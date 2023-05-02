@@ -12,7 +12,8 @@
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ui": "*"
+    "ui": "*",
+    "remark-code-annotate": "*"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
