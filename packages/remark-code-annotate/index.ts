@@ -154,8 +154,23 @@ function processAnnotationLine(line:  shiki.IThemedToken[]) {
  * @returns 
  */
 function renderDirectiveToken(token: shiki.IThemedToken) {  
-  const regexp = /\/\/(?<space>\s+)\^ (?<comment>.+)$/
-  const {groups: {space, comment}} = regexp.exec(token.content)
-  console.log(space, comment)
-  return space + ' ' + '<span class="callout"><span class="callout-arrow"></span>' + comment + '</span>';
+  // //    ^ This is annotation from tech writer.
+  let matches = /\/\/(?<space>\s+)\^ (?<comment>.+)$/.exec(token.content)
+  if (matches) {
+    const {groups: {space, comment}} = matches
+    return space + ' ' + '<span class="callout"><span class="callout-arrow"></span>' + comment + '</span>';
+  }
+  // //                         ^---------------------- This is important 
+  matches = /\/\/(?<space>\s+)\^(?<dashes>-+)\s+(?<comment>.+)$/.exec(token.content)
+  if (matches) {
+    const {groups: {space, dashes, comment}} = matches
+    return space + '  ' + '<span class="callout callout-of-dashes"><span class="callout-dashes">' + dashes + ' </span>' + comment + '</span>';
+  }
+
+  matches = /\/\/(?<space>\s+)\^(?<dashes>~+)\s+(?<comment>.+)$/.exec(token.content)
+  if (matches) {
+    const {groups: {space, dashes, comment}} = matches
+    return space + '  ' + '<span class="callout callout-of-waves"><span class="callout-waves">' + dashes + ' </span>' + comment + '</span>';
+  }
+  return '<span class="callout"><span class="callout-arrow"></span>' + token.content + '</span>';
 }

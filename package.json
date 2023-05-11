@@ -16,7 +16,7 @@
   "name": "shaku",
   "packageManager": "npm@8.5.1",
   "workspaces": [
-    "apps/*",
+    "examples/*",
     "packages/*"
   ]
 }
