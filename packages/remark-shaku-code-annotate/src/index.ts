@@ -18,10 +18,8 @@ export const remarkShakuCodeAnnotate: unified.Plugin<[], mdast.Root> = () => {
 
       // generate the html from the tokens
       let html = '<pre class="shiki">';
-
       html += `<div class="code-container"><code>`
 
-      // first, parse all the lines
       const parsedLines = lines.map(line => {
         if (isCommentLine(line)) {
           // comment might have // or /*
@@ -39,7 +37,6 @@ export const remarkShakuCodeAnnotate: unified.Plugin<[], mdast.Root> = () => {
             } as const
           }
         }
-
         return {
           type: 'default',
           line
@@ -52,13 +49,9 @@ export const remarkShakuCodeAnnotate: unified.Plugin<[], mdast.Root> = () => {
         const line = parsedLines[i]
         switch (line.type) {
           case 'shaku': {
-            // for a shaku line, we'll try to move a few steps foward
-            // to pick up the necessry lines, including the source code lines,
-            // to generate the component, and render it
             const shakuLine = line.line
             switch (shakuLine.type) {
               case 'DirectiveCallout': {
-                // callout should be followed by annotationline
                 const arrowOffset = shakuLine.config.offset
                 let offset = arrowOffset
                 const contents = []
@@ -91,11 +84,12 @@ export const remarkShakuCodeAnnotate: unified.Plugin<[], mdast.Root> = () => {
               }
               
               case 'AnnotationLine':
+                // TODO
                 break
               case 'DirectiveCollapse':
+                // TODO
                 break
               case 'DirectiveHighlight':
-                console.log('DirectiveHighlight', shakuLine);
                 const mark = shakuLine.config.mark
                 switch (mark) {
                   case 'start':
@@ -111,7 +105,6 @@ export const remarkShakuCodeAnnotate: unified.Plugin<[], mdast.Root> = () => {
                 }
                 break
               case 'DirectiveUnderline':
-                // underline doesn't need to have annotation following
                 const underlineOffset = shakuLine.config.offset
                 const underlineContent = shakuLine.config.content
                 let offset = underlineOffset
@@ -167,71 +160,10 @@ export const remarkShakuCodeAnnotate: unified.Plugin<[], mdast.Root> = () => {
           default:
             assertsNever(line)
         }
-        // const tokens = lines[i]
-        // if (tokens.length === 0) {
-        //   html += `<div class='line'></div>`;
-        // } else{
-        //   let shakuLine: ReturnType<typeof parseLine> | null = null
-
-        //   if (isCommentLine(tokens)) {
-        //     // parse it with shaku
-        //     // @ts-ignore
-        //     const commentBody = tokens[0].explanation[1].content
-        //     shakuLine = parseLine(commentBody)
-        //   }
-          
-        //   if (shakuLine != null){
-        //     // it is shaku line
-           
-        //     switch (shakuLine.type) {
-        //       case 'DirectiveCallout':
-        //         break
-        //       case 'DirectiveCollapse':
-        //       case 'DirectiveHighlight':
-        //       case 'DirectiveUnderline':
-        //         break
-        //       case 'AnnotationLine':
-        //         throw new Error('AnnotationLine is expected to be after some directive')
-        //       default:
-        //         assertsNever(shakuLine)
-        //     }
-        //       const prefix = `<div class="annotate">`;
-        //       html += prefix;
-        //       html += renderLine(shakuLine)
-        //       html += `</div>`;
-        //   } else {
-        //     // not shaku line
-        //     // const hiClass = hasHighlight ? (hl(i) ? " highlight" : " dim") : ""
-        //     // const prefix = `<div class='line${hiClass}'>`
-        //     const prefix = `<div class="line">`;
-        //     html += prefix;
-
-        //     tokens.forEach((token) => {
-        //       html += `<span style="color: ${token.color}">${escapeHtml(
-        //         token.content
-        //       )}</span>`;
-        //     });
-        //     html += `</div>`;
-        //   }
-        // }
-
-        // lines.forEach((l, i) => {
-        // html += '<p>fuck</p>'
-        // if (l.length === 0) {
-        //   html += `<div class='line'></div>`;
-        // } else if (isAnnotateLine(l)) {
-        //   const prefix = `<div class="annotate">`;
-        //   html += prefix;
-
-        //   html += processAnnotationLine(l);
-        //   html += `</div>`;
-      // });
       }
 
-      // html = html.replace(/\n*$/, "") // Get rid of final new lines
       html += `</code></div></pre>`;
 
-      // done processing, generate html
       node.value = html;
       // @ts-ignore expected error
       node.type = "html";

@@ -223,9 +223,9 @@ type ShakuComponent =
 export function renderComponent(component: ShakuComponent) {
   switch (component.type) {
     case 'ShakuComponentCallout':
-      return `<div class="shaku-callout" style="left:${component.config.offset}ch"><span class="shaku-callout-arrow" style="left:${component.config.arrowOffset}ch"></span>${component.config.contents.join('\n')}</div>`;
+      return `<div class="shaku-callout" style="left:${component.config.offset}ch"><span class="shaku-callout-arrow" style="left:${component.config.arrowOffset}ch"></span>${component.config.contents.map(escapeHtml).join('\n')}</div>`;
     case 'ShakuComponentUnderline':
-      return `<div class="shaku-underline shaku-underline-${component.config.underlineStyle}" style="left:${component.config.offset}ch"><span class="shaku-underline-line" style="left:${component.config.underlineOffset}ch">${component.config.underlineContent}</span>${component.config.contents.join('\n')}</div>`
+      return `<div class="shaku-underline shaku-underline-${component.config.underlineStyle}" style="left:${component.config.offset}ch"><span class="shaku-underline-line" style="left:${component.config.underlineOffset}ch">${component.config.underlineContent}</span>${component.config.contents.map(escapeHtml).join('\n')}</div>`
     default:
       assertsNever(component)
   }
@@ -233,4 +233,8 @@ export function renderComponent(component: ShakuComponent) {
 
 function assertsNever(data: never) {
   throw new Error('expected never but got: ' + data)
+}
+
+function escapeHtml(html: string) {
+  return html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }

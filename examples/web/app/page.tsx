@@ -66,7 +66,7 @@ const markdownShaku = `
 
   const b = "jser.dev"
 //         ^
-//       [JSer.dev is a good blog]
+//       [<b>s</b>JSer.dev is a good blog]
 //       [you know you can do better, right?]
 
   const b = "jser.dev"
