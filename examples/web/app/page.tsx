@@ -6,9 +6,9 @@ import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 import * as shiki from "shiki";
 
 export default async function Page() {
-  const highlighter = await shiki.getHighlighter({ theme: "github-light" });
+  const highlighter = await shiki.getHighlighter({ theme: "github-dark" });
   const processorShaku = remark()
-    .use(remarkShakuCodeAnnotate, { theme: "github-light" })
+    .use(remarkShakuCodeAnnotate, { theme: "github-dark" })
     .use(html, { sanitize: false });
 
   const processorShiki = remark()

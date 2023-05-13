@@ -26,8 +26,10 @@ export const remarkShakuCodeAnnotate = (
         node.lang ?? "txt"
       );
 
+      const foregroundColor = highlighter.getForegroundColor()
+      const backgroundColor =  highlighter.getBackgroundColor()
       // generate the html from the tokens
-      let html = '<pre class="shiki">';
+      let html = `<pre class="shiki" style="color:${foregroundColor};background-color:${backgroundColor}">`;
       html += `<div class="code-container"><code>`;
 
       const parsedLines = lines.map((line) => {
