@@ -7,15 +7,74 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-       <style dangerouslySetInnerHTML={{__html:`
-          .callout {
-            background-color: #eee;
-            color: #888;
-            padding: 0.5em 1em;
-            position: relative;
-            // font-family: Georgia;
-            // font-size: 0.8em;
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+
+          pre.shiki .line {
+            min-height: 1em;
           }
+
+          pre.shiki .line.highlight {
+            background-color: #dffa83;
+            display: block;
+          }
+
+          .shaku-callout {
+            background-color: #0685ce;
+            color: #fff;
+            padding: 0.5em 1ch;
+            position: relative;
+            margin: 0.5em 0;
+            display: inline-block;
+            border-radius: 3px;
+        
+          }
+
+          .shaku-callout-arrow {
+            width: 1ch;
+            height: 1ch;
+            display: inline-block;
+            background-color: #0685ce;
+            position: absolute;
+            top: -0.5ch;
+            transform: rotate(45deg);
+          }
+
+          .shaku-underline {
+            padding: 0 1ch;
+            position: relative;
+            display: block;
+            border-radius: 3px;
+            color: red;
+            margin: 0.3em 0;
+          }
+
+          .shaku-underline-line {
+            line-height: 0;
+            top: 0.5em;
+            position: absolute;
+            text-decoration-line: overline;
+            text-decoration-color: red;
+            color: transparent;
+            pointer-events: none;
+            user-select: none;
+            text-decoration-thickness: 2px;
+          }
+
+          .shaku-underline-wavy > .shaku-underline-line {
+            text-decoration-style: wavy;
+            top: 0.7em;
+          }
+
+          .shaku-underline-solid > .shaku-underline-line{
+            text-decoration-style: solid;
+          }
+
+          .shaku-underline-dotted > .shaku-underline-line{
+            text-decoration-style: dotted;
+          }
+          
 
           .annotate {
             padding: 1rem 0;
@@ -24,16 +83,6 @@ export default function RootLayout({
           .annotate:has(.callout-of-waves) {
             padding-top: 0;
             color: red;
-          }
-          .callout-arrow {
-            width: 1em;
-            height: 1em;
-            display: inline-block;
-            background-color: #eee;
-            position: absolute;
-            top: -0.5em;
-            left: 0.5em;
-            transform: rotate(45deg);
           }
           .callout-dashes {
             position: absolute;
@@ -58,8 +107,9 @@ export default function RootLayout({
             color: blue;
             padding-left: 0;
           }
-        `}}>
-        </style>
+        `,
+        }}
+      ></style>
       <body>{children}</body>
     </html>
   );

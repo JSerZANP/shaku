@@ -1,50 +1,67 @@
-import Head from 'next/head';
+import Head from "next/head";
 import { remark } from "remark";
-import { remarkCodeAnnotate } from 'remark-code-annotate';
 import html from "remark-html";
+import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 
 export default async function Page() {
-    
-  const processor = remark().use(remarkCodeAnnotate).use(html, { sanitize: false });
+  const processor = remark()
+    .use(remarkShakuCodeAnnotate)
+    .use(html, { sanitize: false });
   const markdown = `
 \`\`\`js annotate
-// This is a comment from source code
-//    \^ This is annotation from tech writer.
-//    ^ This is annotation from tech writer.
-const a = 3;
-//    ^ This is annotation from tech writer.
-// This is a comment from source code
-const b = "JSer.dev"
-//           ^ JSer.dev is a really cool blog.
-// This is a comment from source code
-const processor = remark().use(remarkCodeAnnotate).use(html, { sanitize: false });
-//                         ^----------------------- This is important!!                
-// This is a comment from source code
-const processor = remark().use(remarkCodeAnnotate).use(html, { sanitize: false });
-//                         ^~~~~~~~~~~~~~~~~~~~~~~ This is important   
+
+  const b = "jser.dev"
+//         ^
+//       [JSer.dev is a good blog]
+//       [you know you can do better, right?]
+
+  const b = "jser.dev"
+//           ~~~~~~~~
+//       [jser.dev is a good blog]
+//       [you know you can do better, right?]
+
+  const b = "jser.dev"
+//           --------
+//       [jser.dev is a good blog]
+
+  const b = "jser.dev"
+//           ........
+//       [jser.dev is a good blog]
+
+
+  const b = "jser.dev"
+//           ........
+
+  const b = "jser.dev"
+//           --------
+  const b = "jser.dev"
+//           ~~~~~~~~
 
 
 
 
-\`\`\`
-`
-// const processor = remark().use(remarkCodeAnnotate).use(html, { sanitize: false });
-// //^<< To move the arrow left
+// @highlight
+  const a = 1;
+  const b = 2;
 
-// const processor = remark().use(remarkCodeAnnotate).use(html, { sanitize: false });
-// //^<< To move the arrow left
+// @highlight start
+  function a() {
+    
+  }
+// @highlight end
 
+  \`\`\`
+`;
   const result = await processor.process(markdown);
 
-  console.log(result.value)
   return (
     <>
       <Head>
         <title>My page title</title>
       </Head>
       <body>
-        <div dangerouslySetInnerHTML={{__html: result.value}}></div>
+        <div dangerouslySetInnerHTML={{ __html: result.value }}></div>
       </body>
     </>
-  )
+  );
 }

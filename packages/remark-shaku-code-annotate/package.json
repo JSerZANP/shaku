@@ -1,0 +1,25 @@
+{
+  "name": "remark-shaku-code-annotate",
+  "version": "0.0.0",
+  "dependencies": {
+    "@microflash/fenceparser": "^2.6.2",
+    "mdast": "^3.0.0",
+    "remark": "^14.0.2",
+    "remark-code-title": "^0.2.5",
+    "remark-html": "^15.0.2",
+    "shaku-code-annotate": "*",
+    "shiki": "^0.14.2",
+    "typescript": "latest",
+    "unified": "^10.1.2",
+    "unist-util-visit": "^4.1.2"
+  },
+  "devDependencies": {
+    "tsup": "^6.7.0",
+    "vitest": "^0.30.1"
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "test": "vitest"
+  }
+}
