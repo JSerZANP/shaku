@@ -2,7 +2,6 @@
   "name": "shaku-code-annotate",
   "version": "0.0.0",
   "dependencies": {
-    "@microflash/fenceparser": "^2.6.2",
     "mdast": "^3.0.0",
     "remark": "^14.0.2",
     "remark-html": "^15.0.2",

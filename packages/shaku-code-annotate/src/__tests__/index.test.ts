@@ -1,9 +1,5 @@
-import { assert, test, describe, expect } from "vitest";
-import codeTitle from "remark-code-title";
-import html from "remark-html";
-import { remark } from "remark";
+import { test, describe, expect } from "vitest";
 import { parseLine, shouldApplyAnnotation } from "../index";
-import * as shiki from "shiki";
 
 describe("parseLine() can parse comment lines", () => {
   test("  -------  ", async () => {
@@ -106,7 +102,6 @@ describe("parseLine() can parse comment lines", () => {
     expect(result).toEqual({
       type: "DirectiveHighlight",
       config: {
-        offset: 3,
         mark: "start",
       },
     });
@@ -117,19 +112,17 @@ describe("parseLine() can parse comment lines", () => {
     expect(result).toEqual({
       type: "DirectiveHighlight",
       config: {
-        offset: 3,
         mark: "end",
       },
     });
   });
 
-  test("   @highlight above ", async () => {
-    const result = parseLine("   @highlight above ");
+  test("   @highlight ", async () => {
+    const result = parseLine("   @highlight ");
     expect(result).toEqual({
       type: "DirectiveHighlight",
       config: {
-        offset: 3,
-        mark: "above",
+        mark: "below",
       },
     });
   });
@@ -139,7 +132,6 @@ describe("parseLine() can parse comment lines", () => {
     expect(result).toEqual({
       type: "DirectiveHighlight",
       config: {
-        offset: 3,
         mark: "below",
       },
     });

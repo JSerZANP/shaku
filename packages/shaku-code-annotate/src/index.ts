@@ -158,7 +158,7 @@ export const parseLine = (line: string): ShakuLine | null => {
 
   const matchShakuDirectiveHighlight = line.match(RegShakuDirectiveHighlight);
   if (matchShakuDirectiveHighlight) {
-    const mark = matchShakuDirectiveHighlight.groups?.mark ?? 'below'
+    const mark = matchShakuDirectiveHighlight.groups?.mark || 'below'
     if (
       mark !== "start" &&
       mark !== "end" &&
@@ -193,7 +193,6 @@ export function shouldApplyAnnotation(meta: string): boolean {
  * 2. one ore more AnnotationLine
  * 
  * DirectiveCollapse also render a few lines of source code 
- * 
  * So this function should render component
  */
 
