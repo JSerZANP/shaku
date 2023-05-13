@@ -1,6 +1,6 @@
 {
   "name": "shaku-code-annotate",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "dependencies": {
     "mdast": "^3.0.0",
     "remark": "^14.0.2",
@@ -14,7 +14,10 @@
     "typescript": "latest",
     "vitest": "^0.30.1"
   },
-  "files": ["./dist"],
+  "files": [
+    "./dist/**",
+    "./docs/**"
+  ],
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
