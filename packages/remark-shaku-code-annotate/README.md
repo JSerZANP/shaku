@@ -2,6 +2,7 @@
 
 This is a plugin of remark for [shaku-code-annotate](../shaku-code-annotate/)
 
+Take a look at the live demo https://shaku-web.vercel.app.
 
 # How to use
 

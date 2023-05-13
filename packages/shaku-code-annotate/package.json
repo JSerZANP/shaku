@@ -1,6 +1,6 @@
 {
   "name": "shaku-code-annotate",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "dependencies": {
     "mdast": "^3.0.0",
     "remark": "^14.0.2",
@@ -25,5 +25,10 @@
     "test": "vitest",
     "build": "tsup src/index.ts --format esm --dts",
     "dev": "npm run build -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JSerZANP/shaku.git",
+    "directory": "packages/shaku-code-annotate"
   }
 }

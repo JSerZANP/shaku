@@ -125,11 +125,11 @@ function useSomeEffect({blog}) {
         <h1>shaku-code-annotate example</h1>
         <div style={{ display: "flex" }}>
           <div style={{ flexGrow: 1 }}>
-            what you write (highlight with `remark-shiki`)
+            what you write (highlight with <a href="https://github.com/stefanprobst/remark-shiki" target="blank">remark-shiki</a>)
             <div dangerouslySetInnerHTML={{ __html: resultShiki.value }}></div>
           </div>
           <div style={{ flexGrow: 1 }}>
-            what you see (highlight with `remark-shaku-code-annotate`, control how it looks by CSS)
+            what you see (highlight with <a href="https://github.com/JSerZANP/shaku/tree/main/packages/remark-shaku-code-annotate" target="_blank">remark-shaku-code-annotate</a>, control how it looks by CSS)
             <div dangerouslySetInnerHTML={{ __html: resultShaku.value }}></div>
           </div>
         </div>
