@@ -37,11 +37,6 @@ const blog = "jser.dev"
 //            ........
 //          [Check it out!]
 
-// Code blocks work well too!
-/*             ^
-        [Yes! That's right!]
-*/
-
 const blog = "jser.dev"
 //            ........
 
@@ -90,11 +85,6 @@ const blog = "jser.dev"
 const blog = "jser.dev"
 //            ........
 //          [Check it out!]
-
-// Code blocks work well too!
-/*             ^
-        [Yes! That's right!]
-*/
 
 const blog = "jser.dev"
 //            ........
