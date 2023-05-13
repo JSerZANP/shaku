@@ -16,52 +16,57 @@ export default async function Page() {
     .use(html, { sanitize: false });
 
   const markdownCode = `
-\`\`\`js
+  \`\`\`js
 
-const blog = "https://jser.dev"
-//                    ^
-//       [JSer.dev is the homepage for JSer.]
-//       [Check it out!]
-
-const blog = "https://jser.dev"
-//                    ~~~~~~~~
-//       [JSer.dev is the homepage for JSer.]
-//       [Check it out!]
-
-const blog = "jser.dev"
-//            --------
-//          [Check it out!]
-
-const blog = "jser.dev"
-//            ........
-//          [Check it out!]
-
-
-const blog = "jser.dev"
-//            ........
-
-const blog = "jser.dev"
-//            --------
-const blog = "jser.dev"
-//            ~~~~~~~~
-
-// @highlight
-function useSomeEffect({blog}) {
-//       ~~~~~~~~~~~~~
-  useEffect(() => {
-    // do some stuff
-    
-// @highlight start
-      return () => {
-        location.href = 'https://jser.dev'
-      }
-//    ^
-// [This cleanup function is super important]
-// @highlight end
-
-    }, [blog])
-}
-\`\`\`
+  const blog = "https://jser.dev"
+  //                    ^
+  //       [JSer.dev is the homepage for JSer.]
+  //       [Check it out!]
+  
+  // This is normal comments from source code.
+  const blog = "https://jser.dev"
+  //                    ~~~~~~~~
+  //       [JSer.dev is the homepage for JSer.]
+  //       [Check it out!]
+  
+  const blog = "jser.dev"
+  //            --------
+  //          [Check it out!]
+  
+  const blog = "jser.dev"
+  //            ........
+  //          [Check it out!]
+  
+  // Code blocks work well too!
+  /*             ^
+          [Yes! That's right!]
+  */
+  
+  const blog = "jser.dev"
+  //            ........
+  
+  const blog = "jser.dev"
+  //            --------
+  const blog = "jser.dev"
+  //            ~~~~~~~~
+  
+  // @highlight
+  function useSomeEffect({blog}) {
+  //       ~~~~~~~~~~~~~
+    useEffect(() => {
+      // do some stuff
+      
+  // @highlight start
+        return () => {
+          location.href = 'https://jser.dev'
+        }
+  //    ^
+  // [This cleanup function is super important]
+  // @highlight end
+  
+      }, [blog])
+  }
+  \`\`\`
 `;
 
   const markdownShaku = `
@@ -72,6 +77,7 @@ const blog = "https://jser.dev"
 //       [JSer.dev is the homepage for JSer.]
 //       [Check it out!]
 
+// This is normal comments from source code.
 const blog = "https://jser.dev"
 //                    ~~~~~~~~
 //       [JSer.dev is the homepage for JSer.]
@@ -85,6 +91,10 @@ const blog = "jser.dev"
 //            ........
 //          [Check it out!]
 
+// Code blocks work well too!
+/*             ^
+        [Yes! That's right!]
+*/
 
 const blog = "jser.dev"
 //            ........
