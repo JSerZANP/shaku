@@ -158,12 +158,8 @@ export const parseLine = (line: string): ShakuLine | null => {
 
   const matchShakuDirectiveHighlight = line.match(RegShakuDirectiveHighlight);
   if (matchShakuDirectiveHighlight) {
-    const mark = matchShakuDirectiveHighlight.groups?.mark || 'below'
-    if (
-      mark !== "start" &&
-      mark !== "end" &&
-      mark !== "below"
-    ) {
+    const mark = matchShakuDirectiveHighlight.groups?.mark || "below";
+    if (mark !== "start" && mark !== "end" && mark !== "below") {
       throw new Error(`mark: ${mark} is not supported under @highlight`);
     }
 
@@ -187,51 +183,63 @@ export function shouldApplyAnnotation(meta: string): boolean {
  * A full callout normally contains:
  * 1. DirectiveCallout
  * 2. one or more AnnotationLine
- * 
+ *
  * An underline annotation contains:
  * 1. DirectiveUnderline
  * 2. one ore more AnnotationLine
- * 
- * DirectiveCollapse also render a few lines of source code 
+ *
+ * DirectiveCollapse also render a few lines of source code
  * So this function should render component
  */
 
 type ShakuComponentCallout = {
-  type: 'ShakuComponentCallout',
+  type: "ShakuComponentCallout";
   config: {
-    offset: number
-    arrowOffset: number
-    contents: string[]
-  }
-}
+    offset: number;
+    arrowOffset: number;
+    contents: string[];
+  };
+};
 
 type ShakuComponentUnderline = {
-  type: 'ShakuComponentUnderline'
+  type: "ShakuComponentUnderline";
   config: {
-    offset: number
-    underlineOffset: number
-    underlineContent: string
-    underlineStyle: 'solid' | 'dotted' | 'wavy'
-    contents: string[]
-  }
-}
+    offset: number;
+    underlineOffset: number;
+    underlineContent: string;
+    underlineStyle: "solid" | "dotted" | "wavy";
+    contents: string[];
+  };
+};
 
-type ShakuComponent = 
-  | ShakuComponentCallout
-  | ShakuComponentUnderline
+type ShakuComponent = ShakuComponentCallout | ShakuComponentUnderline;
 export function renderComponent(component: ShakuComponent) {
   switch (component.type) {
-    case 'ShakuComponentCallout':
-      return `<div class="shaku-callout" style="left:${component.config.offset}ch"><span class="shaku-callout-arrow" style="left:${component.config.arrowOffset}ch"></span>${component.config.contents.map(escapeHtml).join('\n')}</div>`;
-    case 'ShakuComponentUnderline':
-      return `<div class="shaku-underline shaku-underline-${component.config.underlineStyle}" style="left:${component.config.offset}ch"><span class="shaku-underline-line" style="left:${component.config.underlineOffset}ch">${component.config.underlineContent}</span>${component.config.contents.map(escapeHtml).join('\n')}</div>`
+    case "ShakuComponentCallout":
+      return `<div class="shaku-callout" style="left:${
+        component.config.offset
+      }ch"><span class="shaku-callout-arrow" style="left:${
+        component.config.arrowOffset
+      }ch"></span>${component.config.contents
+        .map(escapeHtml)
+        .join("\n")}</div>`;
+    case "ShakuComponentUnderline":
+      return `<div class="shaku-underline shaku-underline-${
+        component.config.underlineStyle
+      }" style="left:${
+        component.config.offset
+      }ch"><span class="shaku-underline-line" style="left:${
+        component.config.underlineOffset
+      }ch">${
+        component.config.underlineContent
+      }</span>${component.config.contents.map(escapeHtml).join("\n")}</div>`;
     default:
-      assertsNever(component)
+      assertsNever(component);
   }
 }
 
 function assertsNever(data: never) {
-  throw new Error('expected never but got: ' + data)
+  throw new Error("expected never but got: " + data);
 }
 
 function escapeHtml(html: string) {

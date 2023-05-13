@@ -1,164 +1,187 @@
 import { visit } from "unist-util-visit";
 import type * as mdast from "mdast";
 import type * as unified from "unified";
-import * as shiki from "shiki";
-import { shouldApplyAnnotation, parseLine, renderComponent } from "shaku-code-annotate";
 
-export const remarkShakuCodeAnnotate: unified.Plugin<[], mdast.Root> = () => {
-  return async (tree, file) => {
-    const highlighter = await shiki.getHighlighter({
-      theme: "github-light", // TODO: allow config
+import { getHighlighter, HighlighterOptions, IThemedToken } from "shiki";
+import {
+  shouldApplyAnnotation,
+  parseLine,
+  renderComponent,
+} from "shaku-code-annotate";
+
+export const remarkShakuCodeAnnotate = (
+  options: HighlighterOptions
+): unified.Transformer => {
+  return async (tree) => {
+    const highlighter = await getHighlighter({
+      theme: options.theme ?? "github-light",
     });
 
-    visit(tree, "code", (node, index, parent) => {
+    visit(tree, "code", (node: mdast.Code) => {
       const shouldAnnotate = shouldApplyAnnotation(node.meta ?? "");
-      if (!shouldAnnotate) return
+      if (!shouldAnnotate) return;
 
-      const lines = highlighter.codeToThemedTokens(node.value, node.lang ?? 'txt');
+      const lines = highlighter.codeToThemedTokens(
+        node.value,
+        node.lang ?? "txt"
+      );
 
       // generate the html from the tokens
       let html = '<pre class="shiki">';
-      html += `<div class="code-container"><code>`
+      html += `<div class="code-container"><code>`;
 
-      const parsedLines = lines.map(line => {
+      const parsedLines = lines.map((line) => {
         if (isCommentLine(line)) {
           // comment might have // or /*
           // meaning comment body might be in the 2nd explanation
           // or 1st one. Does this hold for all languages?
           // @ts-ignore
-          const commentBody = (line[0].explanation[1] ?? line[0].explanation[0]).content
-          const shakuLine = parseLine(commentBody)
+          const commentBody = (line[0].explanation[1] ?? line[0].explanation[0])
+            .content;
+          const shakuLine = parseLine(commentBody);
           if (shakuLine != null) {
             return {
-              type: 'shaku',
+              type: "shaku",
               line: shakuLine,
-               // @ts-ignore
-              commentTag: line[0].explanation[0].content
-            } as const
+              // @ts-ignore
+              commentTag: line[0].explanation[0].content,
+            } as const;
           }
         }
         return {
-          type: 'default',
-          line
-        } as const
-      })
+          type: "default",
+          line,
+        } as const;
+      });
 
-      let shouldHighlighNextSourceLine = false
-      let isHighlightingBlock = false
+      let shouldHighlighNextSourceLine = false;
+      let isHighlightingBlock = false;
       for (let i = 0; i < parsedLines.length; i++) {
-        const line = parsedLines[i]
+        const line = parsedLines[i];
         switch (line.type) {
-          case 'shaku': {
-            const shakuLine = line.line
+          case "shaku": {
+            const shakuLine = line.line;
             switch (shakuLine.type) {
-              case 'DirectiveCallout': {
-                const arrowOffset = shakuLine.config.offset
-                let offset = arrowOffset
-                const contents = []
-                const commentTagLength = line.commentTag.length
-              
-                let j = i + 1
+              case "DirectiveCallout": {
+                const arrowOffset = shakuLine.config.offset;
+                let offset = arrowOffset;
+                const contents = [];
+                const commentTagLength = line.commentTag.length;
+
+                let j = i + 1;
                 while (j < parsedLines.length) {
-                  const nextLine = parsedLines[j]
-                  if (nextLine.type !== 'shaku' || nextLine.line.type !== 'AnnotationLine') {
-                    break
+                  const nextLine = parsedLines[j];
+                  if (
+                    nextLine.type !== "shaku" ||
+                    nextLine.line.type !== "AnnotationLine"
+                  ) {
+                    break;
                   }
 
-                  offset = Math.min(offset, nextLine.line.config.offset)
-                  contents.push(nextLine.line.config.content)
-                  j += 1
+                  offset = Math.min(offset, nextLine.line.config.offset);
+                  contents.push(nextLine.line.config.content);
+                  j += 1;
                 }
 
-
                 html += renderComponent({
-                  type: 'ShakuComponentCallout',
+                  type: "ShakuComponentCallout",
                   config: {
                     offset: offset + commentTagLength,
                     arrowOffset: arrowOffset - offset,
-                    contents
-                  }
-                })
+                    contents,
+                  },
+                });
 
-                i = j - 1
-                continue
+                i = j - 1;
+                continue;
               }
-              
-              case 'AnnotationLine':
+
+              case "AnnotationLine":
                 // TODO
-                break
-              case 'DirectiveCollapse':
+                break;
+              case "DirectiveCollapse":
                 // TODO
-                break
-              case 'DirectiveHighlight':
-                const mark = shakuLine.config.mark
+                break;
+              case "DirectiveHighlight":
+                const mark = shakuLine.config.mark;
                 switch (mark) {
-                  case 'start':
-                    isHighlightingBlock = true
+                  case "start":
+                    isHighlightingBlock = true;
                     break;
-                  case 'end':
-                    isHighlightingBlock = false
+                  case "end":
+                    isHighlightingBlock = false;
                     break;
-                  case 'below':
+                  case "below":
                   default:
-                    shouldHighlighNextSourceLine = true
-                    break
+                    shouldHighlighNextSourceLine = true;
+                    break;
                 }
-                break
-              case 'DirectiveUnderline':
-                const underlineOffset = shakuLine.config.offset
-                const underlineContent = shakuLine.config.content
-                let offset = underlineOffset
-                const contents = []
-                const commentTagLength = line.commentTag.length
-              
-                let j = i + 1
+                break;
+              case "DirectiveUnderline":
+                const underlineOffset = shakuLine.config.offset;
+                const underlineContent = shakuLine.config.content;
+                let offset = underlineOffset;
+                const contents = [];
+                const commentTagLength = line.commentTag.length;
+
+                let j = i + 1;
                 while (j < parsedLines.length) {
-                  const nextLine = parsedLines[j]
-                  if (nextLine.type !== 'shaku' || nextLine.line.type !== 'AnnotationLine') {
-                    break
+                  const nextLine = parsedLines[j];
+                  if (
+                    nextLine.type !== "shaku" ||
+                    nextLine.line.type !== "AnnotationLine"
+                  ) {
+                    break;
                   }
 
-                  offset = Math.min(offset, nextLine.line.config.offset)
-                  contents.push(nextLine.line.config.content)
-                  j += 1
+                  offset = Math.min(offset, nextLine.line.config.offset);
+                  contents.push(nextLine.line.config.content);
+                  j += 1;
                 }
-
 
                 html += renderComponent({
-                  type: 'ShakuComponentUnderline',
+                  type: "ShakuComponentUnderline",
                   config: {
                     offset: offset + commentTagLength,
                     underlineOffset: underlineOffset - offset,
                     underlineContent,
                     underlineStyle: shakuLine.config.style,
-                    contents
-                  }
-                })
+                    contents,
+                  },
+                });
 
-                i = j - 1
-                continue
+                i = j - 1;
+                continue;
               default:
-                assertsNever(shakuLine)
+                assertsNever(shakuLine);
             }
 
-            break
+            break;
           }
-          case 'default': {
-            const shouldHighlight = isHighlightingBlock || shouldHighlighNextSourceLine
-            shouldHighlighNextSourceLine = false
+          case "default": {
+            const shouldHighlight =
+              isHighlightingBlock || shouldHighlighNextSourceLine;
+            shouldHighlighNextSourceLine = false;
 
-            const sourceLine = line.line
-            const prefix = `<div class="line ${shouldHighlight ? 'highlight' : ''}">`;
+            const sourceLine = line.line;
+            const prefix = `<div class="line ${
+              shouldHighlight ? "highlight" : ""
+            }">`;
 
             html += prefix;
-            html += sourceLine.map((token) => `<span style="color: ${token.color}">${escapeHtml(
-              token.content
-            )}</span>`).join('')
+            html += sourceLine
+              .map(
+                (token) =>
+                  `<span style="color: ${token.color}">${escapeHtml(
+                    token.content
+                  )}</span>`
+              )
+              .join("");
             html += `</div>`;
-            break
+            break;
           }
           default:
-            assertsNever(line)
+            assertsNever(line);
         }
       }
 
@@ -175,10 +198,15 @@ function escapeHtml(html: string) {
   return html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function isCommentLine(line: shiki.IThemedToken[]) {
-  return line.length === 1 && line[0].explanation?.[0].scopes.some(scope => scope.scopeName.startsWith('comment.'))
+function isCommentLine(line: IThemedToken[]) {
+  return (
+    line.length === 1 &&
+    line[0].explanation?.[0].scopes.some((scope) =>
+      scope.scopeName.startsWith("comment.")
+    )
+  );
 }
 
 function assertsNever(data: never) {
-  throw new Error('expected never but got: ' + data)
+  throw new Error("expected never but got: " + data);
 }
