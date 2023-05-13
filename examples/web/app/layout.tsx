@@ -10,6 +10,10 @@ export default function RootLayout({
       <style
         dangerouslySetInnerHTML={{
           __html: `
+          pre.shiki {
+            padding: 1rem;
+            border: 1px solid #eee;
+          }
 
           pre.shiki .line {
             min-height: 1em;
@@ -73,39 +77,6 @@ export default function RootLayout({
 
           .shaku-underline-dotted > .shaku-underline-line{
             text-decoration-style: dotted;
-          }
-          
-
-          .annotate {
-            padding: 1rem 0;
-          }
-          .annotate:has(.callout-of-dashes),
-          .annotate:has(.callout-of-waves) {
-            padding-top: 0;
-            color: red;
-          }
-          .callout-dashes {
-            position: absolute;
-            border-top: 2px solid red;
-            height: 1px;
-            color: transparent;
-          }
-          .callout-of-dashes {
-            background-color: transparent;
-            color: red;
-            padding-left: 0;
-          }
-
-          .callout-waves {
-            position: absolute;
-            border-top: 2px dotted blue;
-            height: 1px;
-            color: transparent;
-          }
-          .callout-of-waves {
-            background-color: transparent;
-            color: blue;
-            padding-left: 0;
           }
         `,
         }}
