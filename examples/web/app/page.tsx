@@ -6,9 +6,9 @@ import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 import * as shiki from "shiki";
 
 export default async function Page() {
-  const highlighter = await shiki.getHighlighter({ theme: "github-dark" });
+  const highlighter = await shiki.getHighlighter({ theme: "github-light" });
   const processorShaku = remark()
-    .use(remarkShakuCodeAnnotate, { theme: "github-dark" })
+    .use(remarkShakuCodeAnnotate, { theme: "github-light" })
     .use(html, { sanitize: false });
 
   const processorShiki = remark()
@@ -18,93 +18,99 @@ export default async function Page() {
   const markdownCode = `
 \`\`\`js
 
-  const b = "jser.dev"
-//         ^
-//       [JSer.dev is a good blog]
-//       [you know you can do better, right?]
+const blog = "https://jser.dev"
+//                    ^
+//       [JSer.dev is the homepage for JSer.]
+//       [Check it out!]
 
-  const b = "jser.dev"
-//           ~~~~~~~~
-//       [jser.dev is a good blog]
-//       [you know you can do better, right?]
+const blog = "https://jser.dev"
+//                    ~~~~~~~~
+//       [JSer.dev is the homepage for JSer.]
+//       [Check it out!]
 
-  const b = "jser.dev"
-//           --------
-//       [jser.dev is a good blog]
+const blog = "jser.dev"
+//            --------
+//          [Check it out!]
 
-  const b = "jser.dev"
-//           ........
-//       [jser.dev is a good blog]
-
-
-  const b = "jser.dev"
-//           ........
-
-  const b = "jser.dev"
-//           --------
-  const b = "jser.dev"
-//           ~~~~~~~~
+const blog = "jser.dev"
+//            ........
+//          [Check it out!]
 
 
+const blog = "jser.dev"
+//            ........
 
+const blog = "jser.dev"
+//            --------
+const blog = "jser.dev"
+//            ~~~~~~~~
 
 // @highlight
-  const a = 1;
-  const b = 2;
-
-// @highlight start
-  function a() {
+function useSomeEffect({blog}) {
+//       ~~~~~~~~~~~~~
+  useEffect(() => {
+    // do some stuff
     
-  }
+// @highlight start
+      return () => {
+        location.href = 'https://jser.dev'
+      }
+//    ^
+// [This cleanup function is super important]
 // @highlight end
 
-  \`\`\`
+    }, [blog])
+}
+\`\`\`
 `;
 
   const markdownShaku = `
 \`\`\`js annotate
 
-  const b = "jser.dev"
-//         ^
-//       [<b>s</b>JSer.dev is a good blog]
-//       [you know you can do better, right?]
+const blog = "https://jser.dev"
+//                    ^
+//       [JSer.dev is the homepage for JSer.]
+//       [Check it out!]
 
-  const b = "jser.dev"
-//           ~~~~~~~~
-//       [jser.dev is a good blog]
-//       [you know you can do better, right?]
+const blog = "https://jser.dev"
+//                    ~~~~~~~~
+//       [JSer.dev is the homepage for JSer.]
+//       [Check it out!]
 
-  const b = "jser.dev"
-//           --------
-//       [jser.dev is a good blog]
+const blog = "jser.dev"
+//            --------
+//          [Check it out!]
 
-  const b = "jser.dev"
-//           ........
-//       [jser.dev is a good blog]
-
-
-  const b = "jser.dev"
-//           ........
-
-  const b = "jser.dev"
-//           --------
-  const b = "jser.dev"
-//           ~~~~~~~~
+const blog = "jser.dev"
+//            ........
+//          [Check it out!]
 
 
+const blog = "jser.dev"
+//            ........
 
+const blog = "jser.dev"
+//            --------
+const blog = "jser.dev"
+//            ~~~~~~~~
 
 // @highlight
-  const a = 1;
-  const b = 2;
-
-// @highlight start
-  function a() {
+function useSomeEffect({blog}) {
+//       ~~~~~~~~~~~~~
+  useEffect(() => {
+    // do some stuff
     
-  }
+// @highlight start
+      return () => {
+        location.href = 'https://jser.dev'
+      }
+//    ^
+// [This cleanup function is super important]
 // @highlight end
 
-  \`\`\`
+    }, [blog])
+}
+\`\`\`
 `;
 
   const resultShiki = await processorShiki.process(markdownCode);
@@ -123,7 +129,7 @@ export default async function Page() {
             <div dangerouslySetInnerHTML={{ __html: resultShiki.value }}></div>
           </div>
           <div style={{ flexGrow: 1 }}>
-            what you see (highlight with `remark-shaku-code-annotate`)
+            what you see (highlight with `remark-shaku-code-annotate`, control how it looks by CSS)
             <div dangerouslySetInnerHTML={{ __html: resultShaku.value }}></div>
           </div>
         </div>
