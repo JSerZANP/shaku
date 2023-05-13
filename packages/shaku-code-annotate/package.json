@@ -14,9 +14,12 @@
     "tsup": "^6.7.0",
     "vitest": "^0.30.1"
   },
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "build": "tsup src/index.ts --format esm --dts",
+    "dev": "npm run build -- --watch"
   }
 }
