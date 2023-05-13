@@ -2,63 +2,15 @@
 
 <ruby>釈<rp>(<rp><rt>Shaku</rt><rp>)<rp></ruby>- _elucidate, explain_
 
-This modules enables you to annotate your code snippet, like below.
+This modules enables you to annotate your code snippet in any language, like below.
 
-## 1. underline
+![](./docs/static/shaku-code-annotate-screenshot.png)
 
-```
-// -------
-// [What we want to do is underline]
-```
+## How to use?
 
-## 2. wavy line
+use one of the plugins.
 
-```
-// ~~~~~~~~~
-// [What we want to do is underline]
-```
+1. [remark-shaku-code-annotate](../remark-shaku-code-annotate/)
+2. TODO
 
-```
-// .........
-// [What we want to do is underline]
-```
-
-## 3. callout
-
-```
-// ^
-// [What we want to do is underline]
-
-```
-
-## 4. arrow callout
-
-// <~
-// [What we want to do is underline]
-// ~>
-// [What we want to do is underline]
-
-## 5. collapse
-
-// @collapse begin
-// @collapse end
-
-## 6. highlight
-
-// @highlight start
-
-// @highlight end
-
-// @highlight above
-// @highlight below
-
-Some special cases
-
-## 3. backspace
-
-//------------ <<
-//^ <<
-
-## 5. escape
-
-//\
+> This plugin is inspired by [shiki-twoslash](https://shikijs.github.io/twoslash/).
