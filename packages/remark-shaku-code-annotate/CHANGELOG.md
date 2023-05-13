@@ -1,5 +1,13 @@
 # remark-shaku-code-annotate
 
+## 0.0.4
+
+### Patch Changes
+
+- fix files
+- Updated dependencies
+  - shaku-code-annotate@0.0.4
+
 ## 0.0.3
 
 ### Patch Changes
