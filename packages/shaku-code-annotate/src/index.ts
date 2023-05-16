@@ -1,8 +1,3 @@
-import { visit } from "unist-util-visit";
-import type * as mdast from "mdast";
-import type * as unified from "unified";
-import * as shiki from "shiki";
-
 type ShakuDirectiveUnderline = {
   type: "DirectiveUnderline";
   config: {

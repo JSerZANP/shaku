@@ -14,7 +14,7 @@ export const remarkShakuCodeAnnotate = (
 ): unified.Transformer => {
   return async (tree) => {
     const highlighter = await getHighlighter({
-      theme: options.theme ?? "github-light",
+      theme: options?.theme ?? "github-light",
     });
 
     visit(tree, "code", (node: mdast.Code) => {
@@ -166,8 +166,8 @@ export const remarkShakuCodeAnnotate = (
             shouldHighlighNextSourceLine = false;
 
             const sourceLine = line.line;
-            const prefix = `<div class="line ${
-              shouldHighlight ? "highlight" : ""
+            const prefix = `<div class="line${
+              shouldHighlight ? " highlight" : ""
             }">`;
 
             html += prefix;
