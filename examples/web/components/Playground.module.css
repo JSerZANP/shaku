@@ -1,0 +1,27 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.playground {
+  display: flex;
+  flex-grow: 1;
+  column-gap: 1rem;
+}
+
+.editor {
+  width: 0;
+  flex-grow: 1;
+}
+
+.preview {
+  width: 0;
+  flex-grow: 1;
+  font-family: sans-serif;
+  height: 100%;
+  overflow-y: auto;
+}
+.head {
+  font-family: sans-serif;
+}

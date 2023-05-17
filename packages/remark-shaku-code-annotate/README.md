@@ -51,7 +51,7 @@ function useSomeEffect({blog}) {
 //       ~~~~~~~~~~~~~
   useEffect(() => {
     // do some stuff
-    
+
 // @highlight start
       return () => {
         location.href = 'https://jser.dev'
@@ -91,7 +91,6 @@ pre.shiki .line.highlight {
   margin: 0.5em 0;
   display: inline-block;
   border-radius: 3px;
-
 }
 
 .shaku-callout-arrow {
@@ -130,11 +129,11 @@ pre.shiki .line.highlight {
   top: 0.7em;
 }
 
-.shaku-underline-solid > .shaku-underline-line{
+.shaku-underline-solid > .shaku-underline-line {
   text-decoration-style: solid;
 }
 
-.shaku-underline-dotted > .shaku-underline-line{
+.shaku-underline-dotted > .shaku-underline-line {
   text-decoration-style: dotted;
 }
 ```

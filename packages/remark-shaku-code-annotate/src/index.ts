@@ -14,6 +14,7 @@ export const remarkShakuCodeAnnotate = (
 ): unified.Transformer => {
   return async (tree) => {
     const highlighter = await getHighlighter({
+      ...(options ?? {}),
       theme: options?.theme ?? "github-light",
     });
 
@@ -26,8 +27,8 @@ export const remarkShakuCodeAnnotate = (
         node.lang ?? "txt"
       );
 
-      const foregroundColor = highlighter.getForegroundColor()
-      const backgroundColor =  highlighter.getBackgroundColor()
+      const foregroundColor = highlighter.getForegroundColor();
+      const backgroundColor = highlighter.getBackgroundColor();
       // generate the html from the tokens
       let html = `<pre class="shiki" style="color:${foregroundColor};background-color:${backgroundColor}">`;
       html += `<div class="code-container"><code>`;
