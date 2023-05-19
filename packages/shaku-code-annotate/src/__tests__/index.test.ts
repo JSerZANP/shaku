@@ -141,7 +141,46 @@ describe("parseLine() can parse comment lines", () => {
     const func = () => parseLine("   @highlight unexpected ");
     expect(func).toThrow();
   });
-
+  test("   @hidden start", async () => {
+    const result = parseLine("   @hidden start ");
+    expect(result).toEqual({
+      type: "DirectiveHidden",
+      config: {
+        mark: "start",
+      },
+    });
+  })
+  test("   @hidden end", async () => {
+    const result = parseLine("   @hidden end ");
+    expect(result).toEqual({
+      type: "DirectiveHidden",
+      config: {
+        mark: "end",
+      },
+    });
+  })
+  test("   @hidden ", async () => {
+    const result = parseLine("   @hidden ");
+    expect(result).toEqual({
+      type: "DirectiveHidden",
+      config: {
+        mark: "below",
+      },
+    });
+  })
+  test("   @hidden below ", async () => {
+    const result = parseLine("   @hidden below ");
+    expect(result).toEqual({
+      type: "DirectiveHidden",
+      config: {
+        mark: "below",
+      },
+    });
+  })
+  test("   @hidden unexpect", async () => {
+    const func = () => parseLine("   @hidden unexpected ");
+    expect(func).toThrow();
+  })
   test("This is some comments from source code ", async () => {
     const result = parseLine("This is some comments from source code");
     expect(result).toBeNull();
