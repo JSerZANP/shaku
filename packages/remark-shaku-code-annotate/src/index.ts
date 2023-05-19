@@ -58,7 +58,10 @@ export const remarkShakuCodeAnnotate = (
       });
 
       let shouldHighlighNextSourceLine = false;
+      let shouldHiddenNextSourceLine = false;
       let isHighlightingBlock = false;
+      let isHiddenBlock = false;
+
       for (let i = 0; i < parsedLines.length; i++) {
         const line = parsedLines[i];
         switch (line.type) {
@@ -98,7 +101,6 @@ export const remarkShakuCodeAnnotate = (
                 i = j - 1;
                 continue;
               }
-
               case "AnnotationLine":
                 // TODO
                 break;
@@ -117,6 +119,21 @@ export const remarkShakuCodeAnnotate = (
                   case "below":
                   default:
                     shouldHighlighNextSourceLine = true;
+                    break;
+                }
+                break;
+              case "DirectiveHidden":
+                const hiddenMark = shakuLine.config.mark;
+                switch (hiddenMark) {
+                  case "start":
+                    isHiddenBlock = true;
+                    break;
+                  case "end":
+                    isHiddenBlock = false;
+                    break;
+                  case "below":
+                  default:
+                    shouldHiddenNextSourceLine = true;
                     break;
                 }
                 break;
@@ -155,6 +172,7 @@ export const remarkShakuCodeAnnotate = (
 
                 i = j - 1;
                 continue;
+
               default:
                 assertsNever(shakuLine);
             }
@@ -165,11 +183,11 @@ export const remarkShakuCodeAnnotate = (
             const shouldHighlight =
               isHighlightingBlock || shouldHighlighNextSourceLine;
             shouldHighlighNextSourceLine = false;
-
+            const shouldHidden = isHiddenBlock || shouldHiddenNextSourceLine;
+            shouldHiddenNextSourceLine = false
             const sourceLine = line.line;
-            const prefix = `<div class="line${
-              shouldHighlight ? " highlight" : ""
-            }">`;
+            const prefix = `<div style="opacity:${shouldHidden ? 0.3 : 1}" class="line${shouldHighlight ? " highlight" : ""
+              }">`;
 
             html += prefix;
             html += sourceLine
