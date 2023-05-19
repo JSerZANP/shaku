@@ -53,16 +53,20 @@ const blog = "jser.dev"
 //            ~~~~~~~~
 \`\`\`
 
-**easily Highlight lines**
+**easily Highlight/Hidden lines**
 
-You don't need to add code meta, just add the command where you want to highlight
+You don't need to add code meta, just add the command where you want to highlight or hidden.
 
 \`\`\`js annotate
 // @highlight
 function useSomeEffect({blog}) {
+// @hidden
+  const [count, setCount] = useState(0)
   useEffect(() => {
-    // do some stuff
-    
+// @hidden start
+    console.log("Hello")
+    console.log("World")
+// @hidden end
 // @highlight start
       return () => {
         location.href = 'https://jser.dev'
