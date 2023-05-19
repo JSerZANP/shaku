@@ -62,12 +62,22 @@ type ShakuDirectiveHighlight = {
 const RegShakuDirectiveHighlight =
   /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>(\S+)?)\s*)?$/;
 
+type ShakuDirectiveHidden = {
+  type: "DirectiveHidden";
+  config: {
+    mark: "start" | "end" | "below";
+  };
+};
+const RegShakuDirectiveHidden =
+  /^(?<leadingSpaces>\s*)@hidden(\s+(?<mark>(\S+)?)\s*)?$/;
+
 type ShakuLine =
   | ShakuDirectiveUnderline
   | ShakuAnnotationLine
   | ShakuDirectiveCallout
   | ShakuDirectiveCollapse
-  | ShakuDirectiveHighlight;
+  | ShakuDirectiveHighlight
+  | ShakuDirectiveHidden;
 
 export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveUnderlineSolid = line.match(
@@ -166,6 +176,22 @@ export const parseLine = (line: string): ShakuLine | null => {
     };
   }
 
+  const matchShakuDirectiveHidden = line.match(RegShakuDirectiveHidden);
+  if (matchShakuDirectiveHidden) {
+    const mark = matchShakuDirectiveHidden.groups?.mark || "below";
+    if (mark !== "start" && mark !== "end" && mark !== "below") {
+      throw new Error(`mark: ${mark} is not supported under @hidden`);
+    }
+
+    return {
+      type: "DirectiveHidden",
+      config: {
+        mark,
+      },
+    };
+
+  }
+
   return null;
 };
 
@@ -211,23 +237,17 @@ type ShakuComponent = ShakuComponentCallout | ShakuComponentUnderline;
 export function renderComponent(component: ShakuComponent) {
   switch (component.type) {
     case "ShakuComponentCallout":
-      return `<div class="shaku-callout" style="left:${
-        component.config.offset
-      }ch"><span class="shaku-callout-arrow" style="left:${
-        component.config.arrowOffset
-      }ch"></span>${component.config.contents
-        .map(escapeHtml)
-        .join("\n")}</div>`;
+      return `<div class="shaku-callout" style="left:${component.config.offset
+        }ch"><span class="shaku-callout-arrow" style="left:${component.config.arrowOffset
+        }ch"></span>${component.config.contents
+          .map(escapeHtml)
+          .join("\n")}</div>`;
     case "ShakuComponentUnderline":
-      return `<div class="shaku-underline shaku-underline-${
-        component.config.underlineStyle
-      }" style="left:${
-        component.config.offset
-      }ch"><span class="shaku-underline-line" style="left:${
-        component.config.underlineOffset
-      }ch">${
-        component.config.underlineContent
-      }</span>${component.config.contents.map(escapeHtml).join("\n")}</div>`;
+      return `<div class="shaku-underline shaku-underline-${component.config.underlineStyle
+        }" style="left:${component.config.offset
+        }ch"><span class="shaku-underline-line" style="left:${component.config.underlineOffset
+        }ch">${component.config.underlineContent
+        }</span>${component.config.contents.map(escapeHtml).join("\n")}</div>`;
     default:
       assertsNever(component);
   }
