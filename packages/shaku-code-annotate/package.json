@@ -26,6 +26,7 @@
     "build": "tsup src/index.ts --format esm --dts",
     "dev": "npm run build -- --watch"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/JSerZANP/shaku.git",

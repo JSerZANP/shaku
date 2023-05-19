@@ -20,6 +20,7 @@
     "examples/*",
     "packages/*"
   ],
+  "license": "MIT",
   "dependencies": {
     "@changesets/cli": "^2.26.1"
   }
