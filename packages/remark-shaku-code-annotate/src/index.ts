@@ -188,7 +188,7 @@ export const remarkShakuCodeAnnotate = (
             const sourceLine = line.line;
             const prefix = `<div class="line${
               shouldHighlight ? " highlight" : ""
-            } ${shouldDim ? "dim" : ""}">`;
+            }${shouldDim ? " dim" : ""}">`;
 
             html += prefix;
             html += sourceLine
