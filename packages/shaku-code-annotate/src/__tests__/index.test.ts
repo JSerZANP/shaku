@@ -177,7 +177,7 @@ describe("parseLine() can parse comment lines", () => {
       },
     });
   })
-  test("   @hidden unexpect", async () => {
+  test("   @hidden unexpected", async () => {
     const func = () => parseLine("   @hidden unexpected ");
     expect(func).toThrow();
   })
