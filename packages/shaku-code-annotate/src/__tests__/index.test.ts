@@ -141,44 +141,44 @@ describe("parseLine() can parse comment lines", () => {
     const func = () => parseLine("   @highlight unexpected ");
     expect(func).toThrow();
   });
-  test("   @hidden start", async () => {
-    const result = parseLine("   @hidden start ");
+  test("   @defocus start", async () => {
+    const result = parseLine("   @defocus start ");
     expect(result).toEqual({
-      type: "DirectiveHidden",
+      type: "DirectiveDefocus",
       config: {
         mark: "start",
       },
     });
   });
-  test("   @hidden end", async () => {
-    const result = parseLine("   @hidden end ");
+  test("   @defocus end", async () => {
+    const result = parseLine("   @defocus end ");
     expect(result).toEqual({
-      type: "DirectiveHidden",
+      type: "DirectiveDefocus",
       config: {
         mark: "end",
       },
     });
   });
-  test("   @hidden ", async () => {
-    const result = parseLine("   @hidden ");
+  test("   @defocus ", async () => {
+    const result = parseLine("   @defocus ");
     expect(result).toEqual({
-      type: "DirectiveHidden",
+      type: "DirectiveDefocus",
       config: {
         mark: "below",
       },
     });
   });
-  test("   @hidden below ", async () => {
-    const result = parseLine("   @hidden below ");
+  test("   @defocus below ", async () => {
+    const result = parseLine("   @defocus below ");
     expect(result).toEqual({
-      type: "DirectiveHidden",
+      type: "DirectiveDefocus",
       config: {
         mark: "below",
       },
     });
   });
-  test("   @hidden unexpect", async () => {
-    const func = () => parseLine("   @hidden unexpected ");
+  test("   @defocus unexpected", async () => {
+    const func = () => parseLine("   @defocus unexpected ");
     expect(func).toThrow();
   });
   test("This is some comments from source code ", async () => {
