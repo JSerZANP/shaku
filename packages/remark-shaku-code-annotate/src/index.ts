@@ -58,9 +58,9 @@ export const remarkShakuCodeAnnotate = (
       });
 
       let shouldHighlighNextSourceLine = false;
-      let shouldDefocusNextSourceLine = false;
+      let shouldDimNextSourceLine = false;
       let isHighlightingBlock = false;
-      let isDefocusBlock = false;
+      let isDimBlock = false;
 
       for (let i = 0; i < parsedLines.length; i++) {
         const line = parsedLines[i];
@@ -122,18 +122,18 @@ export const remarkShakuCodeAnnotate = (
                     break;
                 }
                 break;
-              case "DirectiveDefocus":
-                const defocusMark = shakuLine.config.mark;
-                switch (defocusMark) {
+              case "DirectiveDim":
+                const dimMark = shakuLine.config.mark;
+                switch (dimMark) {
                   case "start":
-                    isDefocusBlock = true;
+                    isDimBlock = true;
                     break;
                   case "end":
-                    isDefocusBlock = false;
+                    isDimBlock = false;
                     break;
                   case "below":
                   default:
-                    shouldDefocusNextSourceLine = true;
+                    shouldDimNextSourceLine = true;
                     break;
                 }
                 break;
@@ -183,12 +183,12 @@ export const remarkShakuCodeAnnotate = (
             const shouldHighlight =
               isHighlightingBlock || shouldHighlighNextSourceLine;
             shouldHighlighNextSourceLine = false;
-            const shouldDefocus = isDefocusBlock || shouldDefocusNextSourceLine;
-            shouldDefocusNextSourceLine = false;
+            const shouldDim = isDimBlock || shouldDimNextSourceLine;
+            shouldDimNextSourceLine = false;
             const sourceLine = line.line;
             const prefix = `<div class="line${
               shouldHighlight ? " highlight" : ""
-            } ${shouldDefocus ? "defocus" : ""}">`;
+            } ${shouldDim ? "dim" : ""}">`;
 
             html += prefix;
             html += sourceLine

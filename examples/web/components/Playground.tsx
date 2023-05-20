@@ -74,19 +74,19 @@ function useSomeEffect({blog}) {
 }
 \`\`\`
 
-**easily Defocus lines**
+**easily Dim lines**
 
-Use this command to defocus your code and emphasize other parts.
+Use this command to to de-emphasize some lines.
 
 \`\`\`js annotate
-// @defocus
+// @dim
 function foo() {
   console.log("Hello!")
-// @defocus start
+// @dim start
   setTimeout(() => {
     console.log("World!")
   },1000)
-// @defocus end
+// @dim end
 }
 \`\`\`
 

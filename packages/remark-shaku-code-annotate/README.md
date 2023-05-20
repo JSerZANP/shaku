@@ -83,7 +83,7 @@ pre.shiki .line.highlight {
   display: block;
 }
 
-pre.shiki .line.defocus {
+pre.shiki .line.dim {
   opacity: 0.3;
 }
 

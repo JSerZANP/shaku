@@ -62,14 +62,14 @@ type ShakuDirectiveHighlight = {
 const RegShakuDirectiveHighlight =
   /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>(\S+)?)\s*)?$/;
 
-type ShakuDirectiveDefocus = {
-  type: "DirectiveDefocus";
+type ShakuDirectiveDim = {
+  type: "DirectiveDim";
   config: {
     mark: "start" | "end" | "below";
   };
 };
-const RegShakuDirectiveDefocus =
-  /^(?<leadingSpaces>\s*)@defocus(\s+(?<mark>(\S+)?)\s*)?$/;
+const RegShakuDirectiveDim =
+  /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>(\S+)?)\s*)?$/;
 
 type ShakuLine =
   | ShakuDirectiveUnderline
@@ -77,7 +77,7 @@ type ShakuLine =
   | ShakuDirectiveCallout
   | ShakuDirectiveCollapse
   | ShakuDirectiveHighlight
-  | ShakuDirectiveDefocus;
+  | ShakuDirectiveDim;
 
 export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveUnderlineSolid = line.match(
@@ -176,15 +176,15 @@ export const parseLine = (line: string): ShakuLine | null => {
     };
   }
 
-  const matchShakuDirectiveDefocus = line.match(RegShakuDirectiveDefocus);
-  if (matchShakuDirectiveDefocus) {
-    const mark = matchShakuDirectiveDefocus.groups?.mark || "below";
+  const matchShakuDirectiveDim = line.match(RegShakuDirectiveDim);
+  if (matchShakuDirectiveDim) {
+    const mark = matchShakuDirectiveDim.groups?.mark || "below";
     if (mark !== "start" && mark !== "end" && mark !== "below") {
-      throw new Error(`mark: ${mark} is not supported under @defocus`);
+      throw new Error(`mark: ${mark} is not supported under @dim`);
     }
 
     return {
-      type: "DirectiveDefocus",
+      type: "DirectiveDim",
       config: {
         mark,
       },

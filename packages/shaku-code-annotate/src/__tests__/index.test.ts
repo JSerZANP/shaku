@@ -141,44 +141,44 @@ describe("parseLine() can parse comment lines", () => {
     const func = () => parseLine("   @highlight unexpected ");
     expect(func).toThrow();
   });
-  test("   @defocus start", async () => {
-    const result = parseLine("   @defocus start ");
+  test("   @dim start", async () => {
+    const result = parseLine("   @dim start ");
     expect(result).toEqual({
-      type: "DirectiveDefocus",
+      type: "DirectiveDim",
       config: {
         mark: "start",
       },
     });
   });
-  test("   @defocus end", async () => {
-    const result = parseLine("   @defocus end ");
+  test("   @dim end", async () => {
+    const result = parseLine("   @dim end ");
     expect(result).toEqual({
-      type: "DirectiveDefocus",
+      type: "DirectiveDim",
       config: {
         mark: "end",
       },
     });
   });
-  test("   @defocus ", async () => {
-    const result = parseLine("   @defocus ");
+  test("   @dim ", async () => {
+    const result = parseLine("   @dim ");
     expect(result).toEqual({
-      type: "DirectiveDefocus",
+      type: "DirectiveDim",
       config: {
         mark: "below",
       },
     });
   });
-  test("   @defocus below ", async () => {
-    const result = parseLine("   @defocus below ");
+  test("   @dim below ", async () => {
+    const result = parseLine("   @dim below ");
     expect(result).toEqual({
-      type: "DirectiveDefocus",
+      type: "DirectiveDim",
       config: {
         mark: "below",
       },
     });
   });
-  test("   @defocus unexpected", async () => {
-    const func = () => parseLine("   @defocus unexpected ");
+  test("   @dim unexpected", async () => {
+    const func = () => parseLine("   @dim unexpected ");
     expect(func).toThrow();
   });
   test("This is some comments from source code ", async () => {

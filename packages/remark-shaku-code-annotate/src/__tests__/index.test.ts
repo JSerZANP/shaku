@@ -141,21 +141,21 @@ const c = 1;
 `);
 });
 
-test("able to render defocus ", async () => {
+test("able to render dim ", async () => {
   const result = await process(`
 \`\`\`js annotate
 
-// @defocus
+// @dim
 const a = 1;
 
-// @defocus start
+// @dim start
 const b = 1;
 const c = 1;
-// @defocus end
+// @dim end
 
 \`\`\`
 `);
   expect(result.value)
-    .toEqual(`<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line "></div><div class="line defocus"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line "></div><div class="line defocus"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">b</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line defocus"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">c</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line "></div></code></div></pre>
+    .toEqual(`<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line "></div><div class="line dim"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line "></div><div class="line dim"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">b</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line dim"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">c</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line "></div></code></div></pre>
 `);
 });
