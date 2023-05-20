@@ -53,20 +53,17 @@ const blog = "jser.dev"
 //            ~~~~~~~~
 \`\`\`
 
-**easily Highlight/Hidden lines**
+**easily Highlight lines**
 
-You don't need to add code meta, just add the command where you want to highlight or hidden.
+You don't need to add code meta, just add the command where you want to highlight.
 
 \`\`\`js annotate
 // @highlight
 function useSomeEffect({blog}) {
-// @hidden
-  const [count, setCount] = useState(0)
+
   useEffect(() => {
-// @hidden start
-    console.log("Hello")
-    console.log("World")
-// @hidden end
+    // do some staff
+
 // @highlight start
       return () => {
         location.href = 'https://jser.dev'
@@ -74,6 +71,22 @@ function useSomeEffect({blog}) {
 // @highlight end
 
     }, [blog])
+}
+\`\`\`
+
+**easily Defocus lines**
+
+Use this command to defocus your code and emphasize other parts.
+
+\`\`\`js annotate
+// @hidden 
+function foo() {
+  console.log("Hello!")
+// @hidden start
+  setTimeout(() => {
+    console.log("World!")
+  },1000)
+// @hidden end
 }
 \`\`\`
 
@@ -86,7 +99,7 @@ function getProcessor() {
   return shiki
     .getHighlighter({
       theme: "github-light",
-      langs: ['javascript', 'css'],
+      langs: ["javascript", "css"],
       paths: {
         themes: "/_next/static/shiki/themes",
         wasm: "/_next/static/shiki/dist",
@@ -97,7 +110,7 @@ function getProcessor() {
       remark()
         .use(remarkShakuCodeAnnotate, {
           theme: "github-light",
-          langs: ['javascript', 'css'],
+          langs: ["javascript", "css"],
 
           paths: {
             themes: "/_next/static/shiki/themes",
