@@ -76,7 +76,7 @@ function useSomeEffect({blog}) {
 
 **easily Dim lines**
 
-Use this command to to de-emphasize some lines.
+Use this command to de-emphasize some lines.
 
 \`\`\`js annotate
 // @dim
