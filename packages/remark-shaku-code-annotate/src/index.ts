@@ -58,9 +58,9 @@ export const remarkShakuCodeAnnotate = (
       });
 
       let shouldHighlighNextSourceLine = false;
-      let shouldHiddenNextSourceLine = false;
+      let shouldDefocusNextSourceLine = false;
       let isHighlightingBlock = false;
-      let isHiddenBlock = false;
+      let isDefocusBlock = false;
 
       for (let i = 0; i < parsedLines.length; i++) {
         const line = parsedLines[i];
@@ -122,18 +122,18 @@ export const remarkShakuCodeAnnotate = (
                     break;
                 }
                 break;
-              case "DirectiveHidden":
-                const hiddenMark = shakuLine.config.mark;
-                switch (hiddenMark) {
+              case "DirectiveDefocus":
+                const defocusMark = shakuLine.config.mark;
+                switch (defocusMark) {
                   case "start":
-                    isHiddenBlock = true;
+                    isDefocusBlock = true;
                     break;
                   case "end":
-                    isHiddenBlock = false;
+                    isDefocusBlock = false;
                     break;
                   case "below":
                   default:
-                    shouldHiddenNextSourceLine = true;
+                    shouldDefocusNextSourceLine = true;
                     break;
                 }
                 break;
@@ -183,11 +183,12 @@ export const remarkShakuCodeAnnotate = (
             const shouldHighlight =
               isHighlightingBlock || shouldHighlighNextSourceLine;
             shouldHighlighNextSourceLine = false;
-            const shouldHidden = isHiddenBlock || shouldHiddenNextSourceLine;
-            shouldHiddenNextSourceLine = false
+            const shouldDefocus = isDefocusBlock || shouldDefocusNextSourceLine;
+            shouldDefocusNextSourceLine = false;
             const sourceLine = line.line;
-            const prefix = `<div style="opacity:${shouldHidden ? 0.3 : 1}" class="line${shouldHighlight ? " highlight" : ""
-              }">`;
+            const prefix = `<div class="line${
+              shouldHighlight ? " highlight" : ""
+            } ${shouldDefocus ? "defocus" : ""}">`;
 
             html += prefix;
             html += sourceLine

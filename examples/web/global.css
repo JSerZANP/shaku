@@ -1,5 +1,3 @@
-
-
 pre.shiki {
   padding: 1rem;
   border: 1px solid #eee;
@@ -12,6 +10,10 @@ pre.shiki .line {
 pre.shiki .line.highlight {
   background-color: #dffa83;
   display: block;
+}
+
+pre.shiki .line.defocus {
+  opacity: 0.3;
 }
 
 .shaku-callout {
@@ -56,15 +58,15 @@ pre.shiki .line.highlight {
   text-decoration-thickness: 2px;
 }
 
-.shaku-underline-wavy > .shaku-underline-line {
+.shaku-underline-wavy>.shaku-underline-line {
   text-decoration-style: wavy;
   top: 0.7em;
 }
 
-.shaku-underline-solid > .shaku-underline-line{
+.shaku-underline-solid>.shaku-underline-line {
   text-decoration-style: solid;
 }
 
-.shaku-underline-dotted > .shaku-underline-line{
+.shaku-underline-dotted>.shaku-underline-line {
   text-decoration-style: dotted;
 }

@@ -149,7 +149,7 @@ describe("parseLine() can parse comment lines", () => {
         mark: "start",
       },
     });
-  })
+  });
   test("   @hidden end", async () => {
     const result = parseLine("   @hidden end ");
     expect(result).toEqual({
@@ -158,7 +158,7 @@ describe("parseLine() can parse comment lines", () => {
         mark: "end",
       },
     });
-  })
+  });
   test("   @hidden ", async () => {
     const result = parseLine("   @hidden ");
     expect(result).toEqual({
@@ -167,7 +167,7 @@ describe("parseLine() can parse comment lines", () => {
         mark: "below",
       },
     });
-  })
+  });
   test("   @hidden below ", async () => {
     const result = parseLine("   @hidden below ");
     expect(result).toEqual({
@@ -176,11 +176,11 @@ describe("parseLine() can parse comment lines", () => {
         mark: "below",
       },
     });
-  })
+  });
   test("   @hidden unexpect", async () => {
     const func = () => parseLine("   @hidden unexpected ");
     expect(func).toThrow();
-  })
+  });
   test("This is some comments from source code ", async () => {
     const result = parseLine("This is some comments from source code");
     expect(result).toBeNull();

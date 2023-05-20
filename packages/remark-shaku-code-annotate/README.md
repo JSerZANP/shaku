@@ -83,6 +83,10 @@ pre.shiki .line.highlight {
   display: block;
 }
 
+pre.shiki .line.defocus {
+  opacity: 0.3;
+}
+
 .shaku-callout {
   background-color: #0685ce;
   color: #fff;

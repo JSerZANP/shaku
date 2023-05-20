@@ -79,14 +79,14 @@ function useSomeEffect({blog}) {
 Use this command to defocus your code and emphasize other parts.
 
 \`\`\`js annotate
-// @hidden 
+// @defocus
 function foo() {
   console.log("Hello!")
-// @hidden start
+// @defocus start
   setTimeout(() => {
     console.log("World!")
   },1000)
-// @hidden end
+// @defocus end
 }
 \`\`\`
 
