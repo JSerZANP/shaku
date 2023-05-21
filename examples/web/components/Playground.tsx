@@ -82,7 +82,7 @@ function getProcessor() {
   return shiki
     .getHighlighter({
       theme: "github-light",
-      langs: ['javascript', 'css'],
+      langs: ["javascript", "css"],
       paths: {
         themes: "/_next/static/shiki/themes",
         wasm: "/_next/static/shiki/dist",
@@ -93,7 +93,7 @@ function getProcessor() {
       remark()
         .use(remarkShakuCodeAnnotate, {
           theme: "github-light",
-          langs: ['javascript', 'css'],
+          langs: ["javascript", "css"],
 
           paths: {
             themes: "/_next/static/shiki/themes",
