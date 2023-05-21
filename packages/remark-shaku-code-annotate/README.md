@@ -62,6 +62,17 @@ function useSomeEffect({blog}) {
 
     }, [blog])
 }
+
+// @focus
+function foo(){
+  console.log("Hello!")
+// @focus start
+  setTimeout(() => {
+    console.log('World!')
+  },1000)
+// @focus end
+}
+
 \`\`\`
 `;
 
@@ -82,6 +93,11 @@ pre.shiki .line.highlight {
   background-color: #dffa83;
   display: block;
 }
+
+pre.shiki .line.dim {
+  opacity:0.3;
+}
+
 
 .shaku-callout {
   background-color: #0685ce;

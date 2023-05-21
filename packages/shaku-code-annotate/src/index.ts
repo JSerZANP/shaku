@@ -183,7 +183,6 @@ export const parseLine = (line: string): ShakuLine | null => {
     if (mark !== "start" && mark !== "end" && mark !== "below") {
       throw new Error(`mark: ${mark} is not supported under @focus`);
     }
-
     return {
       type: "DirectiveFocus",
       config: {

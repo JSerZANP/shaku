@@ -26,13 +26,11 @@ export const remarkShakuCodeAnnotate = (
         node.value,
         node.lang ?? "txt"
       );
-
       const foregroundColor = highlighter.getForegroundColor();
       const backgroundColor = highlighter.getBackgroundColor();
       // generate the html from the tokens
       let html = `<pre class="shiki" style="color:${foregroundColor};background-color:${backgroundColor}">`;
       html += `<div class="code-container"><code>`;
-
       const parsedLines = lines.map((line) => {
         if (isCommentLine(line)) {
           // comment might have // or /*
@@ -59,6 +57,8 @@ export const remarkShakuCodeAnnotate = (
 
       let shouldHighlighNextSourceLine = false;
       let isHighlightingBlock = false;
+      let shouldFocusNextSourceLine = false;
+      let isFocusBlock = false;
       for (let i = 0; i < parsedLines.length; i++) {
         const line = parsedLines[i];
         switch (line.type) {
@@ -98,7 +98,6 @@ export const remarkShakuCodeAnnotate = (
                 i = j - 1;
                 continue;
               }
-
               case "AnnotationLine":
                 // TODO
                 break;
@@ -155,6 +154,21 @@ export const remarkShakuCodeAnnotate = (
 
                 i = j - 1;
                 continue;
+              case "DirectiveFocus":
+                const focusMark = shakuLine.config.mark;
+                switch (focusMark) {
+                  case "start":
+                    isFocusBlock = true;
+                    break;
+                  case "end":
+                    isFocusBlock = false;
+                    break;
+                  case "below":
+                  default:
+                    shouldFocusNextSourceLine = true;
+                    break;
+                }
+                break;
               default:
                 assertsNever(shakuLine);
             }
@@ -165,12 +179,15 @@ export const remarkShakuCodeAnnotate = (
             const shouldHighlight =
               isHighlightingBlock || shouldHighlighNextSourceLine;
             shouldHighlighNextSourceLine = false;
-
+            const shouldFocus = isFocusBlock || shouldFocusNextSourceLine;
+            shouldFocusNextSourceLine = false;
             const sourceLine = line.line;
-            const prefix = `<div class="line${
-              shouldHighlight ? " highlight" : ""
+            const focusFlag = hasFocusElement(lines);
+            const highlightClass = shouldHighlight ? " highlight" : "";
+            const focusClass = shouldFocus ? "" : " dim";
+            const prefix = `<div class="line${highlightClass}${
+              focusFlag ? focusClass : ""
             }">`;
-
             html += prefix;
             html += sourceLine
               .map(
@@ -207,6 +224,11 @@ function isCommentLine(line: IThemedToken[]) {
     line[0].explanation?.[0].scopes.some((scope) =>
       scope.scopeName.startsWith("comment.")
     )
+  );
+}
+function hasFocusElement(line: IThemedToken[][]) {
+  return line.some((innerLine) =>
+    innerLine.some((element) => element.content.includes("@focus"))
   );
 }
 

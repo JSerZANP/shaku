@@ -140,3 +140,24 @@ const c = 1;
     .toEqual(`<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"></div><div class="line highlight"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line"></div><div class="line highlight"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">b</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line highlight"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">c</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line"></div></code></div></pre>
 `);
 });
+
+test("able to render focus ", async () => {
+  const result = await process(`
+\`\`\`js annotate
+
+// @focus
+const a = 1;
+
+// @focus start
+const b = 1;
+const c = 1;
+// @focus end
+
+const d = 1;
+
+\`\`\`
+`);
+  expect(result.value)
+    .toEqual(`<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line dim"></div><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line dim"></div><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">b</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">c</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line dim"></div><div class="line dim"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">d</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="line dim"></div></code></div></pre>
+`);
+});
