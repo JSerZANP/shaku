@@ -141,6 +141,50 @@ describe("parseLine() can parse comment lines", () => {
     const func = () => parseLine("   @highlight unexpected ");
     expect(func).toThrow();
   });
+  test("   @focus start ", async () => {
+    const result = parseLine("   @focus start ");
+    expect(result).toEqual({
+      type: "DirectiveFocus",
+      config: {
+        mark: "start",
+      },
+    });
+  });
+
+  test("   @focus end ", async () => {
+    const result = parseLine("   @focus end ");
+    expect(result).toEqual({
+      type: "DirectiveFocus",
+      config: {
+        mark: "end",
+      },
+    });
+  });
+
+  test("   @focus ", async () => {
+    const result = parseLine("   @focus ");
+    expect(result).toEqual({
+      type: "DirectiveFocus",
+      config: {
+        mark: "below",
+      },
+    });
+  });
+
+  test("   @focus below ", async () => {
+    const result = parseLine("   @focus below ");
+    expect(result).toEqual({
+      type: "DirectiveFocus",
+      config: {
+        mark: "below",
+      },
+    });
+  });
+
+  test("   @focus unexpected ", async () => {
+    const func = () => parseLine("   @focus unexpected ");
+    expect(func).toThrow();
+  });
 
   test("This is some comments from source code ", async () => {
     const result = parseLine("This is some comments from source code");
