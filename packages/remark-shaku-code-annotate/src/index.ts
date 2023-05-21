@@ -207,7 +207,7 @@ export const remarkShakuCodeAnnotate = (
             const sourceLine = line.line;
             const focusFlag = hasFocusElement(lines);
             const highlightClass = shouldHighlight ? " highlight" : "";
-            const focusClass = focusFlag ? (shouldFocus ? "" : " dim") : "";
+            const focusClass = focusFlag ? (shouldFocus ? "" : " focus") : "";
             const dimClass = shouldDim ? " dim" : "";
             const prefix = `<div class="line${highlightClass}${dimClass}${focusClass}">`;
             html += prefix;
