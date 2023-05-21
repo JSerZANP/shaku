@@ -62,6 +62,17 @@ function useSomeEffect({blog}) {
 
     }, [blog])
 }
+
+// @dim
+function foo() {
+  console.log("Hello!")
+// @dim start
+  setTimeout(() => {
+    console.log("World!")
+  },1000)
+// @dim end
+}
+
 \`\`\`
 `;
 
@@ -81,6 +92,10 @@ pre.shiki .line {
 pre.shiki .line.highlight {
   background-color: #dffa83;
   display: block;
+}
+
+pre.shiki .line.dim {
+  opacity: 0.3;
 }
 
 .shaku-callout {

@@ -58,7 +58,10 @@ export const remarkShakuCodeAnnotate = (
       });
 
       let shouldHighlighNextSourceLine = false;
+      let shouldDimNextSourceLine = false;
       let isHighlightingBlock = false;
+      let isDimBlock = false;
+
       for (let i = 0; i < parsedLines.length; i++) {
         const line = parsedLines[i];
         switch (line.type) {
@@ -98,7 +101,6 @@ export const remarkShakuCodeAnnotate = (
                 i = j - 1;
                 continue;
               }
-
               case "AnnotationLine":
                 // TODO
                 break;
@@ -117,6 +119,21 @@ export const remarkShakuCodeAnnotate = (
                   case "below":
                   default:
                     shouldHighlighNextSourceLine = true;
+                    break;
+                }
+                break;
+              case "DirectiveDim":
+                const dimMark = shakuLine.config.mark;
+                switch (dimMark) {
+                  case "start":
+                    isDimBlock = true;
+                    break;
+                  case "end":
+                    isDimBlock = false;
+                    break;
+                  case "below":
+                  default:
+                    shouldDimNextSourceLine = true;
                     break;
                 }
                 break;
@@ -165,11 +182,12 @@ export const remarkShakuCodeAnnotate = (
             const shouldHighlight =
               isHighlightingBlock || shouldHighlighNextSourceLine;
             shouldHighlighNextSourceLine = false;
-
+            const shouldDim = isDimBlock || shouldDimNextSourceLine;
+            shouldDimNextSourceLine = false;
             const sourceLine = line.line;
             const prefix = `<div class="line${
               shouldHighlight ? " highlight" : ""
-            }">`;
+            }${shouldDim ? " dim" : ""}">`;
 
             html += prefix;
             html += sourceLine

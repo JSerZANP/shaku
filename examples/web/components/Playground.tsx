@@ -55,14 +55,15 @@ const blog = "jser.dev"
 
 **easily Highlight lines**
 
-You don't need to add code meta, just add the command where you want to highlight
+You don't need to add code meta, just add the command where you want to highlight.
 
 \`\`\`js annotate
 // @highlight
 function useSomeEffect({blog}) {
+
   useEffect(() => {
-    // do some stuff
-    
+    // do some staff
+
 // @highlight start
       return () => {
         location.href = 'https://jser.dev'
@@ -70,6 +71,22 @@ function useSomeEffect({blog}) {
 // @highlight end
 
     }, [blog])
+}
+\`\`\`
+
+**easily Dim lines**
+
+Use this command to de-emphasize some lines.
+
+\`\`\`js annotate
+// @dim
+function foo() {
+  console.log("Hello!")
+// @dim start
+  setTimeout(() => {
+    console.log("World!")
+  },1000)
+// @dim end
 }
 \`\`\`
 
@@ -82,7 +99,7 @@ function getProcessor() {
   return shiki
     .getHighlighter({
       theme: "github-light",
-      langs: ['javascript', 'css'],
+      langs: ["javascript", "css"],
       paths: {
         themes: "/_next/static/shiki/themes",
         wasm: "/_next/static/shiki/dist",
@@ -93,7 +110,7 @@ function getProcessor() {
       remark()
         .use(remarkShakuCodeAnnotate, {
           theme: "github-light",
-          langs: ['javascript', 'css'],
+          langs: ["javascript", "css"],
 
           paths: {
             themes: "/_next/static/shiki/themes",

@@ -62,12 +62,22 @@ type ShakuDirectiveHighlight = {
 const RegShakuDirectiveHighlight =
   /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>(\S+)?)\s*)?$/;
 
+type ShakuDirectiveDim = {
+  type: "DirectiveDim";
+  config: {
+    mark: "start" | "end" | "below";
+  };
+};
+const RegShakuDirectiveDim =
+  /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>(\S+)?)\s*)?$/;
+
 type ShakuLine =
   | ShakuDirectiveUnderline
   | ShakuAnnotationLine
   | ShakuDirectiveCallout
   | ShakuDirectiveCollapse
-  | ShakuDirectiveHighlight;
+  | ShakuDirectiveHighlight
+  | ShakuDirectiveDim;
 
 export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveUnderlineSolid = line.match(
@@ -166,6 +176,20 @@ export const parseLine = (line: string): ShakuLine | null => {
     };
   }
 
+  const matchShakuDirectiveDim = line.match(RegShakuDirectiveDim);
+  if (matchShakuDirectiveDim) {
+    const mark = matchShakuDirectiveDim.groups?.mark || "below";
+    if (mark !== "start" && mark !== "end" && mark !== "below") {
+      throw new Error(`mark: ${mark} is not supported under @dim`);
+    }
+
+    return {
+      type: "DirectiveDim",
+      config: {
+        mark,
+      },
+    };
+  }
   return null;
 };
 

@@ -141,6 +141,46 @@ describe("parseLine() can parse comment lines", () => {
     const func = () => parseLine("   @highlight unexpected ");
     expect(func).toThrow();
   });
+  test("   @dim start", async () => {
+    const result = parseLine("   @dim start ");
+    expect(result).toEqual({
+      type: "DirectiveDim",
+      config: {
+        mark: "start",
+      },
+    });
+  });
+  test("   @dim end", async () => {
+    const result = parseLine("   @dim end ");
+    expect(result).toEqual({
+      type: "DirectiveDim",
+      config: {
+        mark: "end",
+      },
+    });
+  });
+  test("   @dim ", async () => {
+    const result = parseLine("   @dim ");
+    expect(result).toEqual({
+      type: "DirectiveDim",
+      config: {
+        mark: "below",
+      },
+    });
+  });
+  test("   @dim below ", async () => {
+    const result = parseLine("   @dim below ");
+    expect(result).toEqual({
+      type: "DirectiveDim",
+      config: {
+        mark: "below",
+      },
+    });
+  });
+  test("   @dim unexpected", async () => {
+    const func = () => parseLine("   @dim unexpected ");
+    expect(func).toThrow();
+  });
 
   test("This is some comments from source code ", async () => {
     const result = parseLine("This is some comments from source code");
