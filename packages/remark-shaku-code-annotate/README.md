@@ -95,9 +95,8 @@ pre.shiki .line.highlight {
 }
 
 pre.shiki .line.dim {
-  opacity:0.3;
+  opacity: 0.3;
 }
-
 
 .shaku-callout {
   background-color: #0685ce;
