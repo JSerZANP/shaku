@@ -107,9 +107,9 @@ export const remarkShakuCodeAnnotate = (
               case "DirectiveCollapse":
                 // TODO
                 break;
-              case "DirectiveHighlight":
-                const highlightMark = shakuLine.config.mark;
-                switch (highlightMark) {
+              case "DirectiveHighlight": {
+                const mark = shakuLine.config.mark;
+                switch (mark) {
                   case "start":
                     isHighlightingBlock = true;
                     break;
@@ -122,9 +122,10 @@ export const remarkShakuCodeAnnotate = (
                     break;
                 }
                 break;
-              case "DirectiveDim":
-                const dimMark = shakuLine.config.mark;
-                switch (dimMark) {
+              }
+              case "DirectiveDim": {
+                const mark = shakuLine.config.mark;
+                switch (mark) {
                   case "start":
                     isDimBlock = true;
                     break;
@@ -137,9 +138,10 @@ export const remarkShakuCodeAnnotate = (
                     break;
                 }
                 break;
-              case "DirectiveFocus":
-                const focusMark = shakuLine.config.mark;
-                switch (focusMark) {
+              }
+              case "DirectiveFocus": {
+                const mark = shakuLine.config.mark;
+                switch (mark) {
                   case "start":
                     isFocusBlock = true;
                     break;
@@ -152,6 +154,7 @@ export const remarkShakuCodeAnnotate = (
                     break;
                 }
                 break;
+              }
               case "DirectiveUnderline":
                 const underlineOffset = shakuLine.config.offset;
                 const underlineContent = shakuLine.config.content;
