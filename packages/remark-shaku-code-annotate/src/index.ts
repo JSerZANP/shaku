@@ -31,37 +31,14 @@ export const remarkShakuCodeAnnotate = (
       // generate the html from the tokens
       let html = `<pre class="shiki" style="color:${foregroundColor};background-color:${backgroundColor}">`;
       html += `<div class="code-container"><code>`;
-      const parsedLines = lines.map((line) => {
-        if (isCommentLine(line)) {
-          // comment might have // or /*
-          // meaning comment body might be in the 2nd explanation
-          // or 1st one. Does this hold for all languages?
-          // @ts-ignore
-          const commentBody = (line[0].explanation[1] ?? line[0].explanation[0])
-            .content;
-          const shakuLine = parseLine(commentBody);
-          if (shakuLine != null) {
-            return {
-              type: "shaku",
-              line: shakuLine,
-              // @ts-ignore
-              commentTag: line[0].explanation[0].content,
-            } as const;
-          }
-        }
-        return {
-          type: "default",
-          line,
-        } as const;
-      });
-
+      const parsedLines = traverseLines(lines);
+      const focusFlag = hasFocusElement(parsedLines);
       let shouldHighlighNextSourceLine = false;
       let shouldDimNextSourceLine = false;
       let shouldFocusNextSourceLine = false;
       let isHighlightingBlock = false;
       let isDimBlock = false;
       let isFocusBlock = false;
-      const focusFlag = hasFocusElement(lines);
       for (let i = 0; i < parsedLines.length; i++) {
         const line = parsedLines[i];
         switch (line.type) {
@@ -247,9 +224,35 @@ function isCommentLine(line: IThemedToken[]) {
     )
   );
 }
-function hasFocusElement(line: IThemedToken[][]) {
-  return line.some((innerLine) =>
-    innerLine.some((element) => element.content.includes("@focus"))
+function traverseLines(lines: IThemedToken[][]) {
+  return lines.map((line) => {
+    if (isCommentLine(line)) {
+      // comment might have // or /*
+      // meaning comment body might be in the 2nd explanation
+      // or 1st one. Does this hold for all languages?
+      // @ts-ignore
+      const commentBody = (line[0].explanation[1] ?? line[0].explanation[0])
+        .content;
+      const shakuLine = parseLine(commentBody);
+      if (shakuLine != null) {
+        return {
+          type: "shaku",
+          line: shakuLine,
+          // @ts-ignore
+          commentTag: line[0].explanation[0].content,
+        } as const;
+      }
+    }
+    return {
+      type: "default",
+      line,
+    } as const;
+  });
+}
+function hasFocusElement(line: ReturnType<typeof traverseLines>) {
+  return line.some(
+    (innerLine) =>
+      innerLine.type === "shaku" && innerLine.line.type === "DirectiveFocus"
   );
 }
 
