@@ -57,10 +57,10 @@ export const remarkShakuCodeAnnotate = (
 
       let shouldHighlighNextSourceLine = false;
       let shouldDimNextSourceLine = false;
-      let isHighlightingBlock = false;
       let shouldFocusNextSourceLine = false;
-      let isFocusBlock = false;
+      let isHighlightingBlock = false;
       let isDimBlock = false;
+      let isFocusBlock = false;
 
       for (let i = 0; i < parsedLines.length; i++) {
         const line = parsedLines[i];
@@ -204,11 +204,9 @@ export const remarkShakuCodeAnnotate = (
             const sourceLine = line.line;
             const focusFlag = hasFocusElement(lines);
             const highlightClass = shouldHighlight ? " highlight" : "";
-            const focusClass = shouldFocus ? "" : " dim";
+            const focusClass = focusFlag ? (shouldFocus ? "" : " dim") : "";
             const dimClass = shouldDim ? " dim" : "";
-            const prefix = `<div class="line${highlightClass}${dimClass}${
-              focusFlag ? focusClass : ""
-            }">`;
+            const prefix = `<div class="line${highlightClass}${dimClass}${focusClass}">`;
             html += prefix;
             html += sourceLine
               .map(

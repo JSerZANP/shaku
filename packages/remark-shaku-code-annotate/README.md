@@ -108,10 +108,6 @@ pre.shiki .line.dim {
   opacity: 0.3;
 }
 
-pre.shiki .line.dim {
-  opacity: 0.3;
-}
-
 .shaku-callout {
   background-color: #0685ce;
   color: #fff;

@@ -195,7 +195,7 @@ describe("parseLine() can parse comment lines", () => {
     });
   });
 
-  test("   @highlight end ", async () => {
+  test("   @focus end ", async () => {
     const result = parseLine("   @focus end ");
     expect(result).toEqual({
       type: "DirectiveFocus",
