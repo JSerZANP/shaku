@@ -56,9 +56,12 @@ export const remarkShakuCodeAnnotate = (
       });
 
       let shouldHighlighNextSourceLine = false;
+      let shouldDimNextSourceLine = false;
       let isHighlightingBlock = false;
       let shouldFocusNextSourceLine = false;
       let isFocusBlock = false;
+      let isDimBlock = false;
+
       for (let i = 0; i < parsedLines.length; i++) {
         const line = parsedLines[i];
         switch (line.type) {
@@ -116,6 +119,21 @@ export const remarkShakuCodeAnnotate = (
                   case "below":
                   default:
                     shouldHighlighNextSourceLine = true;
+                    break;
+                }
+                break;
+              case "DirectiveDim":
+                const dimMark = shakuLine.config.mark;
+                switch (dimMark) {
+                  case "start":
+                    isDimBlock = true;
+                    break;
+                  case "end":
+                    isDimBlock = false;
+                    break;
+                  case "below":
+                  default:
+                    shouldDimNextSourceLine = true;
                     break;
                 }
                 break;
@@ -179,13 +197,16 @@ export const remarkShakuCodeAnnotate = (
             const shouldHighlight =
               isHighlightingBlock || shouldHighlighNextSourceLine;
             shouldHighlighNextSourceLine = false;
+            const shouldDim = isDimBlock || shouldDimNextSourceLine;
+            shouldDimNextSourceLine = false;
             const shouldFocus = isFocusBlock || shouldFocusNextSourceLine;
             shouldFocusNextSourceLine = false;
             const sourceLine = line.line;
             const focusFlag = hasFocusElement(lines);
             const highlightClass = shouldHighlight ? " highlight" : "";
             const focusClass = shouldFocus ? "" : " dim";
-            const prefix = `<div class="line${highlightClass}${
+            const dimClass = shouldDim ? " dim" : "";
+            const prefix = `<div class="line${highlightClass}${dimClass}${
               focusFlag ? focusClass : ""
             }">`;
             html += prefix;
