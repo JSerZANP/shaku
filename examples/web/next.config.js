@@ -2,7 +2,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const path = require('path')
 
 module.exports = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   transpilePackages: ["ui"],
   experimental: {
     appDir: true
