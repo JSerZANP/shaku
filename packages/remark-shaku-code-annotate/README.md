@@ -62,6 +62,17 @@ function useSomeEffect({blog}) {
 
     }, [blog])
 }
+
+// @dim
+function foo() {
+  console.log("Hello!")
+// @dim start
+  setTimeout(() => {
+    console.log("World!")
+  },1000)
+// @dim end
+}
+
 \`\`\`
 `;
 
