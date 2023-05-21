@@ -137,9 +137,6 @@ export const remarkShakuCodeAnnotate = (
                     break;
                 }
                 break;
-              case "DirectiveFocus":
-                //TODO
-                break;
               case "DirectiveUnderline":
                 const underlineOffset = shakuLine.config.offset;
                 const underlineContent = shakuLine.config.content;
