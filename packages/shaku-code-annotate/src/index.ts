@@ -87,8 +87,8 @@ type ShakuLine =
   | ShakuDirectiveCallout
   | ShakuDirectiveCollapse
   | ShakuDirectiveHighlight
-  | ShakuDirectiveFocus
-  | ShakuDirectiveDim;
+  | ShakuDirectiveDim
+  | ShakuDirectiveFocus;
 
 export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveUnderlineSolid = line.match(

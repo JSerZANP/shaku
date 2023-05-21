@@ -108,8 +108,8 @@ export const remarkShakuCodeAnnotate = (
                 // TODO
                 break;
               case "DirectiveHighlight":
-                const mark = shakuLine.config.mark;
-                switch (mark) {
+                const highlightMark = shakuLine.config.mark;
+                switch (highlightMark) {
                   case "start":
                     isHighlightingBlock = true;
                     break;
@@ -134,6 +134,21 @@ export const remarkShakuCodeAnnotate = (
                   case "below":
                   default:
                     shouldDimNextSourceLine = true;
+                    break;
+                }
+                break;
+              case "DirectiveFocus":
+                const focusMark = shakuLine.config.mark;
+                switch (focusMark) {
+                  case "start":
+                    isFocusBlock = true;
+                    break;
+                  case "end":
+                    isFocusBlock = false;
+                    break;
+                  case "below":
+                  default:
+                    shouldFocusNextSourceLine = true;
                     break;
                 }
                 break;
@@ -172,21 +187,6 @@ export const remarkShakuCodeAnnotate = (
 
                 i = j - 1;
                 continue;
-              case "DirectiveFocus":
-                const focusMark = shakuLine.config.mark;
-                switch (focusMark) {
-                  case "start":
-                    isFocusBlock = true;
-                    break;
-                  case "end":
-                    isFocusBlock = false;
-                    break;
-                  case "below":
-                  default:
-                    shouldFocusNextSourceLine = true;
-                    break;
-                }
-                break;
               default:
                 assertsNever(shakuLine);
             }
