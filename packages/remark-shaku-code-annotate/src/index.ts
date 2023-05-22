@@ -224,7 +224,7 @@ function isCommentLine(line: IThemedToken[]) {
     )
   );
 }
-function traverseLines(lines: IThemedToken[][]) {
+function parseLines(lines: IThemedToken[][]) {
   return lines.map((line) => {
     if (isCommentLine(line)) {
       // comment might have // or /*
