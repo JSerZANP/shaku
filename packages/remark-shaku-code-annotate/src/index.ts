@@ -31,8 +31,8 @@ export const remarkShakuCodeAnnotate = (
       // generate the html from the tokens
       let html = `<pre class="shiki" style="color:${foregroundColor};background-color:${backgroundColor}">`;
       html += `<div class="code-container"><code>`;
-      const parsedLines = traverseLines(lines);
-      const focusFlag = hasFocusElement(parsedLines);
+      const parsedLines = parseLines(lines);
+      const focusFlag = hasShakuDirectiveFocus(parsedLines);
       let shouldHighlighNextSourceLine = false;
       let shouldDimNextSourceLine = false;
       let shouldFocusNextSourceLine = false;
@@ -249,7 +249,7 @@ function parseLines(lines: IThemedToken[][]) {
     } as const;
   });
 }
-function hasShakuDirectiveFocus(lines: ReturnType<typeof traverseLines>) {
+function hasShakuDirectiveFocus(lines: ReturnType<typeof parseLines>) {
   return lines.some(
     (line) =>
       line.type === "shaku" && line.line.type === "DirectiveFocus"
