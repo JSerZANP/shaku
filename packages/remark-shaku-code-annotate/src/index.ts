@@ -249,10 +249,10 @@ function parseLines(lines: IThemedToken[][]) {
     } as const;
   });
 }
-function hasFocusElement(line: ReturnType<typeof traverseLines>) {
-  return line.some(
-    (innerLine) =>
-      innerLine.type === "shaku" && innerLine.line.type === "DirectiveFocus"
+function hasShakuDirectiveFocus(lines: ReturnType<typeof traverseLines>) {
+  return lines.some(
+    (line) =>
+      line.type === "shaku" && line.line.type === "DirectiveFocus"
   );
 }
 
