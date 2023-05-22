@@ -177,7 +177,7 @@ export const remarkShakuCodeAnnotate = (
             const shouldHighlight =
               isHighlightingBlock || shouldHighlighNextSourceLine;
             shouldHighlighNextSourceLine = false;
-            const shouldDim = isDimBlock || shouldDimNextSourceLine;
+            const shouldDim = isDimBlock || shouldDimNextSourceLine || (hasFocus && !shouldFocus)
             shouldDimNextSourceLine = false;
             const shouldFocus = isFocusBlock || shouldFocusNextSourceLine;
             shouldFocusNextSourceLine = false;
