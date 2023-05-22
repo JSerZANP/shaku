@@ -32,7 +32,7 @@ export const remarkShakuCodeAnnotate = (
       let html = `<pre class="shiki" style="color:${foregroundColor};background-color:${backgroundColor}">`;
       html += `<div class="code-container"><code>`;
       const parsedLines = parseLines(lines);
-      const focusFlag = hasShakuDirectiveFocus(parsedLines);
+      const hasFocus = hasShakuDirectiveFocus(parsedLines);
       let shouldHighlighNextSourceLine = false;
       let shouldDimNextSourceLine = false;
       let shouldFocusNextSourceLine = false;
