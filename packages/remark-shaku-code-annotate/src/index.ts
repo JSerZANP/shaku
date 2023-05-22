@@ -176,15 +176,18 @@ export const remarkShakuCodeAnnotate = (
           case "default": {
             const shouldHighlight =
               isHighlightingBlock || shouldHighlighNextSourceLine;
-            shouldHighlighNextSourceLine = false;
-            const shouldDim = isDimBlock || shouldDimNextSourceLine || (hasFocus && !shouldFocus)
-            shouldDimNextSourceLine = false;
             const shouldFocus = isFocusBlock || shouldFocusNextSourceLine;
+            const shouldDim =
+              isDimBlock ||
+              shouldDimNextSourceLine ||
+              (hasFocus && !shouldFocus);
+            shouldHighlighNextSourceLine = false;
             shouldFocusNextSourceLine = false;
+            shouldDimNextSourceLine = false;
             const sourceLine = line.line;
             const highlightClass = shouldHighlight ? " highlight" : "";
-            const focusClass = shouldFocus ? " focus" : "";
-            const prefix = `<div class="line${highlightClass}${dimClass}${focusClass}">`;
+            const dimClass = shouldDim ? " dim" : "";
+            const prefix = `<div class="line${highlightClass}${dimClass}">`;
             html += prefix;
             html += sourceLine
               .map(
@@ -250,8 +253,7 @@ function parseLines(lines: IThemedToken[][]) {
 }
 function hasShakuDirectiveFocus(lines: ReturnType<typeof parseLines>) {
   return lines.some(
-    (line) =>
-      line.type === "shaku" && line.line.type === "DirectiveFocus"
+    (line) => line.type === "shaku" && line.line.type === "DirectiveFocus"
   );
 }
 
