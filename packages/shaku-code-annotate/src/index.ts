@@ -71,13 +71,24 @@ type ShakuDirectiveDim = {
 const RegShakuDirectiveDim =
   /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>(\S+)?)\s*)?$/;
 
+type ShakuDirectiveFocus = {
+  type: "DirectiveFocus";
+  config: {
+    mark: "start" | "end" | "below";
+  };
+};
+
+const RegShakuDirectiveFocus =
+  /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>(\S+)?)\s*)?$/;
+
 type ShakuLine =
   | ShakuDirectiveUnderline
   | ShakuAnnotationLine
   | ShakuDirectiveCallout
   | ShakuDirectiveCollapse
   | ShakuDirectiveHighlight
-  | ShakuDirectiveDim;
+  | ShakuDirectiveDim
+  | ShakuDirectiveFocus;
 
 export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveUnderlineSolid = line.match(
@@ -175,7 +186,6 @@ export const parseLine = (line: string): ShakuLine | null => {
       },
     };
   }
-
   const matchShakuDirectiveDim = line.match(RegShakuDirectiveDim);
   if (matchShakuDirectiveDim) {
     const mark = matchShakuDirectiveDim.groups?.mark || "below";
@@ -190,6 +200,20 @@ export const parseLine = (line: string): ShakuLine | null => {
       },
     };
   }
+  const matchShakuDirectiveFocus = line.match(RegShakuDirectiveFocus);
+  if (matchShakuDirectiveFocus) {
+    const mark = matchShakuDirectiveFocus.groups?.mark || "below";
+    if (mark !== "start" && mark !== "end" && mark !== "below") {
+      throw new Error(`mark: ${mark} is not supported under @focus`);
+    }
+    return {
+      type: "DirectiveFocus",
+      config: {
+        mark,
+      },
+    };
+  }
+
   return null;
 };
 

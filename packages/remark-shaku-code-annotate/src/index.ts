@@ -26,42 +26,19 @@ export const remarkShakuCodeAnnotate = (
         node.value,
         node.lang ?? "txt"
       );
-
       const foregroundColor = highlighter.getForegroundColor();
       const backgroundColor = highlighter.getBackgroundColor();
       // generate the html from the tokens
       let html = `<pre class="shiki" style="color:${foregroundColor};background-color:${backgroundColor}">`;
       html += `<div class="code-container"><code>`;
-
-      const parsedLines = lines.map((line) => {
-        if (isCommentLine(line)) {
-          // comment might have // or /*
-          // meaning comment body might be in the 2nd explanation
-          // or 1st one. Does this hold for all languages?
-          // @ts-ignore
-          const commentBody = (line[0].explanation[1] ?? line[0].explanation[0])
-            .content;
-          const shakuLine = parseLine(commentBody);
-          if (shakuLine != null) {
-            return {
-              type: "shaku",
-              line: shakuLine,
-              // @ts-ignore
-              commentTag: line[0].explanation[0].content,
-            } as const;
-          }
-        }
-        return {
-          type: "default",
-          line,
-        } as const;
-      });
-
+      const parsedLines = parseLines(lines);
+      const hasFocus = hasShakuDirectiveFocus(parsedLines);
       let shouldHighlighNextSourceLine = false;
       let shouldDimNextSourceLine = false;
+      let shouldFocusNextSourceLine = false;
       let isHighlightingBlock = false;
       let isDimBlock = false;
-
+      let isFocusBlock = false;
       for (let i = 0; i < parsedLines.length; i++) {
         const line = parsedLines[i];
         switch (line.type) {
@@ -107,7 +84,7 @@ export const remarkShakuCodeAnnotate = (
               case "DirectiveCollapse":
                 // TODO
                 break;
-              case "DirectiveHighlight":
+              case "DirectiveHighlight": {
                 const mark = shakuLine.config.mark;
                 switch (mark) {
                   case "start":
@@ -122,9 +99,10 @@ export const remarkShakuCodeAnnotate = (
                     break;
                 }
                 break;
-              case "DirectiveDim":
-                const dimMark = shakuLine.config.mark;
-                switch (dimMark) {
+              }
+              case "DirectiveDim": {
+                const mark = shakuLine.config.mark;
+                switch (mark) {
                   case "start":
                     isDimBlock = true;
                     break;
@@ -137,6 +115,23 @@ export const remarkShakuCodeAnnotate = (
                     break;
                 }
                 break;
+              }
+              case "DirectiveFocus": {
+                const mark = shakuLine.config.mark;
+                switch (mark) {
+                  case "start":
+                    isFocusBlock = true;
+                    break;
+                  case "end":
+                    isFocusBlock = false;
+                    break;
+                  case "below":
+                  default:
+                    shouldFocusNextSourceLine = true;
+                    break;
+                }
+                break;
+              }
               case "DirectiveUnderline":
                 const underlineOffset = shakuLine.config.offset;
                 const underlineContent = shakuLine.config.content;
@@ -181,14 +176,18 @@ export const remarkShakuCodeAnnotate = (
           case "default": {
             const shouldHighlight =
               isHighlightingBlock || shouldHighlighNextSourceLine;
+            const shouldFocus = isFocusBlock || shouldFocusNextSourceLine;
+            const shouldDim =
+              isDimBlock ||
+              shouldDimNextSourceLine ||
+              (hasFocus && !shouldFocus);
             shouldHighlighNextSourceLine = false;
-            const shouldDim = isDimBlock || shouldDimNextSourceLine;
+            shouldFocusNextSourceLine = false;
             shouldDimNextSourceLine = false;
             const sourceLine = line.line;
-            const prefix = `<div class="line${
-              shouldHighlight ? " highlight" : ""
-            }${shouldDim ? " dim" : ""}">`;
-
+            const highlightClass = shouldHighlight ? " highlight" : "";
+            const dimClass = shouldDim ? " dim" : "";
+            const prefix = `<div class="line${highlightClass}${dimClass}">`;
             html += prefix;
             html += sourceLine
               .map(
@@ -225,6 +224,36 @@ function isCommentLine(line: IThemedToken[]) {
     line[0].explanation?.[0].scopes.some((scope) =>
       scope.scopeName.startsWith("comment.")
     )
+  );
+}
+function parseLines(lines: IThemedToken[][]) {
+  return lines.map((line) => {
+    if (isCommentLine(line)) {
+      // comment might have // or /*
+      // meaning comment body might be in the 2nd explanation
+      // or 1st one. Does this hold for all languages?
+      // @ts-ignore
+      const commentBody = (line[0].explanation[1] ?? line[0].explanation[0])
+        .content;
+      const shakuLine = parseLine(commentBody);
+      if (shakuLine != null) {
+        return {
+          type: "shaku",
+          line: shakuLine,
+          // @ts-ignore
+          commentTag: line[0].explanation[0].content,
+        } as const;
+      }
+    }
+    return {
+      type: "default",
+      line,
+    } as const;
+  });
+}
+function hasShakuDirectiveFocus(lines: ReturnType<typeof parseLines>) {
+  return lines.some(
+    (line) => line.type === "shaku" && line.line.type === "DirectiveFocus"
   );
 }
 

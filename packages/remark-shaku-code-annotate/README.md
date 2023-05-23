@@ -71,6 +71,16 @@ function foo() {
     console.log("World!")
   },1000)
 // @dim end
+
+// @focus
+function foo(){
+  console.log("Hello!")
+// @focus start
+  setTimeout(() => {
+    console.log('World!')
+  },1000)
+// @focus end
+
 }
 
 \`\`\`

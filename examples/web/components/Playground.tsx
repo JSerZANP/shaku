@@ -90,6 +90,23 @@ function foo() {
 }
 \`\`\`
 
+
+**easily Focus lines**
+
+Emphasize some lines while de-emphasize the others.
+
+\`\`\`js annotate
+// @focus
+function foo(){
+  console.log("Hello!")
+// @focus start
+  setTimeout(() => {
+    console.log('World!')
+  },1000)
+// @focus end
+}
+\`\`\`
+
 **How to Use**
 
 Visit [shaku on github](https://github.com/JSerZANP/shaku/tree/main) to find the right plugin.

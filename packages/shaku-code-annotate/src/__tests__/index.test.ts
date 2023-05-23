@@ -141,7 +141,7 @@ describe("parseLine() can parse comment lines", () => {
     const func = () => parseLine("   @highlight unexpected ");
     expect(func).toThrow();
   });
-  test("   @dim start", async () => {
+  test("   @dim start ", async () => {
     const result = parseLine("   @dim start ");
     expect(result).toEqual({
       type: "DirectiveDim",
@@ -150,7 +150,8 @@ describe("parseLine() can parse comment lines", () => {
       },
     });
   });
-  test("   @dim end", async () => {
+
+  test("   @dim end ", async () => {
     const result = parseLine("   @dim end ");
     expect(result).toEqual({
       type: "DirectiveDim",
@@ -159,6 +160,7 @@ describe("parseLine() can parse comment lines", () => {
       },
     });
   });
+
   test("   @dim ", async () => {
     const result = parseLine("   @dim ");
     expect(result).toEqual({
@@ -168,6 +170,7 @@ describe("parseLine() can parse comment lines", () => {
       },
     });
   });
+
   test("   @dim below ", async () => {
     const result = parseLine("   @dim below ");
     expect(result).toEqual({
@@ -177,8 +180,53 @@ describe("parseLine() can parse comment lines", () => {
       },
     });
   });
-  test("   @dim unexpected", async () => {
+
+  test("   @dim unexpected ", async () => {
     const func = () => parseLine("   @dim unexpected ");
+    expect(func).toThrow();
+  });
+  test("   @focus start ", async () => {
+    const result = parseLine("   @focus start ");
+    expect(result).toEqual({
+      type: "DirectiveFocus",
+      config: {
+        mark: "start",
+      },
+    });
+  });
+
+  test("   @focus end ", async () => {
+    const result = parseLine("   @focus end ");
+    expect(result).toEqual({
+      type: "DirectiveFocus",
+      config: {
+        mark: "end",
+      },
+    });
+  });
+
+  test("   @focus ", async () => {
+    const result = parseLine("   @focus ");
+    expect(result).toEqual({
+      type: "DirectiveFocus",
+      config: {
+        mark: "below",
+      },
+    });
+  });
+
+  test("   @focus below ", async () => {
+    const result = parseLine("   @focus below ");
+    expect(result).toEqual({
+      type: "DirectiveFocus",
+      config: {
+        mark: "below",
+      },
+    });
+  });
+
+  test("   @focus unexpected ", async () => {
+    const func = () => parseLine("   @focus unexpected ");
     expect(func).toThrow();
   });
 
