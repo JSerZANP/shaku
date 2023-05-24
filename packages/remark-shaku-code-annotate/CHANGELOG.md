@@ -1,5 +1,13 @@
 # remark-shaku-code-annotate
 
+## 0.0.6
+
+### Patch Changes
+
+- add @focus and @dim
+- Updated dependencies
+  - shaku-code-annotate@0.0.6
+
 ## 0.0.5
 
 ### Patch Changes
