@@ -4,6 +4,7 @@ import withShiki from "@stefanprobst/remark-shiki";
 
 import { Editor } from "@monaco-editor/react";
 import { useEffect, useState } from "react";
+import { RiShareBoxLine } from "react-icons/ri";
 import { remark } from "remark";
 import html from "remark-html";
 import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
@@ -140,8 +141,8 @@ function getProcessor() {
     );
 }
 
-export function Playground() {
-  const [code, setCode] = useState(defaultMarkdown);
+export function Playground({ code: _code }: { code?: string }) {
+  const [code, setCode] = useState(_code ?? defaultMarkdown);
   const [preview, setPreview] = useState("");
 
   useEffect(() => {
@@ -152,6 +153,17 @@ export function Playground() {
     );
   }, [code]);
 
+  const share = () => {
+    const query = "code=" + encodeURIComponent(code);
+    const url = location.origin + "?" + query;
+    const type = "text/plain";
+    const blob = new Blob([url], { type });
+    const data = [new ClipboardItem({ [type]: blob })];
+    navigator.clipboard.write(data).then(
+      () => alert("link copied"),
+      () => alert("failed to copy link.")
+    );
+  };
   return (
     <div className={styles.container}>
       <div className={styles.head}>
@@ -166,6 +178,11 @@ export function Playground() {
           </a>
           , style controlled by CSS.
         </p>
+      </div>
+      <div className={styles.toolbar}>
+        <button className={styles.share} onClick={share}>
+          <RiShareBoxLine /> Share page with below code
+        </button>
       </div>
       <div className={styles.playground}>
         <div className={styles.editor}>

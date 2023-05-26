@@ -25,3 +25,22 @@
 .head {
   font-family: sans-serif;
 }
+
+.toolbar {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.share {
+  border: 0;
+  background-color: transparent;
+  display: inline-flex;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
+
+.share:hover {
+  border-color: #555;
+}

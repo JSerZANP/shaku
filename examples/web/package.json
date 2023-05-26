@@ -15,6 +15,7 @@
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
     "remark-shaku-code-annotate": "*",
     "shiki": "^0.14.2",
     "ui": "*"
