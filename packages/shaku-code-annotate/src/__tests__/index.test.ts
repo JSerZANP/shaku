@@ -93,8 +93,7 @@ describe("parseLine() can parse comment lines", () => {
   });
 
   test("   @collapse unexpected ", async () => {
-    const func = () => parseLine("   @collapse unexpected ");
-    expect(func).toThrow();
+    expect(parseLine("   @collapse unexpected ")).toBeNull();
   });
 
   test("   @highlight start ", async () => {
@@ -138,8 +137,7 @@ describe("parseLine() can parse comment lines", () => {
   });
 
   test("   @highlight unexpected ", async () => {
-    const func = () => parseLine("   @highlight unexpected ");
-    expect(func).toThrow();
+    expect(parseLine("   @highlight unexpected ")).toBeNull();
   });
   test("   @dim start ", async () => {
     const result = parseLine("   @dim start ");
@@ -182,8 +180,7 @@ describe("parseLine() can parse comment lines", () => {
   });
 
   test("   @dim unexpected ", async () => {
-    const func = () => parseLine("   @dim unexpected ");
-    expect(func).toThrow();
+    expect(parseLine("   @dim unexpected ")).toBeNull();
   });
   test("   @focus start ", async () => {
     const result = parseLine("   @focus start ");
@@ -226,8 +223,7 @@ describe("parseLine() can parse comment lines", () => {
   });
 
   test("   @focus unexpected ", async () => {
-    const func = () => parseLine("   @focus unexpected ");
-    expect(func).toThrow();
+    expect(parseLine("   @focus unexpected ")).toBeNull();
   });
 
   test("This is some comments from source code ", async () => {

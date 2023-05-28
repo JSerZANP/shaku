@@ -159,59 +159,52 @@ export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveCollapse = line.match(RegShakuDirectiveCollapse);
   if (matchShakuDirectiveCollapse) {
     const mark = matchShakuDirectiveCollapse.groups?.mark;
-    if (mark !== "start" && mark !== "end") {
-      throw new Error(`mark: ${mark} is not supported under @collapose`);
+    if (mark === "start" || mark === "end") {
+      return {
+        type: "DirectiveCollapse",
+        config: {
+          offset: matchShakuDirectiveCollapse.groups?.leadingSpaces.length ?? 0,
+          mark,
+        },
+      };
     }
-
-    return {
-      type: "DirectiveCollapse",
-      config: {
-        offset: matchShakuDirectiveCollapse.groups?.leadingSpaces.length ?? 0,
-        mark,
-      },
-    };
   }
 
   const matchShakuDirectiveHighlight = line.match(RegShakuDirectiveHighlight);
   if (matchShakuDirectiveHighlight) {
     const mark = matchShakuDirectiveHighlight.groups?.mark || "below";
-    if (mark !== "start" && mark !== "end" && mark !== "below") {
-      throw new Error(`mark: ${mark} is not supported under @highlight`);
+    if (mark === "start" || mark === "end" || mark === "below") {
+      return {
+        type: "DirectiveHighlight",
+        config: {
+          mark,
+        },
+      };
     }
-
-    return {
-      type: "DirectiveHighlight",
-      config: {
-        mark,
-      },
-    };
   }
   const matchShakuDirectiveDim = line.match(RegShakuDirectiveDim);
   if (matchShakuDirectiveDim) {
     const mark = matchShakuDirectiveDim.groups?.mark || "below";
-    if (mark !== "start" && mark !== "end" && mark !== "below") {
-      throw new Error(`mark: ${mark} is not supported under @dim`);
+    if (mark === "start" || mark === "end" || mark === "below") {
+      return {
+        type: "DirectiveDim",
+        config: {
+          mark,
+        },
+      };
     }
-
-    return {
-      type: "DirectiveDim",
-      config: {
-        mark,
-      },
-    };
   }
   const matchShakuDirectiveFocus = line.match(RegShakuDirectiveFocus);
   if (matchShakuDirectiveFocus) {
     const mark = matchShakuDirectiveFocus.groups?.mark || "below";
-    if (mark !== "start" && mark !== "end" && mark !== "below") {
-      throw new Error(`mark: ${mark} is not supported under @focus`);
+    if (mark === "start" || mark === "end" || mark === "below") {
+      return {
+        type: "DirectiveFocus",
+        config: {
+          mark,
+        },
+      };
     }
-    return {
-      type: "DirectiveFocus",
-      config: {
-        mark,
-      },
-    };
   }
 
   return null;
