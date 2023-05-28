@@ -47,9 +47,9 @@ export const remarkShakuCodeAnnotate = (
             switch (shakuLine.type) {
               case "DirectiveCallout": {
                 const arrowOffset = shakuLine.config.offset;
-                let offset = arrowOffset;
+                const directiveOffset = arrowOffset + line.offset;
+                let minOffset = directiveOffset;
                 const contents = [];
-                const commentTagLength = line.commentTag.length;
 
                 let j = i + 1;
                 while (j < parsedLines.length) {
@@ -61,7 +61,10 @@ export const remarkShakuCodeAnnotate = (
                     break;
                   }
 
-                  offset = Math.min(offset, nextLine.line.config.offset);
+                  minOffset = Math.min(
+                    minOffset,
+                    nextLine.line.config.offset + nextLine.offset
+                  );
                   contents.push(nextLine.line.config.content);
                   j += 1;
                 }
@@ -69,8 +72,8 @@ export const remarkShakuCodeAnnotate = (
                 html += renderComponent({
                   type: "ShakuComponentCallout",
                   config: {
-                    offset: offset + commentTagLength,
-                    arrowOffset: arrowOffset - offset,
+                    offset: minOffset,
+                    arrowOffset: directiveOffset - minOffset,
                     contents,
                   },
                 });
@@ -132,12 +135,12 @@ export const remarkShakuCodeAnnotate = (
                 }
                 break;
               }
-              case "DirectiveUnderline":
+              case "DirectiveUnderline": {
                 const underlineOffset = shakuLine.config.offset;
                 const underlineContent = shakuLine.config.content;
-                let offset = underlineOffset;
+                const directiveOffset = underlineOffset + line.offset;
+                let minOffset = directiveOffset;
                 const contents = [];
-                const commentTagLength = line.commentTag.length;
 
                 let j = i + 1;
                 while (j < parsedLines.length) {
@@ -149,7 +152,10 @@ export const remarkShakuCodeAnnotate = (
                     break;
                   }
 
-                  offset = Math.min(offset, nextLine.line.config.offset);
+                  minOffset = Math.min(
+                    minOffset,
+                    nextLine.line.config.offset + nextLine.offset
+                  );
                   contents.push(nextLine.line.config.content);
                   j += 1;
                 }
@@ -157,8 +163,8 @@ export const remarkShakuCodeAnnotate = (
                 html += renderComponent({
                   type: "ShakuComponentUnderline",
                   config: {
-                    offset: offset + commentTagLength,
-                    underlineOffset: underlineOffset - offset,
+                    offset: minOffset,
+                    underlineOffset: directiveOffset - minOffset,
                     underlineContent,
                     underlineStyle: shakuLine.config.style,
                     contents,
@@ -167,6 +173,7 @@ export const remarkShakuCodeAnnotate = (
 
                 i = j - 1;
                 continue;
+              }
               default:
                 assertsNever(shakuLine);
             }
@@ -218,30 +225,77 @@ function escapeHtml(html: string) {
   return html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function isCommentLine(line: IThemedToken[]) {
-  return (
-    line.length === 1 &&
-    line[0].explanation?.[0].scopes.some((scope) =>
-      scope.scopeName.startsWith("comment.")
-    )
+/**
+ * different kinds of comments have different interpretations
+ * Below are some common examples, these are not exaustive
+ * I'm not sure if there are other cases for different languages
+ *
+ * "// aaa" => [{content: "// aaa", explanation: [{content: '//'}, {content: ' aaa'}]}]
+ * "/* aaa *\/" =>  [{content: "/* aaa *\/", explanation: [{content: '/*'}, {content: ' aaa '}, content: '*\/'}]}]
+ * "  // aaa" => [{content: "  "}, {content: "// aaa", explanation: [{content: '//'}, {content: ' aaa'}]}]
+ * "  /* aaa" => [{content: "  "}, {content: "/* aaa", explanation: [{content: '/*'}, {content: ' aaa'}]}]
+ * "  aaa" => [{content: "  aaa"}]
+ * "  *\/" => [{content: "   *\/", explanation: [{content: '   '}, {content: '*\/'}]}]
+ *
+ * So the idea is
+ * 1. if all tokens has explanation of comment, then it is comment line
+ * 2. if the first token is white space, then it should be treated as offset
+ * 3. the first meaningful token has the comment body
+ *   - find the first explanation that is not `punctuation.definition`.
+ */
+function parseComment(line: IThemedToken[]): null | {
+  offset: number;
+  body: string;
+} {
+  if (line.length === 0) return null;
+  // comments start from the begining
+  const isCommentLine = line.every(
+    (token) =>
+      isWhitespace(token.content) ||
+      token.explanation?.some((exp) =>
+        exp.scopes.some((scope) => scope.scopeName.startsWith("comment"))
+      )
   );
+  if (!isCommentLine) return null;
+
+  const isFirstTokenWhitespace = isWhitespace(line[0].content);
+  let offset = isFirstTokenWhitespace ? line[0].content.length : 0;
+  let body = "";
+  const tokenWithBody = isFirstTokenWhitespace ? line[1] : line[0];
+  if (tokenWithBody != null) {
+    const explanations = tokenWithBody.explanation ?? [];
+
+    for (let i = 0; i < explanations.length; i++) {
+      const explanation = explanations[i];
+      // find the first explanation that is not element tag
+      if (
+        explanation.scopes.every(
+          (scope) => !scope.scopeName.startsWith("punctuation.definition")
+        )
+      ) {
+        body = explanation.content;
+        break;
+      }
+      // for other none tokens, treat them as offset
+      offset += explanation.content.length;
+    }
+  }
+  return {
+    offset,
+    body,
+  };
 }
 function parseLines(lines: IThemedToken[][]) {
   return lines.map((line) => {
-    if (isCommentLine(line)) {
-      // comment might have // or /*
-      // meaning comment body might be in the 2nd explanation
-      // or 1st one. Does this hold for all languages?
-      // @ts-ignore
-      const commentBody = (line[0].explanation[1] ?? line[0].explanation[0])
-        .content;
-      const shakuLine = parseLine(commentBody);
+    const parsedComment = parseComment(line);
+    if (parsedComment != null) {
+      const { body, offset } = parsedComment;
+      const shakuLine = parseLine(body);
       if (shakuLine != null) {
         return {
           type: "shaku",
           line: shakuLine,
-          // @ts-ignore
-          commentTag: line[0].explanation[0].content,
+          offset,
         } as const;
       }
     }
@@ -257,6 +311,9 @@ function hasShakuDirectiveFocus(lines: ReturnType<typeof parseLines>) {
   );
 }
 
+function isWhitespace(str: string) {
+  return /^\s+$/.test(str);
+}
 function assertsNever(data: never) {
   throw new Error("expected never but got: " + data);
 }
