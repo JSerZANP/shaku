@@ -1,5 +1,13 @@
 # remark-shaku-code-annotate
 
+## 0.0.7
+
+### Patch Changes
+
+- fix issues of leading whitespaces
+- Updated dependencies
+  - shaku-code-annotate@0.0.7
+
 ## 0.0.6
 
 ### Patch Changes
