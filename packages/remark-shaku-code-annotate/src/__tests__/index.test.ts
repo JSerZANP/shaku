@@ -58,7 +58,7 @@ const a = 1;
   const result2 = await process(`
 \`\`\`js annotate
 const a = 1;
-  /*  -----   */
+   /* -----   */
   /*  [This is line 1] 
       [This is line two] */
 \`\`\`
@@ -83,7 +83,7 @@ const a = 1;
   const result2 = await process(`
 \`\`\`js annotate
 const a = 1;
-  /*  ..... */
+   /* ..... */
   /*  [This is line 1]
       [This is line two] */
 \`\`\`
@@ -108,9 +108,9 @@ const a = 1;
   const result2 = await process(`
 \`\`\`js annotate
 const a = 1;
-  /*  ~~~~~ */
+   /* ~~~~~ */
   /*  [This is line 1] */
-  /*  [This is line two] */
+   /* [This is line two] */
 \`\`\`
 `);
 
@@ -138,9 +138,9 @@ const c = 1;
 const a = 1;
   /*  ----- */
 const b = 1;
-  /*  ..... */
+   /* ..... */
 const c = 1;
-  /*  ~~~~~ */
+    /*~~~~~ */
 \`\`\`
 `);
   const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-underline shaku-underline-solid" style="left:6ch"><span class="shaku-underline-line" style="left:0ch">-----</span></div><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">b</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-underline shaku-underline-dotted" style="left:6ch"><span class="shaku-underline-line" style="left:0ch">.....</span></div><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">c</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-underline shaku-underline-wavy" style="left:6ch"><span class="shaku-underline-line" style="left:0ch">~~~~~</span></div></code></div></pre>

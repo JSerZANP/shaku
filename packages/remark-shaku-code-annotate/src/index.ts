@@ -47,7 +47,8 @@ export const remarkShakuCodeAnnotate = (
             switch (shakuLine.type) {
               case "DirectiveCallout": {
                 const arrowOffset = shakuLine.config.offset;
-                let offset = arrowOffset;
+                const directiveOffset = arrowOffset + line.offset;
+                let minOffset = directiveOffset;
                 const contents = [];
 
                 let j = i + 1;
@@ -60,7 +61,10 @@ export const remarkShakuCodeAnnotate = (
                     break;
                   }
 
-                  offset = Math.min(offset, nextLine.line.config.offset);
+                  minOffset = Math.min(
+                    minOffset,
+                    nextLine.line.config.offset + nextLine.offset
+                  );
                   contents.push(nextLine.line.config.content);
                   j += 1;
                 }
@@ -68,8 +72,8 @@ export const remarkShakuCodeAnnotate = (
                 html += renderComponent({
                   type: "ShakuComponentCallout",
                   config: {
-                    offset: offset + line.offset,
-                    arrowOffset: arrowOffset - offset,
+                    offset: minOffset,
+                    arrowOffset: directiveOffset - minOffset,
                     contents,
                   },
                 });
@@ -131,10 +135,11 @@ export const remarkShakuCodeAnnotate = (
                 }
                 break;
               }
-              case "DirectiveUnderline":
+              case "DirectiveUnderline": {
                 const underlineOffset = shakuLine.config.offset;
                 const underlineContent = shakuLine.config.content;
-                let offset = underlineOffset;
+                const directiveOffset = underlineOffset + line.offset;
+                let minOffset = directiveOffset;
                 const contents = [];
 
                 let j = i + 1;
@@ -147,7 +152,10 @@ export const remarkShakuCodeAnnotate = (
                     break;
                   }
 
-                  offset = Math.min(offset, nextLine.line.config.offset);
+                  minOffset = Math.min(
+                    minOffset,
+                    nextLine.line.config.offset + nextLine.offset
+                  );
                   contents.push(nextLine.line.config.content);
                   j += 1;
                 }
@@ -155,8 +163,8 @@ export const remarkShakuCodeAnnotate = (
                 html += renderComponent({
                   type: "ShakuComponentUnderline",
                   config: {
-                    offset: offset + line.offset,
-                    underlineOffset: underlineOffset - offset,
+                    offset: minOffset,
+                    underlineOffset: directiveOffset - minOffset,
                     underlineContent,
                     underlineStyle: shakuLine.config.style,
                     contents,
@@ -165,6 +173,7 @@ export const remarkShakuCodeAnnotate = (
 
                 i = j - 1;
                 continue;
+              }
               default:
                 assertsNever(shakuLine);
             }
