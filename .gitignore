@@ -37,3 +37,7 @@ yarn-error.log*
 
 # build
 dist
+
+# pnpm yaml
+pnpm-lock.yaml
+pnpm-workspace.yaml
