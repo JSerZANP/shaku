@@ -81,6 +81,13 @@ type ShakuDirectiveFocus = {
 const RegShakuDirectiveFocus =
   /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>(\S+)?)\s*)?$/;
 
+type ShakuCommentEnd = {
+  type: "CommentEnd";
+};
+
+const RegShakuCommentEnd =
+  /^(?<leadingSpaces>\s*)\*\//;
+
 type ShakuLine =
   | ShakuDirectiveUnderline
   | ShakuAnnotationLine
@@ -88,7 +95,8 @@ type ShakuLine =
   | ShakuDirectiveCollapse
   | ShakuDirectiveHighlight
   | ShakuDirectiveDim
-  | ShakuDirectiveFocus;
+  | ShakuDirectiveFocus
+  | ShakuCommentEnd;
 
 export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveUnderlineSolid = line.match(
@@ -205,6 +213,12 @@ export const parseLine = (line: string): ShakuLine | null => {
         },
       };
     }
+  }
+  const matchShakuCommentEnd = line.match(RegShakuCommentEnd);
+  if (matchShakuCommentEnd) {
+    return {
+      type: "CommentEnd",
+    };
   }
 
   return null;

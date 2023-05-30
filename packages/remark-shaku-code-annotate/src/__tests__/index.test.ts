@@ -63,6 +63,7 @@ This is line two</div></code></div></pre>
 `;
   expect(result1.value).toEqual(expected);
   expect(result2.value).toEqual(expected);
+  expect(result3.value).toEqual(expected);
 });
 
 test("able to render solid underline: ----", async () => {

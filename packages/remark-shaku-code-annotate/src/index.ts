@@ -20,6 +20,8 @@ export const remarkShakuCodeAnnotate = (
 
     visit(tree, "code", (node: mdast.Code) => {
       const shouldAnnotate = shouldApplyAnnotation(node.meta ?? "");
+      console.log(shouldAnnotate);
+      
       if (!shouldAnnotate) return;
 
       const lines = highlighter.codeToThemedTokens(
@@ -174,6 +176,8 @@ export const remarkShakuCodeAnnotate = (
                 i = j - 1;
                 continue;
               }
+              case "CommentEnd":
+                break;
               default:
                 assertsNever(shakuLine);
             }
@@ -227,7 +231,7 @@ function escapeHtml(html: string) {
 
 /**
  * different kinds of comments have different interpretations
- * Below are some common examples, these are not exaustive
+ * Below are some common examples, these are not exhaustive
  * I'm not sure if there are other cases for different languages
  *
  * "// aaa" => [{content: "// aaa", explanation: [{content: '//'}, {content: ' aaa'}]}]
