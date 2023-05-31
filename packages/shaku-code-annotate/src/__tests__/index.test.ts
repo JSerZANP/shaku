@@ -230,6 +230,13 @@ describe("parseLine() can parse comment lines", () => {
     const result = parseLine("This is some comments from source code");
     expect(result).toBeNull();
   });
+
+  test("  */", async () => {
+    const result = parseLine("  */");
+    expect(result).toEqual({
+      type: "CommentEnd",
+    });
+  });
 });
 
 describe("shouldApplyAnnotation() should work", () => {

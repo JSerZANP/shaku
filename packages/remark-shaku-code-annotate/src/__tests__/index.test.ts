@@ -66,6 +66,22 @@ This is line two</div></code></div></pre>
   expect(result3.value).toEqual(expected);
 });
 
+test("able to render callout 2: ^", async () => {
+  const result = await process(`
+\`\`\`js annotate
+const a = 1;
+/*    ^
+    [This is line 1]
+    [This is line two]
+         */
+\`\`\`
+`);
+  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-callout" style="left:4ch"><span class="shaku-callout-arrow" style="left:2ch"></span>This is line 1
+This is line two</div></code></div></pre>
+`;
+  expect(result.value).toEqual(expected);
+});
+
 test("able to render solid underline: ----", async () => {
   const result1 = await process(`
 \`\`\`js annotate

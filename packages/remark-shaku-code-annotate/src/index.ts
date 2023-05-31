@@ -20,7 +20,6 @@ export const remarkShakuCodeAnnotate = (
 
     visit(tree, "code", (node: mdast.Code) => {
       const shouldAnnotate = shouldApplyAnnotation(node.meta ?? "");
-      console.log(shouldAnnotate);
       
       if (!shouldAnnotate) return;
 
@@ -292,15 +291,27 @@ function parseComment(line: IThemedToken[]): null | {
 function parseLines(lines: IThemedToken[][]) {
   return lines.map((line) => {
     const parsedComment = parseComment(line);
+    let shakuLine: ReturnType<typeof parseLine> = null;
     if (parsedComment != null) {
       const { body, offset } = parsedComment;
-      const shakuLine = parseLine(body);
+      shakuLine = parseLine(body);
       if (shakuLine != null) {
         return {
           type: "shaku",
           line: shakuLine,
           offset,
         } as const;
+      }
+    }
+    
+    if (line.length > 0) {
+      shakuLine = parseLine(line[0].content);
+      if (shakuLine != null) {
+        return {
+            type: "shaku",
+            line: shakuLine,
+            offset: 0,
+          } as const;
       }
     }
     return {
