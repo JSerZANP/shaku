@@ -289,11 +289,17 @@ function parseComment(line: IThemedToken[]): null | {
   };
 }
 function parseLines(lines: IThemedToken[][]) {
+  let isShaKuLine = false;
   return lines.map((line) => {
     const parsedComment = parseComment(line);
     let shakuLine: ReturnType<typeof parseLine> = null;
     if (parsedComment != null) {
       const { body, offset } = parsedComment;
+      
+      if (/^\/\*/.test(line[0].content)) {
+        isShaKuLine = true;
+      }
+
       shakuLine = parseLine(body);
       if (shakuLine != null) {
         return {
@@ -304,7 +310,8 @@ function parseLines(lines: IThemedToken[][]) {
       }
     }
     
-    if (line.length > 0) {
+    if (line.length > 0 && isShaKuLine) {
+      isShaKuLine = false;
       shakuLine = parseLine(line[0].content);
       if (shakuLine != null) {
         return {

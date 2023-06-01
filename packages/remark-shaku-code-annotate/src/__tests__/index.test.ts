@@ -74,10 +74,39 @@ const a = 1;
     [This is line 1]
     [This is line two]
          */
+
+/*
+* aaa
+* bbb
+*/
 \`\`\`
 `);
   const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-callout" style="left:4ch"><span class="shaku-callout-arrow" style="left:2ch"></span>This is line 1
-This is line two</div></code></div></pre>
+This is line two</div><div class="line"></div><div class="line"><span style="color: #6A737D">/*</span></div><div class="line"><span style="color: #6A737D">* aaa</span></div><div class="line"><span style="color: #6A737D">* bbb</span></div><div class="line"><span style="color: #6A737D">*/</span></div></code></div></pre>
+`;
+  expect(result.value).toEqual(expected);
+});
+
+test("/** */", async () => {
+  const result = await process(`
+\`\`\`js annotate
+const a = 1;
+//   ^
+/*  [this is line 2]
+*/
+
+/*
+* aaa
+* bbb
+*/
+
+/*
+* ccc
+* ddd
+*/
+\`\`\`
+`);
+  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-callout" style="left:4ch"><span class="shaku-callout-arrow" style="left:1ch"></span>this is line 2</div><div class="line"></div><div class="line"><span style="color: #6A737D">/*</span></div><div class="line"><span style="color: #6A737D">* aaa</span></div><div class="line"><span style="color: #6A737D">* bbb</span></div><div class="line"><span style="color: #6A737D">*/</span></div><div class="line"></div><div class="line"><span style="color: #6A737D">/*</span></div><div class="line"><span style="color: #6A737D">* ccc</span></div><div class="line"><span style="color: #6A737D">* ddd</span></div><div class="line"><span style="color: #6A737D">*/</span></div></code></div></pre>
 `;
   expect(result.value).toEqual(expected);
 });
