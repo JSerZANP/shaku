@@ -298,7 +298,7 @@ function parseLines(lines: IThemedToken[][]) {
     if (parsedComment != null) {
       const { body, offset } = parsedComment;
       const shakuLine = parseLine(body);
-      if (shakuLine?.type === "DirectiveCallout") {
+      if ((/\/\*/.test(line[0].content)) && (shakuLine?.type === "DirectiveCallout" || shakuLine?.type === "DirectiveUnderline" || shakuLine?.type === "AnnotationLine")) {
         isShaKuLine = true;
       }
 
