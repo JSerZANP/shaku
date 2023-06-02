@@ -175,8 +175,6 @@ export const remarkShakuCodeAnnotate = (
                 i = j - 1;
                 continue;
               }
-              case "CommentEnd":
-                break;
               default:
                 assertsNever(shakuLine);
             }
@@ -184,6 +182,11 @@ export const remarkShakuCodeAnnotate = (
             break;
           }
           case "default": {
+            // comment block end `*/`
+            if (line.comment_block_end) {
+              break;
+            }
+
             const shouldHighlight =
               isHighlightingBlock || shouldHighlighNextSourceLine;
             const shouldFocus = isFocusBlock || shouldFocusNextSourceLine;
@@ -292,15 +295,13 @@ function parseLines(lines: IThemedToken[][]) {
   let isShaKuLine = false;
   return lines.map((line) => {
     const parsedComment = parseComment(line);
-    let shakuLine: ReturnType<typeof parseLine> = null;
     if (parsedComment != null) {
       const { body, offset } = parsedComment;
-      
-      if (/^\/\*/.test(line[0].content)) {
+      const shakuLine = parseLine(body);
+      if (shakuLine?.type === "DirectiveCallout") {
         isShaKuLine = true;
       }
 
-      shakuLine = parseLine(body);
       if (shakuLine != null) {
         return {
           type: "shaku",
@@ -312,12 +313,12 @@ function parseLines(lines: IThemedToken[][]) {
     
     if (line.length > 0 && isShaKuLine) {
       isShaKuLine = false;
-      shakuLine = parseLine(line[0].content);
-      if (shakuLine != null) {
+      const commentBlockEnd = /^(?<leadingSpaces>\s*)\*\//.test(line[0].content);
+      if (commentBlockEnd) {
         return {
-            type: "shaku",
-            line: shakuLine,
-            offset: 0,
+            type: "default",
+            line,
+            comment_block_end: true,
           } as const;
       }
     }
