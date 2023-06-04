@@ -14,7 +14,6 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "vitest",
     "build": "tsc --project tsconfig.json",
     "dev": "npm run build -- --watch"
   },
