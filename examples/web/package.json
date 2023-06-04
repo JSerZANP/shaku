@@ -9,8 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mdx-js/loader": "^2.3.0",
+    "@mdx-js/react": "^2.3.0",
     "@monaco-editor/react": "^4.5.1",
+    "@next/mdx": "^13.4.4",
     "@stefanprobst/remark-shiki": "^2.2.1",
+    "@types/mdx": "^2.0.5",
     "copy-webpack-plugin": "^11.0.0",
     "next": "latest",
     "react": "^18.2.0",
@@ -18,7 +22,7 @@
     "react-icons": "^4.8.0",
     "remark-shaku-code-annotate": "*",
     "shiki": "^0.14.2",
-    "ui": "*"
+    "shaku-ui": "*"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",

@@ -1,11 +1,13 @@
 const CopyPlugin = require("copy-webpack-plugin");
-const path = require('path')
+const path = require("path");
+const withMDX = require("@next/mdx")();
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ["ui"],
   experimental: {
-    appDir: true
+    mdxRs: true,
+    appDir: true,
   },
 
   // https://github.com/shikijs/shiki/issues/22
@@ -23,3 +25,6 @@ module.exports = {
     return config;
   },
 };
+
+module.exports = withMDX(nextConfig);
+// module.exports = nextConfig;
