@@ -9,7 +9,8 @@
     "strict": true,
     "target": "esnext",
     "jsx": "react",
-    "outDir": "dist"
+    "outDir": "dist",
+    "declaration": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
