@@ -128,7 +128,7 @@ function getProcessor() {
       remark()
         .use(remarkShakuCodeAnnotate, {
           theme: "github-light",
-          langs: ["javascript", "css"],
+          langs: ["javascript", "css", "html"],
 
           paths: {
             themes: "/_next/static/shiki/themes",
