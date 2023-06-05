@@ -117,7 +117,7 @@ function getProcessor() {
   return shiki
     .getHighlighter({
       theme: "github-light",
-      langs: ["javascript", "css"],
+      langs: ["javascript", "css", "html"],
       paths: {
         themes: "/_next/static/shiki/themes",
         wasm: "/_next/static/shiki/dist",
