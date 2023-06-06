@@ -5,11 +5,13 @@
     "mdast": "^3.0.0",
     "remark": "^14.0.2",
     "remark-html": "^15.0.2",
+    "sanitize-html": "^2.10.0",
     "shiki": "^0.14.2",
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.2"
   },
   "devDependencies": {
+    "@types/sanitize-html": "^2.9.0",
     "tsup": "^6.7.0",
     "typescript": "latest",
     "vitest": "^0.30.1"

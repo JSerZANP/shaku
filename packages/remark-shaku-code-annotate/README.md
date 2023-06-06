@@ -118,6 +118,10 @@ pre.shiki .line.dim {
   border-radius: 3px;
 }
 
+.shaku-callout p {
+  margin: 0;
+}
+
 .shaku-callout-arrow {
   width: 1ch;
   height: 1ch;

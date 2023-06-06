@@ -1,3 +1,5 @@
+import sanitizeHtml from "sanitize-html";
+
 type ShakuDirectiveUnderline = {
   type: "DirectiveUnderline";
   config: {
@@ -233,7 +235,8 @@ type ShakuComponentCallout = {
   config: {
     offset: number;
     arrowOffset: number;
-    contents: string[];
+    /** raw html subt */
+    contents: string;
   };
 };
 
@@ -244,7 +247,8 @@ type ShakuComponentUnderline = {
     underlineOffset: number;
     underlineContent: string;
     underlineStyle: "solid" | "dotted" | "wavy";
-    contents: string[];
+    /** raw html subt */
+    contents: string;
   };
 };
 
@@ -256,9 +260,7 @@ export function renderComponent(component: ShakuComponent) {
         component.config.offset
       }ch"><span class="shaku-callout-arrow" style="left:${
         component.config.arrowOffset
-      }ch"></span>${component.config.contents
-        .map(escapeHtml)
-        .join("\n")}</div>`;
+      }ch"></span>${sanitize(component.config.contents)}</div>`;
     case "ShakuComponentUnderline":
       return `<div class="shaku-underline shaku-underline-${
         component.config.underlineStyle
@@ -266,9 +268,9 @@ export function renderComponent(component: ShakuComponent) {
         component.config.offset
       }ch"><span class="shaku-underline-line" style="left:${
         component.config.underlineOffset
-      }ch">${
-        component.config.underlineContent
-      }</span>${component.config.contents.map(escapeHtml).join("\n")}</div>`;
+      }ch">${component.config.underlineContent}</span>${sanitize(
+        component.config.contents
+      )}</div>`;
     default:
       assertsNever(component);
   }
@@ -278,6 +280,13 @@ function assertsNever(data: never) {
   throw new Error("expected never but got: " + data);
 }
 
-function escapeHtml(html: string) {
-  return html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+/* only allow restricted html in shaku annotation */
+function sanitize(html: string = "") {
+  const result = sanitizeHtml(html, {
+    allowedTags: ["b", "i", "em", "strong", "a", "p"],
+    allowedAttributes: {
+      a: ["href", "target"],
+    },
+  });
+  return result;
 }

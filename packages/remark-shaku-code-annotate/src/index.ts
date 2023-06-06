@@ -1,7 +1,9 @@
 import { visit } from "unist-util-visit";
 import type * as mdast from "mdast";
-import type * as unified from "unified";
-
+import { Transformer, unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
 import { getHighlighter, HighlighterOptions, IThemedToken } from "shiki";
 import {
   shouldApplyAnnotation,
@@ -11,12 +13,17 @@ import {
 
 export const remarkShakuCodeAnnotate = (
   options: HighlighterOptions
-): unified.Transformer => {
+): Transformer => {
   return async (tree) => {
     const highlighter = await getHighlighter({
       ...(options ?? {}),
       theme: options?.theme ?? "github-light",
     });
+
+    const unifiedProcessor = unified()
+      .use(remarkParse)
+      .use(remarkRehype) // this sanitize html by default
+      .use(rehypeStringify);
 
     visit(tree, "code", (node: mdast.Code) => {
       const shouldAnnotate = shouldApplyAnnotation(node.meta ?? "");
@@ -65,7 +72,16 @@ export const remarkShakuCodeAnnotate = (
                     minOffset,
                     nextLine.line.config.offset + nextLine.offset
                   );
-                  contents.push(nextLine.line.config.content);
+                  const raw = nextLine.line.config.content;
+                  const processed = String(
+                    unifiedProcessor.processSync(nextLine.line.config.content)
+                  );
+
+                  contents.push(
+                    String(
+                      unifiedProcessor.processSync(nextLine.line.config.content)
+                    )
+                  );
                   j += 1;
                 }
 
@@ -74,7 +90,7 @@ export const remarkShakuCodeAnnotate = (
                   config: {
                     offset: minOffset,
                     arrowOffset: directiveOffset - minOffset,
-                    contents,
+                    contents: contents.join(""),
                   },
                 });
 
@@ -156,7 +172,19 @@ export const remarkShakuCodeAnnotate = (
                     minOffset,
                     nextLine.line.config.offset + nextLine.offset
                   );
-                  contents.push(nextLine.line.config.content);
+
+                  console.log(
+                    String(
+                      unifiedProcessor.processSync(nextLine.line.config.content)
+                    )
+                  );
+                  console.log("raw", nextLine.line.config.content);
+                  contents.push(
+                    String(
+                      unifiedProcessor.processSync(nextLine.line.config.content)
+                    )
+                  );
+
                   j += 1;
                 }
 
@@ -167,7 +195,7 @@ export const remarkShakuCodeAnnotate = (
                     underlineOffset: directiveOffset - minOffset,
                     underlineContent,
                     underlineStyle: shakuLine.config.style,
-                    contents,
+                    contents: contents.join(""),
                   },
                 });
 

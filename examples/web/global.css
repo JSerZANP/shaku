@@ -24,7 +24,14 @@ pre.shiki .line.dim {
   margin: 0.5em 0;
   display: inline-block;
   border-radius: 3px;
+}
 
+.shaku-callout p {
+  margin: 0;
+}
+
+.shaku-callout a {
+  color: #fff;
 }
 
 .shaku-callout-arrow {
@@ -46,6 +53,13 @@ pre.shiki .line.dim {
   margin: 0.3em 0;
 }
 
+.shaku-underline p {
+  margin: 0;
+}
+
+.shaku-underline a {
+  color: red;
+}
 .shaku-underline-line {
   line-height: 0;
   top: 0.5em;
@@ -58,15 +72,15 @@ pre.shiki .line.dim {
   text-decoration-thickness: 2px;
 }
 
-.shaku-underline-wavy>.shaku-underline-line {
+.shaku-underline-wavy > .shaku-underline-line {
   text-decoration-style: wavy;
   top: 0.7em;
 }
 
-.shaku-underline-solid>.shaku-underline-line {
+.shaku-underline-solid > .shaku-underline-line {
   text-decoration-style: solid;
 }
 
-.shaku-underline-dotted>.shaku-underline-line {
+.shaku-underline-dotted > .shaku-underline-line {
   text-decoration-style: dotted;
 }
