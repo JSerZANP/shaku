@@ -21,8 +21,8 @@ in a different context.
 \`\`\`js annotate
 const blog = "https://jser.dev"
 //                    ^
-//       [JSer.dev is the homepage for JSer.]
-//       [Check it out!]
+//       [JSer.dev is the *homepage* for JSer.]
+//       [Check it out! [jser.dev](https://jser.dev)]
 // This is a normal comment
 \`\`\`
 
@@ -34,8 +34,8 @@ See how the callout is rendered separately from normal comments
 // This is normal comments from source code.
 const blog = "https://jser.dev"
 //                    ~~~~~~~~
-//       [JSer.dev is the homepage for JSer.]
-//       [Check it out!]
+//       [JSer.dev is the **homepage** for JSer.]
+//       [Check it out! [jser.dev](https://jser.dev)]
 
 const blog = "jser.dev"
 //            --------

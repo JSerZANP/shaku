@@ -21,8 +21,8 @@ export default async function Page() {
 
 const blog = "https://jser.dev"
 //                    ^
-//       [JSer.dev is the homepage for JSer.]
-//       [Check it out!]
+//       [JSer.dev is the **homepage** for JSer.]
+//       [Check it out! [jser.dev](https://jser.dev)]
 
 const blog = "https://jser.dev"
 //                    ~~~~~~~~
@@ -118,6 +118,14 @@ pre.shiki .line.dim {
   border-radius: 3px;
 }
 
+.shaku-callout p {
+  margin: 0;
+}
+
+.shaku-callout a {
+  color: #fff;
+}
+
 .shaku-callout-arrow {
   width: 1ch;
   height: 1ch;
@@ -137,6 +145,13 @@ pre.shiki .line.dim {
   margin: 0.3em 0;
 }
 
+.shaku-underline p {
+  margin: 0;
+}
+
+.shaku-underline a {
+  color: red;
+}
 .shaku-underline-line {
   line-height: 0;
   top: 0.5em;

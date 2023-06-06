@@ -58,8 +58,7 @@ const a = 1;
    /* [This is line two] */
 \`\`\`
 `);
-  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-callout" style="left:6ch"><span class="shaku-callout-arrow" style="left:0ch"></span>This is line 1
-This is line two</div></code></div></pre>
+  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-callout" style="left:6ch"><span class="shaku-callout-arrow" style="left:0ch"></span><p>This is line 1</p><p>This is line two</p></div></code></div></pre>
 `;
   expect(result1.value).toEqual(expected);
   expect(result2.value).toEqual(expected);
@@ -83,8 +82,7 @@ const a = 1;
 \`\`\`
 `);
 
-  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-underline shaku-underline-solid" style="left:6ch"><span class="shaku-underline-line" style="left:0ch">-----</span>This is line 1
-This is line two</div></code></div></pre>
+  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-underline shaku-underline-solid" style="left:6ch"><span class="shaku-underline-line" style="left:0ch">-----</span><p>This is line 1</p><p>This is line two</p></div></code></div></pre>
 `;
   expect(result1.value).toEqual(expected);
   expect(result2.value).toEqual(expected);
@@ -107,8 +105,7 @@ const a = 1;
       [This is line two] */
 \`\`\`
 `);
-  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-underline shaku-underline-dotted" style="left:6ch"><span class="shaku-underline-line" style="left:0ch">.....</span>This is line 1
-This is line two</div></code></div></pre>
+  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-underline shaku-underline-dotted" style="left:6ch"><span class="shaku-underline-line" style="left:0ch">.....</span><p>This is line 1</p><p>This is line two</p></div></code></div></pre>
 `;
   expect(result1.value).toEqual(expected);
   expect(result2.value).toEqual(expected);
@@ -133,8 +130,7 @@ const a = 1;
 \`\`\`
 `);
 
-  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-underline shaku-underline-wavy" style="left:6ch"><span class="shaku-underline-line" style="left:0ch">~~~~~</span>This is line 1
-This is line two</div></code></div></pre>
+  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-underline shaku-underline-wavy" style="left:6ch"><span class="shaku-underline-line" style="left:0ch">~~~~~</span><p>This is line 1</p><p>This is line two</p></div></code></div></pre>
 `;
   expect(result1.value).toEqual(expected);
   expect(result2.value).toEqual(expected);
