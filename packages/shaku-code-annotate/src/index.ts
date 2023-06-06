@@ -235,7 +235,7 @@ type ShakuComponentCallout = {
   config: {
     offset: number;
     arrowOffset: number;
-    /** raw html subt */
+    /** restricted raw html */
     contents: string;
   };
 };
@@ -247,7 +247,7 @@ type ShakuComponentUnderline = {
     underlineOffset: number;
     underlineContent: string;
     underlineStyle: "solid" | "dotted" | "wavy";
-    /** raw html subt */
+    /** restricted raw html */
     contents: string;
   };
 };

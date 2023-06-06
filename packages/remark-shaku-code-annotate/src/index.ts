@@ -72,11 +72,6 @@ export const remarkShakuCodeAnnotate = (
                     minOffset,
                     nextLine.line.config.offset + nextLine.offset
                   );
-                  const raw = nextLine.line.config.content;
-                  const processed = String(
-                    unifiedProcessor.processSync(nextLine.line.config.content)
-                  );
-
                   contents.push(
                     String(
                       unifiedProcessor.processSync(nextLine.line.config.content)
@@ -172,13 +167,6 @@ export const remarkShakuCodeAnnotate = (
                     minOffset,
                     nextLine.line.config.offset + nextLine.offset
                   );
-
-                  console.log(
-                    String(
-                      unifiedProcessor.processSync(nextLine.line.config.content)
-                    )
-                  );
-                  console.log("raw", nextLine.line.config.content);
                   contents.push(
                     String(
                       unifiedProcessor.processSync(nextLine.line.config.content)
