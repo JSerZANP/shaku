@@ -258,9 +258,9 @@ function escapeHtml(html: string) {
  *
  * So the idea is:
  * 1. if all tokens has explanation of comment or "whitespace", then it is comment line
- * 2. "whitespace" means token is whitespace or has `punctuation.section.embedded.begin` and `meta.jsx.children`.
- * 2. if the first token is "whitespace", then it used to calculate the offset
- * 3. the first meaningful token has the comment body
+ * 2. "whitespace" means token is whitespace or has `punctuation.section.embedded` and `meta.jsx.children`.
+ * 3. if the first token is "whitespace", then it used to calculate the offset
+ * 4. the first meaningful token has the comment body
  *   - find the first explanation that is not `punctuation.definition`.
  */
 function parseComment(line: IThemedToken[]): null | {
