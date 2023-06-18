@@ -1,5 +1,11 @@
 # remark-shaku-code-annotate
 
+## 0.0.8
+
+### Patch Changes
+
+- support jsx
+
 ## 0.0.7
 
 ### Patch Changes
