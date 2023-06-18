@@ -253,9 +253,13 @@ function escapeHtml(html: string) {
  * "  aaa" => [{content: "  aaa"}]
  * "  *\/" => [{content: "   *\/", explanation: [{content: '   '}, {content: '*\/'}]}]
  *
- * So the idea is
- * 1. if all tokens has explanation of comment, then it is comment line
- * 2. if the first token is white space, then it should be treated as offset
+ * one exception is jsx, there is no comment line but following form which should be treated as one
+ * " {  /* aaa *\/ }" => [{content: " {  "}, {content: "/* a *\/"}, {content: " }"}]
+ *
+ * So the idea is:
+ * 1. if all tokens has explanation of comment or "whitespace", then it is comment line
+ * 2. "whitespace" means token is whitespace or has `punctuation.section.embedded.begin` and `meta.jsx.children`.
+ * 2. if the first token is "whitespace", then it used to calculate the offset
  * 3. the first meaningful token has the comment body
  *   - find the first explanation that is not `punctuation.definition`.
  */
@@ -267,17 +271,17 @@ function parseComment(line: IThemedToken[]): null | {
   // comments start from the begining
   const isCommentLine = line.every(
     (token) =>
-      isWhitespace(token.content) ||
+      shouldBeTreatedAsWhitespace(token) ||
       token.explanation?.some((exp) =>
         exp.scopes.some((scope) => scope.scopeName.startsWith("comment"))
       )
   );
   if (!isCommentLine) return null;
 
-  const isFirstTokenWhitespace = isWhitespace(line[0].content);
-  let offset = isFirstTokenWhitespace ? line[0].content.length : 0;
+  const shouldTreatFirstTokenOffset = shouldBeTreatedAsWhitespace(line[0]);
+  let offset = shouldTreatFirstTokenOffset ? line[0].content.length : 0;
   let body = "";
-  const tokenWithBody = isFirstTokenWhitespace ? line[1] : line[0];
+  const tokenWithBody = shouldTreatFirstTokenOffset ? line[1] : line[0];
   if (tokenWithBody != null) {
     const explanations = tokenWithBody.explanation ?? [];
 
@@ -330,6 +334,33 @@ function hasShakuDirectiveFocus(lines: ReturnType<typeof parseLines>) {
 function isWhitespace(str: string) {
   return /^\s+$/.test(str);
 }
+
+function shouldBeTreatedAsWhitespace(token: IThemedToken) {
+  if (isWhitespace(token.content)) return true;
+
+  // special case for jsx
+  if (
+    token.explanation?.every((explanation) => {
+      return (
+        isWhitespace(explanation.content) ||
+        (explanation.scopes.some((scope) =>
+          scope.scopeName.startsWith("meta.jsx.children")
+        ) &&
+          explanation.scopes.some(
+            (scope) =>
+              scope.scopeName.startsWith(
+                "punctuation.section.embedded.begin"
+              ) ||
+              scope.scopeName.startsWith("punctuation.section.embedded.end")
+          ))
+      );
+    })
+  ) {
+    return true;
+  }
+  return false;
+}
+
 function assertsNever(data: never) {
   throw new Error("expected never but got: " + data);
 }

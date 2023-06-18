@@ -62,6 +62,7 @@ const a = 1;
 `;
   expect(result1.value).toEqual(expected);
   expect(result2.value).toEqual(expected);
+  expect(result3.value).toEqual(expected);
 });
 
 test("able to render solid underline: ----", async () => {
@@ -267,4 +268,46 @@ const c = 1;
   expect(result1.value).toEqual(expected);
 
   expect(result2.value).toEqual(expected);
+});
+
+test("able to render  in jsx", async () => {
+  const result1 = await process(`
+\`\`\`jsx annotate
+function a() {
+  //       ^
+  //     [This is line 1]
+    return <p>aaa
+    { /*      ---       */}
+       {/*   [This is line 2]       */}
+       {/*   @highlight       */}
+       <button>click me </button>
+       {123}
+    </p>
+  }
+\`\`\`
+`);
+  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">function</span><span style="color: #24292E"> </span><span style="color: #6F42C1">a</span><span style="color: #24292E">() {</span></div><div class="shaku-callout" style="left:9ch"><span class="shaku-callout-arrow" style="left:2ch"></span><p>This is line 1</p></div><div class="line"><span style="color: #24292E">    </span><span style="color: #D73A49">return</span><span style="color: #24292E"> &lt;</span><span style="color: #22863A">p</span><span style="color: #24292E">&gt;aaa</span></div><div class="shaku-underline shaku-underline-solid" style="left:13ch"><span class="shaku-underline-line" style="left:1ch">---</span><p>This is line 2</p></div><div class="line highlight"><span style="color: #24292E">       &lt;</span><span style="color: #22863A">button</span><span style="color: #24292E">&gt;click me &lt;/</span><span style="color: #22863A">button</span><span style="color: #24292E">&gt;</span></div><div class="line"><span style="color: #24292E">       {</span><span style="color: #005CC5">123</span><span style="color: #24292E">}</span></div><div class="line"><span style="color: #24292E">    &lt;/</span><span style="color: #22863A">p</span><span style="color: #24292E">&gt;</span></div><div class="line"><span style="color: #24292E">  }</span></div></code></div></pre>
+`;
+  expect(result1.value).toEqual(expected);
+});
+
+test("able to render  in tsx", async () => {
+  const result1 = await process(`
+\`\`\`tsx annotate
+function a() {
+  //       ^
+  //     [This is line 1]
+    return <p>aaa
+    { /*      ---       */}
+       {/*   [This is line 2]       */}
+       {/*   @highlight       */}
+       <button>click me </button>
+       {123}
+    </p>
+  }
+\`\`\`
+`);
+  const expected = `<pre class="shiki" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">function</span><span style="color: #24292E"> </span><span style="color: #6F42C1">a</span><span style="color: #24292E">() {</span></div><div class="shaku-callout" style="left:9ch"><span class="shaku-callout-arrow" style="left:2ch"></span><p>This is line 1</p></div><div class="line"><span style="color: #24292E">    </span><span style="color: #D73A49">return</span><span style="color: #24292E"> &lt;</span><span style="color: #22863A">p</span><span style="color: #24292E">&gt;aaa</span></div><div class="shaku-underline shaku-underline-solid" style="left:13ch"><span class="shaku-underline-line" style="left:1ch">---</span><p>This is line 2</p></div><div class="line highlight"><span style="color: #24292E">       &lt;</span><span style="color: #22863A">button</span><span style="color: #24292E">&gt;click me &lt;/</span><span style="color: #22863A">button</span><span style="color: #24292E">&gt;</span></div><div class="line"><span style="color: #24292E">       {</span><span style="color: #005CC5">123</span><span style="color: #24292E">}</span></div><div class="line"><span style="color: #24292E">    &lt;/</span><span style="color: #22863A">p</span><span style="color: #24292E">&gt;</span></div><div class="line"><span style="color: #24292E">  }</span></div></code></div></pre>
+`;
+  expect(result1.value).toEqual(expected);
 });

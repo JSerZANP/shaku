@@ -108,6 +108,22 @@ function foo(){
 }
 \`\`\`
 
+**also works in JSX/TSX**
+
+\`\`\`tsx annotate
+function component() {
+  //       ^
+  //     [This is line 1]
+    return <p>jser.dev
+    { /*      --------       */}
+       {/*   [This is line 2]       */}
+       {/*   @highlight       */}
+       <button>click me</button>
+       {123}
+    </p>
+  }
+\`\`\`
+
 **How to Use**
 
 Visit [shaku on github](https://github.com/JSerZANP/shaku/tree/main) to find the right plugin.
@@ -117,7 +133,7 @@ function getProcessor() {
   return shiki
     .getHighlighter({
       theme: "github-light",
-      langs: ["javascript", "css", "html"],
+      langs: ["javascript", "css", "jsx", "html", "typescript", "tsx"],
       paths: {
         themes: "/_next/static/shiki/themes",
         wasm: "/_next/static/shiki/dist",
@@ -128,7 +144,7 @@ function getProcessor() {
       remark()
         .use(remarkShakuCodeAnnotate, {
           theme: "github-light",
-          langs: ["javascript", "css", "html"],
+          langs: ["javascript", "css", "jsx", "html", "typescript", "tsx"],
 
           paths: {
             themes: "/_next/static/shiki/themes",
