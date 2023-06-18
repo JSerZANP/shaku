@@ -14,4 +14,4 @@ Take a look at the live demo from playground https://shaku-web.vercel.app
 You should choose the right plugin for your code base.
 
 1. [remark-shaku-code-annotate](../remark-shaku-code-annotate/)
-2. markit? TODO
+2. marked? TODO
