@@ -1,5 +1,11 @@
 # remark-shaku-code-annotate
 
+## 0.0.9
+
+### Patch Changes
+
+- fix deps
+
 ## 0.0.8
 
 ### Patch Changes
