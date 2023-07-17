@@ -143,6 +143,7 @@ pre.shiki .line.dim {
   border-radius: 3px;
   color: red;
   margin: 0.3em 0;
+  width: min-content;
 }
 
 .shaku-underline p {
