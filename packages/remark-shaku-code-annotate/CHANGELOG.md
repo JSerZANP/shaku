@@ -1,5 +1,11 @@
 # remark-shaku-code-annotate
 
+## 0.0.11
+
+### Patch Changes
+
+- support themes
+
 ## 0.0.10
 
 ### Patch Changes
