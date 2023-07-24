@@ -13,6 +13,16 @@ async function process(md: string) {
   return result;
 }
 
+async function processWithThemes(md: string) {
+  const processor = remark()
+    .use(remarkShakuCodeAnnotate, {
+      themes: ["github-light", "github-dark"],
+    })
+    .use(html, { sanitize: false });
+  const result = await processor.process(md);
+  return result;
+}
+
 test("should not apply annotation without meta", async () => {
   const result = await process(`
 \`\`\`js 
@@ -308,6 +318,21 @@ function a() {
 \`\`\`
 `);
   const expected = `<pre class="shiki github-light" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">function</span><span style="color: #24292E"> </span><span style="color: #6F42C1">a</span><span style="color: #24292E">() {</span></div><div class="shaku-callout" style="left:9ch"><span class="shaku-callout-arrow" style="left:2ch"></span><p>This is line 1</p></div><div class="line"><span style="color: #24292E">    </span><span style="color: #D73A49">return</span><span style="color: #24292E"> &lt;</span><span style="color: #22863A">p</span><span style="color: #24292E">&gt;aaa</span></div><div class="shaku-underline shaku-underline-solid" style="left:13ch"><span class="shaku-underline-line" style="left:1ch">---</span><p>This is line 2</p></div><div class="line highlight"><span style="color: #24292E">       &lt;</span><span style="color: #22863A">button</span><span style="color: #24292E">&gt;click me &lt;/</span><span style="color: #22863A">button</span><span style="color: #24292E">&gt;</span></div><div class="line"><span style="color: #24292E">       {</span><span style="color: #005CC5">123</span><span style="color: #24292E">}</span></div><div class="line"><span style="color: #24292E">    &lt;/</span><span style="color: #22863A">p</span><span style="color: #24292E">&gt;</span></div><div class="line"><span style="color: #24292E">  }</span></div></code></div></pre>
+`;
+  expect(result1.value).toEqual(expected);
+});
+
+test("able to render multiple code blocks with themes", async () => {
+  const result1 = await processWithThemes(`
+\`\`\`js annotate
+const a = 1;
+//    ^
+//    [This is line 1]
+//    [This is line two]
+\`\`\`
+`);
+
+  const expected = `<pre class="shiki github-light" style="color:#24292e;background-color:#fff"><div class="code-container"><code><div class="line"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">a</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E">;</span></div><div class="shaku-callout" style="left:6ch"><span class="shaku-callout-arrow" style="left:0ch"></span><p>This is line 1</p><p>This is line two</p></div></code></div></pre><pre class="shiki github-dark" style="color:#e1e4e8;background-color:#24292e"><div class="code-container"><code><div class="line"><span style="color: #F97583">const</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">a</span><span style="color: #E1E4E8"> </span><span style="color: #F97583">=</span><span style="color: #E1E4E8"> </span><span style="color: #79B8FF">1</span><span style="color: #E1E4E8">;</span></div><div class="shaku-callout" style="left:6ch"><span class="shaku-callout-arrow" style="left:0ch"></span><p>This is line 1</p><p>This is line two</p></div></code></div></pre>
 `;
   expect(result1.value).toEqual(expected);
 });
