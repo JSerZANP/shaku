@@ -178,3 +178,17 @@ pre.shiki .line.dim {
   text-decoration-style: dotted;
 }
 ```
+
+# Dark Mode support.
+
+Multiple code blocks are rendered if you pass `themes` rather than `theme`.
+Each code block is marked with its theme name as class name, then you can
+easily support dark mode by hiding one or another.
+
+For example.
+
+```js
+remark().use(remarkShakuCodeAnnotate, {
+  themes: ["github-dark", "github-light"],
+});
+```
