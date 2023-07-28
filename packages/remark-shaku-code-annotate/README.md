@@ -2,7 +2,7 @@
 
 This is a plugin of remark for [shaku-code-annotate](../shaku-code-annotate/)
 
-Take a look at the live demo https://shaku-web.vercel.app.
+Take a look at the live demo https://shaku-web.vercel.app, or  [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/github-yunziv?file=src%2Flayouts%2FBlogPost.astro).                                                                
 
 # How to use
 
