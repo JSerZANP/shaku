@@ -10,13 +10,14 @@ import html from "remark-html";
 import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 import * as shiki from "shiki";
 import styles from "./Playground.module.css";
+import { Button, Column, Row, Text, View } from "./bare";
 
 const defaultMarkdown = `
 
 **shaku-code-annotate** allows you to annotate the code snippets,
 in a different context.
 
-**Here is a callout**
+## Here is a callout
 
 \`\`\`js annotate
 const blog = "https://jser.dev"
@@ -28,7 +29,7 @@ const blog = "https://jser.dev"
 
 See how the callout is rendered separately from normal comments
 
-**Various kinds of underlines**
+## Various kinds of underlines
 
 \`\`\`js annotate
 // This is normal comments from source code.
@@ -54,7 +55,7 @@ const blog = "jser.dev"
 //            ~~~~~~~~
 \`\`\`
 
-**easily Highlight lines**
+## Easily Highlight lines
 
 You don't need to add code meta, just add the command where you want to highlight.
 
@@ -75,40 +76,50 @@ function useSomeEffect({blog}) {
 }
 \`\`\`
 
-**easily Dim lines**
+## Easily Dim lines
 
 Use this command to de-emphasize some lines.
 
 \`\`\`js annotate
-// @dim
-function foo() {
-  console.log("Hello!")
-// @dim start
-  setTimeout(() => {
-    console.log("World!")
-  },1000)
-// @dim end
+function useSomeEffect({blog}) {
+  // @dim
+  useEffect(() => {
+    // do some staff
+
+      return () => {
+        // @dim start
+        location.href = 'https://jser.dev'
+        // @dim end
+
+      }
+
+    }, [blog])
 }
 \`\`\`
 
 
-**easily Focus lines**
+## Easily Focus lines
 
 Emphasize some lines while de-emphasize the others.
 
 \`\`\`js annotate
-// @focus
-function foo(){
-  console.log("Hello!")
-// @focus start
-  setTimeout(() => {
-    console.log('World!')
-  },1000)
-// @focus end
+function useSomeEffect({blog}) {
+  // @focus
+  useEffect(() => {
+    // do some staff
+
+      return () => {
+        // @focus start
+        location.href = 'https://jser.dev'
+        // @focus end
+
+      }
+
+    }, [blog])
 }
 \`\`\`
 
-**also works in JSX/TSX**
+## Also works in JSX/TSX
 
 \`\`\`tsx annotate
 function component() {
@@ -124,7 +135,7 @@ function component() {
   }
 \`\`\`
 
-**How to Use**
+## How to Use
 
 Visit [shaku on github](https://github.com/JSerZANP/shaku/tree/main) to find the right plugin.
 `;
@@ -181,10 +192,10 @@ export function Playground({ code: _code }: { code?: string }) {
     );
   };
   return (
-    <div className={styles.container}>
-      <div className={styles.head}>
-        <h1 className={styles.heading}>shaku-code-annotate playground</h1>
-        <p>
+    <Column height={"100vh"} padding={12} gap={12}>
+      <View>
+        <Text type="headline1">Shaku Playground</Text>
+        <Text type="body">
           The markdown preview is highlighted with{" "}
           <a
             href="https://github.com/JSerZANP/shaku/tree/main/packages/remark-shaku-code-annotate"
@@ -193,15 +204,17 @@ export function Playground({ code: _code }: { code?: string }) {
             remark-shaku-code-annotate
           </a>
           , style controlled by CSS.
-        </p>
-      </div>
-      <div className={styles.toolbar}>
-        <button className={styles.share} onClick={share}>
-          <RiShareBoxLine /> Share page with below code
-        </button>
-      </div>
-      <div className={styles.playground}>
-        <div className={styles.editor}>
+        </Text>
+      </View>
+      <Row>
+        <Button
+          onClick={share}
+          label="Share page with below code"
+          icon={<RiShareBoxLine />}
+        ></Button>
+      </Row>
+      <Row gap={10} flex="1 0 0 ">
+        <View flex="1 0 0">
           <Editor
             defaultLanguage="markdown"
             height="100%"
@@ -209,11 +222,14 @@ export function Playground({ code: _code }: { code?: string }) {
             theme="vs-dark"
             onChange={setCode}
           />
-        </div>
-        <div className={styles.preview}>
-          <div dangerouslySetInnerHTML={{ __html: preview }}></div>
-        </div>
-      </div>
-    </div>
+        </View>
+        <View flex="1 0 0">
+          <div
+            dangerouslySetInnerHTML={{ __html: preview }}
+            className={styles.preview}
+          ></div>
+        </View>
+      </Row>
+    </Column>
   );
 }

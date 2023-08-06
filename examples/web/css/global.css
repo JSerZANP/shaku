@@ -1,3 +1,9 @@
+@import url("./reset.css");
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 pre.shiki {
   padding: 1rem;
   border: 1px solid #eee;
@@ -5,10 +11,16 @@ pre.shiki {
 
 pre.shiki .line {
   min-height: 1em;
+  line-height: 1.5;
 }
 
-pre.shiki .line.highlight {
-  background-color: #dffa83;
+pre.shiki.github-light .line.highlight {
+  background-color: color-mix(in srgb, rgb(5, 118, 149) 15%, #fff);
+  display: block;
+}
+
+pre.shiki.github-dark .line.highlight {
+  background-color: #2b4a70;
   display: block;
 }
 
@@ -38,7 +50,7 @@ pre.shiki .line.dim {
   width: 1ch;
   height: 1ch;
   display: inline-block;
-  background-color: #0685ce;
+  background-color: #048ad8;
   position: absolute;
   top: -0.5ch;
   transform: rotate(45deg);
@@ -50,7 +62,7 @@ pre.shiki .line.dim {
   display: block;
   border-radius: 3px;
   color: red;
-  margin: 0.3em 0;
+  margin: 0;
   width: min-content;
 }
 

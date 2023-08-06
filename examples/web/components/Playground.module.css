@@ -1,46 +1,95 @@
-.container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+.preview p {
+  line-height: 1.5;
+  margin: 1em 0;
 }
 
-.playground {
-  display: flex;
-  flex-grow: 1;
-  column-gap: 1rem;
+.preview pre p {
+  margin: 0;
 }
 
-.editor {
-  width: 0;
-  flex-grow: 1;
+.preview pre {
+  margin: 1em 0;
+  font-size: 14px;
 }
 
-.preview {
-  width: 0;
-  flex-grow: 1;
-  font-family: sans-serif;
-  height: 100%;
-  overflow-y: auto;
-}
-.head {
-  font-family: sans-serif;
-}
-
-.toolbar {
-  display: flex;
-  padding: 1rem 0;
+.preview p code:not(pre code),
+.preview li code:not(pre code) {
+  background: var(--color-bg-deemphasized);
+  color: var(--color-text-main);
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-code);
+  font-size: 0.9em;
 }
 
-.share {
-  border: 0;
-  background-color: transparent;
-  display: inline-flex;
-  gap: 5px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #eee;
+.preview ol {
+  list-style: decimal;
+  padding-left: 2rem;
+  line-height: 1.8;
 }
 
-.share:hover {
-  border-color: #555;
+.preview ul {
+  list-style: inherit;
+  padding-left: 2rem;
+  line-height: 1.8;
+}
+
+.preview a {
+  color: var(--color-link-sub);
+}
+
+.preview blockquote {
+  color: var(--color-text-sub);
+  margin-left: 0;
+  padding-left: 1rem;
+  border-left: 5px solid var(--color-line-3rd);
+}
+
+.preview table {
+  width: max-content;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.preview table td,
+.preview table th {
+  border: 1px solid var(--color-line-3rd);
+  text-align: center;
+  padding: 0.5rem 1rem;
+}
+
+.preview img {
+  max-width: min(100%, 600px);
+  background-color: #fff;
+}
+
+.preview iframe {
+  max-width: 100%;
+}
+
+.preview hr {
+  border-top: 1px solid #eee;
+}
+
+.preview h1 {
+  font-size: 24px;
+}
+.preview h2 {
+  font-size: 20px;
+}
+.preview h3 {
+  font-size: 16px;
+}
+.preview h4,
+.preview h5,
+.preview h6 {
+  font-size: 1.2rem;
+}
+
+.preview h1,
+.preview h2,
+.preview h3,
+.preview h4,
+.preview h5,
+.preview h6 {
+  font-weight: bold;
 }
