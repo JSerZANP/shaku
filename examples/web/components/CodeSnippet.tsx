@@ -417,7 +417,12 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
           />
         </View>
         <View flex="1 0 0">
-          <Row justifyContent="flex-start" marginBottom="1rem" gap={12}>
+          <Row
+            justifyContent="flex-start"
+            marginBottom="1rem"
+            gap={12}
+            alignItems="center"
+          >
             <Text type="headline4">Preview</Text>
             <Button
               onClick={download}

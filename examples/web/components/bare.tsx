@@ -126,7 +126,7 @@ export function Button({
         gap: "5px",
         alignItems: "ceter",
         backgroundColor: "transparent",
-        padding: "10px",
+        padding: "6px 10px",
         borderRadius: "5px",
         fontSize: "16px",
         border: hovered ? "1px solid #555" : "1px solid #eee",
