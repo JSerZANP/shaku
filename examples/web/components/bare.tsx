@@ -18,7 +18,18 @@ type TextType =
 
 type BaseProps = {
   children?: ReactNode;
-} & CSSProperties;
+  padding?: CSSProperties["padding"];
+  margin?: CSSProperties["padding"];
+  marginBottom?: CSSProperties["marginBottom"];
+  width?: CSSProperties["width"];
+  height?: CSSProperties["height"];
+  flex?: CSSProperties["flex"];
+  // this field seems ugly
+  maxWidth?: CSSProperties["maxWidth"];
+  minWidth?: CSSProperties["minWidth"];
+  backgroundColor?: CSSProperties["backgroundColor"];
+  color?: CSSProperties["color"];
+};
 
 export function Text({
   type,
