@@ -205,14 +205,11 @@ export function Playground({ code: _code }: { code?: string }) {
           </a>
         </Row>
         <Text type="body">
-          The markdown preview is highlighted with{" "}
-          <a
-            href="https://github.com/JSerZANP/shaku/tree/main/packages/remark-shaku-code-annotate"
-            target="_blank"
-          >
-            remark-shaku-code-annotate
-          </a>
-          , style controlled by CSS.
+          <a href="https://github.com/JSerZANP/shaku/tree/main" target="_blank">
+            Shaku
+          </a>{" "}
+          allows you to annotate your code easily. Created by{" "}
+          <a href="https://twitter.com/JSer_ZANP">JSer</a>.
         </Text>
       </View>
       <Row>

@@ -6,6 +6,7 @@ import { Editor } from "@monaco-editor/react";
 import domtoimage from "dom-to-image";
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineDownload } from "react-icons/ai";
+import { BsStars } from "react-icons/bs";
 import { remark } from "remark";
 import html from "remark-html";
 import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
@@ -370,16 +371,19 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   return (
     <Column height={"100vh"} padding={12} gap={12}>
       <View>
-        <Text type="headline1">Shaku Snippet</Text>
+        <Row alignItems="center" justifyContent="space-between" gap={20}>
+          <Text type="headline1">Shaku Snippet</Text>
+          <a href="/" style={{ textDecoration: "none" }}>
+            <Text type="headline5" color="#0e67e4">
+              <BsStars />
+              Shaku Playground →
+            </Text>
+          </a>
+        </Row>
         <Text type="body">
-          Annotate code snippet with{" "}
-          <a
-            href="https://github.com/JSerZANP/shaku/tree/main/packages/shaku-code-annotate"
-            target="_blank"
-          >
-            Shaku Code Annotate
-          </a>{" "}
-          and share it with the world! <a href="/">see all syntax</a>
+          Annotate code snippet with <a href="/">Shaku Code Annotate Syntax</a>{" "}
+          and share it with the world! Created by{" "}
+          <a href="https://twitter.com/JSer_ZANP">JSer</a>.
         </Text>
       </View>
 
