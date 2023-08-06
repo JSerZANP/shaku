@@ -8,6 +8,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <title>Shaku</title>
+      <link rel="icon" type="image/jpg" href="/static/img/favicon.jpg"></link>
       <body>{children}</body>
     </html>
   );
