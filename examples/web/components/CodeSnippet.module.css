@@ -11,6 +11,13 @@
   display: flex;
   gap: 8px;
   border-radius: 6px 6px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.lang {
+  color: #a39d9d;
+  font-size: 12px;
 }
 
 .previewFooter {
