@@ -4,6 +4,7 @@ import withShiki from "@stefanprobst/remark-shiki";
 
 import { Editor } from "@monaco-editor/react";
 import { useEffect, useState } from "react";
+import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
 import { remark } from "remark";
 import html from "remark-html";
@@ -194,7 +195,15 @@ export function Playground({ code: _code }: { code?: string }) {
   return (
     <Column height={"100vh"} padding={12} gap={12}>
       <View>
-        <Text type="headline1">Shaku Playground</Text>
+        <Row alignItems="center" justifyContent="space-between" gap={20}>
+          <Text type="headline1">Shaku Playground</Text>
+          <a href="/snippet" style={{ textDecoration: "none" }}>
+            <Text type="headline5" color="#dc0bf0">
+              <BsStars />
+              Shaku Snippet →
+            </Text>
+          </a>
+        </Row>
         <Text type="body">
           The markdown preview is highlighted with{" "}
           <a

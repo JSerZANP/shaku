@@ -174,8 +174,14 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
       <View>
         <Text type="headline1">Shaku Snippet</Text>
         <Text type="body">
-          Annotate code snippet with <a href="/">Shaku</a> and share it with the
-          world!
+          Annotate code snippet with{" "}
+          <a
+            href="https://github.com/JSerZANP/shaku/tree/main/packages/shaku-code-annotate"
+            target="_blank"
+          >
+            Shaku Code Annotate
+          </a>{" "}
+          and share it with the world! <a href="/">see all syntax</a>
         </Text>
       </View>
 
