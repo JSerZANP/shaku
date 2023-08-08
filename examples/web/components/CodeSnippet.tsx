@@ -274,7 +274,58 @@ function getProcessor(lang) {
     );
 }
 
+const themes = [
+  {
+    name: "blue",
+    background: "#d3efff",
+    cssVars: {
+      "--color-shaku-highlight-dark": "#2b4a70",
+      "--color-shaku-callout-dark": "#0685ce",
+      "--color-shaku-underline-dark": "#0893e3",
+    },
+  },
+  {
+    name: "purple",
+    background: "#fddbfd",
+    cssVars: {
+      "--color-shaku-highlight-dark": "#656065",
+      "--color-shaku-callout-dark": "#df1fdf",
+      "--color-shaku-underline-dark": "#e221e2",
+    },
+  },
+  {
+    name: "green",
+    background: "#dbfdeb",
+    cssVars: {
+      "--color-shaku-highlight-dark": "#424a46",
+      "--color-shaku-callout-dark": "#09984a",
+      "--color-shaku-underline-dark": "#09984a",
+    },
+  },
+  {
+    name: "yellow",
+    background: "#f9fddb",
+    cssVars: {
+      "--color-shaku-highlight-dark": "#3e3f36",
+      "--color-shaku-callout-dark": "#738200",
+      "--color-shaku-underline-dark": "#738200",
+    },
+  },
+  {
+    name: "red",
+    background: "#fddbdb",
+    cssVars: {
+      "--color-shaku-highlight-dark": "#3e3f36",
+      "--color-shaku-callout-dark": "#940000",
+      "--color-shaku-underline-dark": "#d01212",
+    },
+  },
+] as const;
+
 export function CodeSnippet({ code: _code }: { code?: string }) {
+  const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
+    themes[0]
+  );
   const [lang, setLang] = useState<shiki.Lang>("javascript");
   const [code, setCode] = useState(_code ?? defaultCode);
   const [preview, setPreview] = useState("");
@@ -424,6 +475,16 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
             alignItems="center"
           >
             <Text type="headline4">Preview</Text>
+
+            {themes.map((theme) => (
+              <ThemePicker
+                key={theme.name}
+                name={theme.name}
+                background={theme.background}
+                selected={selectedTheme === theme}
+                onClick={() => setTheme(theme)}
+              ></ThemePicker>
+            ))}
             <Button
               onClick={download}
               label="Download"
@@ -432,38 +493,95 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
           </Row>
           <View
             ref={refPreview}
-            padding="50px 50px"
+            padding="40px 40px"
             minWidth={400}
-            backgroundColor="#d3efff"
+            backgroundColor={selectedTheme.background}
             width="min-content"
+            // @ts-ignore
+            style={{ ...selectedTheme.cssVars }}
           >
             <View flex="0 0 0" width="max-content" margin="auto auto">
-              <p className={styles.previewHeader}>
+              <p
+                style={{
+                  backgroundColor: "#24292e",
+                  margin: 0,
+                  padding: "15px 15px 0",
+                  display: "flex",
+                  gap: "8px",
+                  borderRadius: "6px 6px 0 0",
+                  alignItems: "center",
+                }}
+              >
+                <Dot color="#ff5f56" />
+                <Dot color="#ffbd2d" />
+                <Dot color="#26c940" />
                 <span
-                  className={styles.dot}
-                  style={{ backgroundColor: "#ff5f56" }}
-                ></span>
-                <span
-                  className={styles.dot}
-                  style={{ backgroundColor: "#ffbd2d" }}
-                ></span>
-
-                <span
-                  className={styles.dot}
-                  style={{ backgroundColor: "#26c940" }}
-                ></span>
-
-                <span className={styles.lang}>{lang}</span>
+                  style={{
+                    color: " #a39d9d",
+                    fontSize: "12px",
+                  }}
+                >
+                  {lang}
+                </span>
               </p>
               <div
                 className={styles.code}
                 dangerouslySetInnerHTML={{ __html: preview }}
               ></div>
-              <p className={styles.previewFooter}></p>
+              <p
+                style={{
+                  backgroundColor: "#24292e",
+                  margin: 0,
+                  padding: "10px 10px 0",
+                  display: "flex",
+                  gap: "8px",
+                  borderRadius: "0 0 6px 6px",
+                }}
+              ></p>
             </View>
           </View>
         </View>
       </Row>
     </Column>
+  );
+}
+
+function Dot({ color }: { color: string }) {
+  return (
+    <span
+      style={{
+        backgroundColor: color,
+        width: "12px",
+        height: "12px",
+        display: "inline-block",
+        borderRadius: "15px",
+      }}
+    ></span>
+  );
+}
+
+function ThemePicker({
+  onClick,
+  name,
+  selected,
+  background,
+}: {
+  onClick: () => void;
+  name: string;
+  selected?: boolean;
+  background: string;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      aria-label={name}
+      style={{
+        border: selected ? "1px solid #000" : 0,
+        width: "20px",
+        height: "20px",
+        display: "inline-block",
+        background,
+      }}
+    ></button>
   );
 }

@@ -3,36 +3,3 @@
   margin: 0;
   font-size: 14px;
 }
-
-.previewHeader {
-  background-color: #24292e;
-  margin: 0;
-  padding: 15px 15px 0;
-  display: flex;
-  gap: 8px;
-  border-radius: 6px 6px 0 0;
-  display: flex;
-  align-items: center;
-}
-
-.lang {
-  color: #a39d9d;
-  font-size: 12px;
-}
-
-.previewFooter {
-  background-color: #24292e;
-  margin: 0;
-  padding: 10px 10px 0;
-  display: flex;
-  gap: 8px;
-  border-radius: 0 0 6px 6px;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  background-color: #eee;
-  display: inline-block;
-  border-radius: 15px;
-}

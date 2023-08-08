@@ -18,6 +18,7 @@ type TextType =
 
 type BaseProps = {
   children?: ReactNode;
+  style?: CSSProperties;
   padding?: CSSProperties["padding"];
   margin?: CSSProperties["padding"];
   marginBottom?: CSSProperties["marginBottom"];
@@ -140,11 +141,11 @@ export function Button({
 }
 
 export const View = forwardRef(function View(
-  { children, ...rest }: BaseProps,
+  { children, style, ...rest }: BaseProps,
   ref?: RefObject<HTMLDivElement>
 ) {
   return (
-    <div style={{ ...rest }} ref={ref}>
+    <div style={{ ...rest, ...style }} ref={ref}>
       {children}
     </div>
   );
