@@ -329,6 +329,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [lang, setLang] = useState<shiki.Lang>("javascript");
   const [code, setCode] = useState(_code ?? defaultCode);
   const [preview, setPreview] = useState("");
+  const [showLogo, setShowLogo] = useState(true);
 
   useEffect(() => {
     getProcessor(lang).then((processor) =>
@@ -369,21 +370,6 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
           const ctx = canvas.getContext("2d");
           canvas.width = img.width;
           canvas.height = img.height;
-
-          // const width = canvas.width;
-          // const height = canvas.height;
-
-          // ctx.beginPath();
-          // ctx.moveTo(0, 6);
-          // ctx.arcTo(0, 0, width, 0, 6);
-          // ctx.lineTo(width - 6, 0);
-          // ctx.arcTo(width, 0, width, height, 6);
-          // ctx.lineTo(width, height - 6);
-          // ctx.arcTo(width, height, 0, height, 6);
-          // ctx.lineTo(6, height);
-          // ctx.arcTo(0, height, 0, 0, 6);
-          // ctx.lineTo(0, 6);
-          // ctx.clip();
 
           ctx.drawImage(
             img,
@@ -485,6 +471,15 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
                 onClick={() => setTheme(theme)}
               ></ThemePicker>
             ))}
+            <label htmlFor="showlogo">
+              <input
+                id="showlogo"
+                type="checkbox"
+                checked={showLogo}
+                onChange={(e) => setShowLogo(e.currentTarget.checked)}
+              />
+              show logo
+            </label>
             <Button
               onClick={download}
               label="Download"
@@ -493,7 +488,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
           </Row>
           <View
             ref={refPreview}
-            padding="40px 40px"
+            padding="40px 40px 10px 40px"
             minWidth={400}
             backgroundColor={selectedTheme.background}
             width="min-content"
@@ -538,6 +533,19 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
                   borderRadius: "0 0 6px 6px",
                 }}
               ></p>
+              <p
+                style={{
+                  color: "rgba(0,0,0,0.2)",
+                  textAlign: "center",
+                  width: "100%",
+                  fontWeight: "bold",
+                  margin: "10px",
+                  fontSize: "12px",
+                  height: "10px",
+                }}
+              >
+                {showLogo ? "Shaku Snippet" : ""}
+              </p>
             </View>
           </View>
         </View>
