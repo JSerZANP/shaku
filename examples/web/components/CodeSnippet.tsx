@@ -446,7 +446,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
       </View>
 
       <Row gap={10} flex="1 0 0 ">
-        <View flex="1 0 0" maxWidth={600}>
+        <Column flex="1 0 0" maxWidth={600}>
           <Row marginBottom={"1.5rem"}>
             <select
               value={lang}
@@ -478,7 +478,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
               lineNumbers: "off",
             }}
           />
-        </View>
+        </Column>
         <View flex="1 0 0">
           <Row
             justifyContent="flex-start"
