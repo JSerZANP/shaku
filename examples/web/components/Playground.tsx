@@ -3,7 +3,7 @@
 import withShiki from "@stefanprobst/remark-shiki";
 
 import { Editor } from "@monaco-editor/react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
 import { remark } from "remark";
@@ -12,6 +12,7 @@ import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 import * as shiki from "shiki";
 import styles from "./Playground.module.css";
 import { Button, Column, Row, Text, View } from "./bare";
+import useDebouncedCallback from "./useDebouncedCallback";
 
 const defaultMarkdown = `
 
@@ -173,13 +174,19 @@ export function Playground({ code: _code }: { code?: string }) {
   const [code, setCode] = useState(_code ?? defaultMarkdown);
   const [preview, setPreview] = useState("");
 
-  useEffect(() => {
+  const render = useCallback((code) => {
     getProcessor().then((processor) =>
       processor.process(code).then((data) => {
         setPreview(data.toString());
       })
     );
-  }, [code]);
+  }, []);
+
+  const debouncedRender = useDebouncedCallback(render, 1000);
+
+  useEffect(() => {
+    debouncedRender(code);
+  }, [code, debouncedRender]);
 
   const share = () => {
     const query = "code=" + encodeURIComponent(code);

@@ -4,7 +4,7 @@ import withShiki from "@stefanprobst/remark-shiki";
 
 import { Editor } from "@monaco-editor/react";
 import domtoimage from "dom-to-image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineDownload } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { remark } from "remark";
@@ -13,6 +13,7 @@ import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 import * as shiki from "shiki";
 import styles from "./CodeSnippet.module.css";
 import { Button, Column, Row, Text, View } from "./bare";
+import useDebouncedCallback from "./useDebouncedCallback";
 
 const defaultCode = `// @dim
 import { useState } from 'react';
@@ -598,21 +599,4 @@ function ThemePicker({
       }}
     ></button>
   );
-}
-
-function useDebouncedCallback<T>(
-  callback: (...args: T[]) => void,
-  delay: number
-) {
-  const ref = useRef(0);
-
-  const debouncedCallback = useMemo(() => {
-    const run = (...args: T[]) => {
-      window.clearTimeout(ref.current);
-      ref.current = window.setTimeout(() => callback(...args), delay);
-    };
-    return run;
-  }, [callback, delay]);
-
-  return debouncedCallback;
 }
