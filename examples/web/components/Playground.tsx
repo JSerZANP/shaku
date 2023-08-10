@@ -226,7 +226,7 @@ export function Playground({ code: _code }: { code?: string }) {
           icon={<RiShareBoxLine />}
         ></Button>
       </Row>
-      <Row gap={10} flex="1 0 0 ">
+      <Row gap={20} flex="1 0 0 ">
         <Column flex="1 0 0">
           <Editor
             defaultLanguage="markdown"

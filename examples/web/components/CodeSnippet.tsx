@@ -445,7 +445,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
         </Text>
       </View>
 
-      <Row gap={10} flex="1 0 0 ">
+      <Row gap={20} flex="1 0 0 ">
         <Column flex="1 0 0" maxWidth={600}>
           <Row marginBottom={"1.5rem"}>
             <select
