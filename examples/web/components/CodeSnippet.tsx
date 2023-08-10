@@ -7,6 +7,7 @@ import domtoimage from "dom-to-image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineDownload } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
+import { RiShareBoxLine } from "react-icons/ri";
 import { remark } from "remark";
 import html from "remark-html";
 import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
@@ -412,6 +413,19 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
 
     return;
   };
+
+  const share = () => {
+    const query = "code=" + encodeURIComponent(code);
+    const url = location.origin + "/snippet?" + query;
+    const type = "text/plain";
+    const blob = new Blob([url], { type });
+    const data = [new ClipboardItem({ [type]: blob })];
+    navigator.clipboard.write(data).then(
+      () => alert("link copied"),
+      () => alert("failed to copy link.")
+    );
+  };
+
   return (
     <Column height={"100vh"} padding={12} gap={12}>
       <View>
@@ -433,7 +447,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
 
       <Row gap={10} flex="1 0 0 ">
         <View flex="1 0 0" maxWidth={600}>
-          <View marginBottom={"1.5rem"}>
+          <Row marginBottom={"1.5rem"}>
             <select
               value={lang}
               // @ts-ignore
@@ -445,7 +459,12 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
                 </option>
               ))}
             </select>
-          </View>
+            <Button
+              onClick={share}
+              label="Share page with below code"
+              icon={<RiShareBoxLine />}
+            ></Button>
+          </Row>
           <Editor
             language={lang}
             height="100%"
