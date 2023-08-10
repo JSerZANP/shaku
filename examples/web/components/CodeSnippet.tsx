@@ -4,7 +4,7 @@ import withShiki from "@stefanprobst/remark-shiki";
 
 import { Editor } from "@monaco-editor/react";
 import domtoimage from "dom-to-image";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AiOutlineDownload } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { remark } from "remark";
@@ -331,7 +331,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [preview, setPreview] = useState("");
   const [showLogo, setShowLogo] = useState(true);
 
-  useEffect(() => {
+  const render = useCallback((code, lang) => {
     getProcessor(lang).then((processor) =>
       processor
         .process(`\`\`\`${lang} annotate\n${code}\n\`\`\``)
@@ -339,7 +339,13 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
           setPreview(data.toString());
         })
     );
-  }, [code, lang]);
+  }, []);
+
+  const debouncedRender = useDebouncedCallback(render, 1000);
+
+  useEffect(() => {
+    debouncedRender(code, lang);
+  }, [code, debouncedRender, lang]);
 
   const refPreview = useRef<HTMLDivElement>(null);
 
@@ -592,4 +598,21 @@ function ThemePicker({
       }}
     ></button>
   );
+}
+
+function useDebouncedCallback<T>(
+  callback: (...args: T[]) => void,
+  delay: number
+) {
+  const ref = useRef(0);
+
+  const debouncedCallback = useMemo(() => {
+    const run = (...args: T[]) => {
+      window.clearTimeout(ref.current);
+      ref.current = window.setTimeout(() => callback(...args), delay);
+    };
+    return run;
+  }, [callback, delay]);
+
+  return debouncedCallback;
 }
