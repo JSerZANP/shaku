@@ -201,12 +201,12 @@ export function Playground({ code: _code }: { code?: string }) {
     );
   };
   return (
-    <Column height={"100vh"} padding={12} gap={12}>
+    <Column $height={"100vh"} $padding={12} $gap={12}>
       <View>
-        <Row alignItems="center" justifyContent="space-between" gap={20}>
+        <Row $alignItems="center" $justifyContent="space-between" $gap={20}>
           <Text type="headline1">Shaku Playground</Text>
           <$.a href="/snippet" $textDecoration="none">
-            <Text type="headline5" color="#dc0bf0">
+            <Text type="headline5" $color="#dc0bf0">
               <BsStars />
               Shaku Snippet →
             </Text>
@@ -227,8 +227,8 @@ export function Playground({ code: _code }: { code?: string }) {
           icon={<RiShareBoxLine />}
         ></Button>
       </Row>
-      <Row gap={20} flex="1 0 0 ">
-        <Column flex="1 0 0">
+      <Row $gap={20} $flex="1 0 0 ">
+        <Column $flex="1 0 0">
           <Editor
             defaultLanguage="markdown"
             height="100%"
@@ -237,7 +237,7 @@ export function Playground({ code: _code }: { code?: string }) {
             onChange={setCode}
           />
         </Column>
-        <View flex="1 0 0">
+        <View $flex="1 0 0">
           <div
             dangerouslySetInnerHTML={{ __html: preview }}
             className={styles.preview}

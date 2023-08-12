@@ -19,17 +19,10 @@ type TextType =
 type BaseProps = {
   children?: ReactNode;
   style?: CSSProperties;
-  padding?: CSSProperties["padding"];
-  margin?: CSSProperties["padding"];
-  marginBottom?: CSSProperties["marginBottom"];
-  width?: CSSProperties["width"];
-  height?: CSSProperties["height"];
-  flex?: CSSProperties["flex"];
-  // this field seems ugly
-  maxWidth?: CSSProperties["maxWidth"];
-  minWidth?: CSSProperties["minWidth"];
-  backgroundColor?: CSSProperties["backgroundColor"];
-  color?: CSSProperties["color"];
+} & {
+  [P in keyof React.CSSProperties as P extends string
+    ? `$${P}`
+    : never]: React.CSSProperties[P];
 };
 
 export function Text({
@@ -57,43 +50,29 @@ export function Text({
   }
 }
 
-export function Column({
-  children,
-  ...rest
-}: BaseProps & {
-  gap?: CSSProperties["gap"];
-}) {
+export function Column({ children, ...rest }) {
   return (
-    <$.div style={{ display: "flex", flexDirection: "column", ...rest }}>
+    <$.div $display="flex" $flexDirection="column" {...rest}>
       {children}
     </$.div>
   );
 }
 
 export const Row = forwardRef(function Row(
-  {
-    children,
-    ...rest
-  }: BaseProps & {
-    alignItems?: CSSProperties["alignItems"];
-    justifyContent?: CSSProperties["justifyContent"];
-    gap?: CSSProperties["gap"];
-  },
+  { children, ...rest }: BaseProps,
   ref?: RefObject<HTMLDivElement>
 ) {
   return (
-    <div
+    <$.div
       ref={ref}
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "stretch",
-        ...rest,
-      }}
+      $display="flex"
+      $flexDirection="row"
+      $justifyContent="space-between"
+      $alignItems="stretch"
+      {...rest}
     >
       {children}
-    </div>
+    </$.div>
   );
 });
 
@@ -138,13 +117,13 @@ export function Button({
 }
 
 export const View = forwardRef(function View(
-  { children, style, ...rest }: BaseProps,
+  { children, ...rest }: BaseProps,
   ref?: RefObject<HTMLDivElement>
 ) {
   return (
-    <div style={{ ...rest, ...style }} ref={ref}>
+    <$.div {...rest} ref={ref}>
       {children}
-    </div>
+    </$.div>
   );
 });
 

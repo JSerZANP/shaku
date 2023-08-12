@@ -4,6 +4,7 @@ import withShiki from "@stefanprobst/remark-shiki";
 
 import { Editor } from "@monaco-editor/react";
 import domtoimage from "dom-to-image";
+import { $ } from "migacss";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AiOutlineDownload } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
@@ -427,16 +428,16 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   };
 
   return (
-    <Column height={"100vh"} padding={12} gap={12}>
+    <Column $height={"100vh"} $padding={12} $gap={12}>
       <View>
-        <Row alignItems="center" justifyContent="space-between" gap={20}>
+        <Row $alignItems="center" $justifyContent="space-between" $gap={20}>
           <Text type="headline1">Shaku Snippet</Text>
-          <a href="/" style={{ textDecoration: "none" }}>
-            <Text type="headline5" color="#0e67e4">
+          <$.a href="/" $textDecoration="none">
+            <Text type="headline5" $color="#0e67e4">
               <BsStars />
               Shaku Playground →
             </Text>
-          </a>
+          </$.a>
         </Row>
         <Text type="body">
           Annotate code snippet with <a href="/">Shaku Code Annotate Syntax</a>{" "}
@@ -445,9 +446,9 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
         </Text>
       </View>
 
-      <Row gap={20} flex="1 0 0 ">
-        <Column flex="1 0 0" maxWidth={600}>
-          <Row marginBottom={"1.5rem"}>
+      <Row $gap={20} $flex="1 0 0 ">
+        <Column $flex="1 0 0" $maxWidth={600}>
+          <Row $marginBottom="1.5rem">
             <select
               value={lang}
               // @ts-ignore
@@ -479,12 +480,12 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
             }}
           />
         </Column>
-        <View flex="1 0 0">
+        <View $flex="1 0 0">
           <Row
-            justifyContent="flex-start"
-            marginBottom="1rem"
-            gap={12}
-            alignItems="center"
+            $justifyContent="flex-start"
+            $marginBottom="1rem"
+            $gap={12}
+            $alignItems="center"
           >
             <Text type="headline4">Preview</Text>
 
@@ -513,65 +514,54 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
             ></Button>
           </Row>
           <View
-            ref={refPreview}
-            padding="40px 40px 10px 40px"
-            minWidth={400}
-            backgroundColor={selectedTheme.background}
-            width="min-content"
+            $padding="40px 40px 10px 40px"
+            $minWidth={400}
+            $backgroundColor={selectedTheme.background}
+            $width="min-content"
             // @ts-ignore
             style={{ ...selectedTheme.cssVars }}
+            ref={refPreview}
           >
-            <View flex="0 0 0" width="max-content" margin="auto auto">
-              <p
-                style={{
-                  backgroundColor: "#24292e",
-                  margin: 0,
-                  padding: "15px 15px 0",
-                  display: "flex",
-                  gap: "8px",
-                  borderRadius: "6px 6px 0 0",
-                  alignItems: "center",
-                }}
+            <View $flex="0 0 0" $width="max-content" $margin="auto auto">
+              <$.p
+                $backgroundColor="#24292e"
+                $margin={0}
+                $padding="15px 15px 0"
+                $display="flex"
+                $gap="8px"
+                $borderRadius="6px 6px 0 0"
+                $alignItems="center"
               >
                 <Dot color="#ff5f56" />
                 <Dot color="#ffbd2d" />
                 <Dot color="#26c940" />
-                <span
-                  style={{
-                    color: " #a39d9d",
-                    fontSize: "12px",
-                  }}
-                >
+                <$.span $color="#a39d9d" $fontSize="12px">
                   {lang}
-                </span>
-              </p>
+                </$.span>
+              </$.p>
               <div
                 className={styles.code}
                 dangerouslySetInnerHTML={{ __html: preview }}
               ></div>
-              <p
-                style={{
-                  backgroundColor: "#24292e",
-                  margin: 0,
-                  padding: "10px 10px 0",
-                  display: "flex",
-                  gap: "8px",
-                  borderRadius: "0 0 6px 6px",
-                }}
-              ></p>
-              <p
-                style={{
-                  color: "rgba(0,0,0,0.2)",
-                  textAlign: "center",
-                  width: "100%",
-                  fontWeight: "bold",
-                  margin: "10px",
-                  fontSize: "12px",
-                  height: "10px",
-                }}
+              <$.p
+                $backgroundColor="#24292e"
+                $margin={0}
+                $padding="10px 10px 0"
+                $display="flex"
+                $gap="8px"
+                $borderRadius="0 0 6px 6px"
+              ></$.p>
+              <$.p
+                $color="rgba(0,0,0,0.2)"
+                $textAlign="center"
+                $width="100%"
+                $fontWeight="bold"
+                $margin="10px"
+                $fontSize="12px"
+                $height="10px"
               >
                 {showLogo ? "Shaku Snippet" : ""}
-              </p>
+              </$.p>
             </View>
           </View>
         </View>
@@ -582,15 +572,13 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
 
 function Dot({ color }: { color: string }) {
   return (
-    <span
-      style={{
-        backgroundColor: color,
-        width: "12px",
-        height: "12px",
-        display: "inline-block",
-        borderRadius: "15px",
-      }}
-    ></span>
+    <$.span
+      $backgroundColor={color}
+      $width="12px"
+      $height="12px"
+      $display="inline-block"
+      $borderRadius="15px"
+    ></$.span>
   );
 }
 
