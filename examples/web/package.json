@@ -16,14 +16,15 @@
     "@stefanprobst/remark-shiki": "^2.2.1",
     "@types/mdx": "^2.0.5",
     "copy-webpack-plugin": "^11.0.0",
+    "dom-to-image": "2.6.0",
+    "migacss": "^0.0.2",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "remark-shaku-code-annotate": "*",
-    "shiki": "^0.14.2",
     "shaku-ui": "*",
-    "dom-to-image": "2.6.0"
+    "shiki": "^0.14.2"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",

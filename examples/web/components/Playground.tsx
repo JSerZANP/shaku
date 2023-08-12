@@ -3,6 +3,7 @@
 import withShiki from "@stefanprobst/remark-shiki";
 
 import { Editor } from "@monaco-editor/react";
+import { $ } from "migacss";
 import { useCallback, useEffect, useState } from "react";
 import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
@@ -204,12 +205,12 @@ export function Playground({ code: _code }: { code?: string }) {
       <View>
         <Row alignItems="center" justifyContent="space-between" gap={20}>
           <Text type="headline1">Shaku Playground</Text>
-          <a href="/snippet" style={{ textDecoration: "none" }}>
+          <$.a href="/snippet" $textDecoration="none">
             <Text type="headline5" color="#dc0bf0">
               <BsStars />
               Shaku Snippet →
             </Text>
-          </a>
+          </$.a>
         </Row>
         <Text type="body">
           <a href="https://github.com/JSerZANP/shaku/tree/main" target="_blank">

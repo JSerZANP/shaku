@@ -1,3 +1,4 @@
+import { $ } from "migacss";
 import {
   CSSProperties,
   ReactNode,
@@ -7,7 +8,6 @@ import {
   useRef,
   useState,
 } from "react";
-
 type TextType =
   | "headline1"
   | "headline2"
@@ -64,9 +64,9 @@ export function Column({
   gap?: CSSProperties["gap"];
 }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", ...rest }}>
+    <$.div style={{ display: "flex", flexDirection: "column", ...rest }}>
       {children}
-    </div>
+    </$.div>
   );
 }
 
@@ -119,24 +119,21 @@ export function Button({
   const refMouseOut = useEvent("mouseleave", onMouseOut);
   const ref = mergeRefs(refMouseEnter, refMouseOut);
   return (
-    <button
+    <$.button
       ref={ref}
       onClick={onClick}
-      style={{
-        display: "inline-flex",
-        gap: "5px",
-        alignItems: "ceter",
-        backgroundColor: "transparent",
-        padding: "6px 10px",
-        borderRadius: "5px",
-        fontSize: "16px",
-        border: hovered ? "1px solid #555" : "1px solid #eee",
-        ...rest,
-      }}
+      $display="inline-flex"
+      $gap="5px"
+      $alignItems="center"
+      $backgroundColor="transparent"
+      $padding="6px 10px"
+      $borderRadius="5px"
+      $fontSize="16px"
+      $border={hovered ? "1px solid #555" : "1px solid #eee"}
       {...rest}
     >
       {icon} {label}
-    </button>
+    </$.button>
   );
 }
 
@@ -153,47 +150,49 @@ export const View = forwardRef(function View(
 
 function Headline1({ children, ...rest }: BaseProps) {
   return (
-    <h1 style={{ fontSize: "32px", fontWeight: 700, lineHeight: 1.5, ...rest }}>
+    <$.h1 $fontSize={"32px"} $fontWeight={700} $lineHeight={1.5} {...rest}>
       {children}
-    </h1>
+    </$.h1>
   );
 }
 
 function Headline2({ children, ...rest }: BaseProps) {
   return (
-    <h2 style={{ fontSize: "28px", fontWeight: 700, lineHeight: 1.5, ...rest }}>
+    <$.h2 $fontSize={"28px"} $fontWeight={700} $lineHeight={1.5} {...rest}>
       {children}
-    </h2>
+    </$.h2>
   );
 }
 
 function Headline3({ children, ...rest }: BaseProps) {
   return (
-    <h3 style={{ fontSize: "24px", fontWeight: 700, lineHeight: 1.5, ...rest }}>
+    <$.h3 $fontSize={"24px"} $fontWeight={700} $lineHeight={1.5} {...rest}>
       {children}
-    </h3>
+    </$.h3>
   );
 }
 
 function Headline4({ children, ...rest }: BaseProps) {
   return (
-    <h4 style={{ fontSize: "20px", fontWeight: 700, lineHeight: 1.5, ...rest }}>
+    <$.h4 $fontSize={"20px"} $fontWeight={700} $lineHeight={1.5} {...rest}>
       {children}
-    </h4>
+    </$.h4>
   );
 }
 
 function Headline5({ children, ...rest }: BaseProps) {
   return (
-    <h5 style={{ fontSize: "16px", fontWeight: 700, lineHeight: 1.5, ...rest }}>
+    <$.h5 $fontSize={"16px"} $fontWeight={700} $lineHeight={1.5} {...rest}>
       {children}
-    </h5>
+    </$.h5>
   );
 }
 
 function Body({ children, ...rest }: BaseProps) {
   return (
-    <p style={{ fontSize: "16px", lineHeight: 1.5, ...rest }}>{children}</p>
+    <$.p $fontSize={"16px"} $lineHeight={1.5} {...rest}>
+      {children}
+    </$.p>
   );
 }
 
