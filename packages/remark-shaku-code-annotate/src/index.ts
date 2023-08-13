@@ -442,6 +442,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   berry: {
     head: /^\s*#/,
   },
+  bicep: {
+    head: /^\s*\/\//,
+  },
   cobol: {
     head: /^\s*\*/,
   },

@@ -34,7 +34,7 @@ const ALL_LANGS = [
   "berry",
   // "be",
   "bibtex",
-  // "bicep",
+  "bicep",
   // "blade",
   "c",
   // "cadence",
@@ -300,7 +300,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("bibtex");
+  const [lang, setLang] = useState<shiki.Lang>("bicep");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -719,6 +719,13 @@ end
 % Another reference
 %    ^
 % [Hello!]
+`,
+  bicep: `
+// @dim
+// Define a storage
+    // ----
+// ^
+//[Hello!]
 `,
   asm: `
 ; @dim
