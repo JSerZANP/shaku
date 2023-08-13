@@ -155,7 +155,7 @@ const ALL_LANGS = [
   // "rel",
   // "riscv",
   // "rst",
-  // "ruby",
+  "ruby",
   // "rb",
   // "rust",
   // "rs",
@@ -717,6 +717,13 @@ variable <- 123
 #        --
 #        ^
 # [Hello World!]
+`,
+  ruby: `
+# @dim
+square = variable * variable 
+#        --------
+#        ^
+#   [Hello World!]
 `,
   python: `
 # @dim
