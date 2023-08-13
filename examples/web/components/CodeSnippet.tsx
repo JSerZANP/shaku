@@ -132,7 +132,7 @@ const ALL_LANGS = [
   // "ocaml",
   // "pascal",
   // "perl",
-  // "php",
+  "php",
   // "plsql",
   // "postcss",
   // "powerquery",
@@ -672,6 +672,16 @@ export default function Counter() {
     </button>
   );
 }`,
+  php: `
+// @dim
+<?php
+$variable = 10000;
+//          --
+//          ^
+// [Hello world!]
+// @dim
+?>
+`,
   python: `
 # @dim
 def greet(name):

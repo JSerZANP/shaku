@@ -326,7 +326,6 @@ function parseComment(
   // for some languages, we are not able to extract body from above logic
   // so we have to trim manually
   const trimmedBody = trimCommentBody(body, lang);
-  console.log(trimmedBody);
   return {
     offset: offset + body.length - trimmedBody.length,
     body: trimmedBody,

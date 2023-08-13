@@ -1,0 +1,10 @@
+```php annotate
+// @dim
+<?php
+$variable = 10000;
+//          --
+//          ^
+// [Hello world!]
+// @dim
+?>
+```
