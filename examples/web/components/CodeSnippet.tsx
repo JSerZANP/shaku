@@ -93,9 +93,9 @@ const ALL_LANGS = [
   "hlsl",
   "html",
   // "http",
-  // "imba",
-  // "ini",
-  // "properties",
+  "imba",
+  "ini",
+  "properties",
   "java",
   "javascript",
   // "jinja-html",
@@ -303,7 +303,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("html");
+  const [lang, setLang] = useState<shiki.Lang>("properties");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);

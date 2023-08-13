@@ -482,6 +482,28 @@ export default function Counter() {
     </button>
   );
 }`,
+  imba: `
+# @dim
+# coffee
+# ------
+ # ^
+# [Hello!]
+`,
+  ini: `
+; @dim
+[section1]
+; coffee
+; ------
+; ^
+; [Hello!]
+`,
+  properties: `
+# @dim
+# coffee
+# ------
+  # ^
+# [Hello!]
+`,
   julia: `
 # @dim
 variable = 1
