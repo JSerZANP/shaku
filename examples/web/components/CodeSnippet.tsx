@@ -88,7 +88,7 @@ const ALL_LANGS = [
   "haskell",
   // "hs",
   "hcl",
-  // "hlsl",
+  "hlsl",
   // "html",
   // "http",
   // "imba",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("hcl");
+  const [lang, setLang] = useState<shiki.Lang>("hlsl");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -974,6 +974,13 @@ type Query {
 # ------
  # ^
 # [Hello!]
+  `,
+  hlsl: `
+// @dim
+// coffee
+// ------
+  // ^
+// [Hello!]
   `,
   cpp: `
 // @dim

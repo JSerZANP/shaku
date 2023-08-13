@@ -1,0 +1,7 @@
+```hlsl annotate
+// @dim
+// coffee
+// ------
+  // ^
+// [Hello!]
+```
