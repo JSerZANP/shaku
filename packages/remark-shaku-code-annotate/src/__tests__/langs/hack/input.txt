@@ -1,0 +1,9 @@
+```hack annotate
+<?hh
+// @dim
+    echo "hello";
+//  ----
+//   ^
+// [Hello!]  
+?>
+```
