@@ -38,9 +38,9 @@ const ALL_LANGS = [
   "bicep",
   "blade",
   "c",
-  // "cadence",
+  "cadence",
   // "cdc",
-  // "clarity",
+  "clarity",
   // "clojure",
   // "clj",
   // "cmake",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("cadence");
+  const [lang, setLang] = useState<shiki.Lang>("clarity");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -742,6 +742,13 @@ fun add(a: Int, b: Int): Int {
   //[Hello!]
   return a + b
 }
+`,
+  clarity: `
+;;   @dim
+;; This is a single-line comment 
+;; ---
+;; ^
+;;[Hello!]
 `,
   asm: `
 ; @dim

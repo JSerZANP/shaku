@@ -445,6 +445,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   bicep: {
     head: /^\s*\/\//,
   },
+  clarity: {
+    head: /^\s*;;/,
+  },
   cobol: {
     head: /^\s*\*/,
   },
