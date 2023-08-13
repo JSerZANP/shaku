@@ -306,7 +306,7 @@ function parseComment(
   // special case for some languages that one comment has multiple tokens
   // TODO: maybe we should give up the "clever" approach because it is not solid
   // rather we can just try to trim for each lang?
-  if (lang === "ada" || lang === "berry") {
+  if (lang === "ada" || lang === "berry" || lang === "elm") {
     body = line
       .slice(shouldTreatFirstTokenOffset ? 1 : 0)
       .map((token) => token.content)
@@ -456,6 +456,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   },
   d: {
     head: /^\s*\/\//,
+  },
+  elm: {
+    head: /^\s*--/,
   },
   dart: {
     head: /^\s*\/\//,
