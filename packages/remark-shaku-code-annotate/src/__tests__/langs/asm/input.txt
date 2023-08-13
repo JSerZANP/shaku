@@ -1,8 +1,0 @@
-```asm annotate
-; @dim
-section .data
-    message db 'Hello, World!', 0
-;   -------
-;     ^
-; [Hello World!!!]
-```

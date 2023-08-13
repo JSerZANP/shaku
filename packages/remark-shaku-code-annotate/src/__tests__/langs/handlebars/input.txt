@@ -1,7 +1,0 @@
-```handlebars annotate
-{{!-- @dim --}}
-<h1>{{pageTitle}}</h1>
-{{!-- --------- --}}
-{{!-- ^ --}}
-{{!-- [Hello World!] --}}
-```

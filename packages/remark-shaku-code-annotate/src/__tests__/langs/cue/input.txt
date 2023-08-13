@@ -1,7 +1,0 @@
-```cue annotate
-// @dim
-// This is a configuration
-//   -----
-//    ^
-// [Hello!]
-```

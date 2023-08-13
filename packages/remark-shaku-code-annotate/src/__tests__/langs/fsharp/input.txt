@@ -1,7 +1,0 @@
-```fsharp annotate
-// @dim
-// coffee
-// ------
-  // ^
-// [Hello!]
-```

@@ -1,7 +1,0 @@
-```glsl annotate
-// @dim
-// coffee
-// ------
-  // ^
-// [Hello!]
-```

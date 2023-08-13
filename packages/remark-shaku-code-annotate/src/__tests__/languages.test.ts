@@ -3,6 +3,7 @@ import html from "remark-html";
 import { remark } from "remark";
 import { remarkShakuCodeAnnotate } from "../index";
 import fs from "fs";
+import { defaultCode } from "../defaultCode";
 
 async function process(md: string) {
   const processor = remark()
@@ -15,19 +16,19 @@ async function process(md: string) {
 }
 
 test("should support popular languages", async () => {
-  const dirs = fs
-    .readdirSync(__dirname + "/langs", { withFileTypes: true })
-    .filter((file) => file.isDirectory());
-  for (const dir of dirs) {
-    const input = fs.readFileSync(
-      __dirname + "/langs/" + dir.name + "/input.txt",
-      { encoding: "utf-8" }
-    );
-
-    const processed = (await process(input)).value;
-    console.log("checking lang:" + dir.name);
+  for (const [lang, code] of Object.entries(defaultCode)) {
+    const processed = (
+      await process(
+        `
+\`\`\`${lang} annotate
+${code}
+\`\`\`
+`
+      )
+    ).value;
+    console.log("checking lang:" + lang);
     expect(String(processed)).toMatchFileSnapshot(
-      __dirname + "/langs/" + dir.name + "/output.txt"
+      __dirname + "/langs/" + lang + "/output.txt"
     );
   }
 });

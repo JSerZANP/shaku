@@ -1,8 +1,0 @@
-```ara annotate
-// @dim
-$foo = true;
-$foo = true;
-//     ----
-//      ^
-// [Hello!]
-```

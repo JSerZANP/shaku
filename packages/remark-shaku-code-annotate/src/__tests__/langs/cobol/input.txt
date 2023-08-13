@@ -1,8 +1,0 @@
-```cobol annotate
-* @dim
-ENVIRONMENT DIVISION.
-DATA DIVISION.
-*    --------
-*   ^
-* [Hello World!]
-```

@@ -1,8 +1,0 @@
-```graphql annotate
-# @dim
-type Query {
-  #  -----
-  #    ^
-# [Hello world!]
-}
-```

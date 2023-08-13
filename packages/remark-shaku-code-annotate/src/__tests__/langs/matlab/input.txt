@@ -1,9 +1,0 @@
-```matlab annotate
-% @dim
-% This is a single-line comment in MATLAB.
-
-variable = 10; 
-%          --
-  %        ^
-  % [Hello World!]
-```

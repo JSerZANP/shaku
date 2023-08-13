@@ -1,7 +1,0 @@
-```haskell annotate
--- @dim
--- This is a single-line
---      ---
---      ^
--- [Hello World!]
-```

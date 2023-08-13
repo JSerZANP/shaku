@@ -1,7 +1,0 @@
-```git-commit annotate
-# @dim
-# coffee
-# ------
-# ^
-# [Hello!]
-```

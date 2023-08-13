@@ -1,7 +1,0 @@
-```erlang annotate
-%%      @dim
--export([add/2]).
-%%      -------
-%%      ^
-%% [Hello World!]
-```

@@ -518,3 +518,5 @@ function trimCommentBody(body: string, lang?: string | null) {
 function assertsNever(data: never) {
   throw new Error("expected never but got: " + data);
 }
+
+export { defaultCode } from "./defaultCode";

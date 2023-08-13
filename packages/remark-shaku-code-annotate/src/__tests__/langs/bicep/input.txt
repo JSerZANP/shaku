@@ -1,7 +1,0 @@
-```bicep annotate
-// @dim
-// Define a storage
-    // ----
-// ^
-//[Hello!]
-```

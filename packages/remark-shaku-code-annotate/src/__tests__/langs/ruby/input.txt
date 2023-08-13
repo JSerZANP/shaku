@@ -1,7 +1,0 @@
-```ruby annotate
-# @dim
-square = variable * variable 
-#        --------
-#        ^
-#   [Hello World!]
-```
