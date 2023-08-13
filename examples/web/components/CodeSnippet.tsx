@@ -47,9 +47,9 @@ const ALL_LANGS = [
   "cobol",
   // "codeql",
   // "ql",
-  // "coffee",
+  "coffee",
   "cpp",
-  // "crystal",
+  "crystal",
   "c#",
   // "cs",
   // "css",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("coffee");
+  const [lang, setLang] = useState<shiki.Lang>("crystal");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -798,6 +798,12 @@ DATA DIVISION.
 # @dim
 # coffee
 #  ^
+# [Hello!]
+`,
+  crystal: `
+# @dim
+# coffee
+  # ^
 # [Hello!]
 `,
   cpp: `
