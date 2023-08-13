@@ -1,0 +1,12 @@
+```java annotate
+// @dim
+public class CommentExample {
+  public static void main(String[] args) {
+    int x = 10;
+//  ----------
+//       ^
+//[Hello world!]
+    int square = x * x;
+  }
+}
+```

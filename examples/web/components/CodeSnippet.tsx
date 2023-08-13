@@ -95,7 +95,7 @@ const ALL_LANGS = [
   // "imba",
   // "ini",
   // "properties",
-  // "java",
+  "java",
   "javascript",
   // "jinja-html",
   // "jison",
@@ -607,6 +607,18 @@ int main() {
   //    ^
   // [Hello World!]
   return 0;
+}
+`,
+  java: `
+// @dim
+public class CommentExample {
+  public static void main(String[] args) {
+    int x = 10;
+//  ----------
+//       ^
+//[Hello world!]
+    int square = x * x;
+  }
 }
 `,
   javascript: `// @dim
