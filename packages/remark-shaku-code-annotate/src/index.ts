@@ -454,6 +454,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   cobol: {
     head: /^\s*\*/,
   },
+  d: {
+    head: /^\s*\/\//,
+  },
   rust: {
     head: /^\s*\/\//,
   },
