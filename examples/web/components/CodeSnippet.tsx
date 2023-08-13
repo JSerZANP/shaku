@@ -181,7 +181,7 @@ const ALL_LANGS = [
   // "stylus",
   // "styl",
   // "svelte",
-  // "swift",
+  "swift",
   // "system-verilog",
   // "tasl",
   // "tcl",
@@ -744,6 +744,15 @@ CREATE TABLE Customers (
   --     [Hello World!]
     LastName VARCHAR(50)
 );
+`,
+  swift: `
+// @dim
+import Foundation
+
+var variable = 10 
+//           ----
+//            ^
+// [Hello world!]
 `,
   vb: `
 Imports System

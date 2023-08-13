@@ -1,0 +1,9 @@
+```swift annotate
+// @dim
+import Foundation
+
+var variable = 10 
+//           ----
+//            ^
+// [Hello world!]
+```
