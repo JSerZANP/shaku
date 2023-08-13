@@ -27,7 +27,7 @@ const ALL_LANGS = [
   "applescript",
   "ara",
   "asm",
-  // "astro",
+  "astro",
   // "awk",
   // "ballerina",
   // "bat",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("ara");
+  const [lang, setLang] = useState<shiki.Lang>("astro");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -669,6 +669,17 @@ $foo = true;
 //     ----
 //      ^
 // [Hello!]
+`,
+  astro: `
+<!-- @dim -->
+<div>Hello World!</div>
+{/* ^ */}
+{/*[Hello!] */}
+
+<div>Hello World!</div>
+<!-- ----------- -->
+<!-- ^ -->
+<!--[Hello!] -->
 `,
   asm: `
 ; @dim

@@ -393,6 +393,18 @@ function shouldBeTreatedAsWhitespace(token: IThemedToken) {
                 "punctuation.section.embedded.begin"
               ) ||
               scope.scopeName.startsWith("punctuation.section.embedded.end")
+          )) ||
+        (explanation.scopes.some((scope) =>
+          scope.scopeName.startsWith("source.astro")
+        ) &&
+          explanation.scopes.some(
+            (scope) =>
+              scope.scopeName.startsWith(
+                "punctuation.section.embedded.begin.astro"
+              ) ||
+              scope.scopeName.startsWith(
+                "punctuation.section.embedded.end.astro"
+              )
           ))
       );
     })

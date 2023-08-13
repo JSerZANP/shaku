@@ -1,0 +1,11 @@
+```astro annotate
+<!-- @dim -->
+<div>Hello World!</div>
+{/* ^ */}
+{/*[Hello!] */}
+
+<div>Hello World!</div>
+<!-- ----------- -->
+<!-- ^ -->
+<!--[Hello!] -->
+```
