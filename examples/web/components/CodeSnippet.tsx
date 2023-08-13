@@ -25,7 +25,7 @@ const ALL_LANGS = [
   "apex",
   "apl",
   "applescript",
-  // "ara",
+  "ara",
   "asm",
   // "astro",
   // "awk",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("applescript");
+  const [lang, setLang] = useState<shiki.Lang>("ara");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -661,6 +661,14 @@ display dialog "Hello, World!"
 --      ------
 --         ^
 -- [Hello World!]
+`,
+  ara: `
+// @dim
+$foo = true;
+$foo = true;
+//     ----
+//      ^
+// [Hello!]
 `,
   asm: `
 ; @dim
