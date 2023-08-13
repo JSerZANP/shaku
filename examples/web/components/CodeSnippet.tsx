@@ -20,7 +20,7 @@ import useDebouncedCallback from "./useDebouncedCallback";
 const ALL_LANGS = [
   "abap",
   "actionscript-3",
-  // "ada",
+  "ada",
   // "apache",
   // "apex",
   // "apl",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("actionscript-3");
+  const [lang, setLang] = useState<shiki.Lang>("ada");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -605,6 +605,16 @@ package {
     }
   }
 }
+`,
+  ada: `
+-- @dim
+with Ada.Text_IO;
+
+procedure Comments_Example is
+    -- This is a single-line comment
+    --           -----------
+    --              ^
+    --  [Hello World!]
 `,
   asm: `
 ; @dim

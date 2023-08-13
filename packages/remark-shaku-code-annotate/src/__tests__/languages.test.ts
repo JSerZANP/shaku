@@ -28,6 +28,9 @@ test("should support popular languages", async () => {
       { encoding: "utf-8" }
     );
     const processed = (await process(input)).value;
-    expect(processed).toEqual(output);
+    const isEqual = processed == output;
+    if (!isEqual) {
+      throw "snapshot doesn't match for lang: " + dir.name;
+    }
   }
 });

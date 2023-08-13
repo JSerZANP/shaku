@@ -302,30 +302,45 @@ function parseComment(
   const shouldTreatFirstTokenOffset = shouldBeTreatedAsWhitespace(line[0]);
   let offset = shouldTreatFirstTokenOffset ? line[0].content.length : 0;
   let body = "";
-  const tokenWithBody = shouldTreatFirstTokenOffset ? line[1] : line[0];
-  if (tokenWithBody != null) {
-    const explanations = tokenWithBody.explanation ?? [];
 
-    for (let i = 0; i < explanations.length; i++) {
-      const explanation = explanations[i];
-      // find the first explanation that is not element tag
-      if (
-        explanation.scopes.every(
-          (scope) =>
-            !scope.scopeName.startsWith("punctuation.definition") &&
-            !isWhitespace(explanation.content)
-        )
-      ) {
-        body = explanation.content;
-        break;
+  // special case for some languages that one comment has multiple tokens
+  // TODO: maybe we should give up the "clever" approach because it is not solid
+  // rather we can just try to trim for each lang?
+  if (lang === "ada") {
+    body = line
+      .slice(shouldTreatFirstTokenOffset ? 1 : 0)
+      .map((token) => token.content)
+      .join("");
+  } else {
+    const tokenWithBody = shouldTreatFirstTokenOffset ? line[1] : line[0];
+
+    if (tokenWithBody != null) {
+      const explanations = tokenWithBody.explanation ?? [];
+
+      for (let i = 0; i < explanations.length; i++) {
+        const explanation = explanations[i];
+        // find the first explanation that is not element tag
+        if (
+          explanation.scopes.every(
+            (scope) =>
+              !scope.scopeName.startsWith("punctuation.definition") &&
+              !isWhitespace(explanation.content)
+          )
+        ) {
+          body = explanation.content;
+          break;
+        }
+        // for other none tokens, treat them as offset
+        offset += explanation.content.length;
       }
-      // for other none tokens, treat them as offset
-      offset += explanation.content.length;
     }
   }
   // for some languages, we are not able to extract body from above logic
   // so we have to trim manually
+  console.log(body);
   const trimmedBody = trimCommentBody(body, lang);
+  console.log(trimmedBody);
+
   return {
     offset: offset + body.length - trimmedBody.length,
     body: trimmedBody,
@@ -390,6 +405,9 @@ function shouldBeTreatedAsWhitespace(token: IThemedToken) {
 const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   abap: {
     head: /^\s*\*/,
+  },
+  ada: {
+    head: /^\-\-/,
   },
   "actionscript-3": {
     head: /^\s*\/\//,
