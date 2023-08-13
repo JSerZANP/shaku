@@ -504,6 +504,44 @@ export default function Counter() {
   # ^
 # [Hello!]
 `,
+  jison: `
+// @dim
+// coffee
+// ------
+  // ^
+// [Hello!]
+`,
+  json: `
+{
+  "name": "John",
+  "age": 30,
+  "isStudent": false,
+}
+`,
+  json5: `
+{
+  // This is a JSON5 object with comments
+  "name": "John",
+// @dim
+  "age": 30,
+  "isStudent": false,
+// ---------
+// ^
+//[Hello World!]
+}
+`,
+  jsonc: `
+{
+  // This is a JSON5 object with comments
+  "name": "John",
+// @dim
+  "age": 30,
+  "isStudent": false,
+// ---------
+// ^
+//[Hello World!]
+}
+`,
   julia: `
 # @dim
 variable = 1

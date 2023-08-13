@@ -491,6 +491,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   hlsl: {
     head: /^\s*\/\//,
   },
+  json5: {
+    head: /^\s*\/\//,
+  },
   rust: {
     head: /^\s*\/\//,
   },
