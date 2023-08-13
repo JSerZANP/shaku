@@ -44,7 +44,7 @@ const ALL_LANGS = [
   // "clojure",
   // "clj",
   // "cmake",
-  // "cobol",
+  "cobol",
   // "codeql",
   // "ql",
   // "coffee",
@@ -120,7 +120,7 @@ const ALL_LANGS = [
   // "markdown",
   // "md",
   // "marko",
-  // "matlab",
+  "matlab",
   // "mdx",
   // "mermaid",
   // "nginx",
@@ -605,6 +605,14 @@ int main() {
     return 0;
 }
 `,
+  cobol: `
+* @dim
+ENVIRONMENT DIVISION.
+DATA DIVISION.
+*    --------
+*   ^
+* [Hello World!]
+`,
   cpp: `
 // @dim
 #include <iostream>
@@ -683,6 +691,15 @@ export default function Counter() {
     </button>
   );
 }`,
+  matlab: `
+% @dim
+% This is a single-line comment in MATLAB.
+
+variable = 10; 
+%          --
+  %        ^
+  % [Hello World!]
+`,
   php: `
 // @dim
 <?php
