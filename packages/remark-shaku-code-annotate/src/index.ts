@@ -433,6 +433,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   awk: {
     head: /^\s*#/,
   },
+  ballerina: {
+    head: /^\s*\/\//,
+  },
   cobol: {
     head: /^\s*\*/,
   },

@@ -29,7 +29,7 @@ const ALL_LANGS = [
   "asm",
   "astro",
   "awk",
-  // "ballerina",
+  "ballerina",
   // "bat",
   // "batch",
   // "berry",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("awk");
+  const [lang, setLang] = useState<shiki.Lang>("ballerina");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -688,6 +688,17 @@ sum = 1
 #    --
 #    ^
 #[Hello!]
+`,
+  ballerina: `
+//@dim
+import ballerina/io;
+
+public function main() {
+  string message = "Hello, Ballerina!";
+  //     -------
+  //       ^
+  // [Hello!]
+}
 `,
   asm: `
 ; @dim

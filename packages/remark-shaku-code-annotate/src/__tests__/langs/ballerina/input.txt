@@ -1,0 +1,11 @@
+```ballerina annotate
+//@dim
+import ballerina/io;
+
+public function main() {
+  string message = "Hello, Ballerina!";
+  //     -------
+  //       ^
+  // [Hello!]
+}
+```
