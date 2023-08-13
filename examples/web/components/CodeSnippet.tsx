@@ -193,7 +193,7 @@ const ALL_LANGS = [
   // "typescript",
   // "ts",
   // "v",
-  // "vb",
+  "vb",
   // "cmd",
   // "verilog",
   // "vhdl",
@@ -670,5 +670,20 @@ def greet(name):
   # -----
   #   ^
   # [Hello world!]
+`,
+  vb: `
+Imports System
+' @dim
+Namespace CommentExample
+    Class Program
+        ' @highlight
+        Sub Main()
+            Dim x As Integer = 10
+        '   -----
+        '    ^
+        ' [Hello world!]
+        End Sub
+    End Class
+End Namespace
 `,
 };
