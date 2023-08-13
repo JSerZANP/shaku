@@ -28,6 +28,7 @@
   "license": "MIT",
   "scripts": {
     "test": "vitest",
+    "update-snapshot": "vitest -u",
     "build": "tsup src/index.ts --format esm --dts",
     "dev": "npm run build -- --watch"
   },

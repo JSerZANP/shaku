@@ -23,15 +23,11 @@ test("should support popular languages", async () => {
       __dirname + "/langs/" + dir.name + "/input.txt",
       { encoding: "utf-8" }
     );
-    const output = fs.readFileSync(
-      __dirname + "/langs/" + dir.name + "/output.txt",
-      { encoding: "utf-8" }
-    );
+
     const processed = (await process(input)).value;
-    const isEqual = processed == output;
-    if (!isEqual) {
-      console.error("snapshot doesn't match for lang: " + dir.name);
-    }
-    expect(processed).toEqual(output);
+    console.log("checking lang:" + dir.name);
+    expect(String(processed)).toMatchFileSnapshot(
+      __dirname + "/langs/" + dir.name + "/output.txt"
+    );
   }
 });
