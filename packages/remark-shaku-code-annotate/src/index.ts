@@ -49,7 +49,7 @@ export const remarkShakuCodeAnnotate = (
         // generate the html from the tokens
         let html = `<pre class="shiki ${theme.name}" style="color:${foregroundColor};background-color:${backgroundColor}">`;
         html += `<div class="code-container"><code>`;
-        const parsedLines = parseLines(lines);
+        const parsedLines = parseLines(lines, node.lang);
         const hasFocus = hasShakuDirectiveFocus(parsedLines);
         let shouldHighlighNextSourceLine = false;
         let shouldDimNextSourceLine = false;
@@ -261,7 +261,7 @@ function escapeHtml(html: string) {
 
 /**
  * different kinds of comments have different interpretations
- * Below are some common examples, these are not exaustive
+ * Below are some common examples, these are not exhaustive
  * I'm not sure if there are other cases for different languages
  *
  * "// aaa" => [{content: "// aaa", explanation: [{content: '//'}, {content: ' aaa'}]}]
@@ -281,7 +281,10 @@ function escapeHtml(html: string) {
  * 4. the first meaningful token has the comment body
  *   - find the first explanation that is not `punctuation.definition`.
  */
-function parseComment(line: IThemedToken[]): null | {
+function parseComment(
+  line: IThemedToken[],
+  lang?: null | string
+): null | {
   offset: number;
   body: string;
 } {
@@ -320,14 +323,18 @@ function parseComment(line: IThemedToken[]): null | {
       offset += explanation.content.length;
     }
   }
+  // for some languages, we are not able to extract body from above logic
+  // so we have to trim manually
+  const trimmedBody = trimCommentBody(body, lang);
+  console.log(trimmedBody);
   return {
-    offset,
-    body,
+    offset: offset + body.length - trimmedBody.length,
+    body: trimmedBody,
   };
 }
-function parseLines(lines: IThemedToken[][]) {
+function parseLines(lines: IThemedToken[][], lang?: string | null) {
   return lines.map((line) => {
-    const parsedComment = parseComment(line);
+    const parsedComment = parseComment(line, lang);
     if (parsedComment != null) {
       const { body, offset } = parsedComment;
       const shakuLine = parseLine(body);
@@ -379,6 +386,26 @@ function shouldBeTreatedAsWhitespace(token: IThemedToken) {
     return true;
   }
   return false;
+}
+
+const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
+  asm: {
+    head: /^\s*;/,
+  },
+};
+
+function trimCommentBody(body: string, lang?: string | null) {
+  let trimmedBody = body;
+  if (lang != null && lang in commentMarkers) {
+    const { head, tail } = commentMarkers[lang];
+    if (head != null) {
+      trimmedBody = trimmedBody.replace(head, "");
+    }
+    if (tail != null) {
+      trimmedBody = trimmedBody.replace(tail, "");
+    }
+  }
+  return trimmedBody;
 }
 
 function assertsNever(data: never) {

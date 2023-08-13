@@ -26,7 +26,7 @@ const ALL_LANGS = [
   // "apl",
   // "applescript",
   // "ara",
-  // "asm",
+  "asm",
   // "astro",
   // "awk",
   // "ballerina",
@@ -584,6 +584,15 @@ function ThemePicker({
 }
 
 const defaultCode = {
+  asm: `
+; @dim
+section .data
+    message db 'Hello, World!', 0
+;   -------
+;     ^
+; [Hello World!]
+  
+`,
   c: `
 // @dim
 #include <stdio.h>
