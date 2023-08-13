@@ -64,7 +64,7 @@ const ALL_LANGS = [
   "elixir",
   "elm",
   "erb",
-  // "erlang",
+  "erlang",
   // "erl",
   // "fish",
   // "fsharp",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("erb");
+  const [lang, setLang] = useState<shiki.Lang>("erlang");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -875,6 +875,14 @@ FROM node:14
 <%#            --- %>
 <%#     ^ %>
 <%# [Hello World!] %>
+`,
+  erlang: `
+%%      @dim
+-export([add/2]).
+%%      -------
+%%      ^
+%% [Hello World!]
+
 `,
   cpp: `
 // @dim
