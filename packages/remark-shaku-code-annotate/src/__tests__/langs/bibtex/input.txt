@@ -1,0 +1,6 @@
+```bibtex annotate
+% @dim
+% Another reference
+%    ^
+% [Hello!]
+```
