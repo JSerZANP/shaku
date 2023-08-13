@@ -1,0 +1,7 @@
+```dart annotate
+// @dim
+// This is a configuration
+//   -----
+//    ^
+// [Hello!]
+```

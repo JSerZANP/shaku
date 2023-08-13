@@ -55,7 +55,7 @@ const ALL_LANGS = [
   "css",
   "cue",
   "d",
-  // "dart",
+  "dart",
   // "dax",
   // "diff",
   // "docker",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("d");
+  const [lang, setLang] = useState<shiki.Lang>("dart");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -822,6 +822,13 @@ DATA DIVISION.
 // [Hello!]
 `,
   d: `
+// @dim
+// This is a configuration
+//   -----
+//    ^
+// [Hello!]
+`,
+  dart: `
 // @dim
 // This is a configuration
 //   -----
