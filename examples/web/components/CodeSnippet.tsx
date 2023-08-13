@@ -63,7 +63,7 @@ const ALL_LANGS = [
   "dream-maker",
   "elixir",
   "elm",
-  // "erb",
+  "erb",
   // "erlang",
   // "erl",
   // "fish",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("elm");
+  const [lang, setLang] = useState<shiki.Lang>("erb");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -869,6 +869,12 @@ FROM node:14
 -- ------
   -- ^
 -- [Hello!]
+`,
+  erb: `
+<h1>Welcome to our website!</h1>
+<%#            --- %>
+<%#     ^ %>
+<%# [Hello World!] %>
 `,
   cpp: `
 // @dim
