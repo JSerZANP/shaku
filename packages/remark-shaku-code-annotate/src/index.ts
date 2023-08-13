@@ -466,6 +466,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   erlang: {
     head: /^\s*%/,
   },
+  fsharp: {
+    head: /^\s*\/\//,
+  },
   rust: {
     head: /^\s*\/\//,
   },
