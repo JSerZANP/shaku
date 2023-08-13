@@ -1,0 +1,7 @@
+```groovy annotate
+// @dim
+// coffee
+// ------
+  // ^
+// [Hello!]
+```
