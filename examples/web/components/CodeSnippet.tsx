@@ -78,7 +78,7 @@ const ALL_LANGS = [
   // "git-rebase",
   // "glsl",
   // "gnuplot",
-  // "go",
+  "go",
   // "graphql",
   // "groovy",
   // "hack",
@@ -634,6 +634,17 @@ namespace CommentExample
     }
 
   }
+}
+`,
+  go: `
+// @dim
+package main
+import "fmt"
+func main() {
+  variable := 10
+//--------
+//      ^
+//[Hello World!]
 }
 `,
   java: `

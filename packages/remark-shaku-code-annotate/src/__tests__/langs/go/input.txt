@@ -1,0 +1,11 @@
+```go annotate
+// @dim
+package main
+import "fmt"
+func main() {
+  variable := 10
+//--------
+//      ^
+//[Hello World!]
+}
+```
