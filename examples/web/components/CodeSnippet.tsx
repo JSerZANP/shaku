@@ -97,7 +97,6 @@ const ALL_LANGS = [
   // "properties",
   // "java",
   "javascript",
-  // "js",
   // "jinja-html",
   // "jison",
   // "json",
@@ -148,8 +147,7 @@ const ALL_LANGS = [
   // "jade",
   // "puppet",
   // "purescript",
-  // "python",
-  // "py",
+  "python",
   // "r",
   // "raku",
   // "perl6",
@@ -306,6 +304,9 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   );
   const [lang, setLang] = useState<shiki.Lang>("javascript");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
+  useEffect(() => {
+    setCode(defaultCode[lang]);
+  }, [lang]);
   const [preview, setPreview] = useState("");
   const [showLogo, setShowLogo] = useState(true);
 
@@ -608,4 +609,12 @@ export default function Counter() {
     </button>
   );
 }`,
+  python: `
+# @dim
+def greet(name):
+    print(f"Hello, {name}!")
+  # -----
+  #   ^
+  # [Hello world!]
+`,
 };
