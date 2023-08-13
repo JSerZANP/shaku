@@ -391,6 +391,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   abap: {
     head: /^\s*\*/,
   },
+  "actionscript-3": {
+    head: /^\s*\/\//,
+  },
   asm: {
     head: /^\s*;/,
   },

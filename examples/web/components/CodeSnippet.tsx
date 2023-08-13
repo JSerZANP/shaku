@@ -19,7 +19,7 @@ import useDebouncedCallback from "./useDebouncedCallback";
 
 const ALL_LANGS = [
   "abap",
-  // "actionscript-3",
+  "actionscript-3",
   // "ada",
   // "apache",
   // "apex",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("abap");
+  const [lang, setLang] = useState<shiki.Lang>("actionscript-3");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -591,6 +591,20 @@ REPORT Z_SAMPLE_REPORT.
 *      ---------------
 *           ^
 *   [Hello World!]
+`,
+  "actionscript-3": `
+package {
+  // @dim
+  import flash.display.Sprite;
+
+  public class CommentExample extends Sprite {
+    public function CommentExample() {
+  //       --------
+  //           ^
+  // [Hello World!]
+    }
+  }
+}
 `,
   asm: `
 ; @dim
