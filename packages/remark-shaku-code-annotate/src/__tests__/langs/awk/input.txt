@@ -1,0 +1,8 @@
+```awk annotate
+# @dim
+sum = 0
+sum = 1
+#    --
+#    ^
+#[Hello!]
+```

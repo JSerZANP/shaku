@@ -28,7 +28,7 @@ const ALL_LANGS = [
   "ara",
   "asm",
   "astro",
-  // "awk",
+  "awk",
   // "ballerina",
   // "bat",
   // "batch",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("astro");
+  const [lang, setLang] = useState<shiki.Lang>("awk");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -680,6 +680,14 @@ $foo = true;
 <!-- ----------- -->
 <!-- ^ -->
 <!--[Hello!] -->
+`,
+  awk: `
+# @dim
+sum = 0
+sum = 1
+#    --
+#    ^
+#[Hello!]
 `,
   asm: `
 ; @dim
