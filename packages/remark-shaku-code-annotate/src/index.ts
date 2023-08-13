@@ -469,6 +469,12 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   fsharp: {
     head: /^\s*\/\//,
   },
+  "f#": {
+    head: /^\s*\/\//,
+  },
+  "git-commit": {
+    head: /^\s*#/,
+  },
   rust: {
     head: /^\s*\/\//,
   },

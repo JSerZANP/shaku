@@ -67,14 +67,14 @@ const ALL_LANGS = [
   "erlang",
   // "erl",
   "fish",
-  "fsharp",
-  // "f#",
+  // "fsharp",
+  "f#",
   // "fs",
   // "gdresource",
   // "gdscript",
   // "gdshader",
   // "gherkin",
-  // "git-commit",
+  "git-commit",
   // "git-rebase",
   // "glsl",
   // "gnuplot",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("fsharp");
+  const [lang, setLang] = useState<shiki.Lang>("git-commit");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -890,13 +890,21 @@ FROM node:14
   # ^
 # [Hello!]
 `,
-  fsharp: `
+  "f#": `
 // @dim
 // coffee
 // ------
   // ^
 // [Hello!]
 `,
+  "git-commit": `
+# @dim
+# coffee
+# ------
+# ^
+# [Hello!]
+`,
+
   cpp: `
 // @dim
 #include <iostream>
