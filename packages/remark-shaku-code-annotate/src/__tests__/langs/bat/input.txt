@@ -1,0 +1,6 @@
+```bat annotate
+echo Batch Script Example
+REM  -----
+REM ^
+REM [Hello World!]
+```

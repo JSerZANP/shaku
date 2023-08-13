@@ -30,7 +30,7 @@ const ALL_LANGS = [
   "astro",
   "awk",
   "ballerina",
-  // "bat",
+  "bat",
   // "batch",
   // "berry",
   // "be",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("ballerina");
+  const [lang, setLang] = useState<shiki.Lang>("bat");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -699,6 +699,12 @@ public function main() {
   //       ^
   // [Hello!]
 }
+`,
+  bat: `
+echo Batch Script Example
+REM  -----
+REM ^
+REM [Hello World!]
 `,
   asm: `
 ; @dim

@@ -405,7 +405,10 @@ function shouldBeTreatedAsWhitespace(token: IThemedToken) {
               scope.scopeName.startsWith(
                 "punctuation.section.embedded.end.astro"
               )
-          ))
+          )) ||
+        explanation.scopes.some(
+          (scope) => scope.scopeName === "keyword.command.rem.batchfile"
+        )
       );
     })
   ) {
