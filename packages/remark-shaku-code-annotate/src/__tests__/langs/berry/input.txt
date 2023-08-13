@@ -1,0 +1,9 @@
+```berry annotate
+# @dim
+def func(x)
+  return x + 1.5
+  #      -----
+  #      ^
+  #[Hello!]
+end
+```

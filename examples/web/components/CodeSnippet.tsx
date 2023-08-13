@@ -31,7 +31,7 @@ const ALL_LANGS = [
   "awk",
   "ballerina",
   "batch",
-  // "berry",
+  "berry",
   // "be",
   // "bibtex",
   // "bicep",
@@ -300,7 +300,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("batch");
+  const [lang, setLang] = useState<shiki.Lang>("berry");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -704,6 +704,15 @@ echo Batch Script Example
 REM  -----
 REM ^
 REM [Hello World!]
+`,
+  berry: `
+# @dim
+def func(x)
+  return x + 1.5
+  #      -----
+  #      ^
+  #[Hello!]
+end
 `,
   asm: `
 ; @dim
