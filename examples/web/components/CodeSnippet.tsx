@@ -52,7 +52,7 @@ const ALL_LANGS = [
   "crystal",
   "c#",
   // "cs",
-  // "css",
+  "css",
   // "cue",
   // "d",
   // "dart",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("crystal");
+  const [lang, setLang] = useState<shiki.Lang>("css");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -805,6 +805,14 @@ DATA DIVISION.
 # coffee
   # ^
 # [Hello!]
+`,
+  css: `
+.a {
+  /* hello */
+/*    --- */
+/*    ^  */
+/*  [Hello!]  */
+}
 `,
   cpp: `
 // @dim
