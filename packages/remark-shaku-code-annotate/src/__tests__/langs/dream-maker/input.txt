@@ -1,0 +1,7 @@
+```dream-maker annotate
+// @dim
+// This is a configuration
+//   -----
+//    ^
+// [Hello!] 
+```

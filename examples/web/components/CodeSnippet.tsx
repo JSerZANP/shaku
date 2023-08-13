@@ -45,7 +45,7 @@ const ALL_LANGS = [
   // "clj",
   "cmake",
   "cobol",
-  // "codeql",
+  "codeql", // nothing to test
   // "ql",
   "coffee",
   "cpp",
@@ -57,10 +57,10 @@ const ALL_LANGS = [
   "d",
   "dart",
   "dax",
-  // "diff",
+  "diff", // nothing to test
   // "docker",
-  // "dockerfile",
-  // "dream-maker",
+  "dockerfile",
+  "dream-maker",
   // "elixir",
   // "elm",
   // "erb",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("dax");
+  const [lang, setLang] = useState<shiki.Lang>("javascript");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -841,6 +841,20 @@ DATA DIVISION.
 //   -----
 //    ^
 // [Hello!]
+`,
+  dockerfile: `
+# @dim
+FROM node:14
+#---
+  # ^
+# [Hello!]
+`,
+  "dream-maker": `
+// @dim
+// This is a configuration
+//   -----
+//    ^
+// [Hello!] 
 `,
   cpp: `
 // @dim

@@ -1,0 +1,7 @@
+```dockerfile annotate
+# @dim
+FROM node:14
+#---
+  # ^
+# [Hello!]
+```
