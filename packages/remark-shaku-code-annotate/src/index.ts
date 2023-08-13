@@ -306,7 +306,10 @@ function parseComment(
   // special case for some languages that one comment has multiple tokens
   // TODO: maybe we should give up the "clever" approach because it is not solid
   // rather we can just try to trim for each lang?
-  if (lang != null && ["ada", "berry", "elm", "haml"].includes(lang)) {
+  if (
+    lang != null &&
+    ["ada", "berry", "elm", "haml", "handlebars"].includes(lang)
+  ) {
     body = line
       .slice(shouldTreatFirstTokenOffset ? 1 : 0)
       .map((token) => token.content)
@@ -337,12 +340,12 @@ function parseComment(
   }
   // for some languages, we are not able to extract body from above logic
   // so we have to trim manually
-  console.log(body);
-  const trimmedBody = trimCommentBody(body, lang);
-  console.log(trimmedBody);
+  console.log("body", offset, body);
+  const { trimmedBody, offset: extraOffset } = trimCommentBody(body, lang);
+  console.log("trimmedBody", offset + extraOffset, trimmedBody);
 
   return {
-    offset: offset + body.length - trimmedBody.length,
+    offset: offset + extraOffset,
     body: trimmedBody,
   };
 }
@@ -481,6 +484,10 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   haml: {
     head: /^\s*-#/,
   },
+  handlebars: {
+    head: /^\s*\{\{!--/,
+    tail: /--\}\}\s*$/,
+  },
   rust: {
     head: /^\s*\/\//,
   },
@@ -488,16 +495,21 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
 
 function trimCommentBody(body: string, lang?: string | null) {
   let trimmedBody = body;
+  let offset = 0;
   if (lang != null && lang in commentMarkers) {
     const { head, tail } = commentMarkers[lang];
     if (head != null) {
       trimmedBody = trimmedBody.replace(head, "");
+      offset = body.length - trimmedBody.length;
     }
     if (tail != null) {
       trimmedBody = trimmedBody.replace(tail, "");
     }
   }
-  return trimmedBody;
+  return {
+    trimmedBody,
+    offset,
+  };
 }
 
 function assertsNever(data: never) {
