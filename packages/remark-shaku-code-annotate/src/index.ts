@@ -448,6 +448,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   clarity: {
     head: /^\s*;;/,
   },
+  cmake: {
+    head: /^\s*#/,
+  },
   cobol: {
     head: /^\s*\*/,
   },
