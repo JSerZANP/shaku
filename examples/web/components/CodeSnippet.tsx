@@ -175,7 +175,7 @@ const ALL_LANGS = [
   // "smalltalk",
   // "solidity",
   // "sparql",
-  // "sql",
+  "sql",
   // "ssh-config",
   // "stata",
   // "stylus",
@@ -670,6 +670,18 @@ def greet(name):
   # -----
   #   ^
   # [Hello world!]
+`,
+  sql: `
+-- Create a new table to store customer information
+CREATE TABLE Customers (
+  -- @dim
+    CustomerID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+  --          -------
+  --             ^
+  --     [Hello World!]
+    LastName VARCHAR(50)
+);
 `,
   vb: `
 Imports System
