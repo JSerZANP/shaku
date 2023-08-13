@@ -22,7 +22,7 @@ const ALL_LANGS = [
   "actionscript-3",
   "ada",
   "apache",
-  // "apex",
+  "apex",
   // "apl",
   // "applescript",
   // "ara",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("apache");
+  const [lang, setLang] = useState<shiki.Lang>("apex");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -632,6 +632,17 @@ procedure Comments_Example is
         Require all granted
     </Directory>
 </VirtualHost>
+`,
+  apex: `
+public class ExampleClass {
+  // @dim
+  public void doSomething() {
+      System.debug('Doing something...');
+    //       -----
+    //         ^
+    // [Hello World!]
+  }
+}
 `,
   asm: `
 ; @dim

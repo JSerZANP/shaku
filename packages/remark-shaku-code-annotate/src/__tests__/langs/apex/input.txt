@@ -1,0 +1,11 @@
+```apex annotate
+public class ExampleClass {
+  // @dim
+  public void doSomething() {
+      System.debug('Doing something...');
+    //       -----
+    //         ^
+    // [Hello World!]
+  }
+}
+```
