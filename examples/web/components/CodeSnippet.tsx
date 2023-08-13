@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("cmake");
+  const [lang, setLang] = useState<shiki.Lang>("coffee");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -793,6 +793,12 @@ DATA DIVISION.
 *    --------
 *   ^
 * [Hello World!]
+`,
+  coffee: `
+# @dim
+# coffee
+#  ^
+# [Hello!]
 `,
   cpp: `
 // @dim

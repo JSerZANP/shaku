@@ -1,0 +1,6 @@
+```coffee annotate
+# @dim
+# coffee
+#  ^
+# [Hello!]
+```
