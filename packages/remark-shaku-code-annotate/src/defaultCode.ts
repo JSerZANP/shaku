@@ -542,6 +542,25 @@ export default function Counter() {
 //[Hello World!]
 }
 `,
+  jsonnet: `
+{
+  // This is a JSON5 object with comments
+  "name": "John",
+// @dim
+  "age": 30,
+  "isStudent": false,
+// ---------
+// ^
+//[Hello World!]
+}
+`,
+  jssm: `
+// @dim
+// coffee
+// ------
+  // ^
+// [Hello!]
+`,
   julia: `
 # @dim
 variable = 1

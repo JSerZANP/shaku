@@ -308,7 +308,7 @@ function parseComment(
   // rather we can just try to trim for each lang?
   if (
     lang != null &&
-    ["ada", "berry", "elm", "haml", "handlebars", "hlsl"].includes(lang)
+    ["ada", "berry", "elm", "haml", "handlebars", "hlsl", "jssm"].includes(lang)
   ) {
     body = line
       .slice(shouldTreatFirstTokenOffset ? 1 : 0)
@@ -492,6 +492,12 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
     head: /^\s*\/\//,
   },
   json5: {
+    head: /^\s*\/\//,
+  },
+  jsonnet: {
+    head: /^\s*\/\//,
+  },
+  jssm: {
     head: /^\s*\/\//,
   },
   rust: {

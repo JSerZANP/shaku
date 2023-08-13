@@ -103,8 +103,8 @@ const ALL_LANGS = [
   "json",
   "json5",
   "jsonc",
-  // "jsonnet",
-  // "jssm",
+  "jsonnet",
+  "jssm",
   // "fsl",
   // "jsx",
   "julia",
@@ -303,7 +303,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("jsonc");
+  const [lang, setLang] = useState<shiki.Lang>("jssm");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
