@@ -1,0 +1,9 @@
+```cadence annotate
+  // @dim
+fun add(a: Int, b: Int): Int {
+  //---
+  // ^
+  //[Hello!]
+  return a + b
+}
+```

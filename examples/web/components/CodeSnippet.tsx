@@ -30,6 +30,7 @@ const ALL_LANGS = [
   "astro",
   "awk",
   "ballerina",
+  // "bat",
   "batch",
   "berry",
   // "be",
@@ -300,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("blade");
+  const [lang, setLang] = useState<shiki.Lang>("cadence");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -732,6 +733,15 @@ end
 {{--        ---- --}}
 {{-- ^ --}}
 {{-- [Hello World!] --}}
+`,
+  cadence: `
+  // @dim
+fun add(a: Int, b: Int): Int {
+  //---
+  // ^
+  //[Hello!]
+  return a + b
+}
 `,
   asm: `
 ; @dim
