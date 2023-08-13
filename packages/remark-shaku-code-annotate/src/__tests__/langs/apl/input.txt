@@ -1,0 +1,11 @@
+```apl annotate
+⍝ @dim
+data ← 1 2 3 4 5
+
+sum ← +/data
+⍝     ------
+⍝       ^
+⍝  [Hello World!]
+
+sum
+```

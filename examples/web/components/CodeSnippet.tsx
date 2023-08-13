@@ -23,7 +23,7 @@ const ALL_LANGS = [
   "ada",
   "apache",
   "apex",
-  // "apl",
+  "apl",
   // "applescript",
   // "ara",
   "asm",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("apex");
+  const [lang, setLang] = useState<shiki.Lang>("apl");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -643,6 +643,17 @@ public class ExampleClass {
     // [Hello World!]
   }
 }
+`,
+  apl: `
+⍝ @dim
+data ← 1 2 3 4 5
+
+sum ← +/data
+⍝     ------
+⍝       ^
+⍝  [Hello World!]
+
+sum
 `,
   asm: `
 ; @dim
