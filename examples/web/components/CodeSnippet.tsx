@@ -37,7 +37,7 @@ const ALL_LANGS = [
   // "bibtex",
   // "bicep",
   // "blade",
-  // "c",
+  "c",
   // "cadence",
   // "cdc",
   // "clarity",
@@ -48,7 +48,7 @@ const ALL_LANGS = [
   // "codeql",
   // "ql",
   // "coffee",
-  // "cpp",
+  "cpp",
   // "crystal",
   // "csharp",
   // "c#",
@@ -585,6 +585,30 @@ function ThemePicker({
 }
 
 const defaultCode = {
+  c: `
+// @dim
+#include <stdio.h>
+
+int main() {
+    int x = 10;
+//  -----------
+//    ^
+// [Hello World!]
+    return 0;
+}
+`,
+  cpp: `
+// @dim
+#include <iostream>
+
+int main() {
+  int x = 10;
+  //  -----------
+  //    ^
+  // [Hello World!]
+  return 0;
+}
+`,
   javascript: `// @dim
 import { useState } from 'react';
 

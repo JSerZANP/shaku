@@ -308,7 +308,9 @@ function parseComment(line: IThemedToken[]): null | {
       // find the first explanation that is not element tag
       if (
         explanation.scopes.every(
-          (scope) => !scope.scopeName.startsWith("punctuation.definition")
+          (scope) =>
+            !scope.scopeName.startsWith("punctuation.definition") &&
+            !isWhitespace(explanation.content)
         )
       ) {
         body = explanation.content;
