@@ -82,7 +82,7 @@ const ALL_LANGS = [
   "graphql",
   "groovy",
   "hack",
-  // "haml",
+  "haml",
   // "handlebars",
   // "hbs",
   // "haskell",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("hack");
+  const [lang, setLang] = useState<shiki.Lang>("haml");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -915,7 +915,7 @@ FROM node:14
 # @dim
 # coffee
 # ------
-# ^
+ # ^
 # [Hello!]
 `,
   graphql: `
@@ -941,6 +941,18 @@ type Query {
 //   ^
 // [Hello!]  
 ?>
+`,
+  haml: `
+!!!
+%html
+  %head
+    %title My HAML Page
+-# @dim
+  %body
+    %h1 Welcome to My HAML Page
+    -#  -------
+    -# ^
+    -#[Hello World!]
 `,
   cpp: `
 // @dim
