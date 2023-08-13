@@ -1,0 +1,7 @@
+```applescript annotate
+-- @dim
+display dialog "Hello, World!"
+--      ------
+--         ^
+-- [Hello World!]
+```
