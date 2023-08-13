@@ -475,6 +475,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   "git-commit": {
     head: /^\s*#/,
   },
+  graphql: {
+    head: /^\s*#/,
+  },
   rust: {
     head: /^\s*\/\//,
   },

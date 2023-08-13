@@ -79,7 +79,7 @@ const ALL_LANGS = [
   "glsl",
   "gnuplot",
   "go",
-  // "graphql",
+  "graphql",
   // "groovy",
   // "hack",
   // "haml",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("gnuplot");
+  const [lang, setLang] = useState<shiki.Lang>("graphql");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -917,6 +917,14 @@ FROM node:14
 # ------
 # ^
 # [Hello!]
+`,
+  graphql: `
+# @dim
+type Query {
+  #  -----
+  #    ^
+# [Hello world!]
+}
 `,
 
   cpp: `
