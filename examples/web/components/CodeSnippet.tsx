@@ -50,8 +50,7 @@ const ALL_LANGS = [
   // "coffee",
   "cpp",
   // "crystal",
-  // "csharp",
-  // "c#",
+  "c#",
   // "cs",
   // "css",
   // "cue",
@@ -607,6 +606,25 @@ int main() {
   //    ^
   // [Hello World!]
   return 0;
+}
+`,
+  "c#": `
+// @dim
+using System;
+namespace CommentExample
+{
+  // @highlight
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      int x = 10
+    //----------
+    // ^
+    //[Hello World!]
+    }
+
+  }
 }
 `,
   java: `
