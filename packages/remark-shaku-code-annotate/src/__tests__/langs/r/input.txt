@@ -1,0 +1,8 @@
+```r annotate
+# @dim
+# Variables
+variable <- 123
+#        --
+#        ^
+# [Hello World!]
+```

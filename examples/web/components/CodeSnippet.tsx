@@ -147,7 +147,7 @@ const ALL_LANGS = [
   // "puppet",
   // "purescript",
   "python",
-  // "r",
+  "r",
   // "raku",
   // "perl6",
   // "razor",
@@ -709,6 +709,14 @@ $variable = 10000;
 // [Hello world!]
 // @dim
 ?>
+`,
+  r: `
+# @dim
+# Variables
+variable <- 123
+#        --
+#        ^
+# [Hello World!]
 `,
   python: `
 # @dim
