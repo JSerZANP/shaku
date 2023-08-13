@@ -21,7 +21,7 @@ const ALL_LANGS = [
   "abap",
   "actionscript-3",
   "ada",
-  // "apache",
+  "apache",
   // "apex",
   // "apl",
   // "applescript",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("ada");
+  const [lang, setLang] = useState<shiki.Lang>("apache");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -615,6 +615,23 @@ procedure Comments_Example is
     --           -----------
     --              ^
     --  [Hello World!]
+`,
+  apache: `
+# Virtual Host Configuration
+<VirtualHost *:80>
+    ServerName www.example.com
+    DocumentRoot /var/www/html
+
+    # This is a comment within a VirtualHost block.
+    # It can provide additional information about the configuration of this specific virtual host.
+
+    # Directory Configuration
+    <Directory /var/www/html>
+        Options FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+</VirtualHost>
 `,
   asm: `
 ; @dim

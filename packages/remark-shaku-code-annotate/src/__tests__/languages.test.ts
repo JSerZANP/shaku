@@ -30,7 +30,8 @@ test("should support popular languages", async () => {
     const processed = (await process(input)).value;
     const isEqual = processed == output;
     if (!isEqual) {
-      throw "snapshot doesn't match for lang: " + dir.name;
+      console.error("snapshot doesn't match for lang: " + dir.name);
     }
+    expect(processed).toEqual(output);
   }
 });

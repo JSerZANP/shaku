@@ -407,7 +407,10 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
     head: /^\s*\*/,
   },
   ada: {
-    head: /^\-\-/,
+    head: /^\s*\-\-/,
+  },
+  apache: {
+    head: /^\s*#/,
   },
   "actionscript-3": {
     head: /^\s*\/\//,
