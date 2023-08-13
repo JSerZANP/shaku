@@ -1,0 +1,9 @@
+```rust annotate
+// @dim
+fn main() {
+  let square = variable * variable; 
+  //           --------
+  //              ^
+  //      [Hello World!]
+}
+```

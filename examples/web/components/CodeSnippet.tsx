@@ -157,7 +157,7 @@ const ALL_LANGS = [
   // "rst",
   "ruby",
   // "rb",
-  // "rust",
+  "rust",
   // "rs",
   // "sas",
   // "sass",
@@ -718,13 +718,7 @@ variable <- 123
 #        ^
 # [Hello World!]
 `,
-  ruby: `
-# @dim
-square = variable * variable 
-#        --------
-#        ^
-#   [Hello World!]
-`,
+
   python: `
 # @dim
 def greet(name):
@@ -733,6 +727,22 @@ def greet(name):
   #   ^
   # [Hello world!]
 `,
+  ruby: `
+# @dim
+square = variable * variable 
+#        --------
+#        ^
+#   [Hello World!]
+`,
+  rust: `
+// @dim
+fn main() {
+  let square = variable * variable; 
+  //           --------
+  //              ^
+  //      [Hello World!]
+}
+  `,
   sql: `
 -- Create a new table to store customer information
 CREATE TABLE Customers (

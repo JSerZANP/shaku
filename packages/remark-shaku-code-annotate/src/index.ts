@@ -394,6 +394,9 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
   cobol: {
     head: /^\s*\*/,
   },
+  rust: {
+    head: /^\s*\/\//,
+  },
 };
 
 function trimCommentBody(body: string, lang?: string | null) {
