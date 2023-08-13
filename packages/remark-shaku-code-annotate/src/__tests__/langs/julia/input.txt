@@ -1,0 +1,9 @@
+```julia annotate
+# @dim
+variable = 1
+
+variable = 10 
+#          --
+#          ^
+# [Hello World]
+```

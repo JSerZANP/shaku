@@ -105,7 +105,7 @@ const ALL_LANGS = [
   // "jssm",
   // "fsl",
   // "jsx",
-  // "julia",
+  "julia",
   // "kotlin",
   // "kusto",
   // "kql",
@@ -691,6 +691,15 @@ export default function Counter() {
     </button>
   );
 }`,
+  julia: `
+# @dim
+variable = 1
+
+variable = 10 
+#          --
+#          ^
+# [Hello World]
+`,
   matlab: `
 % @dim
 % This is a single-line comment in MATLAB.
