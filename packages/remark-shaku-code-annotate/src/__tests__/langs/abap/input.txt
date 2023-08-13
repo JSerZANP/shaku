@@ -1,0 +1,8 @@
+```abap annotate
+* @dim
+REPORT Z_SAMPLE_REPORT.
+REPORT Z_SAMPLE_REPORT.
+*      ---------------
+*           ^
+*   [Hello World!]
+```

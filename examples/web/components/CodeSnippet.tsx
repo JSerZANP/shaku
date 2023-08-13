@@ -18,7 +18,7 @@ import { Button, Column, Row, Text, View } from "./bare";
 import useDebouncedCallback from "./useDebouncedCallback";
 
 const ALL_LANGS = [
-  // "abap",
+  "abap",
   // "actionscript-3",
   // "ada",
   // "apache",
@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("javascript");
+  const [lang, setLang] = useState<shiki.Lang>("abap");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -584,6 +584,14 @@ function ThemePicker({
 }
 
 const defaultCode = {
+  abap: `
+* @dim
+REPORT Z_SAMPLE_REPORT.
+REPORT Z_SAMPLE_REPORT.
+*      ---------------
+*           ^
+*   [Hello World!]
+`,
   asm: `
 ; @dim
 section .data

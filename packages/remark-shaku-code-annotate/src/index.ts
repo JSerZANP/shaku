@@ -388,6 +388,9 @@ function shouldBeTreatedAsWhitespace(token: IThemedToken) {
 }
 
 const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
+  abap: {
+    head: /^\s*\*/,
+  },
   asm: {
     head: /^\s*;/,
   },
