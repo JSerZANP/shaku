@@ -1,0 +1,7 @@
+```clojure annotate
+;   @dim
+; This is a single-line comment 
+; ---
+; ^
+;[Hello!]
+```

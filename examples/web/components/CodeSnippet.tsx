@@ -301,7 +301,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
   const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
     themes[0]
   );
-  const [lang, setLang] = useState<shiki.Lang>("clarity");
+  const [lang, setLang] = useState<shiki.Lang>("clojure");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
   useEffect(() => {
     setCode(defaultCode[lang]);
@@ -749,6 +749,13 @@ fun add(a: Int, b: Int): Int {
 ;; ---
 ;; ^
 ;;[Hello!]
+`,
+  clojure: `
+;   @dim
+; This is a single-line comment 
+; ---
+; ^
+;[Hello!]
 `,
   asm: `
 ; @dim
