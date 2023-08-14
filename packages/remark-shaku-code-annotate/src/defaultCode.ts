@@ -515,7 +515,7 @@ export default function Counter() {
 {
   "name": "John",
   "age": 30,
-  "isStudent": false,
+  "isStudent": false
 }
 `,
   json5: `

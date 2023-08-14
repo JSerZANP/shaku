@@ -291,12 +291,19 @@ const themes = [
   },
 ] as const;
 
-export function CodeSnippet({ code: _code }: { code?: string }) {
-  const [lang, setLang] = useState<shiki.Lang>("javascript");
+export function CodeSnippet({
+  code: _code,
+  lang: _lang,
+}: {
+  code?: string;
+  lang?: string;
+}) {
+  const [lang, setLang] = useState<string>(_lang ?? "javascript");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
 
   const share = () => {
-    const query = "code=" + encodeURIComponent(code);
+    const query =
+      "code=" + encodeURIComponent(code) + "&lang=" + encodeURIComponent(lang);
     const url = location.origin + "/snippet?" + query;
     const type = "text/plain";
     const blob = new Blob([url], { type });
