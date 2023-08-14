@@ -10,6 +10,7 @@ import html from "remark-html";
 import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 import * as shiki from "shiki";
 import styles from "./CodeSnippet.module.css";
+import { Fetcher } from "./Fetcher";
 import { Button, Row, Text, View } from "./bare";
 
 const themes = [
@@ -86,27 +87,6 @@ function fetchProcessor(lang) {
         .use(withShiki, { highlighter })
         .use(html, { sanitize: false })
     );
-}
-
-class Fetcher<K> {
-  data: null | K;
-  promise: null | Promise<void>;
-  error: any;
-  constructor(private fetcher: () => Promise<K>) {}
-  fetch() {
-    if (this.data != null) return this.data;
-    if (this.error != null) throw this.error;
-    if (!this.promise) {
-      this.promise = this.fetcher()
-        .then((data) => {
-          this.data = data;
-        })
-        .catch((error) => {
-          this.error = error;
-        });
-    }
-    throw this.promise;
-  }
 }
 
 const processorStore = new Map<string, Fetcher<ReturnType<typeof remark>>>();

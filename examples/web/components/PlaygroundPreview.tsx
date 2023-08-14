@@ -1,41 +1,59 @@
-import { useCallback, useEffect, useState } from "react";
+import { useDeferredValue } from "react";
 import styles from "./Playground.module.css";
 import { View } from "./bare";
-import useDebouncedCallback from "./useDebouncedCallback";
 
 import withShiki from "@stefanprobst/remark-shiki";
 import { remark } from "remark";
 import html from "remark-html";
 import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 import * as shiki from "shiki";
+import { Fetcher } from "./Fetcher";
+
+let fetcher: Fetcher<ReturnType<typeof remark>> | null = null;
+const getProcessor = () => {
+  if (fetcher == null) {
+    fetcher = new Fetcher(() => fetchProcessor());
+  }
+  return fetcher.fetch();
+};
+
+const processedResultStore = new Map<string, Fetcher<string>>();
+
+const getProcessedResult = (
+  code: string,
+  processor: ReturnType<typeof remark>
+) => {
+  const key = code;
+
+  if (!processedResultStore.has(key)) {
+    processedResultStore.set(
+      key,
+      new Fetcher(() => processor.process(code).then((data) => data.toString()))
+    );
+
+    if (processedResultStore.size > 5) {
+      const firstResultKey = processedResultStore.entries().next().value.key;
+      processedResultStore.delete(firstResultKey);
+    }
+  }
+  return processedResultStore.get(key).fetch();
+};
 
 export default function PlaygroundPreview({ code }: { code: string }) {
-  const [preview, setPreview] = useState("");
-
-  const render = useCallback((code) => {
-    getProcessor().then((processor) =>
-      processor.process(code).then((data) => {
-        setPreview(data.toString());
-      })
-    );
-  }, []);
-
-  const debouncedRender = useDebouncedCallback(render, 500);
-
-  useEffect(() => {
-    debouncedRender(code);
-  }, [code, debouncedRender]);
+  const deferredCode = useDeferredValue(code);
+  const processor = getProcessor();
+  const processedResult = getProcessedResult(code, processor);
   return (
     <View $flex="1 0 0">
       <div
-        dangerouslySetInnerHTML={{ __html: preview }}
+        dangerouslySetInnerHTML={{ __html: processedResult }}
         className={styles.preview}
       ></div>
     </View>
   );
 }
 
-function getProcessor() {
+function fetchProcessor() {
   return shiki
     .getHighlighter({
       theme: "github-light",

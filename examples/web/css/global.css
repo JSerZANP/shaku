@@ -1,5 +1,31 @@
 @import url("./reset.css");
 
+:root {
+  --color-text-main: #333;
+  --color-text-sub: #65758b;
+  /* third color */
+  --color-text-3rd: #eeeeee;
+
+  /* link color */
+  --color-link-main: #2973af;
+  /* link color sub */
+  --color-link-sub: #008eff;
+  --color-bg-main: #fff;
+  background-color: #fff;
+  --color-bg-sub: #aaa;
+  --color-bg-3rd: #555;
+  --color-bg-deemphasized: #eee;
+
+  --color-line-main: #777;
+  --color-line-sub: #aaa;
+  --color-link-coffee: #fedd00;
+  --color-line-3rd: #eee;
+}
+
+a {
+  color: var(--color-link-main);
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }

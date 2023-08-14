@@ -116,7 +116,9 @@ function useSomeEffect({blog}) {
 }
 \`\`\`
 
-## Also works in JSX/TSX
+## Support 150+ languages, also in JSX/TSX
+
+Try out all language demos in [Shaku Snippet](/snippet).
 
 \`\`\`tsx annotate
 function component() {
