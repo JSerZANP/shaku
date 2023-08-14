@@ -289,7 +289,7 @@ function parseComment(
   body: string;
 } {
   if (line.length === 0) return null;
-  // comments start from the begining
+  // comments start from the beginning
   const isCommentLine = line.every(
     (token) =>
       shouldBeTreatedAsWhitespace(token) ||
@@ -308,7 +308,28 @@ function parseComment(
   // rather we can just try to trim for each lang?
   if (
     lang != null &&
-    ["ada", "berry", "elm", "haml", "handlebars", "hlsl", "jssm"].includes(lang)
+    [
+      "ada",
+      "berry",
+      "elm",
+      "haml",
+      "handlebars",
+      "hlsl",
+      "jssm",
+      "kotlin",
+      "nix",
+      "ocaml",
+      "prisma",
+      "proto",
+      "sas",
+      "sass",
+      "shaderlab",
+      "shader",
+      "solidity",
+      "viml",
+      "vimscript",
+      "wenyan",
+    ].includes(lang)
   ) {
     body = line
       .slice(shouldTreatFirstTokenOffset ? 1 : 0)
@@ -340,9 +361,7 @@ function parseComment(
   }
   // for some languages, we are not able to extract body from above logic
   // so we have to trim manually
-  console.log("body", offset, body);
   const { trimmedBody, offset: extraOffset } = trimCommentBody(body, lang);
-  console.log("trimmedBody", offset + extraOffset, trimmedBody);
 
   return {
     offset: offset + extraOffset,
@@ -411,7 +430,11 @@ function shouldBeTreatedAsWhitespace(token: IThemedToken) {
           )) ||
         explanation.scopes.some(
           (scope) => scope.scopeName === "keyword.command.rem.batchfile"
-        )
+        ) ||
+        (explanation.scopes.some((scope) => scope.scopeName === "source.mdx") &&
+          explanation.scopes.some((scope) =>
+            scope.scopeName.startsWith("string.other.begin.expression.mdx")
+          ))
       );
     })
   ) {
@@ -501,6 +524,80 @@ const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
     head: /^\s*\/\//,
   },
   rust: {
+    head: /^\s*\/\//,
+  },
+  kotlin: {
+    head: /^\s*\/\//,
+  },
+  kusto: {
+    head: /^\s*\/\//,
+  },
+  kql: {
+    head: /^\s*\/\//,
+  },
+  mermaid: {
+    head: /^\s*%%/,
+  },
+  nginx: {
+    head: /^\s*#/,
+  },
+  nix: {
+    head: /^\s*#/,
+  },
+  ocaml: {
+    head: /^\s*\(\*/,
+    tail: /\s*\*\)$/,
+  },
+  plsql: {
+    head: /^\s*--/,
+  },
+  powerquery: {
+    head: /^\s*\/\//,
+  },
+  prisma: {
+    head: /^\s*\/\//,
+  },
+  proto: {
+    head: /^\s*\/\//,
+  },
+  sas: {
+    head: /^\s*\/\*/,
+    tail: /\s*\*\/$/,
+  },
+  sass: {
+    head: /^\s*\/\//,
+  },
+  shaderlab: {
+    head: /^\s*\/\//,
+  },
+  shader: {
+    head: /^\s*\/\//,
+  },
+  solidity: {
+    head: /^\s*\/\//,
+  },
+  sparql: {
+    head: /^\s*#/,
+  },
+  turtle: {
+    head: /^\s*#/,
+  },
+  vhdl: {
+    head: /^\s*--/,
+  },
+  viml: {
+    head: /^\s*"/,
+  },
+  vimscript: {
+    head: /^\s*"/,
+  },
+  wenyan: {
+    head: /^\s*注曰。/,
+  },
+  wgsl: {
+    head: /^\s*\/\//,
+  },
+  zenscript: {
     head: /^\s*\/\//,
   },
 };

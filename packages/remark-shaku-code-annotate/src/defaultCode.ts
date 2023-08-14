@@ -1,6 +1,6 @@
 export const defaultCode = {
   abap: `
-* @dim
+* @highlight
 REPORT Z_SAMPLE_REPORT.
 REPORT Z_SAMPLE_REPORT.
 *      ---------------
@@ -9,7 +9,7 @@ REPORT Z_SAMPLE_REPORT.
 `,
   "actionscript-3": `
 package {
-  // @dim
+  // @highlight
   import flash.display.Sprite;
 
   public class CommentExample extends Sprite {
@@ -22,7 +22,7 @@ package {
 }
 `,
   ada: `
--- @dim
+-- @highlight
 with Ada.Text_IO;
 
 procedure Comments_Example is
@@ -50,7 +50,7 @@ procedure Comments_Example is
 `,
   apex: `
 public class ExampleClass {
-  // @dim
+  // @highlight
   public void doSomething() {
       System.debug('Doing something...');
     //       -----
@@ -60,7 +60,7 @@ public class ExampleClass {
 }
 `,
   apl: `
-⍝ @dim
+⍝ @highlight
 data ← 1 2 3 4 5
 
 sum ← +/data
@@ -71,14 +71,14 @@ sum ← +/data
 sum
 `,
   applescript: `
--- @dim
+-- @highlight
 display dialog "Hello, World!"
 --      ------
 --         ^
 -- [Hello World!]
 `,
   ara: `
-// @dim
+// @highlight
 $foo = true;
 $foo = true;
 //     ----
@@ -86,7 +86,7 @@ $foo = true;
 // [Hello!]
 `,
   astro: `
-<!-- @dim -->
+<!-- @highlight -->
 <div>Hello World!</div>
 {/* ^ */}
 {/*[Hello!] */}
@@ -97,7 +97,7 @@ $foo = true;
 <!--[Hello!] -->
 `,
   awk: `
-# @dim
+# @highlight
 sum = 0
 sum = 1
 #    --
@@ -105,7 +105,7 @@ sum = 1
 #[Hello!]
 `,
   ballerina: `
-//@dim
+//@highlight
 import ballerina/io;
 
 public function main() {
@@ -122,7 +122,7 @@ REM ^
 REM [Hello World!]
 `,
   berry: `
-# @dim
+# @highlight
 def func(x)
   return x + 1.5
   #      -----
@@ -131,13 +131,13 @@ def func(x)
 end
 `,
   bibtex: `
-% @dim
+% @highlight
 % Another reference
 %    ^
 % [Hello!]
 `,
   bicep: `
-// @dim
+// @highlight
 // Define a storage
     // ----
 // ^
@@ -150,7 +150,7 @@ end
 {{-- [Hello World!] --}}
 `,
   cadence: `
-  // @dim
+  // @highlight
 fun add(a: Int, b: Int): Int {
   //---
   // ^
@@ -159,21 +159,21 @@ fun add(a: Int, b: Int): Int {
 }
 `,
   clarity: `
-;;   @dim
+;;   @highlight
 ;; This is a single-line comment 
 ;; ---
 ;; ^
 ;;[Hello!]
 `,
   clojure: `
-;   @dim
+;   @highlight
 ; This is a single-line comment 
 ; ---
 ; ^
 ;[Hello!]
 `,
   cmake: `
-# @dim
+# @highlight
 # This is a single-line comment
 # ----
 #  ^
@@ -181,7 +181,7 @@ fun add(a: Int, b: Int): Int {
   
 `,
   asm: `
-; @dim
+; @highlight
 section .data
     message db 'Hello, World!', 0
 ;   -------
@@ -190,7 +190,7 @@ section .data
   
 `,
   c: `
-// @dim
+// @highlight
 #include <stdio.h>
 
 int main() {
@@ -202,7 +202,7 @@ int main() {
 }
 `,
   cobol: `
-* @dim
+* @highlight
 ENVIRONMENT DIVISION.
 DATA DIVISION.
 *    --------
@@ -210,13 +210,13 @@ DATA DIVISION.
 * [Hello World!]
 `,
   coffee: `
-# @dim
+# @highlight
 # coffee
 #  ^
 # [Hello!]
 `,
   crystal: `
-# @dim
+# @highlight
 # coffee
   # ^
 # [Hello!]
@@ -230,56 +230,56 @@ DATA DIVISION.
 }
 `,
   cue: `
-// @dim
+// @highlight
 // This is a configuration
 //   -----
 //    ^
 // [Hello!]
 `,
   d: `
-// @dim
+// @highlight
 // This is a configuration
 //   -----
 //    ^
 // [Hello!]
 `,
   dart: `
-// @dim
+// @highlight
 // This is a configuration
 //   -----
 //    ^
 // [Hello!]
 `,
   dax: `
-// @dim
+// @highlight
 // This is a configuration
 //   -----
 //    ^
 // [Hello!]
 `,
   dockerfile: `
-# @dim
+# @highlight
 FROM node:14
 #---
   # ^
 # [Hello!]
 `,
   "dream-maker": `
-// @dim
+// @highlight
 // This is a configuration
 //   -----
 //    ^
 // [Hello!] 
 `,
   elixir: `
-# @dim
+# @highlight
 # coffee
 # ------
   # ^
 # [Hello!]
 `,
   elm: `
--- @dim
+-- @highlight
 -- coffee
 -- ------
   -- ^
@@ -292,49 +292,49 @@ FROM node:14
 <%# [Hello World!] %>
 `,
   erlang: `
-%%      @dim
+%%      @highlight
 -export([add/2]).
 %%      -------
 %%      ^
 %% [Hello World!]
 `,
   fish: `
-# @dim
+# @highlight
 # coffee
 # ------
   # ^
 # [Hello!]
 `,
   "f#": `
-// @dim
+// @highlight
 // coffee
 // ------
   // ^
 // [Hello!]
 `,
   "git-commit": `
-# @dim
+# @highlight
 # coffee
 # ------
 # ^
 # [Hello!]
 `,
   glsl: `
-// @dim
+// @highlight
 // coffee
 // ------
   // ^
 // [Hello!]
 `,
   gnuplot: `
-# @dim
+# @highlight
 # coffee
 # ------
  # ^
 # [Hello!]
 `,
   graphql: `
-# @dim
+# @highlight
 type Query {
   #  -----
   #    ^
@@ -342,7 +342,7 @@ type Query {
 }
 `,
   groovy: `
-// @dim
+// @highlight
 // coffee
 // ------
   // ^
@@ -350,7 +350,7 @@ type Query {
 `,
   hack: `
 <?hh
-// @dim
+// @highlight
     echo "hello";
 //  ----
 //   ^
@@ -362,7 +362,7 @@ type Query {
 %html
   %head
     %title My HAML Page
--# @dim
+-# @highlight
   %body
     %h1 Welcome to My HAML Page
     -#  -------
@@ -370,42 +370,42 @@ type Query {
     -#[Hello World!]
 `,
   handlebars: `
-{{!-- @dim --}}
+{{!-- @highlight --}}
 <h1>{{pageTitle}}</h1>
 {{!-- --------- --}}
 {{!-- ^ --}}
 {{!-- [Hello World!] --}}
 `,
   haskell: `
--- @dim
+-- @highlight
 -- This is a single-line
 --      ---
 --      ^
 -- [Hello World!]
 `,
   hcl: `
-# @dim
+# @highlight
 # coffee
 # ------
  # ^
 # [Hello!]
   `,
   hlsl: `
-// @dim
+// @highlight
 // coffee
 // ------
   // ^
 // [Hello!]
   `,
   html: `
-<!-- @dim -->
+<!-- @highlight -->
 <p>coffeee</p>   
 <!-- ----- -->
 <!--  ^ -->
 <!-- [Hello ] -->
   `,
   cpp: `
-// @dim
+// @highlight
 #include <iostream>
 
 int main() {
@@ -417,7 +417,7 @@ int main() {
 }
 `,
   "c#": `
-// @dim
+// @highlight
 using System;
 namespace CommentExample
 {
@@ -436,7 +436,7 @@ namespace CommentExample
 }
 `,
   go: `
-// @dim
+// @highlight
 package main
 import "fmt"
 func main() {
@@ -447,7 +447,7 @@ func main() {
 }
 `,
   java: `
-// @dim
+// @highlight
 public class CommentExample {
   public static void main(String[] args) {
     int x = 10;
@@ -458,7 +458,7 @@ public class CommentExample {
   }
 }
 `,
-  javascript: `// @dim
+  javascript: `// @highlight
 import { useState } from 'react';
 
 export default function Counter() {
@@ -483,14 +483,14 @@ export default function Counter() {
   );
 }`,
   imba: `
-# @dim
+# @highlight
 # coffee
 # ------
  # ^
 # [Hello!]
 `,
   ini: `
-; @dim
+; @highlight
 [section1]
 ; coffee
 ; ------
@@ -498,14 +498,14 @@ export default function Counter() {
 ; [Hello!]
 `,
   properties: `
-# @dim
+# @highlight
 # coffee
 # ------
   # ^
 # [Hello!]
 `,
   jison: `
-// @dim
+// @highlight
 // coffee
 // ------
   // ^
@@ -522,7 +522,7 @@ export default function Counter() {
 {
   // This is a JSON5 object with comments
   "name": "John",
-// @dim
+// @highlight
   "age": 30,
   "isStudent": false,
 // ---------
@@ -534,7 +534,7 @@ export default function Counter() {
 {
   // This is a JSON5 object with comments
   "name": "John",
-// @dim
+// @highlight
   "age": 30,
   "isStudent": false,
 // ---------
@@ -546,7 +546,7 @@ export default function Counter() {
 {
   // This is a JSON5 object with comments
   "name": "John",
-// @dim
+// @highlight
   "age": 30,
   "isStudent": false,
 // ---------
@@ -555,14 +555,51 @@ export default function Counter() {
 }
 `,
   jssm: `
-// @dim
+// @highlight
 // coffee
 // ------
   // ^
 // [Hello!]
 `,
+  jsx: `
+function a() {
+  // @highlight
+  return <div>
+  {/*    ----- */}
+  {/*    ^ */}
+  {/* [Hello World!] */}
+  </div>
+}
+`,
+  kotlin: `
+// @highlight
+fun main() {
+  // This is a single-line comment
+  println("Hello, World!")
+  //     -----------------
+  //      ^
+  // [Hello World!]
+
+}
+`,
+  kusto: `
+// This is a single-line comment
+// @highlight
+let startDate = datetime(2023-01-01);
+//  ---------
+//    ^
+// [Hello world!]
+`,
+  kql: `
+// This is a single-line comment
+// @highlight
+print "Hello, world!";
+//  ---------
+//    ^
+  // [Hello world!]
+`,
   julia: `
-# @dim
+# @highlight
 variable = 1
 
 variable = 10 
@@ -571,7 +608,7 @@ variable = 10
 # [Hello World]
 `,
   matlab: `
-% @dim
+% @highlight
 % This is a single-line comment in MATLAB.
 
 variable = 10; 
@@ -579,27 +616,533 @@ variable = 10;
   %        ^
   % [Hello World!]
 `,
+  latex: `
+% @highlight
+\documentclass{article}
+%              -------
+%                ^
+%  [Hello       World!]
+`,
+  less: `
+
+#lib() {
+  .colors() {
+    // @highlights
+    @primary: blue;
+    @secondary: green;
+    /*          ----- */
+    /*          ^ */
+    /* [Hello World!] */
+
+  }
+}
+`,
+  liquid: `
+This is a multi-line comment 
+{% comment %}
+          ----------
+     ^
+  [Hello World!]
+{% endcomment %}
+`,
   php: `
-// @dim
+// @highlight
 <?php
 $variable = 10000;
 //          --
 //          ^
 // [Hello world!]
-// @dim
+// @highlight
 ?>
 `,
+  lisp: `
+; @highlight
+(defun calculate-square (x)
+  "This function calculates the square of a number."
+  ;     --------
+  ;        ^
+  ; [Hello World!]
+  (* x x))
+`,
+  logo: `
+; @highlight
+REPEAT 4 [
+  FORWARD 100 
+; -------
+;   ^
+;[Hello World!]
+  RIGHT 90 
+]
+`,
+  lua: `
+-- @highlight
+print("Shaku!")
+print("Hello, World!") -- This is a comment
+--     ------------
+--     ^
+--    [Hello World!]
+
+`,
+  make: `
+# Variables
+# @highlight
+CC = gcc
+CFLAGS = -Wall -g
+#        -----
+#        ^
+# [Hello World!]
+`,
+  makefile: `
+# Variables
+# @highlight
+CC = gcc
+CFLAGS = -Wall -g
+#        -----
+#        ^
+# [Hello World!]
+`,
+  markdown: `
+<!-- @highlight -->
+# Markdown Comments
+<!-- ---- -->
+<!-- ^ -->
+<!--[Hello]-->
+`,
+  marko: `
+<!-- @highlight  -->
+<div>Shaku Snippet!</div>
+<!-- -----  -->
+<!-- ^  -->
+<!-- [Hello Shaku!]  -->
+
+`,
+  mdx: `
+{/* @highlight */}
+# Markdown Comments
+<Alert></Alert>
+{/* --- */}
+{/* ^ */}
+{/* [Hello!] */}
+
+`,
+  mermaid: `
+graph LR
+    A[Start] --> B[Process]
+    %% @highlight
+    B --> C[Process]
+    C --> D[End]
+    %%    -----
+  %%      ^
+  %% [Hello Shaku!]
+`,
+  nginx: `
+# @highlight
+server {
+  listen 80;
+  #      --
+  #      ^
+  # [Hello Shaku!]
+  server_name example.com;
+}
+`,
+  nim: `
+# @highlight
+proc add(a, b: int): int =
+  return a + b
+# ------
+# ^
+# [Hello Shaku!]
+`,
+  nix: `
+{
+  # @highlight
+  option1 = "value1";
+  #         --------
+  #          ^
+  # [Hello World!]
+}
+`,
+  objc: `
+#import <Foundation/Foundation.h>
+// @highlight
+// This is a single-line comment
+// ------
+//  ^
+// [Hello World!]
+`,
+  ocaml: `
+(* @highlight *)
+let main () =
+  print_string "Hello, OCaml!";
+            (*  ----- *)
+            (*  ^ *)
+       (*  [Hello World!] *)
+
+`,
+  pascal: `
+{ @highlight }
+uses
+  crt;
+{ --- }
+{ ^ }
+{[This is a single-line comment]}
+`,
+  perl: `
+# This is a single-line comment in Perl
+# @highlight
+print "Hello, World!";
+#      -----
+#       ^
+# [Hello Shaku!]
+`,
+  powerquery: `
+// @highlight
+// This is a single-line comment
+//           -----------
+//              ^
+//      [Hello World!]
+`,
+  powershell: `
+# Variables
+# @highlight
+$age = 25
+$name = "John"
+#        ----
+#         ^
+# [Hello World!]
+`,
+  prisma: `
+// @highlight
+model User {
+  // The user's username
+  username  String   @unique
+  //        ------
+  //         ^
+  // [Hello Shaku!]
+}
+`,
+  prolog: `
+% Predicates for family relationships
+% @highlight
+parent(john, sarah).
+%     -----
+%       ^
+%  [Hello World!]
+
+`,
+  proto: `
+// @highlight
+syntax = "proto3";
+//       --------
+//        ^
+// [Hello World!]
+
+`,
+  plsql: `
+-- @highlight
+DECLARE
+  v_name VARCHAR2(50);
+  --     --------
+  --      ^
+  --  [Hello Shaku!]
+`,
+  purescript: `
+  -- You can also use comments to explain code
+  -- @highlight
+add :: Int -> Int -> Int
+--     ---
+--      ^
+-- [Hello World!]
+`,
+  raku: `
+# @highlight
+my $variable = 42;  
+#  ---------
+#    ^
+# [Hello World!]
+`,
+  perl6: `
+# This is a single-line comment in Perl
+# @highlight
+print "Hello, World!";
+#      -----
+#       ^
+# [Hello Shaku!]
+`,
+  razor: `
+<h1>Welcome to our website!</h1>
+  @{
+    // ----
+    // ^
+    //[Hello World!]
+  }
+`,
+  reg: `
+; @highlight
+"CompletionChar"=dword:00000040 
+  ;    --------
+  ;    ^
+  ;[Hello World!]
+`,
+  rel: `
+// @highlight
+name: "John"; 
+//    -----
+//    ^
+// [Hello Shaku!]
+`,
+  riscv: `
+# @highlight
+.data
+  # Data section where
+  value1: .word 10
+# -----
+# ^
+#[Hello World!]
+`,
+  sas: `
+/* This is a single-line comment */
+/* @highlight */
+data mydata;
+  set inputdata;
+/*    ---------- */
+/*    ^ */
+/* [Hello World] */
+  `,
+  sass: `
+// Example Sass code with comments
+// @highlight
+$primary-color: #3498db;
+//              -------
+//              ^
+//        [Hello Shaku!]
+`,
+  scala: `
+// @highlight
+object CommentsExample {
+  def main(args: Array[String]): Unit = {
+    //           -----
+    //           ^
+    // [Hello Shaku!]
+  }
+}
+`,
+  scheme: `
+; This is a single-line comment in Scheme
+
+(define (factorial n)
+  ; Base case: factorial of 0 is 1
+  ; @highlight
+  (if (= n 0)
+      1
+      ; Recursive case: n * factorial of (n - 1)
+      (* n (factorial (- n 1)))))
+    ; ---------------------------
+    ; ^
+  ;[Hello Shaku!]
+; @highlight start
+(display "Factorial of 5 is: ")
+(display (factorial 5)) ; Calculate and display factorial
+(newline)
+; @highlight end
+
+`,
+  shaderlab: `
+Shader "Custom/ExampleShader" {
+  Properties {
+      _MainTex ("Texture", 2D) = "white" {}
+      _Color ("Tint Color", Color) = (1, 1, 1, 1)
+  }
+
+  SubShader {
+    // @highlight
+      Tags { "RenderType"="Opaque" }
+      // @highlight
+      LOD 100
+
+      Pass {
+          CGPROGRAM
+        //----------
+        // ^
+      //[Hello Shaku!]
+          #pragma vertex vert
+          // This is a single-line comment
+      }
+    }
+  }
+}
+`,
+  scss: `
+/*    @highlight */
+.button {
+  background-color: $primary-color;
+  color: white; 
+  /*    ------ */
+  /*    ^ */
+  /* [Hello World!] */
+
+}
+`,
+  shader: `
+// @highlight start
+// Input vertex position
+attribute vec3 inPosition;
+// @highlight end
+
+// Output vertex position
+varying vec4 outPosition;
+//           ------------
+//           ^
+// [Hello World!]
+
+`,
+  shellscript: `
+# Variable assignment
+# @highlight
+name="John"
+#     ----
+#      ^
+# [Hello Shaku!]
+`,
+  bash: `
+# Variable assignment
+# @highlight
+name="Alice"
+#     ----
+#      ^
+# [Hello Shaku!]
+`,
+  shell: `
+# Variable assignment
+# @highlight
+name="John"
+#     ----
+#      ^
+# [Hello Shaku!]
+`,
+  zsh: `
+# Variable assignment
+# @highlight
+name="John"
+#     ----
+#      ^
+# [Hello Shaku!]
+`,
+  smalltalk: `
+Object subclass: MyClass [
+  "This is a simple class named MyClass."
+  
+  | instanceVariable |
+  
+  "@highlight"
+  MyClass class >> classMethod [
+      "This is a class method of MyClass."
+      
+      ^ 'Hello from class method!'
+      "  -----"
+      "  ^ "
+  " [Hello Shaku!]"
+  ]
+  
+  MyClass >> instanceMethod [
+      "This is an instance method of MyClass."
+      
+      ^ 'Hello from instance method!'
+  ]
+]
+`,
+  solidity: `
+// Function to add two numbers
+// @highlight
+function add(uint256 a, uint256 b) public pure returns (uint256) {
+    // Adding the two numbers
+    uint256 result = a + b;
+  //--------------
+  //      ^
+  //[Hello World!]
+}
+`,
   r: `
-# @dim
+# @highlight
 # Variables
 variable <- 123
 #        --
 #        ^
 # [Hello World!]
 `,
+  sparql: `
+# This is a SPARQL query that retrieves the names of all cities and their populations.
 
+# @highlight
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+#           ---------
+#           ^
+# [Hello World!]
+`,
+  "ssh-config": `
+# This is a comment 
+Host myserver
+    HostName 192.168.1.100
+  # @highlight
+    Port 22
+    User myusername
+    #    -----------
+    #    ^
+# [Hello Shaku!]
+`,
+  stata: `
+* @highlight
+use "mydata.dta"
+*    ------
+*     ^
+* [Hello Shaku!]
+`,
+  stylus: `
+body
+  background-color: #f0f0f0
+  // @highlight
+  color: #333 
+  //     ----
+  //     ^
+  // [Hello Shaku!]
+`,
+  svelte: `
+ <script>
+ // @highlight
+  let count = 0;
+//    ---------
+//     ^
+// [Hello Shaku!]
+  // This is a single-line comment
+</script>
+
+<main>
+  <!-- @highlight -->
+  <h1>Hello Svelte!</h1>
+<!--  ------------ -->
+<!--  ^ -->
+<!-- [Hello Shaku!] -->
+
+
+  <p>The current count is {count}</p>
+</main>
+
+<style>
+  /* This is a CSS comment */
+  /* @highlight */
+  main {
+    text-align: center;
+  /*            ------ */
+  /*            ^ */
+  /*     [Hello Shaku!] */
+
+    padding: 2rem;
+  }
+</style>
+ `,
   python: `
-# @dim
+# @highlight
 def greet(name):
     print(f"Hello, {name}!")
   # -----
@@ -607,14 +1150,14 @@ def greet(name):
   # [Hello world!]
 `,
   ruby: `
-# @dim
+# @highlight
 square = variable * variable 
 #        --------
 #        ^
 #   [Hello World!]
 `,
   rust: `
-// @dim
+// @highlight
 fn main() {
   let square = variable * variable; 
   //           --------
@@ -625,7 +1168,7 @@ fn main() {
   sql: `
 -- Create a new table to store customer information
 CREATE TABLE Customers (
-  -- @dim
+  -- @highlight
     CustomerID INT PRIMARY KEY,
     FirstName VARCHAR(50),
   --          -------
@@ -634,8 +1177,79 @@ CREATE TABLE Customers (
     LastName VARCHAR(50)
 );
 `,
+  "system-verilog": `
+// @highlight start
+module ExampleModule (
+  input logic clk,
+  //    -----
+  input logic reset,
+  output logic [7:0] data
+);
+// @highlight end
+//  ^
+//[Hello World!]
+endmodule
+`,
+  tcl: `
+# @highlight
+set variable_name 42;
+# Another comment explaining the above line
+#         -------
+#          ^
+#   [Hello World!]
+`,
+  tex: `
+documentclass{article}
+
+% @highlight
+begin{document}
+
+This is some text in the document.
+%       ---------
+%       ^
+% [Hello World!]
+`,
+  toml: `
+# This is a TOML configuration file
+# @highlight
+title = "Example Config"
+description = "An example of using comments in TOML"
+#                 -------
+#                 ^
+#     [Hello Shaku!]
+
+`,
+  tsx: `
+const MyComponent: React.FC = () => {
+  return (
+    {/* @highlight */}
+
+    <div>
+      {/* This is a comment inside JSX */}
+      <h1>Hello, World!</h1>
+      {/*        -----  */}
+      {/*        ^  */}
+      {/*   [Hello World!]  */}
+    </div>
+  );
+};
+`,
+  turtle: `
+import turtle
+
+# @highlight start
+# Create a Turtle screen
+screen = turtle.Screen()
+# @highlight end
+
+# Set the background color of the screen
+screen.bgcolor("white")
+#      -------
+#       ^
+# [Hello World!]
+`,
   swift: `
-// @dim
+// @highlight
 import Foundation
 
 var variable = 10 
@@ -643,19 +1257,238 @@ var variable = 10
 //            ^
 // [Hello world!]
 `,
+  twig: `
+{# @highlight #}
+{% if condition %}
+  <p>The condition is true.</p>
+  {# ------------- #}
+  {#  ^ #}
+  {# [Hello Shaku!] #}
+{% else %}
+`,
+  typescript: `
+// @highlight start
+function add(a: number, b: number): number {
+  return a + b;
+}
+// @highlight end
+
+
+// Usage of the function
+const result = add(5, 3); // result will be 8
+//    ------
+//      ^
+// [Hello World!]
+`,
   vb: `
 Imports System
-' @dim
+' @highlight
 Namespace CommentExample
     Class Program
         ' @highlight
         Sub Main()
-            Dim x As Integer = 10
+            highlight x As Integer = 10
         '   -----
         '    ^
         ' [Hello world!]
         End Sub
     End Class
 End Namespace
+`,
+  verilog: `
+// @highlight
+module ExampleModule (
+  input wire clk,       // Clock input
+  input wire reset,     // Reset input
+  output reg [7:0] data // Data output
+//-----
+  // ^
+  //[Hello World!]
+);
+
+`,
+  vhdl: `
+-- This is a single-line comment in VHDL
+
+-- @highlight
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+--  --------------
+--   ^
+-- [Hello Shaku!]
+
+`,
+  viml: `
+" This is a single-line comment in VimL
+
+" @highlight
+let g:my_variable = 42 
+"     -----------
+"     ^
+" [Hello World!]
+`,
+  vimscript: `
+" This is a single-line comment in VimL
+
+" @highlight
+let g:my_variable = 42 
+"     -----------
+"     ^
+" [Hello World!]
+`,
+  vue: `
+<template>
+  <div>
+    <!-- @highlight -->
+    <p>{{ message }}</p>
+    <!--  ------- -->
+    <!--  ^ -->
+    <!-- [Hello Shaku!] -->
+    <button @click="increment">Increment</button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      message: "Hello, Vue!",
+    // ------
+    // ^
+    // [Hello Shaku!]
+      count: 0
+    };
+  },
+  // @highlight start
+  methods: {
+    increment() {
+      this.count++;
+    
+    }
+  }
+  // @highlight end
+
+};
+</script>
+`,
+  wasm: `
+;; This is a single-line comment in WebAssembly
+(module
+  ;; @highlight start
+  ;; This is a multi-line comment
+  ;; that spans multiple lines
+  ;; @highlight end
+
+  (func $add (param $a i32) (param $b i32) (result i32)
+    ;; This function adds two integers
+    get_local $a
+  ;;---------
+  ;; ^
+;;[Hello Shaku!]
+    get_local $b
+    i32.add
+  )
+)
+`,
+  wenyan: `
+注曰。@highlight start
+吾有一數。曰五。名之曰「長」。注曰。「「節點的數量」」。
+吾有一列。名之曰「橋」。 注曰。「「鄰接數組」」。
+注曰。@highlight end
+
+吾有二數。曰一。曰五。名之曰「開始」曰「終點」。
+注曰。    --------
+注曰。    ^
+注曰。 [Hello Shaku!]
+
+注曰。相鄰節點。
+`,
+  wgsl: `
+fn main() -> void {
+  // Initialize variables
+  var x: f32 = 5.0; // This is the value of x
+  // @highlight start
+  // Perform some calculations
+  x = x * 2.0; // Double the value of x
+  // @highlight end
+
+  // Output the result
+  log(x); // Log the value of x
+  //      ------
+  //      ^
+  // [Hello Shaku!]
+}
+`,
+  wolfram: `
+(* Define a function that calculates the square of a number *)
+square[x_] := x^2
+
+(* @highlight start *)
+(* Print a message *)
+Print["This program calculates the square of a number."]
+(*     ---- *)
+(*     ^ *)
+(*  [Hello Shaku!] *)
+
+
+(* @highlight end *)
+
+`,
+  xml: `
+<!-- @highlight -->
+<!-- This is a comment inside the root element -->
+<element1>
+    <!-- Comment for element1 -->
+    <subelement>Content</subelement>
+    <!--        _______ -->
+    <!--        ^ -->
+    <!--     [Hello Shaku!] -->
+
+</element1>
+`,
+  xsl: `
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+  <!-- This is a comment explaining the purpose of the XSLT stylesheet -->
+  
+  <!-- @highlight start -->
+  <!-- Match any element and copy it to the output unchanged -->
+  <xsl:template match="@*|node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()"/>
+    <!--   _______________ -->
+    <!--        ^ -->
+    <!--     [Hello Shaku!] -->
+    </xsl:copy>
+  </xsl:template>
+  <!-- @highlight end -->
+
+
+</xsl:stylesheet>
+`,
+  yaml: `
+# Configuration settings for an application
+# @highlight start
+app_settings:
+  name: MyApp
+  version: 1.0
+  # @highlight end
+
+  # The following line is a comment about the description
+  description: This is a sample application
+  #            ----------------
+  #            ^
+  #    [Hello World!]
+
+`,
+  zenscript: `
+// @highlight start
+// Hello
+// @highlight end
+
+print("This line is commented out")
+//     ----
+//     ^
+// [Hello Shaku!]
 `,
 };
