@@ -50,7 +50,7 @@ export function Text({
   }
 }
 
-export function Column({ children, ...rest }) {
+export function Column({ children, ...rest }: BaseProps) {
   return (
     <$.div $display="flex" $flexDirection="column" {...rest}>
       {children}
