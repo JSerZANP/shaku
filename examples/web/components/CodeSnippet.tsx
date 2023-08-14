@@ -292,16 +292,91 @@ const themes = [
 ] as const;
 
 export function CodeSnippet({ code: _code }: { code?: string }) {
-  const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
-    themes[0]
-  );
   const [lang, setLang] = useState<shiki.Lang>("javascript");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
+
+  const share = () => {
+    const query = "code=" + encodeURIComponent(code);
+    const url = location.origin + "/snippet?" + query;
+    const type = "text/plain";
+    const blob = new Blob([url], { type });
+    const data = [new ClipboardItem({ [type]: blob })];
+    navigator.clipboard.write(data).then(
+      () => alert("link copied"),
+      () => alert("failed to copy link.")
+    );
+  };
+
   useEffect(() => {
     setCode(defaultCode[lang]);
   }, [lang]);
-  const [preview, setPreview] = useState("");
+
+  return (
+    <Column $height={"100vh"} $padding={12} $gap={12}>
+      <View>
+        <Row $alignItems="center" $justifyContent="space-between" $gap={20}>
+          <Text type="headline1">Shaku Snippet</Text>
+          <$.a href="/" $textDecoration="none">
+            <Text type="headline5" $color="#0e67e4">
+              <BsStars />
+              Shaku Playground →
+            </Text>
+          </$.a>
+        </Row>
+        <Text type="body">
+          Annotate code snippet with <a href="/">Shaku Code Annotate Syntax</a>{" "}
+          and share it with the world! Created by{" "}
+          <a href="https://twitter.com/JSer_ZANP">JSer</a>.
+        </Text>
+      </View>
+
+      <Row $gap={20} $flex="1 0 0 ">
+        <Column $flex="1 0 0" $maxWidth={600}>
+          <Row $marginBottom="1.5rem">
+            <select
+              value={lang}
+              // @ts-ignore
+              onChange={(e) => setLang(e.currentTarget.value)}
+            >
+              {ALL_LANGS.map((lang) => (
+                <option value={lang} key={lang}>
+                  {lang}
+                </option>
+              ))}
+            </select>
+            <Button
+              onClick={share}
+              label="Share page with below code"
+              icon={<RiShareBoxLine />}
+            ></Button>
+          </Row>
+          <Editor
+            language={lang}
+            height="100%"
+            value={code}
+            theme="vs-dark"
+            onChange={setCode}
+            options={{
+              minimap: {
+                enabled: false,
+              },
+              lineNumbers: "off",
+            }}
+          />
+        </Column>
+        <Preview code={code} lang={lang} />
+      </Row>
+    </Column>
+  );
+}
+
+function Preview({ lang, code }: { lang?: string | null; code: string }) {
+  const [selectedTheme, setTheme] = useState<(typeof themes)[number]>(
+    themes[0]
+  );
   const [showLogo, setShowLogo] = useState(true);
+
+  const [preview, setPreview] = useState("");
 
   const render = useCallback((code, lang) => {
     getProcessor(lang).then((processor) =>
@@ -313,7 +388,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
     );
   }, []);
 
-  const debouncedRender = useDebouncedCallback(render, 1000);
+  const debouncedRender = useDebouncedCallback(render, 500);
 
   useEffect(() => {
     debouncedRender(code, lang);
@@ -321,7 +396,7 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
 
   const refPreview = useRef<HTMLDivElement>(null);
 
-  const download = () => {
+  const download = useCallback(() => {
     const elPreview = refPreview.current;
     if (elPreview == null) return;
     const offsetWidth = elPreview.offsetWidth;
@@ -382,160 +457,94 @@ export function CodeSnippet({ code: _code }: { code?: string }) {
       });
 
     return;
-  };
-
-  const share = () => {
-    const query = "code=" + encodeURIComponent(code);
-    const url = location.origin + "/snippet?" + query;
-    const type = "text/plain";
-    const blob = new Blob([url], { type });
-    const data = [new ClipboardItem({ [type]: blob })];
-    navigator.clipboard.write(data).then(
-      () => alert("link copied"),
-      () => alert("failed to copy link.")
-    );
-  };
+  }, []);
 
   return (
-    <Column $height={"100vh"} $padding={12} $gap={12}>
-      <View>
-        <Row $alignItems="center" $justifyContent="space-between" $gap={20}>
-          <Text type="headline1">Shaku Snippet</Text>
-          <$.a href="/" $textDecoration="none">
-            <Text type="headline5" $color="#0e67e4">
-              <BsStars />
-              Shaku Playground →
-            </Text>
-          </$.a>
-        </Row>
-        <Text type="body">
-          Annotate code snippet with <a href="/">Shaku Code Annotate Syntax</a>{" "}
-          and share it with the world! Created by{" "}
-          <a href="https://twitter.com/JSer_ZANP">JSer</a>.
-        </Text>
-      </View>
+    <View $flex="1 0 0">
+      <Row
+        $justifyContent="flex-start"
+        $marginBottom="1rem"
+        $gap={12}
+        $alignItems="center"
+      >
+        <Text type="headline4">Preview</Text>
 
-      <Row $gap={20} $flex="1 0 0 ">
-        <Column $flex="1 0 0" $maxWidth={600}>
-          <Row $marginBottom="1.5rem">
-            <select
-              value={lang}
-              // @ts-ignore
-              onChange={(e) => setLang(e.currentTarget.value)}
-            >
-              {ALL_LANGS.map((lang) => (
-                <option value={lang} key={lang}>
-                  {lang}
-                </option>
-              ))}
-            </select>
-            <Button
-              onClick={share}
-              label="Share page with below code"
-              icon={<RiShareBoxLine />}
-            ></Button>
-          </Row>
-          <Editor
-            language={lang}
-            height="100%"
-            value={code}
-            theme="vs-dark"
-            onChange={setCode}
-            options={{
-              minimap: {
-                enabled: false,
-              },
-              lineNumbers: "off",
-            }}
+        {themes.map((theme) => (
+          <ThemePicker
+            key={theme.name}
+            name={theme.name}
+            background={theme.background}
+            selected={selectedTheme === theme}
+            onClick={() => setTheme(theme)}
+          ></ThemePicker>
+        ))}
+        <label htmlFor="showlogo">
+          <input
+            id="showlogo"
+            type="checkbox"
+            checked={showLogo}
+            onChange={(e) => setShowLogo(e.currentTarget.checked)}
           />
-        </Column>
-        <View $flex="1 0 0">
-          <Row
-            $justifyContent="flex-start"
-            $marginBottom="1rem"
-            $gap={12}
+          show logo
+        </label>
+        <Button
+          onClick={download}
+          label="Download"
+          icon={<AiOutlineDownload />}
+        ></Button>
+      </Row>
+      <View
+        $padding="40px 40px 10px 40px"
+        $minWidth={400}
+        $backgroundColor={selectedTheme.background}
+        $width="min-content"
+        // @ts-ignore
+        style={{ ...selectedTheme.cssVars }}
+        ref={refPreview}
+      >
+        <View $flex="0 0 0" $width="max-content" $margin="auto auto">
+          <$.p
+            $backgroundColor="#24292e"
+            $margin={0}
+            $padding="15px 15px 0"
+            $display="flex"
+            $gap="8px"
+            $borderRadius="6px 6px 0 0"
             $alignItems="center"
           >
-            <Text type="headline4">Preview</Text>
-
-            {themes.map((theme) => (
-              <ThemePicker
-                key={theme.name}
-                name={theme.name}
-                background={theme.background}
-                selected={selectedTheme === theme}
-                onClick={() => setTheme(theme)}
-              ></ThemePicker>
-            ))}
-            <label htmlFor="showlogo">
-              <input
-                id="showlogo"
-                type="checkbox"
-                checked={showLogo}
-                onChange={(e) => setShowLogo(e.currentTarget.checked)}
-              />
-              show logo
-            </label>
-            <Button
-              onClick={download}
-              label="Download"
-              icon={<AiOutlineDownload />}
-            ></Button>
-          </Row>
-          <View
-            $padding="40px 40px 10px 40px"
-            $minWidth={400}
-            $backgroundColor={selectedTheme.background}
-            $width="min-content"
-            // @ts-ignore
-            style={{ ...selectedTheme.cssVars }}
-            ref={refPreview}
+            <Dot color="#ff5f56" />
+            <Dot color="#ffbd2d" />
+            <Dot color="#26c940" />
+            <$.span $color="#a39d9d" $fontSize="12px">
+              {lang}
+            </$.span>
+          </$.p>
+          <div
+            className={styles.code}
+            dangerouslySetInnerHTML={{ __html: preview }}
+          ></div>
+          <$.p
+            $backgroundColor="#24292e"
+            $margin={0}
+            $padding="10px 10px 0"
+            $display="flex"
+            $gap="8px"
+            $borderRadius="0 0 6px 6px"
+          ></$.p>
+          <$.p
+            $color="rgba(0,0,0,0.2)"
+            $textAlign="center"
+            $width="100%"
+            $fontWeight="bold"
+            $margin="10px"
+            $fontSize="12px"
+            $height="10px"
           >
-            <View $flex="0 0 0" $width="max-content" $margin="auto auto">
-              <$.p
-                $backgroundColor="#24292e"
-                $margin={0}
-                $padding="15px 15px 0"
-                $display="flex"
-                $gap="8px"
-                $borderRadius="6px 6px 0 0"
-                $alignItems="center"
-              >
-                <Dot color="#ff5f56" />
-                <Dot color="#ffbd2d" />
-                <Dot color="#26c940" />
-                <$.span $color="#a39d9d" $fontSize="12px">
-                  {lang}
-                </$.span>
-              </$.p>
-              <div
-                className={styles.code}
-                dangerouslySetInnerHTML={{ __html: preview }}
-              ></div>
-              <$.p
-                $backgroundColor="#24292e"
-                $margin={0}
-                $padding="10px 10px 0"
-                $display="flex"
-                $gap="8px"
-                $borderRadius="0 0 6px 6px"
-              ></$.p>
-              <$.p
-                $color="rgba(0,0,0,0.2)"
-                $textAlign="center"
-                $width="100%"
-                $fontWeight="bold"
-                $margin="10px"
-                $fontSize="12px"
-                $height="10px"
-              >
-                {showLogo ? "Shaku Snippet" : ""}
-              </$.p>
-            </View>
-          </View>
+            {showLogo ? "Shaku Snippet" : ""}
+          </$.p>
         </View>
-      </Row>
-    </Column>
+      </View>
+    </View>
   );
 }
 

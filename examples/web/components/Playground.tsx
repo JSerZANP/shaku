@@ -183,7 +183,7 @@ export function Playground({ code: _code }: { code?: string }) {
     );
   }, []);
 
-  const debouncedRender = useDebouncedCallback(render, 1000);
+  const debouncedRender = useDebouncedCallback(render, 500);
 
   useEffect(() => {
     debouncedRender(code);
