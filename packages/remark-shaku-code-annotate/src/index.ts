@@ -292,14 +292,17 @@ function parseComment(
   // comments start from the beginning
   const isCommentLine = line.every(
     (token) =>
-      shouldBeTreatedAsWhitespace(token) ||
+      shouldBeTreatedAsWhitespace(token, lang) ||
       token.explanation?.some((exp) =>
         exp.scopes.some((scope) => scope.scopeName.startsWith("comment"))
       )
   );
   if (!isCommentLine) return null;
 
-  const shouldTreatFirstTokenOffset = shouldBeTreatedAsWhitespace(line[0]);
+  const shouldTreatFirstTokenOffset = shouldBeTreatedAsWhitespace(
+    line[0],
+    lang
+  );
   let offset = shouldTreatFirstTokenOffset ? line[0].content.length : 0;
   let body = "";
 
@@ -398,10 +401,17 @@ function isWhitespace(str: string) {
   return /^\s+$/.test(str);
 }
 
-function shouldBeTreatedAsWhitespace(token: IThemedToken) {
+function shouldBeTreatedAsWhitespace(
+  token: IThemedToken,
+  lang?: string | null
+) {
   if (isWhitespace(token.content)) return true;
 
-  // special case for jsx
+  if (
+    !["javascript", "jsx", "tsx", "astro", "mdx", "batch"].includes(lang ?? "")
+  ) {
+    return false;
+  }
   if (
     token.explanation?.every((explanation) => {
       return (
