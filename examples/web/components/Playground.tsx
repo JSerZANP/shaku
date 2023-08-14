@@ -5,6 +5,7 @@ import withShiki from "@stefanprobst/remark-shiki";
 import { Editor } from "@monaco-editor/react";
 import { $ } from "migacss";
 import { useCallback, useEffect, useState } from "react";
+import { AiFillGithub } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
 import { remark } from "remark";
@@ -204,7 +205,17 @@ export function Playground({ code: _code }: { code?: string }) {
     <Column $height={"100vh"} $padding={12} $gap={12}>
       <View>
         <Row $alignItems="center" $justifyContent="space-between" $gap={20}>
-          <Text type="headline1">Shaku Playground</Text>
+          <Text type="headline1">
+            Shaku Playground
+            <$.a
+              href="https://github.com/JSerZANP/shaku"
+              target="_blank"
+              $fontSize={20}
+              $marginLeft={12}
+            >
+              <AiFillGithub />
+            </$.a>
+          </Text>
           <$.a href="/snippet" $textDecoration="none">
             <Text type="headline5" $color="#dc0bf0">
               <BsStars />

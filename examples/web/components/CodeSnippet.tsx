@@ -5,7 +5,7 @@ import withShiki from "@stefanprobst/remark-shiki";
 import domtoimage from "dom-to-image";
 import { $ } from "migacss";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AiOutlineDownload } from "react-icons/ai";
+import { AiFillGithub, AiOutlineDownload } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
 import { remark } from "remark";
@@ -322,7 +322,17 @@ export function CodeSnippet({
     <Column $height={"100vh"} $padding={12} $gap={12}>
       <View>
         <Row $alignItems="center" $justifyContent="space-between" $gap={20}>
-          <Text type="headline1">Shaku Snippet</Text>
+          <Text type="headline1">
+            Shaku Snippet{" "}
+            <$.a
+              href="https://github.com/JSerZANP/shaku"
+              target="_blank"
+              $fontSize={20}
+              $marginLeft={12}
+            >
+              <AiFillGithub />
+            </$.a>
+          </Text>
           <$.a href="/" $textDecoration="none">
             <Text type="headline5" $color="#0e67e4">
               <BsStars />
