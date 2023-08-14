@@ -1,7 +1,9 @@
+import { useDeferredValue, useState } from "react";
+
 import withShiki from "@stefanprobst/remark-shiki";
 import domtoimage from "dom-to-image";
 import { $ } from "migacss";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import { AiOutlineDownload } from "react-icons/ai";
 import { remark } from "remark";
 import html from "remark-html";
@@ -9,7 +11,6 @@ import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 import * as shiki from "shiki";
 import styles from "./CodeSnippet.module.css";
 import { Button, Row, Text, View } from "./bare";
-import useDebouncedCallback from "./useDebouncedCallback";
 
 const themes = [
   {
@@ -59,7 +60,7 @@ const themes = [
   },
 ] as const;
 
-function getProcessor(lang) {
+function fetchProcessor(lang) {
   return shiki
     .getHighlighter({
       theme: "github-dark",
@@ -87,6 +88,63 @@ function getProcessor(lang) {
     );
 }
 
+class Fetcher<K> {
+  data: null | K;
+  promise: null | Promise<void>;
+  error: any;
+  constructor(private fetcher: () => Promise<K>) {}
+  fetch() {
+    if (this.data != null) return this.data;
+    if (this.error != null) throw this.error;
+    if (!this.promise) {
+      this.promise = this.fetcher()
+        .then((data) => {
+          this.data = data;
+        })
+        .catch((error) => {
+          this.error = error;
+        });
+    }
+    throw this.promise;
+  }
+}
+
+const processorStore = new Map<string, Fetcher<ReturnType<typeof remark>>>();
+const getProcessor = (lang: string) => {
+  if (!processorStore.has(lang)) {
+    processorStore.set(lang, new Fetcher(() => fetchProcessor(lang)));
+  }
+  return processorStore.get(lang).fetch();
+};
+
+const processedResultStore = new Map<string, Fetcher<string>>();
+const getProcessedResult = (
+  lang: string,
+  code: string,
+  processor: ReturnType<typeof remark>
+) => {
+  const key = `${lang}|${code}`;
+
+  if (!processedResultStore.has(key)) {
+    processedResultStore.set(
+      key,
+      new Fetcher(() =>
+        processor
+          .process(`\`\`\`${lang} annotate\n${code}\n\`\`\``)
+          .then((data) => {
+            return data.toString();
+          })
+      )
+    );
+
+    if (processedResultStore.size > 5) {
+      const firstResultKey = processedResultStore.entries().next().value.key;
+      processedResultStore.delete(firstResultKey);
+    }
+  }
+  return processedResultStore.get(key).fetch();
+};
+
 export default function CodeSnippetPreview({
   lang,
   code,
@@ -99,23 +157,10 @@ export default function CodeSnippetPreview({
   );
   const [showLogo, setShowLogo] = useState(true);
 
-  const [preview, setPreview] = useState("");
-
-  const render = useCallback((code, lang) => {
-    getProcessor(lang).then((processor) =>
-      processor
-        .process(`\`\`\`${lang} annotate\n${code}\n\`\`\``)
-        .then((data) => {
-          setPreview(data.toString());
-        })
-    );
-  }, []);
-
-  const debouncedRender = useDebouncedCallback(render, 500);
-
-  useEffect(() => {
-    debouncedRender(code, lang);
-  }, [code, debouncedRender, lang]);
+  const deferredLang = useDeferredValue(lang);
+  const deferredCode = useDeferredValue(code);
+  const processor = getProcessor(deferredLang);
+  const preview = getProcessedResult(deferredLang, deferredCode, processor);
 
   const refPreview = useRef<HTMLDivElement>(null);
 
