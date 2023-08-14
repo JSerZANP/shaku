@@ -2,12 +2,15 @@
 
 import { Editor } from "@monaco-editor/react";
 import { $ } from "migacss";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
-import PlaygroundPreview from "./PlaygroundPreview";
 import { Button, Column, Row, Text, View } from "./bare";
+const PlaygroundPreview = dynamic(() => import("./PlaygroundPreview"), {
+  ssr: false,
+});
 
 const defaultMarkdown = `
 
