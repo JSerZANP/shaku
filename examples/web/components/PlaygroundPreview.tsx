@@ -42,7 +42,7 @@ const getProcessedResult = (
 export default function PlaygroundPreview({ code }: { code: string }) {
   const deferredCode = useDeferredValue(code);
   const processor = getProcessor();
-  const processedResult = getProcessedResult(code, processor);
+  const processedResult = getProcessedResult(deferredCode, processor);
   return (
     <View $flex="1 0 0">
       <div
