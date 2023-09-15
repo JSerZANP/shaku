@@ -195,7 +195,7 @@ function useEvent(event, handler) {
     [event, handler]
   );
 
-  const dettach = useCallback(() => {
+  const detach = useCallback(() => {
     if (refClean.current) {
       refClean.current();
     }
@@ -205,7 +205,7 @@ function useEvent(event, handler) {
 
   const ref = (el: HTMLElement) => {
     if (el === null) {
-      dettach();
+      detach();
     } else {
       attach(el);
     }
