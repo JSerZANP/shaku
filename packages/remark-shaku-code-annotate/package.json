@@ -8,7 +8,7 @@
     "remark-html": "^15.0.2",
     "remark-parse": "^10.0.2",
     "remark-rehype": "^10.1.0",
-    "shaku-code-annotate": "^0.0.9",
+    "shaku-code-annotate": "*",
     "shiki": "^0.14.2",
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.2"
