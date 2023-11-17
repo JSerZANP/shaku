@@ -142,10 +142,48 @@ exports[`parseLine() can parse comment lines >    [This is annotation]   1`] = `
 }
 `;
 
+exports[`parseLine() can parse comment lines >    [This is annotation] <<<   1`] = `
+{
+  "config": {
+    "content": "This is annotation",
+    "offset": 0,
+  },
+  "type": "AnnotationLine",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    [This is annotation]<   1`] = `
+{
+  "config": {
+    "content": "This is annotation",
+    "offset": 2,
+  },
+  "type": "AnnotationLine",
+}
+`;
+
 exports[`parseLine() can parse comment lines >    ^   1`] = `
 {
   "config": {
     "offset": 3,
+  },
+  "type": "DirectiveCallout",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    ^ <<<  1`] = `
+{
+  "config": {
+    "offset": 0,
+  },
+  "type": "DirectiveCallout",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    ^<   1`] = `
+{
+  "config": {
+    "offset": 2,
   },
   "type": "DirectiveCallout",
 }
@@ -156,6 +194,28 @@ exports[`parseLine() can parse comment lines >   ......   1`] = `
   "config": {
     "content": "......",
     "offset": 2,
+    "style": "dotted",
+  },
+  "type": "DirectiveUnderline",
+}
+`;
+
+exports[`parseLine() can parse comment lines >   ...... <<   1`] = `
+{
+  "config": {
+    "content": "......",
+    "offset": 0,
+    "style": "dotted",
+  },
+  "type": "DirectiveUnderline",
+}
+`;
+
+exports[`parseLine() can parse comment lines >   ......<   1`] = `
+{
+  "config": {
+    "content": "......",
+    "offset": 1,
     "style": "dotted",
   },
   "type": "DirectiveUnderline",
@@ -173,11 +233,55 @@ exports[`parseLine() can parse comment lines >   ~~~~~~~~   1`] = `
 }
 `;
 
+exports[`parseLine() can parse comment lines >   ~~~~~~~~ <<  1`] = `
+{
+  "config": {
+    "content": "~~~~~~~~",
+    "offset": 0,
+    "style": "wavy",
+  },
+  "type": "DirectiveUnderline",
+}
+`;
+
+exports[`parseLine() can parse comment lines >   ~~~~~~~~<   1`] = `
+{
+  "config": {
+    "content": "~~~~~~~~",
+    "offset": 1,
+    "style": "wavy",
+  },
+  "type": "DirectiveUnderline",
+}
+`;
+
 exports[`parseLine() can parse comment lines >   -------   1`] = `
 {
   "config": {
     "content": "-------",
     "offset": 2,
+    "style": "solid",
+  },
+  "type": "DirectiveUnderline",
+}
+`;
+
+exports[`parseLine() can parse comment lines >   ------- <<   1`] = `
+{
+  "config": {
+    "content": "-------",
+    "offset": 0,
+    "style": "solid",
+  },
+  "type": "DirectiveUnderline",
+}
+`;
+
+exports[`parseLine() can parse comment lines >   -------<   1`] = `
+{
+  "config": {
+    "content": "-------",
+    "offset": 1,
     "style": "solid",
   },
   "type": "DirectiveUnderline",

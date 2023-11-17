@@ -63,9 +63,19 @@ const a = 1;
    /* [This is line two] */
 \`\`\`
 `);
+
+  const result4 = await process(`
+\`\`\`js annotate
+const a = 1;
+/*      ^<<*/
+  //    [This is line 1] <<
+   /*  [This is line two]< */
+\`\`\`
+`);
   expect(result1.value).toMatchSnapshot();
   expect(result2.value).toEqual(result1.value);
   expect(result3.value).toEqual(result1.value);
+  expect(result4.value).toEqual(result1.value);
 });
 
 test("able to render solid underline: ----", async () => {
@@ -85,9 +95,17 @@ const a = 1;
       [This is line two] */
 \`\`\`
 `);
-
+  const result3 = await process(`
+\`\`\`js annotate
+const a = 1;
+   /*  -----<   */
+  /*    [This is line 1]  <<
+          [This is line two] <<<< */
+\`\`\`
+`);
   expect(result1.value).toMatchSnapshot();
   expect(result2.value).toEqual(result1.value);
+  expect(result3.value).toEqual(result1.value);
 });
 
 test("able to render dotted underline: .....", async () => {
@@ -107,8 +125,17 @@ const a = 1;
       [This is line two] */
 \`\`\`
 `);
+  const result3 = await process(`
+\`\`\`js annotate
+const a = 1;
+   /*  .....< */
+  /*    [This is line 1]  <<
+         [This is line two]<<< */
+\`\`\`
+`);
   expect(result1.value).toMatchSnapshot();
   expect(result2.value).toEqual(result1.value);
+  expect(result3.value).toEqual(result1.value);
 });
 
 test("able to render wavy underline: ~~~~~ ", async () => {
@@ -130,8 +157,18 @@ const a = 1;
 \`\`\`
 `);
 
+  const result3 = await process(`
+\`\`\`js annotate
+const a = 1;
+   /*  ~~~~~< */
+  /*    [This is line 1] << */
+   /*    [This is line two]   <<< */
+\`\`\`
+`);
+
   expect(result1.value).toMatchSnapshot();
   expect(result2.value).toEqual(result1.value);
+  expect(result3.value).toEqual(result1.value);
 });
 
 test("able to render underline without comments ", async () => {

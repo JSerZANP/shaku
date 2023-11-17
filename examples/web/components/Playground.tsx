@@ -138,6 +138,24 @@ function component() {
   }
 \`\`\`
 
+## Shift position with \`<\`
+
+Sometimes it could be annoying when you want to target the start of the line. You can use \`<\` to shift left the annotation with one unit,
+repeat it(\`<<\`, \`<<<\` .etc) to shift more.
+
+\`\`\`tsx annotate
+function component() {
+//^<<
+//[This is very beginning ] <<
+   return <Button
+            class="button"
+            //--------------<<
+            //[Hello World!]<<<
+            disabled
+          />
+}
+\`\`\`
+
 ## How to Use
 
 Visit [shaku on github](https://github.com/JSerZANP/shaku/tree/main) to find the right plugin.

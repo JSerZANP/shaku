@@ -9,11 +9,11 @@ type ShakuDirectiveUnderline = {
   };
 };
 const RegShakuDirectiveUnderlineSolid =
-  /^(?<leadingSpaces>\s*)(?<content>-+)\s*$/;
+  /^(?<leadingSpaces>\s*)(?<content>-+)\s*(?<shift><*)\s*$/;
 const RegShakuDirectiveUnderlineWavy =
-  /^(?<leadingSpaces>\s*)(?<content>~+)\s*$/;
+  /^(?<leadingSpaces>\s*)(?<content>~+)\s*(?<shift><*)\s*$/;
 const RegShakuDirectiveUnderlineDotted =
-  /^(?<leadingSpaces>\s*)(?<content>\.+)\s*$/;
+  /^(?<leadingSpaces>\s*)(?<content>\.+)\s*(?<shift><*)\s*$/;
 
 type ShakuAnnotationLine = {
   type: "AnnotationLine";
@@ -23,7 +23,8 @@ type ShakuAnnotationLine = {
   };
 };
 
-const RegShakuAnnotationLine = /^(?<leadingSpaces>\s*)\[(?<content>.+)\]\s*$/;
+const RegShakuAnnotationLine =
+  /^(?<leadingSpaces>\s*)\[(?<content>.+)\]\s*(?<shift><*)\s*$/;
 
 type ShakuDirectiveCallout = {
   type: "DirectiveCallout";
@@ -32,7 +33,7 @@ type ShakuDirectiveCallout = {
   };
 };
 
-const RegShakuDirectiveCallout = /^(?<leadingSpaces>\s*)\^\s*$/;
+const RegShakuDirectiveCallout = /^(?<leadingSpaces>\s*)\^\s*(?<shift><*)\s*$/;
 
 // type ShakuDirectiveFloatCallout = {
 //   type: 'DirectiveFloatCallout',
@@ -101,7 +102,8 @@ export const parseLine = (line: string): ShakuLine | null => {
       type: "DirectiveUnderline",
       config: {
         offset:
-          matchShakuDirectiveUnderlineSolid.groups?.leadingSpaces.length ?? 0,
+          (matchShakuDirectiveUnderlineSolid.groups?.leadingSpaces.length ??
+            0) - (matchShakuDirectiveUnderlineSolid.groups?.shift.length ?? 0),
         content: matchShakuDirectiveUnderlineSolid.groups?.content ?? "",
         style: "solid",
       },
@@ -116,7 +118,8 @@ export const parseLine = (line: string): ShakuLine | null => {
       type: "DirectiveUnderline",
       config: {
         offset:
-          matchShakuDirectiveUnderlineWavy.groups?.leadingSpaces.length ?? 0,
+          (matchShakuDirectiveUnderlineWavy.groups?.leadingSpaces.length ?? 0) -
+          (matchShakuDirectiveUnderlineWavy.groups?.shift.length ?? 0),
         content: matchShakuDirectiveUnderlineWavy.groups?.content ?? "",
         style: "wavy",
       },
@@ -130,7 +133,8 @@ export const parseLine = (line: string): ShakuLine | null => {
       type: "DirectiveUnderline",
       config: {
         offset:
-          matchShakuDirectiveUnderlineDotted.groups?.leadingSpaces.length ?? 0,
+          (matchShakuDirectiveUnderlineDotted.groups?.leadingSpaces.length ??
+            0) - (matchShakuDirectiveUnderlineDotted.groups?.shift.length ?? 0),
         content: matchShakuDirectiveUnderlineDotted.groups?.content ?? "",
         style: "dotted",
       },
@@ -142,7 +146,9 @@ export const parseLine = (line: string): ShakuLine | null => {
     return {
       type: "AnnotationLine",
       config: {
-        offset: matchShakuAnnotationLine.groups?.leadingSpaces.length ?? 0,
+        offset:
+          (matchShakuAnnotationLine.groups?.leadingSpaces.length ?? 0) -
+          (matchShakuAnnotationLine.groups?.shift.length ?? 0),
         content: matchShakuAnnotationLine.groups?.content ?? "",
       },
     };
@@ -153,7 +159,9 @@ export const parseLine = (line: string): ShakuLine | null => {
     return {
       type: "DirectiveCallout",
       config: {
-        offset: matchShakuDirectiveCallout.groups?.leadingSpaces.length ?? 0,
+        offset:
+          (matchShakuDirectiveCallout.groups?.leadingSpaces.length ?? 0) -
+          (matchShakuDirectiveCallout.groups?.shift.length ?? 0),
       },
     };
   }
