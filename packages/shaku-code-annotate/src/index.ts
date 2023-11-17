@@ -9,7 +9,7 @@ type ShakuDirectiveUnderline = {
   };
 };
 const RegShakuDirectiveUnderlineSolid =
-  /^(?<leadingSpaces>\s*)(?<content>-+)\s*(?<shift><*)\s*$/;
+  /^(?<leadingSpaces>\s*)(?<content>(-|_)+)\s*(?<shift><*)\s*$/;
 const RegShakuDirectiveUnderlineWavy =
   /^(?<leadingSpaces>\s*)(?<content>~+)\s*(?<shift><*)\s*$/;
 const RegShakuDirectiveUnderlineDotted =

@@ -35,7 +35,7 @@
 }
 
 .preview a {
-  color: var(--color-link-sub);
+  color: var(--color-link-main);
 }
 
 .preview blockquote {

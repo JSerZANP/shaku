@@ -49,7 +49,7 @@ export const remarkShakuCodeAnnotate = (
         // generate the html from the tokens
         let html = `<pre class="shiki ${theme.name}" style="color:${foregroundColor};background-color:${backgroundColor}">`;
         html += `<div class="code-container"><code>`;
-        const parsedLines = parseLines(lines);
+        const parsedLines = parseLines(lines, node.lang);
         const hasFocus = hasShakuDirectiveFocus(parsedLines);
         let shouldHighlighNextSourceLine = false;
         let shouldDimNextSourceLine = false;
@@ -261,7 +261,7 @@ function escapeHtml(html: string) {
 
 /**
  * different kinds of comments have different interpretations
- * Below are some common examples, these are not exaustive
+ * Below are some common examples, these are not exhaustive
  * I'm not sure if there are other cases for different languages
  *
  * "// aaa" => [{content: "// aaa", explanation: [{content: '//'}, {content: ' aaa'}]}]
@@ -281,51 +281,99 @@ function escapeHtml(html: string) {
  * 4. the first meaningful token has the comment body
  *   - find the first explanation that is not `punctuation.definition`.
  */
-function parseComment(line: IThemedToken[]): null | {
+function parseComment(
+  line: IThemedToken[],
+  lang?: null | string
+): null | {
   offset: number;
   body: string;
 } {
   if (line.length === 0) return null;
-  // comments start from the begining
+  // comments start from the beginning
   const isCommentLine = line.every(
     (token) =>
-      shouldBeTreatedAsWhitespace(token) ||
+      shouldBeTreatedAsWhitespace(token, lang) ||
       token.explanation?.some((exp) =>
         exp.scopes.some((scope) => scope.scopeName.startsWith("comment"))
       )
   );
   if (!isCommentLine) return null;
 
-  const shouldTreatFirstTokenOffset = shouldBeTreatedAsWhitespace(line[0]);
+  const shouldTreatFirstTokenOffset = shouldBeTreatedAsWhitespace(
+    line[0],
+    lang
+  );
   let offset = shouldTreatFirstTokenOffset ? line[0].content.length : 0;
   let body = "";
-  const tokenWithBody = shouldTreatFirstTokenOffset ? line[1] : line[0];
-  if (tokenWithBody != null) {
-    const explanations = tokenWithBody.explanation ?? [];
 
-    for (let i = 0; i < explanations.length; i++) {
-      const explanation = explanations[i];
-      // find the first explanation that is not element tag
-      if (
-        explanation.scopes.every(
-          (scope) => !scope.scopeName.startsWith("punctuation.definition")
-        )
-      ) {
-        body = explanation.content;
-        break;
+  // special case for some languages that one comment has multiple tokens
+  // TODO: maybe we should give up the "clever" approach because it is not solid
+  // rather we can just try to trim for each lang?
+  if (
+    lang != null &&
+    [
+      "ada",
+      "berry",
+      "elm",
+      "haml",
+      "handlebars",
+      "hlsl",
+      "jssm",
+      "kotlin",
+      "nix",
+      "ocaml",
+      "prisma",
+      "proto",
+      "sas",
+      "sass",
+      "shaderlab",
+      "shader",
+      "solidity",
+      "viml",
+      "vimscript",
+      "wenyan",
+    ].includes(lang)
+  ) {
+    body = line
+      .slice(shouldTreatFirstTokenOffset ? 1 : 0)
+      .map((token) => token.content)
+      .join("");
+  } else {
+    const tokenWithBody = shouldTreatFirstTokenOffset ? line[1] : line[0];
+
+    if (tokenWithBody != null) {
+      const explanations = tokenWithBody.explanation ?? [];
+
+      for (let i = 0; i < explanations.length; i++) {
+        const explanation = explanations[i];
+        // find the first explanation that is not element tag
+        if (
+          explanation.scopes.every(
+            (scope) =>
+              !scope.scopeName.startsWith("punctuation.definition") &&
+              !isWhitespace(explanation.content)
+          )
+        ) {
+          body = explanation.content;
+          break;
+        }
+        // for other none tokens, treat them as offset
+        offset += explanation.content.length;
       }
-      // for other none tokens, treat them as offset
-      offset += explanation.content.length;
     }
   }
+  // for some languages, we are not able to extract body from above logic
+  // so we have to trim manually
+  const { trimmedBody, offset: extraOffset } = trimCommentBody(body, lang);
+
   return {
-    offset,
-    body,
+    offset: offset + extraOffset,
+    body: trimmedBody,
   };
 }
-function parseLines(lines: IThemedToken[][]) {
+function parseLines(lines: IThemedToken[][], lang?: string | null) {
   return lines.map((line) => {
-    const parsedComment = parseComment(line);
+    const parsedComment = parseComment(line, lang);
     if (parsedComment != null) {
       const { body, offset } = parsedComment;
       const shakuLine = parseLine(body);
@@ -353,10 +401,17 @@ function isWhitespace(str: string) {
   return /^\s+$/.test(str);
 }
 
-function shouldBeTreatedAsWhitespace(token: IThemedToken) {
+function shouldBeTreatedAsWhitespace(
+  token: IThemedToken,
+  lang?: string | null
+) {
   if (isWhitespace(token.content)) return true;
 
-  // special case for jsx
+  if (
+    !["javascript", "jsx", "tsx", "astro", "mdx", "batch"].includes(lang ?? "")
+  ) {
+    return false;
+  }
   if (
     token.explanation?.every((explanation) => {
       return (
@@ -370,6 +425,25 @@ function shouldBeTreatedAsWhitespace(token: IThemedToken) {
                 "punctuation.section.embedded.begin"
               ) ||
               scope.scopeName.startsWith("punctuation.section.embedded.end")
+          )) ||
+        (explanation.scopes.some((scope) =>
+          scope.scopeName.startsWith("source.astro")
+        ) &&
+          explanation.scopes.some(
+            (scope) =>
+              scope.scopeName.startsWith(
+                "punctuation.section.embedded.begin.astro"
+              ) ||
+              scope.scopeName.startsWith(
+                "punctuation.section.embedded.end.astro"
+              )
+          )) ||
+        explanation.scopes.some(
+          (scope) => scope.scopeName === "keyword.command.rem.batchfile"
+        ) ||
+        (explanation.scopes.some((scope) => scope.scopeName === "source.mdx") &&
+          explanation.scopes.some((scope) =>
+            scope.scopeName.startsWith("string.other.begin.expression.mdx")
           ))
       );
     })
@@ -379,6 +453,186 @@ function shouldBeTreatedAsWhitespace(token: IThemedToken) {
   return false;
 }
 
+const commentMarkers: Record<string, { head?: RegExp; tail?: RegExp }> = {
+  abap: {
+    head: /^\s*\*/,
+  },
+  ada: {
+    head: /^\s*\-\-/,
+  },
+  apache: {
+    head: /^\s*#/,
+  },
+  "actionscript-3": {
+    head: /^\s*\/\//,
+  },
+  asm: {
+    head: /^\s*;/,
+  },
+  awk: {
+    head: /^\s*#/,
+  },
+  ballerina: {
+    head: /^\s*\/\//,
+  },
+  berry: {
+    head: /^\s*#/,
+  },
+  bicep: {
+    head: /^\s*\/\//,
+  },
+  clarity: {
+    head: /^\s*;;/,
+  },
+  cmake: {
+    head: /^\s*#/,
+  },
+  cobol: {
+    head: /^\s*\*/,
+  },
+  d: {
+    head: /^\s*\/\//,
+  },
+  elm: {
+    head: /^\s*--/,
+  },
+  dart: {
+    head: /^\s*\/\//,
+  },
+  erlang: {
+    head: /^\s*%/,
+  },
+  fsharp: {
+    head: /^\s*\/\//,
+  },
+  "f#": {
+    head: /^\s*\/\//,
+  },
+  "git-commit": {
+    head: /^\s*#/,
+  },
+  graphql: {
+    head: /^\s*#/,
+  },
+  haml: {
+    head: /^\s*-#/,
+  },
+  handlebars: {
+    head: /^\s*\{\{!--/,
+    tail: /--\}\}\s*$/,
+  },
+  hlsl: {
+    head: /^\s*\/\//,
+  },
+  json5: {
+    head: /^\s*\/\//,
+  },
+  jsonnet: {
+    head: /^\s*\/\//,
+  },
+  jssm: {
+    head: /^\s*\/\//,
+  },
+  rust: {
+    head: /^\s*\/\//,
+  },
+  kotlin: {
+    head: /^\s*\/\//,
+  },
+  kusto: {
+    head: /^\s*\/\//,
+  },
+  kql: {
+    head: /^\s*\/\//,
+  },
+  mermaid: {
+    head: /^\s*%%/,
+  },
+  nginx: {
+    head: /^\s*#/,
+  },
+  nix: {
+    head: /^\s*#/,
+  },
+  ocaml: {
+    head: /^\s*\(\*/,
+    tail: /\s*\*\)$/,
+  },
+  plsql: {
+    head: /^\s*--/,
+  },
+  powerquery: {
+    head: /^\s*\/\//,
+  },
+  prisma: {
+    head: /^\s*\/\//,
+  },
+  proto: {
+    head: /^\s*\/\//,
+  },
+  sas: {
+    head: /^\s*\/\*/,
+    tail: /\s*\*\/$/,
+  },
+  sass: {
+    head: /^\s*\/\//,
+  },
+  shaderlab: {
+    head: /^\s*\/\//,
+  },
+  shader: {
+    head: /^\s*\/\//,
+  },
+  solidity: {
+    head: /^\s*\/\//,
+  },
+  sparql: {
+    head: /^\s*#/,
+  },
+  turtle: {
+    head: /^\s*#/,
+  },
+  vhdl: {
+    head: /^\s*--/,
+  },
+  viml: {
+    head: /^\s*"/,
+  },
+  vimscript: {
+    head: /^\s*"/,
+  },
+  wenyan: {
+    head: /^\s*注曰。/,
+  },
+  wgsl: {
+    head: /^\s*\/\//,
+  },
+  zenscript: {
+    head: /^\s*\/\//,
+  },
+};
+
+function trimCommentBody(body: string, lang?: string | null) {
+  let trimmedBody = body;
+  let offset = 0;
+  if (lang != null && lang in commentMarkers) {
+    const { head, tail } = commentMarkers[lang];
+    if (head != null) {
+      trimmedBody = trimmedBody.replace(head, "");
+      offset = body.length - trimmedBody.length;
+    }
+    if (tail != null) {
+      trimmedBody = trimmedBody.replace(tail, "");
+    }
+  }
+  return {
+    trimmedBody,
+    offset,
+  };
+}
+
 function assertsNever(data: never) {
   throw new Error("expected never but got: " + data);
 }
+
+export { defaultCode } from "./defaultCode";

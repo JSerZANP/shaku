@@ -1,19 +1,16 @@
 "use client";
 
-import withShiki from "@stefanprobst/remark-shiki";
-
 import { Editor } from "@monaco-editor/react";
 import { $ } from "migacss";
-import { useCallback, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+import { AiFillGithub } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
-import { remark } from "remark";
-import html from "remark-html";
-import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
-import * as shiki from "shiki";
-import styles from "./Playground.module.css";
 import { Button, Column, Row, Text, View } from "./bare";
-import useDebouncedCallback from "./useDebouncedCallback";
+const PlaygroundPreview = dynamic(() => import("./PlaygroundPreview"), {
+  ssr: false,
+});
 
 const defaultMarkdown = `
 
@@ -122,7 +119,9 @@ function useSomeEffect({blog}) {
 }
 \`\`\`
 
-## Also works in JSX/TSX
+## Support 150+ languages, also in JSX/TSX
+
+Try out all language demos in [Shaku Snippet](/snippet).
 
 \`\`\`tsx annotate
 function component() {
@@ -161,51 +160,8 @@ function component() {
 Visit [shaku on github](https://github.com/JSerZANP/shaku/tree/main) to find the right plugin.
 `;
 
-function getProcessor() {
-  return shiki
-    .getHighlighter({
-      theme: "github-light",
-      langs: ["javascript", "css", "jsx", "html", "typescript", "tsx"],
-      paths: {
-        themes: "/_next/static/shiki/themes",
-        wasm: "/_next/static/shiki/dist",
-        languages: "/_next/static/shiki/languages",
-      },
-    })
-    .then((highlighter) =>
-      remark()
-        .use(remarkShakuCodeAnnotate, {
-          theme: "github-light",
-          langs: ["javascript", "css", "jsx", "html", "typescript", "tsx"],
-
-          paths: {
-            themes: "/_next/static/shiki/themes",
-            wasm: "/_next/static/shiki/dist",
-            languages: "/_next/static/shiki/languages",
-          },
-        })
-        .use(withShiki, { highlighter })
-        .use(html, { sanitize: false })
-    );
-}
-
 export function Playground({ code: _code }: { code?: string }) {
   const [code, setCode] = useState(_code ?? defaultMarkdown);
-  const [preview, setPreview] = useState("");
-
-  const render = useCallback((code) => {
-    getProcessor().then((processor) =>
-      processor.process(code).then((data) => {
-        setPreview(data.toString());
-      })
-    );
-  }, []);
-
-  const debouncedRender = useDebouncedCallback(render, 1000);
-
-  useEffect(() => {
-    debouncedRender(code);
-  }, [code, debouncedRender]);
 
   const share = () => {
     const query = "code=" + encodeURIComponent(code);
@@ -222,7 +178,17 @@ export function Playground({ code: _code }: { code?: string }) {
     <Column $height={"100vh"} $padding={12} $gap={12}>
       <View>
         <Row $alignItems="center" $justifyContent="space-between" $gap={20}>
-          <Text type="headline1">Shaku Playground</Text>
+          <Text type="headline1">
+            Shaku Playground
+            <$.a
+              href="https://github.com/JSerZANP/shaku"
+              target="_blank"
+              $fontSize={20}
+              $marginLeft={12}
+            >
+              <AiFillGithub />
+            </$.a>
+          </Text>
           <$.a href="/snippet" $textDecoration="none">
             <Text type="headline5" $color="#dc0bf0">
               <BsStars />
@@ -246,7 +212,7 @@ export function Playground({ code: _code }: { code?: string }) {
         ></Button>
       </Row>
       <Row $gap={20} $flex="1 0 0 ">
-        <Column $flex="1 0 0">
+        <Column $flex="1 0 0" $maxWidth={700}>
           <Editor
             defaultLanguage="markdown"
             height="100%"
@@ -255,12 +221,7 @@ export function Playground({ code: _code }: { code?: string }) {
             onChange={setCode}
           />
         </Column>
-        <View $flex="1 0 0">
-          <div
-            dangerouslySetInnerHTML={{ __html: preview }}
-            className={styles.preview}
-          ></div>
-        </View>
+        <PlaygroundPreview code={code} />
       </Row>
     </Column>
   );
