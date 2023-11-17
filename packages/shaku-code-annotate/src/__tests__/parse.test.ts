@@ -4,81 +4,42 @@ import { parseLine, shouldApplyAnnotation } from "../index";
 describe("parseLine() can parse comment lines", () => {
   test("  -------  ", () => {
     const result = parseLine("  -------");
-    expect(result).toEqual({
-      type: "DirectiveUnderline",
-      config: {
-        content: "-------",
-        offset: 2,
-        style: "solid",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("  ~~~~~~~~  ", () => {
     const result = parseLine("  ~~~~~~~~");
-    expect(result).toEqual({
-      type: "DirectiveUnderline",
-      config: {
-        content: "~~~~~~~~",
-        offset: 2,
-        style: "wavy",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("  ......  ", () => {
     const result = parseLine("  ......");
-    expect(result).toEqual({
-      type: "DirectiveUnderline",
-      config: {
-        content: "......",
-        offset: 2,
-        style: "dotted",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   [This is annotation]  ", () => {
     const result = parseLine("   [This is annotation]");
-    expect(result).toEqual({
-      type: "AnnotationLine",
-      config: {
-        content: "This is annotation",
-        offset: 3,
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   ^  ", () => {
     const result = parseLine("   ^  ");
-    expect(result).toEqual({
-      type: "DirectiveCallout",
-      config: {
-        offset: 3,
-      },
-    });
+    expect(result).toMatchSnapshot();
+  });
+
+  test("   ^  ", () => {
+    const result = parseLine("   ^  ");
+    expect(result).toMatchSnapshot();
   });
 
   test("   @collapse start ", () => {
     const result = parseLine("   @collapse start ");
-    expect(result).toEqual({
-      type: "DirectiveCollapse",
-      config: {
-        offset: 3,
-        mark: "start",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @collapse end ", () => {
     const result = parseLine("   @collapse end ");
-    expect(result).toEqual({
-      type: "DirectiveCollapse",
-      config: {
-        offset: 3,
-        mark: "end",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @collapse unexpected ", () => {
@@ -87,42 +48,22 @@ describe("parseLine() can parse comment lines", () => {
 
   test("   @highlight start ", () => {
     const result = parseLine("   @highlight start ");
-    expect(result).toEqual({
-      type: "DirectiveHighlight",
-      config: {
-        mark: "start",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @highlight end ", () => {
     const result = parseLine("   @highlight end ");
-    expect(result).toEqual({
-      type: "DirectiveHighlight",
-      config: {
-        mark: "end",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @highlight ", () => {
     const result = parseLine("   @highlight ");
-    expect(result).toEqual({
-      type: "DirectiveHighlight",
-      config: {
-        mark: "below",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @highlight below ", () => {
     const result = parseLine("   @highlight below ");
-    expect(result).toEqual({
-      type: "DirectiveHighlight",
-      config: {
-        mark: "below",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @highlight unexpected ", () => {
@@ -130,42 +71,22 @@ describe("parseLine() can parse comment lines", () => {
   });
   test("   @dim start ", () => {
     const result = parseLine("   @dim start ");
-    expect(result).toEqual({
-      type: "DirectiveDim",
-      config: {
-        mark: "start",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @dim end ", () => {
     const result = parseLine("   @dim end ");
-    expect(result).toEqual({
-      type: "DirectiveDim",
-      config: {
-        mark: "end",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @dim ", () => {
     const result = parseLine("   @dim ");
-    expect(result).toEqual({
-      type: "DirectiveDim",
-      config: {
-        mark: "below",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @dim below ", () => {
     const result = parseLine("   @dim below ");
-    expect(result).toEqual({
-      type: "DirectiveDim",
-      config: {
-        mark: "below",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @dim unexpected ", () => {
@@ -173,42 +94,22 @@ describe("parseLine() can parse comment lines", () => {
   });
   test("   @focus start ", () => {
     const result = parseLine("   @focus start ");
-    expect(result).toEqual({
-      type: "DirectiveFocus",
-      config: {
-        mark: "start",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @focus end ", () => {
     const result = parseLine("   @focus end ");
-    expect(result).toEqual({
-      type: "DirectiveFocus",
-      config: {
-        mark: "end",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @focus ", () => {
     const result = parseLine("   @focus ");
-    expect(result).toEqual({
-      type: "DirectiveFocus",
-      config: {
-        mark: "below",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @focus below ", () => {
     const result = parseLine("   @focus below ");
-    expect(result).toEqual({
-      type: "DirectiveFocus",
-      config: {
-        mark: "below",
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 
   test("   @focus unexpected ", () => {
