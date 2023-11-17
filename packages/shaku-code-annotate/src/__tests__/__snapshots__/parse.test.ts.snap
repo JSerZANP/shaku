@@ -20,6 +20,8 @@ exports[`parseLine() can parse comment lines >    @collapse start  1`] = `
 }
 `;
 
+exports[`parseLine() can parse comment lines >    @collapse unexpected  1`] = `null`;
+
 exports[`parseLine() can parse comment lines >    @dim  1`] = `
 {
   "config": {
@@ -29,7 +31,7 @@ exports[`parseLine() can parse comment lines >    @dim  1`] = `
 }
 `;
 
-exports[`parseLine() can parse comment lines >    @dim below  1`] = `
+exports[`parseLine() can parse comment lines >    @dim below 1`] = `
 {
   "config": {
     "mark": "below",
@@ -128,6 +130,8 @@ exports[`parseLine() can parse comment lines >    @highlight start  1`] = `
 }
 `;
 
+exports[`parseLine() can parse comment lines >    @highlight unexpected  1`] = `null`;
+
 exports[`parseLine() can parse comment lines >    [This is annotation]   1`] = `
 {
   "config": {
@@ -139,15 +143,6 @@ exports[`parseLine() can parse comment lines >    [This is annotation]   1`] = `
 `;
 
 exports[`parseLine() can parse comment lines >    ^   1`] = `
-{
-  "config": {
-    "offset": 3,
-  },
-  "type": "DirectiveCallout",
-}
-`;
-
-exports[`parseLine() can parse comment lines >    ^   2`] = `
 {
   "config": {
     "offset": 3,
