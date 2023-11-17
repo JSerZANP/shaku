@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.0.9
+
+### Patch Changes
+
+- enable shift operator
+
 ## 0.0.8
 
 ### Patch Changes

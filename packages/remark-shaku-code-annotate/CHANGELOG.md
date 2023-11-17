@@ -1,5 +1,13 @@
 # remark-shaku-code-annotate
 
+## 0.0.12
+
+### Patch Changes
+
+- enable shift operator
+- Updated dependencies
+  - shaku-code-annotate@0.0.9
+
 ## 0.0.11
 
 ### Patch Changes
