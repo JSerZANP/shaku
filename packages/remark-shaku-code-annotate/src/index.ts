@@ -4,27 +4,47 @@ import { Transformer, unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
-import { getHighlighter, HighlighterOptions, IThemedToken } from "shiki";
+import {
+  getHighlighter,
+  Highlighter,
+  HighlighterOptions,
+  IThemedToken,
+} from "shiki";
 import {
   shouldApplyAnnotation,
   parseLine,
   renderComponent,
 } from "shaku-code-annotate";
 
+const highlighterFetcherStore = new Map<string, Promise<Array<Highlighter>>>();
+
+async function getHighlighters(options: HighlighterOptions) {
+  const key = JSON.stringify(options);
+  if (highlighterFetcherStore.has(key)) {
+    return await highlighterFetcherStore.get(key)!;
+  }
+
+  const themes = (options == null ? void 0 : options.themes) ?? [
+    (options == null ? void 0 : options.theme) ?? "github-light",
+  ];
+  const highlighterFetcher = Promise.all(
+    themes.map((theme) =>
+      getHighlighter({
+        ...(options ?? {}),
+        theme,
+        themes: void 0,
+      })
+    )
+  );
+  highlighterFetcherStore.set(key, highlighterFetcher);
+  return await highlighterFetcher;
+}
+
 export const remarkShakuCodeAnnotate = (
   options: HighlighterOptions
 ): Transformer => {
   return async (tree) => {
-    const themes = options?.themes ?? [options?.theme ?? "github-light"];
-    const highlighters = await Promise.all(
-      themes.map((theme) =>
-        getHighlighter({
-          ...(options ?? {}),
-          theme,
-          themes: undefined,
-        })
-      )
-    );
+    const highlighters = await getHighlighters(options);
 
     const unifiedProcessor = unified()
       .use(remarkParse)

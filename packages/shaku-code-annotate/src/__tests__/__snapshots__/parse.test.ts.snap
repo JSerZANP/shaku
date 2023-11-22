@@ -222,17 +222,6 @@ exports[`parseLine() can parse comment lines >   ......<   1`] = `
 }
 `;
 
-exports[`parseLine() can parse comment lines >   ~~~~~~~~   1`] = `
-{
-  "config": {
-    "content": "~~~~~~~~",
-    "offset": 2,
-    "style": "wavy",
-  },
-  "type": "DirectiveUnderline",
-}
-`;
-
 exports[`parseLine() can parse comment lines >   ~~~~~~~~ <<  1`] = `
 {
   "config": {
