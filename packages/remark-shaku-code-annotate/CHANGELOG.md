@@ -1,5 +1,11 @@
 # remark-shaku-code-annotate
 
+## 0.1.1
+
+### Patch Changes
+
+- cache highlighter fetcher
+
 ## 0.1.0
 
 ### Minor Changes
