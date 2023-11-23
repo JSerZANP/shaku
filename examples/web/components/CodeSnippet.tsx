@@ -3,7 +3,7 @@
 import { Editor } from "@monaco-editor/react";
 import { $ } from "migacss";
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
@@ -233,11 +233,6 @@ export function CodeSnippet({
       () => alert("failed to copy link.")
     );
   };
-
-  useEffect(() => {
-    setCode(defaultCode[lang]);
-  }, [lang]);
-
   return (
     <Column $height={"100vh"} $padding={12} $gap={12}>
       <View>
@@ -273,7 +268,10 @@ export function CodeSnippet({
             <select
               value={lang}
               // @ts-ignore
-              onChange={(e) => setLang(e.currentTarget.value)}
+              onChange={(e) => {
+                setLang(e.currentTarget.value);
+                setCode(defaultCode[lang]);
+              }}
             >
               {ALL_LANGS.map((lang) => (
                 <option value={lang} key={lang}>
