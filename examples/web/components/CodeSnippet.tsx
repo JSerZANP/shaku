@@ -269,8 +269,9 @@ export function CodeSnippet({
               value={lang}
               // @ts-ignore
               onChange={(e) => {
-                setLang(e.currentTarget.value);
-                setCode(defaultCode[lang]);
+                const newLang = e.currentTarget.value;
+                setLang(newLang);
+                setCode(defaultCode[newLang]);
               }}
             >
               {ALL_LANGS.map((lang) => (

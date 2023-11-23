@@ -24,7 +24,7 @@
     "react-icons": "^4.10.1",
     "remark-shaku-code-annotate": "*",
     "shaku-ui": "*",
-    "shiki": "^0.14.2"
+    "shiki": "^0.14.5"
   },
   "devDependencies": {
     "@types/node": "^17.0.12",
