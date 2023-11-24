@@ -12,9 +12,9 @@ import { Fetcher } from "../Fetcher";
 import { Column, Text } from "../bare";
 import styles from "./ShikiTokenVisualizer.module.css";
 
-function fetchProcessor(lang) {
+function fetchProcessor(lang, theme) {
   return shiki.getHighlighter({
-    theme: "github-dark",
+    theme,
     langs: [lang],
     paths: {
       themes: "/_next/static/shiki/themes",
@@ -26,11 +26,12 @@ function fetchProcessor(lang) {
 
 const processorStore = new Map<string, Fetcher<shiki.Highlighter>>();
 
-const getProcessor = (lang: string) => {
-  if (!processorStore.has(lang)) {
-    processorStore.set(lang, new Fetcher(() => fetchProcessor(lang)));
+const getProcessor = (lang: string, theme: shiki.Theme) => {
+  const key = `${lang}|${theme}`;
+  if (!processorStore.has(key)) {
+    processorStore.set(key, new Fetcher(() => fetchProcessor(lang, theme)));
   }
-  return processorStore.get(lang).fetch();
+  return processorStore.get(key).fetch();
 };
 
 type ShikiTokenWithId = shiki.IThemedToken & {
@@ -41,9 +42,10 @@ const processedResultStore = new Map<string, Fetcher<ShikiTokenWithId[][]>>();
 const getProcessedTokensResult = (
   lang: string,
   code: string,
+  theme: shiki.Theme,
   processor: shiki.Highlighter
 ) => {
-  const key = `${lang}|${code}`;
+  const key = `${lang}|${code}|${theme}`;
 
   if (!processedResultStore.has(key)) {
     processedResultStore.set(
@@ -110,14 +112,18 @@ function Lines({
   selectToken,
   isStatic = false,
   selectedToken,
+  bg,
+  theme,
 }: {
   lines: ShikiTokenWithId[][];
   selectedToken?: ShikiTokenWithId;
   selectToken?: (token: ShikiTokenWithId) => void;
   isStatic?: boolean;
+  bg: string;
+  theme: shiki.Theme;
 }) {
   return (
-    <pre className="shiki github-dark" style={{ backgroundColor: "#24292e" }}>
+    <pre className={`shiki ${theme}`} style={{ backgroundColor: bg }}>
       <code>
         {lines.map((line, i) => (
           <Line
@@ -136,20 +142,28 @@ function Lines({
 export default function ShikiTokenPreview({
   lang,
   code,
+  theme,
 }: {
   lang?: string | null;
   code: string;
+  theme: shiki.Theme;
 }) {
   const deferredLang = useDeferredValue(lang);
   const deferredCode = useDeferredValue(code);
-  const processor = getProcessor(deferredLang);
-  const lines = getProcessedTokensResult(deferredLang, deferredCode, processor);
+  const deferredTheme = useDeferredValue(theme);
+  const processor = getProcessor(deferredLang, deferredTheme);
+  const lines = getProcessedTokensResult(
+    deferredLang,
+    deferredCode,
+    deferredTheme,
+    processor
+  );
   const [selectedToken, _selectToken] = useState<ShikiTokenWithId>(lines[0][0]);
   const selectToken = useCallback((token) => {
     startTransition(() => _selectToken(token));
   }, []);
-
-  const jsonProcessor = getProcessor("json");
+  const JSON_THEME = "github-dark";
+  const jsonProcessor = getProcessor("json", JSON_THEME);
 
   const selectedTokenWithOutId = useMemo(() => {
     if (selectedToken) {
@@ -163,13 +177,10 @@ export default function ShikiTokenPreview({
   const jsonLines = getProcessedTokensResult(
     "json",
     JSON.stringify(selectedTokenWithOutId, undefined, "  "),
+    JSON_THEME,
     jsonProcessor
   );
 
-  const jsonHtml = useMemo(
-    () => <Lines lines={jsonLines} isStatic />,
-    [jsonLines]
-  );
   return (
     <Column
       $flex="1 0 0"
@@ -182,44 +193,26 @@ export default function ShikiTokenPreview({
         Click the tokens in below preview to see more details. Tokens varies on
         themes.
       </Text>
-
       <Column $flexGrow={1} $flexBasis={0} $minHeight={0} $width="min-content">
-        <$.p
-          $backgroundColor="#24292e"
-          $margin={0}
-          $padding="15px 15px 0"
-          $display="flex"
-          $gap="8px"
-          $borderRadius="6px 6px 0 0"
-          $alignItems="center"
-        >
-          <Dot color="#ff5f56" />
-          <Dot color="#ffbd2d" />
-          <Dot color="#26c940" />
-          <$.span $color="#a39d9d" $fontSize="12px">
-            {lang}
-          </$.span>
-        </$.p>
         <$.div className={styles.code} $flexShrink={1} $overflow="auto">
           <Lines
+            theme={deferredTheme}
             lines={lines}
+            bg={processor.getBackgroundColor()}
             selectToken={selectToken}
             selectedToken={selectedToken}
           />
         </$.div>
-        <$.p
-          $backgroundColor="#24292e"
-          $margin={0}
-          $padding="10px 10px 0"
-          $display="flex"
-          $gap="8px"
-          $borderRadius="0 0 6px 6px"
-        ></$.p>
       </Column>
       <Column $flexGrow={1} $flexBasis={0} $flexShrink={1} $height={0}>
         <Text type="body">Selected Token:</Text>
         <$.div $flex="1 1 0" $overflow="auto">
-          <Lines lines={jsonLines} isStatic />
+          <Lines
+            lines={jsonLines}
+            isStatic
+            bg={jsonProcessor.getBackgroundColor()}
+            theme={JSON_THEME}
+          />
         </$.div>
       </Column>
     </Column>

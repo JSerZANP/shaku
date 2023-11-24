@@ -7,6 +7,7 @@ import { useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { RiShareBoxLine } from "react-icons/ri";
 import { defaultCode } from "remark-shaku-code-annotate";
+import * as shiki from "shiki";
 import { ALL_LANGS } from "../../utils/lang";
 import { Button, Column, Row, Text, View } from "../bare";
 
@@ -17,17 +18,20 @@ const CodeSnippetPreview = dynamic(() => import("./ShikiTokenPreview"), {
 export function ShikiTokenInspector({
   code: _code,
   lang: _lang,
+  theme: _theme,
 }: {
   code?: string;
   lang?: string;
+  theme?: shiki.Theme;
 }) {
   const [lang, setLang] = useState<string>(_lang ?? "javascript");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
+  const [theme, setTheme] = useState<shiki.Theme>(_theme ?? "github-dark");
 
   const share = () => {
     const query =
       "code=" + encodeURIComponent(code) + "&lang=" + encodeURIComponent(lang);
-    const url = location.origin + "/snippet?" + query;
+    const url = location.origin + "/shiki-token-inspector?" + query;
     const type = "text/plain";
     const blob = new Blob([url], { type });
     const data = [new ClipboardItem({ [type]: blob })];
@@ -41,7 +45,7 @@ export function ShikiTokenInspector({
       <View>
         <Row $alignItems="center" $justifyContent="space-between" $gap={20}>
           <Text type="headline1">
-            Shiki Token Visualizer
+            Shiki Token Inspector
             <$.a
               href="https://github.com/JSerZANP/shaku"
               target="_blank"
@@ -77,9 +81,24 @@ export function ShikiTokenInspector({
                 </option>
               ))}
             </select>
+            <select
+              // @ts-ignore
+              value={theme}
+              // @ts-ignore
+              onChange={(e) => {
+                // @ts-ignore
+                setTheme(e.currentTarget.value);
+              }}
+            >
+              {shiki.BUNDLED_THEMES.map((theme) => (
+                <option value={theme} key={theme}>
+                  {theme}
+                </option>
+              ))}
+            </select>
             <Button
               onClick={share}
-              label="Share page with below code"
+              label="Share with below code"
               icon={<RiShareBoxLine />}
             ></Button>
           </Row>
@@ -97,7 +116,7 @@ export function ShikiTokenInspector({
             }}
           />
         </Column>
-        <CodeSnippetPreview code={code} lang={lang} />
+        <CodeSnippetPreview code={code} lang={lang} theme={theme} />
       </Row>
     </Column>
   );

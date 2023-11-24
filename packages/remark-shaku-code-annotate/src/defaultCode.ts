@@ -130,12 +130,12 @@ def func(x)
   #[Hello!]
 end
 `,
-  bibtex: `
-% @highlight
-% Another reference
-%    ^
-% [Hello!]
-`,
+  //   bibtex: `
+  // % @highlight
+  // % Another reference
+  // %    ^
+  // % [Hello!]
+  // `,
   bicep: `
 // @highlight
 // Define a storage

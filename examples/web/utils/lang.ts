@@ -15,7 +15,7 @@ export const ALL_LANGS = [
   "batch",
   "berry",
   // "be",
-  "bibtex",
+  // "bibtex",
   "bicep",
   "blade",
   "c",
