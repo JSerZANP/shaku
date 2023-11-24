@@ -314,7 +314,15 @@ function parseComment(
     (token) =>
       shouldBeTreatedAsWhitespace(token, lang) ||
       token.explanation?.some((exp) =>
-        exp.scopes.some((scope) => scope.scopeName.startsWith("comment"))
+        exp.scopes.some((scope) => {
+          if (lang === "astro") {
+            return (
+              scope.scopeName.startsWith("comment") &&
+              scope.scopeName !== "comment"
+            );
+          }
+          return scope.scopeName.startsWith("comment");
+        })
       )
   );
   if (!isCommentLine) return null;

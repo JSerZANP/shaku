@@ -2,7 +2,6 @@ import { expect, test } from "vitest";
 import html from "remark-html";
 import { remark } from "remark";
 import { remarkShakuCodeAnnotate } from "../index";
-import fs from "fs";
 import { defaultCode } from "../defaultCode";
 
 async function process(md: string) {
@@ -27,7 +26,7 @@ ${code}
       )
     ).value;
     console.log("checking lang:" + lang);
-    expect(String(processed)).toMatchFileSnapshot(
+    await expect(String(processed)).toMatchFileSnapshot(
       __dirname + "/langs/" + lang + "/output.txt"
     );
   }

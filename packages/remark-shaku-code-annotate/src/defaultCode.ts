@@ -86,6 +86,9 @@ $foo = true;
 // [Hello!]
 `,
   astro: `
+---
+import { Button } from 'Button'
+---
 <!-- @highlight -->
 <div>Hello World!</div>
 {/* ^ */}
@@ -717,6 +720,10 @@ CFLAGS = -Wall -g
 
 `,
   mdx: `
+---
+import { Button } from 'Button'
+---
+
 {/* @highlight */}
 # Markdown Comments
 <Alert></Alert>
