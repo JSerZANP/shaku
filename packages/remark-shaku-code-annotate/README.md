@@ -2,7 +2,11 @@
 
 This is a plugin of remark for [shaku-code-annotate](../shaku-code-annotate/)
 
-Take a look at the live demo https://shaku-web.vercel.app, or  [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/github-yunziv?file=src%2Flayouts%2FBlogPost.astro).                                                                
+Take a look at the demos on:
+
+1. [Shaku playground](https://shaku-web.vercel.app)
+2. [demo with Astro](https://stackblitz.com/edit/github-yunziv?file=src%2Fcontent%2Fblog%2Fshaku.mdx).
+3. [demo with Next.js](https://stackblitz.com/edit/github-hrpoqm-zfq1kt?file=pages%2Findex.mdx).
 
 # How to use
 
