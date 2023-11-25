@@ -98,13 +98,29 @@ function foo(){
 
 Also you need CSS code to get it rendered nicely, surely you can alter it and adapt to your needs.
 
+> Check out the [CSS code used on Shaku homepage](https://github.com/JSerZANP/shaku/blob/main/examples/web/css/shaku.css)
+
 ```css
-pre.shiki .line {
-  min-height: 1em;
+pre.shiki {
+  padding: 1rem;
+  border: 1px solid #eee;
 }
 
-pre.shiki .line.highlight {
-  background-color: #dffa83;
+pre.shiki .line {
+  min-height: 1em;
+  line-height: 1.5;
+}
+
+pre.shiki.github-light .line.highlight {
+  background-color: var(
+    --color-shaku-highlight-light,
+    color-mix(in srgb, rgb(5, 118, 149) 15%, #fff)
+  );
+  display: block;
+}
+
+pre.shiki.github-dark .line.highlight {
+  background-color: var(--color-shaku-highlight-dark, #2b4a70);
   display: block;
 }
 
@@ -113,20 +129,24 @@ pre.shiki .line.dim {
 }
 
 .shaku-callout {
-  background-color: #0685ce;
+  background-color: var(--color-shaku-callout-light, #0685ce);
   color: #fff;
   padding: 0.5em 1ch;
   position: relative;
-  margin: 0.5em 0;
+  margin: 0.5em 0 0 -0.2ch;
   display: inline-block;
-  border-radius: 3px;
+  border-radius: 2px;
+}
+
+pre.shiki.github-dark .shaku-callout {
+  background-color: var(--color-shaku-callout-dark, #0685ce);
 }
 
 .shaku-callout p {
   margin: 0;
 }
 
-.shaku-callout a {
+.shaku-callout p a {
   color: #fff;
 }
 
@@ -134,10 +154,14 @@ pre.shiki .line.dim {
   width: 1ch;
   height: 1ch;
   display: inline-block;
-  background-color: #0685ce;
+  background-color: var(--color-shaku-callout-light, #0685ce);
   position: absolute;
   top: -0.5ch;
   transform: rotate(45deg);
+  margin-left: 0.2ch;
+}
+pre.shiki.github-dark .shaku-callout-arrow {
+  background-color: var(--color-shaku-callout-dark, #0685ce);
 }
 
 .shaku-underline {
@@ -145,9 +169,12 @@ pre.shiki .line.dim {
   position: relative;
   display: block;
   border-radius: 3px;
-  color: red;
-  margin: 0.3em 0;
+  color: var(--color-shaku-underline-light, red);
+  margin: 0;
   width: min-content;
+}
+pre.shiki.github-dark .shaku-underline {
+  color: var(--color-shaku-underline-dark, red);
 }
 
 .shaku-underline p {
@@ -155,18 +182,26 @@ pre.shiki .line.dim {
 }
 
 .shaku-underline a {
-  color: red;
+  color: var(--color-shaku-underline-light, red);
 }
+pre.shiki.github-dark .shaku-underline a {
+  color: var(--color-shaku-underline-dark, red);
+}
+
 .shaku-underline-line {
   line-height: 0;
   top: 0.5em;
   position: absolute;
   text-decoration-line: overline;
-  text-decoration-color: red;
+  text-decoration-color: var(--color-shaku-underline-light, red);
   color: transparent;
   pointer-events: none;
   user-select: none;
   text-decoration-thickness: 2px;
+}
+
+pre.shiki.github-dark .shaku-underline-line {
+  text-decoration-color: var(--color-shaku-underline-dark, red);
 }
 
 .shaku-underline-wavy > .shaku-underline-line {
