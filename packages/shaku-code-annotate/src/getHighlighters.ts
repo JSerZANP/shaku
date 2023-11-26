@@ -34,6 +34,5 @@ export async function getShakuHighlighters(options: HighlighterOptions) {
     )
   );
   shikiHighlighterFetcherStore.set(key, highlighterFetcher);
-  console.log("create new fetcher", options);
   return highlighterFetcher;
 }

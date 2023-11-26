@@ -8,8 +8,6 @@ export default function markedShakuCodeAnnotate(options = {}): MarkedExtension {
   return {
     async: true,
     async walkTokens(token) {
-      console.log(token);
-
       if (token.type !== "code") {
         return;
       }
@@ -18,12 +16,10 @@ export default function markedShakuCodeAnnotate(options = {}): MarkedExtension {
       const { lang, meta } = getLangAndMeta(token);
       const code = token.text;
 
-      console.log(lang, meta);
       if (!shouldApplyAnnotation(meta)) {
         return;
       }
 
-      console.log("getShakuHighlighters", lang);
       const highlighters = await getShakuHighlighters({
         ...(options ?? {}),
         // @ts-ignore
@@ -41,7 +37,6 @@ export default function markedShakuCodeAnnotate(options = {}): MarkedExtension {
           })
         )
         .join("\n");
-      console.log("html", html);
       token.text = html;
     },
     renderer: {
