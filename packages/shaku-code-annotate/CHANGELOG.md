@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.1.2
+
+### Patch Changes
+
+- now shaku-code-annotate holds the core logic
+
 ## 0.1.1
 
 ### Patch Changes

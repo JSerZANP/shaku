@@ -1,6 +1,6 @@
 {
   "name": "shaku-code-annotate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "dependencies": {
     "mdast": "^3.0.0",
     "remark": "^14.0.2",

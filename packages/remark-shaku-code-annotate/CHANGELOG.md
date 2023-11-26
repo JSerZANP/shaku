@@ -1,5 +1,11 @@
 # remark-shaku-code-annotate
 
+## 0.1.4
+
+### Patch Changes
+
+- move core logic to shaku-code-annotate
+
 ## 0.1.3
 
 ### Patch Changes
