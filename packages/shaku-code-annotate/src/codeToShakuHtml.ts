@@ -1,24 +1,48 @@
 import { Highlighter, IThemedToken } from "shiki";
-import { parseLine, renderComponent } from "./parser";
+import { parseLine, renderComponent, shouldApplyAnnotation } from "./parser";
 import { supportedLangs } from "./defaultCode";
+import { ShakuHighlighter } from "./getHighlighters";
 
 export let codeToShakuHtml = function (
-  this: Highlighter,
+  this: ShakuHighlighter,
   {
     code,
-    parseBasicMd,
+    meta,
+    parseBasicMarkdown,
     options,
   }: {
     code: string;
-    parseBasicMd: (md: string) => string;
+    meta: string;
+    parseBasicMarkdown: (md: string) => string;
     options: Parameters<Highlighter["codeToHtml"]>[1];
   }
-) {
+): {
+  skipped: boolean;
+  html: string;
+} {
   const highlighter = this;
   let lang = options?.lang ?? "";
   lang = supportedLangs.includes(lang) ? lang : "";
-  console.log(lang);
   const theme = highlighter.getTheme();
+
+  const shouldAnnotate = shouldApplyAnnotation(meta);
+
+  if (!shouldAnnotate) {
+    // do nothing
+    if (this.fallbackToShiki === false) {
+      return {
+        html: "",
+        skipped: true,
+      };
+    }
+
+    return {
+      // @ts-ignore
+      html: highlighter.codeToHtml(code, lang, theme, options),
+      skipped: false,
+    };
+  }
+
   const lines = highlighter.codeToThemedTokens(code, lang);
   const foregroundColor = highlighter.getForegroundColor();
   const backgroundColor = highlighter.getBackgroundColor();
@@ -60,7 +84,7 @@ export let codeToShakuHtml = function (
                 nextLine.line.config.offset + nextLine.offset
               );
               contents.push(
-                parseBasicMd(nextLine.line.config.content).trim()
+                parseBasicMarkdown(nextLine.line.config.content).trim()
                 // String(
                 //   unifiedProcessor.processSync(nextLine.line.config.content)
                 // )
@@ -157,7 +181,7 @@ export let codeToShakuHtml = function (
               );
               contents.push(
                 // some engines generates \n at line end
-                parseBasicMd(nextLine.line.config.content).trim()
+                parseBasicMarkdown(nextLine.line.config.content).trim()
                 // String(
                 //   unifiedProcessor.processSync(nextLine.line.config.content)
                 // )
@@ -218,7 +242,10 @@ export let codeToShakuHtml = function (
 
   html += `</code></div></pre>`;
 
-  return html;
+  return {
+    html,
+    skipped: false,
+  };
 };
 
 function escapeHtml(html: string) {

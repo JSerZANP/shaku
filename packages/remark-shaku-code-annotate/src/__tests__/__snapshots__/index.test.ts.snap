@@ -55,6 +55,23 @@ exports[`able to render wavy underline: ~~~~~  1`] = `
 "
 `;
 
+exports[`should be able to prevent fallback to shiki 1`] = `
+"<pre><code class=\\"language-js\\">const a = 1;
+//    ^
+//    [This is line 1]
+//    [This is line two]
+</code></pre>
+"
+`;
+
+exports[`should fallback to shiki if without meta 1`] = `
+"<pre class=\\"shiki github-light\\" style=\\"background-color: #fff\\" tabindex=\\"0\\"><code><span class=\\"line\\"><span style=\\"color: #D73A49\\">const</span><span style=\\"color: #24292E\\"> </span><span style=\\"color: #005CC5\\">a</span><span style=\\"color: #24292E\\"> </span><span style=\\"color: #D73A49\\">=</span><span style=\\"color: #24292E\\"> </span><span style=\\"color: #005CC5\\">1</span><span style=\\"color: #24292E\\">;</span></span>
+<span class=\\"line\\"><span style=\\"color: #6A737D\\">//    ^</span></span>
+<span class=\\"line\\"><span style=\\"color: #6A737D\\">//    [This is line 1]</span></span>
+<span class=\\"line\\"><span style=\\"color: #6A737D\\">//    [This is line two]</span></span></code></pre>
+"
+`;
+
 exports[`should not apply annotation without meta 1`] = `
 "<pre><code class=\\"language-js\\">const a = 1;
 //    ^

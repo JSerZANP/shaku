@@ -3,14 +3,32 @@ import { Marked } from "marked";
 import markedShakuCodeAnnotate from "../index";
 
 const marked = new Marked(markedShakuCodeAnnotate());
-const markedWithTheme = new Marked(
+const markedWithThemes = new Marked(
   markedShakuCodeAnnotate({
     themes: ["github-light", "github-dark"],
   })
 );
+const markedWithoutFallback = new Marked(
+  markedShakuCodeAnnotate({
+    fallbackToShiki: false,
+  })
+);
 
-test("should not apply annotation without meta", async () => {
+test("should fallback to shiki if without meta", async () => {
   const result = await marked.parse(`
+\`\`\`js 
+const a = 1;
+//    ^
+//    [This is line 1]
+//    [This is line two]
+\`\`\`
+`);
+
+  expect(result).toMatchSnapshot();
+});
+
+test("should be able to prevent fallback to shiki", async () => {
+  const result = await markedWithoutFallback.parse(`
 \`\`\`js 
 const a = 1;
 //    ^
@@ -319,7 +337,7 @@ function a() {
 });
 
 test("able to render multiple code blocks with themes", async () => {
-  const result = await markedWithTheme.parse(`
+  const result = await markedWithThemes.parse(`
 \`\`\`js annotate
 const a = 1;
 //    ^

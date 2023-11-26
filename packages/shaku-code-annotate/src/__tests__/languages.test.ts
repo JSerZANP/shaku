@@ -3,7 +3,6 @@ import html from "remark-html";
 import { remark } from "remark";
 import { defaultCode } from "../defaultCode";
 import { getShakuHighlighters } from "../getHighlighters";
-import { options } from "sanitize-html";
 
 test("should support popular languages", async () => {
   for (const [lang, code] of Object.entries(defaultCode)) {
@@ -13,14 +12,16 @@ test("should support popular languages", async () => {
     });
 
     const html = highlighters
-      .map((highlighter) =>
-        highlighter.codeToShakuHtml({
-          code,
-          parseBasicMd: (code) => code,
-          options: {
-            lang,
-          },
-        })
+      .map(
+        (highlighter) =>
+          highlighter.codeToShakuHtml({
+            code,
+            meta: "annotate",
+            parseBasicMarkdown: (code) => code,
+            options: {
+              lang,
+            },
+          }).html
       )
       .join("\n");
 

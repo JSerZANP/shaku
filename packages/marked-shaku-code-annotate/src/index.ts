@@ -1,10 +1,12 @@
 import {
+  ShakuHighlighterOptions,
   getShakuHighlighters,
-  shouldApplyAnnotation,
 } from "shaku-code-annotate";
 import { MarkedExtension, Token, Tokens, marked } from "marked";
 
-export default function markedShakuCodeAnnotate(options = {}): MarkedExtension {
+export default function markedShakuCodeAnnotate(
+  options: ShakuHighlighterOptions = {}
+): MarkedExtension {
   return {
     async: true,
     async walkTokens(token) {
@@ -16,40 +18,37 @@ export default function markedShakuCodeAnnotate(options = {}): MarkedExtension {
       const { lang, meta } = getLangAndMeta(token);
       const code = token.text;
 
-      if (!shouldApplyAnnotation(meta)) {
-        return;
-      }
-
       const highlighters = await getShakuHighlighters({
         ...(options ?? {}),
         // @ts-ignore
         langs: [lang],
       });
 
-      const html = highlighters
-        .map((highlighter) =>
-          highlighter.codeToShakuHtml({
-            code,
-            parseBasicMd: (code) => marked(code),
-            options: {
-              lang,
-            },
-          })
-        )
-        .join("\n");
-      token.text = html;
+      let snippets = "";
+      let skipped = false;
+      highlighters.forEach((highlighter) => {
+        const { html, skipped: _skipped } = highlighter.codeToShakuHtml({
+          code,
+          meta,
+          parseBasicMarkdown: (code) => marked(code),
+          options: {
+            lang,
+          },
+        });
+        if (_skipped) {
+          skipped = _skipped;
+        }
+
+        snippets += html;
+      });
+
+      if (!skipped) {
+        token.text = snippets;
+      }
     },
     renderer: {
-      code(code, infoString, escaped) {
+      code(code) {
         return code;
-        // const lang = (infoString || "").match(/\S*/)[0];
-        // const classAttr = lang
-        //   ? ` class="${options.langPrefix}${escape(lang)}"`
-        //   : "";
-        // code = code.replace(/\n$/, "");
-        // return `<pre><code${classAttr}>${
-        //   escaped ? code : escape(code, true)
-        // }\n</code></pre>`;
       },
     },
   };

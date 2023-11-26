@@ -58,7 +58,8 @@ export default function PlaygroundPreview({ code }: { code: string }) {
 async function fetchProcessor() {
   return remark()
     .use(remarkShakuCodeAnnotate, {
-      themes: ["github-light", "github-dark"],
+      // themes: ["github-light", "github-dark"],
+      theme: "github-light",
       paths: {
         themes: "/_next/static/shiki/themes",
         wasm: "/_next/static/shiki/dist",

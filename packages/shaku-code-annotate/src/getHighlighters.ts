@@ -1,8 +1,9 @@
 import { Highlighter, HighlighterOptions, getHighlighter } from "shiki";
 import { codeToShakuHtml } from "./codeToShakuHtml";
 
-interface ShakuHighlighter extends Highlighter {
+export interface ShakuHighlighter extends Highlighter {
   codeToShakuHtml: typeof codeToShakuHtml;
+  fallbackToShiki?: boolean; // default true
 }
 
 const shikiHighlighterFetcherStore = new Map<
@@ -10,25 +11,28 @@ const shikiHighlighterFetcherStore = new Map<
   Promise<Array<ShakuHighlighter>>
 >();
 
-export async function getShakuHighlighters(options: HighlighterOptions) {
+export type ShakuHighlighterOptions = HighlighterOptions & {
+  fallbackToShiki?: boolean; // default true
+};
+
+export async function getShakuHighlighters(options: ShakuHighlighterOptions) {
   const key = JSON.stringify(options);
   if (shikiHighlighterFetcherStore.has(key)) {
     return shikiHighlighterFetcherStore.get(key)!;
   }
 
-  const themes = (options == null ? void 0 : options.themes) ?? [
-    (options == null ? void 0 : options.theme) ?? "github-light",
-  ];
+  const themes = options.themes ?? [options.theme ?? "github-light"];
 
   const highlighterFetcher = Promise.all(
     themes.map((theme) =>
       getHighlighter({
         ...(options ?? {}),
         theme,
-        themes: void 0,
+        themes: undefined,
       }).then((highlighter) => {
         return Object.assign(highlighter, {
           codeToShakuHtml,
+          fallbackToShiki: options.fallbackToShiki,
         });
       })
     )
