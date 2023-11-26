@@ -60,6 +60,7 @@ async function fetchProcessor() {
     .use(remarkShakuCodeAnnotate, {
       // themes: ["github-light", "github-dark"],
       theme: "github-light",
+      langs: ["javascript", "css", "jsx", "html", "typescript", "tsx"],
       paths: {
         themes: "/_next/static/shiki/themes",
         wasm: "/_next/static/shiki/dist",
