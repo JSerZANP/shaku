@@ -23,8 +23,32 @@ async function processWithThemes(md: string) {
   return result;
 }
 
-test("should not apply annotation without meta", async () => {
+async function processWithoutFallback(md: string) {
+  const processor = remark()
+    .use(remarkShakuCodeAnnotate, {
+      fallbackToShiki: false,
+      theme: "github-light",
+    })
+    .use(html, { sanitize: false });
+  const result = await processor.process(md);
+  return result;
+}
+
+test("should fallback to shiki if without meta", async () => {
   const result = await process(`
+\`\`\`js 
+const a = 1;
+//    ^
+//    [This is line 1]
+//    [This is line two]
+\`\`\`
+`);
+
+  expect(result.value).toMatchSnapshot();
+});
+
+test("should be able to prevent fallback to shiki", async () => {
+  const result = await processWithoutFallback(`
 \`\`\`js 
 const a = 1;
 //    ^

@@ -8,7 +8,7 @@ import { AiFillGithub } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
 import { defaultCode } from "remark-shaku-code-annotate";
-import { ALL_LANGS } from "../utils/lang";
+import { supportedLangs } from "shaku-code-annotate";
 import { Button, Column, Row, Text, View } from "./bare";
 
 const CodeSnippetPreview = dynamic(() => import("./CodeSnippetPreview"), {
@@ -78,7 +78,7 @@ export function CodeSnippet({
                 setCode(defaultCode[newLang]);
               }}
             >
-              {ALL_LANGS.map((lang) => (
+              {supportedLangs.map((lang) => (
                 <option value={lang} key={lang}>
                   {lang}
                 </option>

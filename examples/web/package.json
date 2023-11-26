@@ -18,11 +18,13 @@
     "copy-webpack-plugin": "^11.0.0",
     "dom-to-image": "2.6.0",
     "migacss": "^0.0.6",
+    "marked": "^10.0.0",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "remark-shaku-code-annotate": "*",
+    "marked-shaku-code-annotate": "*",
     "shaku-ui": "*",
     "shiki": "^0.14.5"
   },

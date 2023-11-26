@@ -6,9 +6,8 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { RiShareBoxLine } from "react-icons/ri";
-import { defaultCode } from "remark-shaku-code-annotate";
+import { defaultCode, supportedLangs } from "remark-shaku-code-annotate";
 import * as shiki from "shiki";
-import { ALL_LANGS } from "../../utils/lang";
 import { Button, Column, Row, Text, View } from "../bare";
 
 const CodeSnippetPreview = dynamic(() => import("./ShikiTokenPreview"), {
@@ -75,7 +74,7 @@ export function ShikiTokenInspector({
                 setCode(defaultCode[newLang]);
               }}
             >
-              {ALL_LANGS.map((lang) => (
+              {supportedLangs.map((lang) => (
                 <option value={lang} key={lang}>
                   {lang}
                 </option>
