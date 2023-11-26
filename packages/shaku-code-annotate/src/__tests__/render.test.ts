@@ -1,5 +1,5 @@
 import { test, describe, expect } from "vitest";
-import { parseLine, renderComponent, shouldApplyAnnotation } from "../index";
+import { renderComponent } from "../parser";
 
 describe("renderComponent() can render shaku lines and sanitize html", () => {
   test("ShakuComponentCallout", () => {

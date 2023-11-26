@@ -8,9 +8,19 @@ import { AiFillGithub } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
 import { Button, Column, Row, Text, View } from "./bare";
-const PlaygroundPreview = dynamic(() => import("./PlaygroundPreview"), {
-  ssr: false,
-});
+
+const CodePreviewRemark = dynamic(
+  () => import("./CodePreview/CodePreviewRemark"),
+  {
+    ssr: false,
+  }
+);
+const CodePreviewMarked = dynamic(
+  () => import("./CodePreview/CodePreviewMarked"),
+  {
+    ssr: false,
+  }
+);
 
 const defaultMarkdown = `
 
@@ -162,6 +172,7 @@ Visit [shaku on github](https://github.com/JSerZANP/shaku/tree/main) to find the
 
 export function Playground({ code: _code }: { code?: string }) {
   const [code, setCode] = useState(_code ?? defaultMarkdown);
+  const [mdEngine, setMdEngine] = useState<"remark" | "marked">("remark");
 
   const share = () => {
     const query = "code=" + encodeURIComponent(code);
@@ -210,6 +221,16 @@ export function Playground({ code: _code }: { code?: string }) {
           label="Share page with below code"
           icon={<RiShareBoxLine />}
         ></Button>
+        <span>
+          <label>Markdown Engine: </label>
+          <select
+            value={mdEngine}
+            onChange={(e) => setMdEngine(e.currentTarget.value as any)}
+          >
+            <option value="remark">remark</option>
+            <option value="marked">marked</option>
+          </select>
+        </span>
       </Row>
       <Row $gap={20} $flex="1 0 0 ">
         <Column $flex="1 0 0" $maxWidth={700}>
@@ -221,7 +242,11 @@ export function Playground({ code: _code }: { code?: string }) {
             onChange={setCode}
           />
         </Column>
-        <PlaygroundPreview code={code} />
+        {mdEngine === "marked" ? (
+          <CodePreviewMarked code={code} />
+        ) : (
+          <CodePreviewRemark code={code} />
+        )}
       </Row>
     </Column>
   );

@@ -1,5 +1,5 @@
 import { test, describe, expect } from "vitest";
-import { parseLine, shouldApplyAnnotation } from "../index";
+import { parseLine, shouldApplyAnnotation } from "../parser";
 
 describe("parseLine() can parse comment lines", () => {
   const inputs = [
