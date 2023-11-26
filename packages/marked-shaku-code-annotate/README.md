@@ -1,39 +1,40 @@
-# remark-shaku-code-annotate
+# marked-shaku-code-annotate
 
-This is a plugin of [remark](https://github.com/remarkjs/remark) for [shaku-code-annotate](../shaku-code-annotate/)
+This is a plugin of [marked](https://github.com/markedjs/marked) for [shaku-code-annotate](../shaku-code-annotate/)
 
 Take a look at the demos on:
 
-1. [Shaku playground](https://shaku-web.vercel.app)
-2. [demo with Astro](https://stackblitz.com/edit/github-yunziv?file=src%2Fcontent%2Fblog%2Fshaku.mdx).
-3. [demo with Next.js](https://stackblitz.com/edit/github-hrpoqm-zfq1kt?file=pages%2Findex.mdx).
+1. [Shaku playground](https://shaku-web.vercel.app) (set the engine to `marked`)
 
 # How to use
 
 ```js
-import { remark } from "remark";
-import html from "remark-html";
-import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 
-export default async function Page() {
-  const processorShaku = remark()
-    .use(remarkShakuCodeAnnotate, {
-      // You can render multiple themes
-      // themes: ["github-light", "github-dark"],
-      theme: "github-light",
+import { Marked } from "marked";
+import markedShakuCodeAnnotate from "marked-shaku-code-annotate";
 
-      // Use following flag if you don't want to fall back to shiki when `annotate` is not set
-      // fallbackToShiki: false
+const marked = new Marked();
+marked.use(
+  markedShakuCodeAnnotate({
+    langs: ["javascript", "css", "jsx", "html", "typescript", "tsx"],
 
-      // Following paths are for client-side, example is for next.js
-      // paths: {
-      //   themes: "/_next/static/shiki/themes",
-      //   wasm: "/_next/static/shiki/dist",
-      //   languages: "/_next/static/shiki/languages",
-      // },
-    })
-    // You should be responsible for the sanitization!!!
-    // .use(html, { sanitize: false });
+    // You can render multiple themes
+    // themes: ["github-light", "github-dark"],
+    theme: "github-light",
+
+    // Use following flag if you don't want to fall back to shiki when `annotate` is not set
+    // fallbackToShiki: false
+
+    // Following paths are for client-side, example is for next.js
+    // paths: {
+    //   themes: "/_next/static/shiki/themes",
+    //   wasm: "/_next/static/shiki/dist",
+    //   languages: "/_next/static/shiki/languages",
+    // },
+  })
+);
+
+// You should be responsible for the sanitization!!!!
 
   const markdown = `
 \`\`\`js annotate
@@ -105,9 +106,8 @@ function foo(){
 \`\`\`
 `;
 
-  const html = await processorShaku.process(markdownShaku);
-  ...
-}
+const html = await marked.parse(markdownShaku);
+...
 
 ```
 
@@ -242,7 +242,7 @@ easily support dark mode by hiding one or another.
 For example.
 
 ```js
-remark().use(remarkShakuCodeAnnotate, {
+marked.use(markedShakuCodeAnnotate, {
   themes: ["github-dark", "github-light"],
 });
 ```

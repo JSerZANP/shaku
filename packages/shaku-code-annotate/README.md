@@ -15,7 +15,38 @@ Take a look at the live demo from
 
 ## Usage
 
-You should choose the right plugin for your code base.
+```ts
+import { getShakuHighlighters } from "../getHighlighters";
 
-1. [remark-shaku-code-annotate](../remark-shaku-code-annotate/)
-2. marked? TODO
+// 1. get highlighters of one theme or multiple themes
+const highlighters = await getShakuHighlighters({
+  langs: [lang],
+  // theme: 'github-light'
+  themes: ["github-light", "github-dark"],
+});
+
+// 2. for each theme generate HTML from code
+const html = highlighters
+  .map(
+    (highlighter) =>
+      highlighter.codeToShakuHtml({
+        code,
+        meta: "annotate",
+        // by default Shaku falls back to shiki if meta doesn't contain "annotate"
+        // you can turn this off by following option
+        // fallbackToShiki: false
+        parseBasicMarkdown: (code) => code,
+        options: {
+          lang,
+        },
+      }).html
+  )
+  .join("\n");
+```
+
+## Plugins
+
+Generally it is better for you to choose the right plugin for your markdown engine.
+
+1. Remark - [remark-shaku-code-annotate](../remark-shaku-code-annotate/)
+2. Marked - [marked-shaku-code-annotate](../marked-shaku-code-annotate/)
