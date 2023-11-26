@@ -91,7 +91,6 @@ export let codeToShakuHtml = function (
               );
               j += 1;
             }
-            console.log(contents);
             html += renderComponent({
               type: "ShakuComponentCallout",
               config: {
