@@ -71,12 +71,3 @@ exports[`should fallback to shiki if without meta 1`] = `
 <span class=\\"line\\"><span style=\\"color: #6A737D\\">//    [This is line two]</span></span></code></pre>
 "
 `;
-
-exports[`should not apply annotation without meta 1`] = `
-"<pre><code class=\\"language-js\\">const a = 1;
-//    ^
-//    [This is line 1]
-//    [This is line two]
-</code></pre>
-"
-`;
