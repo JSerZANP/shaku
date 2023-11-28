@@ -6,6 +6,7 @@ import { remark } from "remark";
 import html from "remark-html";
 import { remarkShakuCodeAnnotate } from "remark-shaku-code-annotate";
 import { Fetcher } from "../Fetcher";
+import { sanitize } from "./sanitize";
 
 let fetcher: Fetcher<ReturnType<typeof remark>> | null = null;
 const getProcessor = () => {
@@ -26,7 +27,9 @@ const getProcessedResult = (
   if (!processedResultStore.has(key)) {
     processedResultStore.set(
       key,
-      new Fetcher(() => processor.process(code).then((data) => data.toString()))
+      new Fetcher(() =>
+        processor.process(code).then((data) => sanitize(data.toString()))
+      )
     );
 
     if (processedResultStore.size > 5) {

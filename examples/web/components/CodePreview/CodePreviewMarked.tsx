@@ -3,6 +3,7 @@ import markedShakuCodeAnnotate from "marked-shaku-code-annotate";
 import { useDeferredValue } from "react";
 import { Fetcher } from "../Fetcher";
 import styles from "./CodePreview.module.css";
+import { sanitize } from "./sanitize";
 
 import { View } from "../bare";
 
@@ -30,7 +31,7 @@ const getProcessedResult = (code: string) => {
     processedResultStore.set(
       key,
       // @ts-ignore
-      new Fetcher(() => marked.parse(code))
+      new Fetcher(() => marked.parse(code).then(sanitize))
     );
 
     if (processedResultStore.size > 5) {

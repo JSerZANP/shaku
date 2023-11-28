@@ -1,0 +1,45 @@
+import sanitizeHtml from "sanitize-html";
+
+export const sanitize = (html: string) => {
+  return sanitizeHtml(html, {
+    allowedTags: [
+      "h1",
+      "h2",
+      "h3",
+      "h4",
+      "h5",
+      "h6",
+      "p",
+      "b",
+      "i",
+      "code",
+      "em",
+      "blockquote",
+      "strong",
+      "pre",
+      "a",
+      "ul",
+      "ol",
+      "li",
+      "span",
+      "hr",
+      "br",
+      "table",
+      "thead",
+      "tbody",
+      "tr",
+      "th",
+      "td",
+      "mark",
+      "div",
+    ],
+    allowedAttributes: {
+      a: ["href", "target"],
+      span: ["class", "style"],
+      div: ["class", "style"],
+      pre: ["class", "style"],
+      p: ["class", "style"],
+      mark: ["data-*", "class"],
+    },
+  });
+};
