@@ -1,5 +1,25 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`parseLine() can parse comment lines >    (0)  (2 ) <<< 1`] = `
+{
+  "config": {
+    "parts": [
+      {
+        "id": 0,
+        "length": 3,
+        "offset": 0,
+      },
+      {
+        "id": 2,
+        "length": 4,
+        "offset": 5,
+      },
+    ],
+  },
+  "type": "DirectiveHighlightInline",
+}
+`;
+
 exports[`parseLine() can parse comment lines >    @collapse end  1`] = `
 {
   "config": {
@@ -339,6 +359,26 @@ exports[`parseLine() can parse comment lines >  (0)  (2 )   (0)    1`] = `
 `;
 
 exports[`parseLine() can parse comment lines >  (0)  (2 )   0 1`] = `null`;
+
+exports[`parseLine() can parse comment lines >  (0)  (2 )< 1`] = `
+{
+  "config": {
+    "parts": [
+      {
+        "id": 0,
+        "length": 3,
+        "offset": 0,
+      },
+      {
+        "id": 2,
+        "length": 4,
+        "offset": 5,
+      },
+    ],
+  },
+  "type": "DirectiveHighlightInline",
+}
+`;
 
 exports[`parseLine() can parse comment lines > () 1`] = `
 {

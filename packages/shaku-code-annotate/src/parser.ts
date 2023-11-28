@@ -37,10 +37,18 @@ export type ShakuDirectiveHighlightInline = {
   };
 };
 
-const RegShakuDirectiveHighlightInline = /^(\(\d*\))+$/;
+const RegShakuDirectiveHighlightInline = /^(\(\d*\))+(?<shift><*)$/;
 const RegShakuDirectiveHighlightInlinePart = /\(\s*(?<id>\d*)\s*\)/g;
-function isShakuDirectiveHighlightInline(str: string) {
-  return RegShakuDirectiveHighlightInline.test(str.replace(/ /g, ""));
+function isShakuDirectiveHighlightInline(str: string): {
+  shift: number;
+  isHighlightInline: boolean;
+} {
+  const significantLine = str.replace(/ /g, "");
+  const matches = significantLine.match(RegShakuDirectiveHighlightInline);
+  return {
+    isHighlightInline: !!matches,
+    shift: matches?.groups?.shift.length ?? 0,
+  };
 }
 
 type ShakuDirectiveCallout = {
@@ -235,7 +243,7 @@ export const parseLine = (line: string): ShakuLine | null => {
     }
   }
 
-  const isHighlightInline = isShakuDirectiveHighlightInline(line);
+  const { isHighlightInline, shift } = isShakuDirectiveHighlightInline(line);
   if (isHighlightInline) {
     const parts = [...line.matchAll(RegShakuDirectiveHighlightInlinePart)];
     return {
@@ -243,7 +251,7 @@ export const parseLine = (line: string): ShakuLine | null => {
       config: {
         parts: parts.map((part) => {
           return {
-            offset: part.index!,
+            offset: part.index! - shift,
             length: part[0].length,
             id: part[1] ? Number(part[1]) : undefined,
           };
