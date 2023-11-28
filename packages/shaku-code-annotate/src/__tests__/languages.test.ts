@@ -1,6 +1,4 @@
 import { expect, test } from "vitest";
-import html from "remark-html";
-import { remark } from "remark";
 import { defaultCode } from "../defaultCode";
 import { getShakuHighlighters } from "../getHighlighters";
 

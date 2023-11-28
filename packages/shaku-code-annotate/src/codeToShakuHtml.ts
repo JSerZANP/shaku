@@ -1,7 +1,16 @@
 import { Highlighter, IThemedToken } from "shiki";
-import { parseLine, renderComponent, shouldApplyAnnotation } from "./parser";
+import {
+  ShakuDirectiveHighlightInline,
+  parseLine,
+  renderComponent,
+  shouldApplyAnnotation,
+} from "./parser";
 import { supportedLangs } from "./defaultCode";
 import { ShakuHighlighter } from "./getHighlighters";
+import {
+  renderSourceLine,
+  renderSourceLineWithInlineHighlight,
+} from "./render";
 
 export let codeToShakuHtml = function (
   this: ShakuHighlighter,
@@ -46,17 +55,26 @@ export let codeToShakuHtml = function (
   const lines = highlighter.codeToThemedTokens(code, lang);
   const foregroundColor = highlighter.getForegroundColor();
   const backgroundColor = highlighter.getBackgroundColor();
+
   // generate the html from the tokens
   let html = `<pre class="shiki ${theme.name}" style="color:${foregroundColor};background-color:${backgroundColor}">`;
   html += `<div class="code-container"><code>`;
+
   const parsedLines = parseLines(lines, lang);
   const hasFocus = hasShakuDirectiveFocus(parsedLines);
+
   let shouldHighlighNextSourceLine = false;
   let shouldDimNextSourceLine = false;
   let shouldFocusNextSourceLine = false;
   let isHighlightingBlock = false;
   let isDimBlock = false;
   let isFocusBlock = false;
+  let shakuDirectiveHighlightInline: null | {
+    type: "shaku";
+    line: ShakuDirectiveHighlightInline;
+    offset: number;
+  } = null;
+
   for (let i = 0; i < parsedLines.length; i++) {
     const line = parsedLines[i];
     switch (line.type) {
@@ -203,6 +221,17 @@ export let codeToShakuHtml = function (
             i = j - 1;
             continue;
           }
+          case "DirectiveHighlightInline": {
+            // only treat it as shaku line if next line is default line
+            if (parsedLines[i + 1].type === "default") {
+              shakuDirectiveHighlightInline = {
+                type: "shaku",
+                line: shakuLine,
+                offset: line.offset,
+              };
+            }
+            continue;
+          }
           default:
             assertsNever(shakuLine);
         }
@@ -223,14 +252,17 @@ export let codeToShakuHtml = function (
         const dimClass = shouldDim ? " dim" : "";
         const prefix = `<div class="line${highlightClass}${dimClass}">`;
         html += prefix;
-        html += sourceLine
-          .map(
-            (token) =>
-              `<span style="color: ${token.color}">${escapeHtml(
-                token.content
-              )}</span>`
-          )
-          .join("");
+
+        if (shakuDirectiveHighlightInline) {
+          html += renderSourceLineWithInlineHighlight(
+            sourceLine,
+            shakuDirectiveHighlightInline
+          );
+          shakuDirectiveHighlightInline = null;
+        } else {
+          html += renderSourceLine(sourceLine);
+        }
+
         html += `</div>`;
         break;
       }
@@ -246,10 +278,6 @@ export let codeToShakuHtml = function (
     skipped: false,
   };
 };
-
-function escapeHtml(html: string) {
-  return html.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
 
 /**
  * different kinds of comments have different interpretations

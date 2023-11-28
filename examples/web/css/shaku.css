@@ -113,3 +113,26 @@ pre.shiki.github-dark .shaku-underline-line {
 .shaku-underline-dotted > .shaku-underline-line {
   text-decoration-style: dotted;
 }
+
+.shaku-inline-highlight {
+  background-color: #05a4fa30;
+  border-bottom: 2px solid rgb(9, 113, 239);
+  margin: 0 1px;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+
+.shaku-inline-highlight[data-id="1"] {
+  background-color: #05a4fa30;
+  border-bottom: 2px solid rgb(9, 113, 239);
+}
+
+.shaku-inline-highlight[data-id="2"] {
+  background-color: #fa05f230;
+  border-bottom: 2px solid rgb(235, 4, 158);
+}
+
+.shaku-inline-highlight[data-id="3"] {
+  background-color: #05faa930;
+  border-bottom: 2px solid green;
+}

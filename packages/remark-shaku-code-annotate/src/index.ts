@@ -8,7 +8,6 @@ import { HighlighterOptions } from "shiki";
 import {
   ShakuHighlighterOptions,
   getShakuHighlighters,
-  shouldApplyAnnotation,
 } from "shaku-code-annotate";
 
 export const remarkShakuCodeAnnotate = (

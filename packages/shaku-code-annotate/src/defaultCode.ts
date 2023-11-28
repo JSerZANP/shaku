@@ -465,11 +465,12 @@ public class CommentExample {
   javascript: `// @highlight
 import { useState } from 'react';
 
+//     (     ) (2     ) (   3 )
 export default function Counter() {
   // @highlight
   const [count, setCount] = useState(0);
               //~~~~~~~~
-
+  
   function handleClick() {
     setCount(count + 1);
   //-------------------

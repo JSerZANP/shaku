@@ -26,6 +26,23 @@ type ShakuAnnotationLine = {
 const RegShakuAnnotationLine =
   /^(?<leadingSpaces>\s*)\[(?<content>.+)\]\s*(?<shift><*)\s*$/;
 
+export type ShakuDirectiveHighlightInline = {
+  type: "DirectiveHighlightInline";
+  config: {
+    parts: Array<{
+      offset: number;
+      length: number;
+      id?: number;
+    }>;
+  };
+};
+
+const RegShakuDirectiveHighlightInline = /^(\(\d*\))+$/;
+const RegShakuDirectiveHighlightInlinePart = /\(\s*(?<id>\d*)\s*\)/g;
+function isShakuDirectiveHighlightInline(str: string) {
+  return RegShakuDirectiveHighlightInline.test(str.replace(/ /g, ""));
+}
+
 type ShakuDirectiveCallout = {
   type: "DirectiveCallout";
   config: {
@@ -91,7 +108,8 @@ type ShakuLine =
   | ShakuDirectiveCollapse
   | ShakuDirectiveHighlight
   | ShakuDirectiveDim
-  | ShakuDirectiveFocus;
+  | ShakuDirectiveFocus
+  | ShakuDirectiveHighlightInline;
 
 export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveUnderlineSolid = line.match(
@@ -215,6 +233,23 @@ export const parseLine = (line: string): ShakuLine | null => {
         },
       };
     }
+  }
+
+  const isHighlightInline = isShakuDirectiveHighlightInline(line);
+  if (isHighlightInline) {
+    const parts = [...line.matchAll(RegShakuDirectiveHighlightInlinePart)];
+    return {
+      type: "DirectiveHighlightInline",
+      config: {
+        parts: parts.map((part) => {
+          return {
+            offset: part.index!,
+            length: part[0].length,
+            id: part[1] ? Number(part[1]) : undefined,
+          };
+        }),
+      },
+    };
   }
 
   return null;

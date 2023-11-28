@@ -65,7 +65,7 @@ const blog = "jser.dev"
 //            ~~~~~~~~
 \`\`\`
 
-## Easily Highlight lines
+## Easily Highlight Lines
 
 You don't need to add code meta, just add the command where you want to highlight.
 
@@ -85,6 +85,22 @@ function useSomeEffect({blog}) {
     }, [blog])
 }
 \`\`\`
+
+## Highlight Words where they are
+
+\`\`\`js annotate
+//       (           )
+function useSomeEffect({blog}) {
+//( 2      )
+  useEffect(() => {
+      return () => {
+      //( 3    )        (          3    ) 
+        location.href = 'https://jser.dev'
+      }
+    }, [blog])
+}
+\`\`\`
+
 
 ## Easily Dim lines
 

@@ -76,6 +76,15 @@ exports[`parseLine() can parse comment lines >    @focus below  1`] = `
 }
 `;
 
+exports[`parseLine() can parse comment lines >    @focus below  2`] = `
+{
+  "config": {
+    "mark": "below",
+  },
+  "type": "DirectiveFocus",
+}
+`;
+
 exports[`parseLine() can parse comment lines >    @focus end  1`] = `
 {
   "config": {
@@ -274,5 +283,139 @@ exports[`parseLine() can parse comment lines >   -------<   1`] = `
     "style": "solid",
   },
   "type": "DirectiveUnderline",
+}
+`;
+
+exports[`parseLine() can parse comment lines >  ( )  ( )   ()    1`] = `
+{
+  "config": {
+    "parts": [
+      {
+        "id": undefined,
+        "length": 3,
+        "offset": 1,
+      },
+      {
+        "id": undefined,
+        "length": 3,
+        "offset": 6,
+      },
+      {
+        "id": undefined,
+        "length": 2,
+        "offset": 12,
+      },
+    ],
+  },
+  "type": "DirectiveHighlightInline",
+}
+`;
+
+exports[`parseLine() can parse comment lines >  (( 1`] = `null`;
+
+exports[`parseLine() can parse comment lines >  (0)  (2 )   (0)    1`] = `
+{
+  "config": {
+    "parts": [
+      {
+        "id": 0,
+        "length": 3,
+        "offset": 1,
+      },
+      {
+        "id": 2,
+        "length": 4,
+        "offset": 6,
+      },
+      {
+        "id": 0,
+        "length": 3,
+        "offset": 13,
+      },
+    ],
+  },
+  "type": "DirectiveHighlightInline",
+}
+`;
+
+exports[`parseLine() can parse comment lines >  (0)  (2 )   0 1`] = `null`;
+
+exports[`parseLine() can parse comment lines > () 1`] = `
+{
+  "config": {
+    "parts": [
+      {
+        "id": undefined,
+        "length": 2,
+        "offset": 0,
+      },
+    ],
+  },
+  "type": "DirectiveHighlightInline",
+}
+`;
+
+exports[`parseLine() can parse comment lines > ()()() 1`] = `
+{
+  "config": {
+    "parts": [
+      {
+        "id": undefined,
+        "length": 2,
+        "offset": 0,
+      },
+      {
+        "id": undefined,
+        "length": 2,
+        "offset": 2,
+      },
+      {
+        "id": undefined,
+        "length": 2,
+        "offset": 4,
+      },
+    ],
+  },
+  "type": "DirectiveHighlightInline",
+}
+`;
+
+exports[`parseLine() can parse comment lines > (1) 1`] = `
+{
+  "config": {
+    "parts": [
+      {
+        "id": 1,
+        "length": 3,
+        "offset": 0,
+      },
+    ],
+  },
+  "type": "DirectiveHighlightInline",
+}
+`;
+
+exports[`parseLine() can parse comment lines > (1)(1)(10) 1`] = `
+{
+  "config": {
+    "parts": [
+      {
+        "id": 1,
+        "length": 3,
+        "offset": 0,
+      },
+      {
+        "id": 1,
+        "length": 3,
+        "offset": 3,
+      },
+      {
+        "id": 10,
+        "length": 4,
+        "offset": 6,
+      },
+    ],
+  },
+  "type": "DirectiveHighlightInline",
 }
 `;

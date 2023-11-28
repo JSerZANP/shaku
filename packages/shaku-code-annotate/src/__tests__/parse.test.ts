@@ -33,6 +33,15 @@ describe("parseLine() can parse comment lines", () => {
     "   @focus end ",
     "   @focus ",
     "   @focus below ",
+    "   @focus below ",
+    "()",
+    "()()()",
+    " ( )  ( )   ()   ",
+    "(1)",
+    "(1)(1)(10)",
+    " (0)  (2 )   (0)   ",
+    " ((",
+    " (0)  (2 )   0",
   ];
   for (const input of inputs) {
     test(input, () => {
