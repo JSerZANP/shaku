@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.1.3
+
+### Patch Changes
+
+- styling with prefix:shaku
+
 ## 0.1.2
 
 ### Patch Changes
