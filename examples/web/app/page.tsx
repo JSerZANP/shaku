@@ -93,7 +93,20 @@ export default async function Page({
           </$.li>
         </$.ol>
 
-        <$.p>Or you can just inspect the source code of this website TODO</$.p>
+        <$.p>
+          Or you can just inspect the source code of this website -{" "}
+          <a href="https://github.com/JSerZANP/shaku/blob/main/examples/web/components/CodeBlock.tsx">
+            <code>CodeBlock.tsx</code>
+          </a>
+          ,{" "}
+          <a href="https://github.com/JSerZANP/shaku/blob/main/examples/web/components/CodePreview/CodePreviewRemark.tsx">
+            <code>CodePreviewRemark.tsx</code>
+          </a>{" "}
+          or{" "}
+          <a href="https://github.com/JSerZANP/shaku/blob/main/examples/web/components/CodePreview/CodePreviewMarked.tsx">
+            <code>CodePreviewMarked.tsx</code>
+          </a>
+        </$.p>
         <$.h2 $textAlign="center">Supported Languages</$.h2>
         <$.p>
           Shaku supports most languages that are supported by Shiki. You can
