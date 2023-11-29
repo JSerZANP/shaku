@@ -116,17 +116,17 @@ Also you need CSS code to get it rendered nicely, surely you can alter it and ad
 > Check out the [CSS code used on Shaku homepage](https://github.com/JSerZANP/shaku/blob/main/examples/web/css/shaku.css)
 
 ```css
-pre.shiki {
+pre.shaku {
   padding: 1rem;
   border: 1px solid #eee;
 }
 
-pre.shiki .line {
+pre.shaku .line {
   min-height: 1em;
   line-height: 1.5;
 }
 
-pre.shiki.github-light .line.highlight {
+pre.shaku.github-light .line.highlight {
   background-color: var(
     --color-shaku-highlight-light,
     color-mix(in srgb, rgb(5, 118, 149) 15%, #fff)
@@ -134,12 +134,12 @@ pre.shiki.github-light .line.highlight {
   display: block;
 }
 
-pre.shiki.github-dark .line.highlight {
+pre.shaku.github-dark .line.highlight {
   background-color: var(--color-shaku-highlight-dark, #2b4a70);
   display: block;
 }
 
-pre.shiki .line.dim {
+pre.shaku .line.dim {
   opacity: 0.3;
 }
 
@@ -153,7 +153,7 @@ pre.shiki .line.dim {
   border-radius: 2px;
 }
 
-pre.shiki.github-dark .shaku-callout {
+pre.shaku.github-dark .shaku-callout {
   background-color: var(--color-shaku-callout-dark, #0685ce);
 }
 
@@ -175,7 +175,7 @@ pre.shiki.github-dark .shaku-callout {
   transform: rotate(45deg);
   margin-left: 0.2ch;
 }
-pre.shiki.github-dark .shaku-callout-arrow {
+pre.shaku.github-dark .shaku-callout-arrow {
   background-color: var(--color-shaku-callout-dark, #0685ce);
 }
 
@@ -188,7 +188,7 @@ pre.shiki.github-dark .shaku-callout-arrow {
   margin: 0;
   width: min-content;
 }
-pre.shiki.github-dark .shaku-underline {
+pre.shaku.github-dark .shaku-underline {
   color: var(--color-shaku-underline-dark, red);
 }
 
@@ -199,7 +199,7 @@ pre.shiki.github-dark .shaku-underline {
 .shaku-underline a {
   color: var(--color-shaku-underline-light, red);
 }
-pre.shiki.github-dark .shaku-underline a {
+pre.shaku.github-dark .shaku-underline a {
   color: var(--color-shaku-underline-dark, red);
 }
 
@@ -215,7 +215,7 @@ pre.shiki.github-dark .shaku-underline a {
   text-decoration-thickness: 2px;
 }
 
-pre.shiki.github-dark .shaku-underline-line {
+pre.shaku.github-dark .shaku-underline-line {
   text-decoration-color: var(--color-shaku-underline-dark, red);
 }
 
@@ -230,6 +230,29 @@ pre.shiki.github-dark .shaku-underline-line {
 
 .shaku-underline-dotted > .shaku-underline-line {
   text-decoration-style: dotted;
+}
+
+.shaku-inline-highlight {
+  background-color: #05a4fa30;
+  border-bottom: 2px solid rgb(9, 113, 239);
+  margin: 0 1px;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+
+.shaku-inline-highlight[data-id="1"] {
+  background-color: #05a4fa30;
+  border-bottom: 2px solid rgb(9, 113, 239);
+}
+
+.shaku-inline-highlight[data-id="2"] {
+  background-color: #fa05f230;
+  border-bottom: 2px solid rgb(235, 4, 158);
+}
+
+.shaku-inline-highlight[data-id="3"] {
+  background-color: #05faa930;
+  border-bottom: 2px solid green;
 }
 ```
 

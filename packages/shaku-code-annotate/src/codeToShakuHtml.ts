@@ -44,12 +44,6 @@ export let codeToShakuHtml = function (
         skipped: true,
       };
     }
-
-    return {
-      // @ts-ignore
-      html: highlighter.codeToHtml(code, lang, theme, options),
-      skipped: false,
-    };
   }
 
   const lines = highlighter.codeToThemedTokens(code, lang);
@@ -57,10 +51,10 @@ export let codeToShakuHtml = function (
   const backgroundColor = highlighter.getBackgroundColor();
 
   // generate the html from the tokens
-  let html = `<pre class="shiki ${theme.name}" style="color:${foregroundColor};background-color:${backgroundColor}">`;
+  let html = `<pre class="shiki shaku ${theme.name}" style="color:${foregroundColor};background-color:${backgroundColor}">`;
   html += `<div class="code-container"><code>`;
 
-  const parsedLines = parseLines(lines, lang);
+  const parsedLines = parseLines(lines, lang, shouldAnnotate);
   const hasFocus = hasShakuDirectiveFocus(parsedLines);
 
   let shouldHighlighNextSourceLine = false;
@@ -399,18 +393,24 @@ function parseComment(
     body: trimmedBody,
   };
 }
-function parseLines(lines: IThemedToken[][], lang?: string | null) {
+function parseLines(
+  lines: IThemedToken[][],
+  lang: string | null,
+  shouldAnnotate: boolean
+) {
   return lines.map((line) => {
-    const parsedComment = parseComment(line, lang);
-    if (parsedComment != null) {
-      const { body, offset } = parsedComment;
-      const shakuLine = parseLine(body);
-      if (shakuLine != null) {
-        return {
-          type: "shaku",
-          line: shakuLine,
-          offset,
-        } as const;
+    if (shouldAnnotate) {
+      const parsedComment = parseComment(line, lang);
+      if (parsedComment != null) {
+        const { body, offset } = parsedComment;
+        const shakuLine = parseLine(body);
+        if (shakuLine != null) {
+          return {
+            type: "shaku",
+            line: shakuLine,
+            offset,
+          } as const;
+        }
       }
     }
     return {
