@@ -1,5 +1,11 @@
 # remark-shaku-code-annotate
 
+## 0.1.5
+
+### Patch Changes
+
+- bump
+
 ## 0.1.4
 
 ### Patch Changes
