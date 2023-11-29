@@ -21,6 +21,9 @@
   --color-line-sub: #aaa;
   --color-link-coffee: #fedd00;
   --color-line-3rd: #eee;
+
+  --font-code: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro",
+    monospace;
 }
 
 a {

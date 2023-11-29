@@ -74,7 +74,7 @@ You don't need to add code meta, just add the command where you want to highligh
 function useSomeEffect({blog}) {
 
   useEffect(() => {
-    // do some staff
+    //  do some stuff
 
 // @highlight start
       return () => {
@@ -110,7 +110,7 @@ Use this command to de-emphasize some lines.
 function useSomeEffect({blog}) {
   // @dim
   useEffect(() => {
-    // do some staff
+    //  do some stuff
 
       return () => {
         // @dim start
@@ -132,7 +132,7 @@ Emphasize some lines while de-emphasize the others.
 function useSomeEffect({blog}) {
   // @focus
   useEffect(() => {
-    // do some staff
+    //  do some stuff
 
       return () => {
         // @focus start
@@ -192,7 +192,7 @@ export function Playground({ code: _code }: { code?: string }) {
 
   const share = () => {
     const query = "code=" + encodeURIComponent(code);
-    const url = location.origin + "?" + query;
+    const url = location.origin + "/playground?" + query;
     const type = "text/plain";
     const blob = new Blob([url], { type });
     const data = [new ClipboardItem({ [type]: blob })];

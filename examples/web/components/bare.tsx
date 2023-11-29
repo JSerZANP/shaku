@@ -16,7 +16,7 @@ type TextType =
   | "headline5"
   | "body";
 
-type BaseProps = {
+export type BaseProps = {
   children?: ReactNode;
   style?: CSSProperties;
 } & {

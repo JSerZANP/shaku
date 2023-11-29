@@ -68,6 +68,8 @@
 
 .preview hr {
   border-top: 1px solid #eee;
+  margin: 2rem 0;
+  height: 0;
 }
 
 .preview h1 {
@@ -92,4 +94,6 @@
 .preview h5,
 .preview h6 {
   font-weight: bold;
+  line-height: 1.5;
+  margin: 2rem 0;
 }
