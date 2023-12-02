@@ -6,7 +6,6 @@ import {
   forwardRef,
   useCallback,
   useRef,
-  useState,
 } from "react";
 type TextType =
   | "headline1"
@@ -87,19 +86,8 @@ export function Button({
   label?: string;
   icon?: ReactNode;
 }) {
-  const [hovered, setHovered] = useState(false);
-  const onHover = useCallback(() => {
-    setHovered(true);
-  }, []);
-  const onMouseOut = useCallback(() => {
-    setHovered(false);
-  }, []);
-  const refMouseEnter = useEvent("mouseenter", onHover);
-  const refMouseOut = useEvent("mouseleave", onMouseOut);
-  const ref = mergeRefs(refMouseEnter, refMouseOut);
   return (
     <$.button
-      ref={ref}
       onClick={onClick}
       $display="inline-flex"
       $gap="5px"
@@ -108,7 +96,6 @@ export function Button({
       $padding="6px 10px"
       $borderRadius="5px"
       $fontSize="16px"
-      $border={hovered ? "1px solid #555" : "1px solid #eee"}
       {...rest}
     >
       {icon} {label}

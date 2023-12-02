@@ -63,4 +63,9 @@ body {
 
 button {
   color: var(--color-text-main);
+  border: 1px solid var(--color-line-3rd);
+}
+
+button:hover {
+  border: 1px solid var(--color-line-sub);
 }
