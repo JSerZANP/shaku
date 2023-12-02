@@ -87,7 +87,7 @@ type ShakuDirectiveCollapse = {
   };
 };
 const RegShakuDirectiveCollapse =
-  /^(?<leadingSpaces>\s*)@collapse\s+(?<mark>\S+)\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@collapse\s+(?<mark>[a-z]+)\s*(?<escape>!?)\s*$/;
 
 type ShakuDirectiveHighlight = {
   type: "DirectiveHighlight";
@@ -98,7 +98,7 @@ type ShakuDirectiveHighlight = {
 };
 
 const RegShakuDirectiveHighlight =
-  /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>(\S+)?)\s*)?\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>([a-z]+)?)\s*)?\s*(?<escape>!?)\s*$/;
 
 type ShakuDirectiveDim = {
   type: "DirectiveDim";
@@ -108,7 +108,7 @@ type ShakuDirectiveDim = {
   };
 };
 const RegShakuDirectiveDim =
-  /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>(\S+)?)\s*)?\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>([a-z]+)?)\s*)?\s*(?<escape>!?)\s*$/;
 
 type ShakuDirectiveFocus = {
   type: "DirectiveFocus";
@@ -119,7 +119,7 @@ type ShakuDirectiveFocus = {
 };
 
 const RegShakuDirectiveFocus =
-  /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>(\S+)?)\s*)?\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>([a-z]+)?)\s*)?\s*(?<escape>!?)\s*$/;
 
 type ShakuLine =
   | ShakuDirectiveUnderline
