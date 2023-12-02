@@ -71,197 +71,193 @@ export let codeToShakuHtml = function (
 
   for (let i = 0; i < parsedLines.length; i++) {
     const line = parsedLines[i];
-    switch (line.type) {
-      case "shaku": {
-        const shakuLine = line.line;
-        switch (shakuLine.type) {
-          case "DirectiveCallout": {
-            const arrowOffset = shakuLine.config.offset;
-            const directiveOffset = arrowOffset + line.offset;
-            let minOffset = directiveOffset;
-            const contents = [];
 
-            let j = i + 1;
-            while (j < parsedLines.length) {
-              const nextLine = parsedLines[j];
-              if (
-                nextLine.type !== "shaku" ||
-                nextLine.line.type !== "AnnotationLine"
-              ) {
-                break;
-              }
+    const isShakuLine = line.type === "shaku" && !line.line.config.isEscaped;
+    if (isShakuLine) {
+      const shakuLine = line.line;
+      switch (shakuLine.type) {
+        case "DirectiveCallout": {
+          const arrowOffset = shakuLine.config.offset;
+          const directiveOffset = arrowOffset + line.offset;
+          let minOffset = directiveOffset;
+          const contents = [];
 
-              minOffset = Math.min(
-                minOffset,
-                nextLine.line.config.offset + nextLine.offset
-              );
-              contents.push(
-                parseBasicMarkdown(nextLine.line.config.content).trim()
-                // String(
-                //   unifiedProcessor.processSync(nextLine.line.config.content)
-                // )
-              );
-              j += 1;
-            }
-            html += renderComponent({
-              type: "ShakuComponentCallout",
-              config: {
-                offset: minOffset,
-                arrowOffset: directiveOffset - minOffset,
-                contents: contents.join(""),
-              },
-            });
-
-            i = j - 1;
-            continue;
-          }
-          case "AnnotationLine":
-            // TODO
-            break;
-          case "DirectiveCollapse":
-            // TODO
-            break;
-          case "DirectiveHighlight": {
-            const mark = shakuLine.config.mark;
-            switch (mark) {
-              case "start":
-                isHighlightingBlock = true;
-                break;
-              case "end":
-                isHighlightingBlock = false;
-                break;
-              case "below":
-              default:
-                shouldHighlighNextSourceLine = true;
-                break;
-            }
-            break;
-          }
-          case "DirectiveDim": {
-            const mark = shakuLine.config.mark;
-            switch (mark) {
-              case "start":
-                isDimBlock = true;
-                break;
-              case "end":
-                isDimBlock = false;
-                break;
-              case "below":
-              default:
-                shouldDimNextSourceLine = true;
-                break;
-            }
-            break;
-          }
-          case "DirectiveFocus": {
-            const mark = shakuLine.config.mark;
-            switch (mark) {
-              case "start":
-                isFocusBlock = true;
-                break;
-              case "end":
-                isFocusBlock = false;
-                break;
-              case "below":
-              default:
-                shouldFocusNextSourceLine = true;
-                break;
-            }
-            break;
-          }
-          case "DirectiveUnderline": {
-            const underlineOffset = shakuLine.config.offset;
-            const underlineContent = shakuLine.config.content;
-            const directiveOffset = underlineOffset + line.offset;
-            let minOffset = directiveOffset;
-            const contents = [];
-
-            let j = i + 1;
-            while (j < parsedLines.length) {
-              const nextLine = parsedLines[j];
-              if (
-                nextLine.type !== "shaku" ||
-                nextLine.line.type !== "AnnotationLine"
-              ) {
-                break;
-              }
-
-              minOffset = Math.min(
-                minOffset,
-                nextLine.line.config.offset + nextLine.offset
-              );
-              contents.push(
-                // some engines generates \n at line end
-                parseBasicMarkdown(nextLine.line.config.content).trim()
-                // String(
-                //   unifiedProcessor.processSync(nextLine.line.config.content)
-                // )
-              );
-
-              j += 1;
+          let j = i + 1;
+          while (j < parsedLines.length) {
+            const nextLine = parsedLines[j];
+            if (
+              nextLine.type !== "shaku" ||
+              nextLine.line.type !== "AnnotationLine"
+            ) {
+              break;
             }
 
-            html += renderComponent({
-              type: "ShakuComponentUnderline",
-              config: {
-                offset: minOffset,
-                underlineOffset: directiveOffset - minOffset,
-                underlineContent,
-                underlineStyle: shakuLine.config.style,
-                contents: contents.join(""),
-              },
-            });
+            minOffset = Math.min(
+              minOffset,
+              nextLine.line.config.offset + nextLine.offset
+            );
+            contents.push(
+              parseBasicMarkdown(nextLine.line.config.content).trim()
+              // String(
+              //   unifiedProcessor.processSync(nextLine.line.config.content)
+              // )
+            );
+            j += 1;
+          }
+          html += renderComponent({
+            type: "ShakuComponentCallout",
+            config: {
+              offset: minOffset,
+              arrowOffset: directiveOffset - minOffset,
+              contents: contents.join(""),
+            },
+          });
 
-            i = j - 1;
-            continue;
-          }
-          case "DirectiveHighlightInline": {
-            // only treat it as shaku line if next line is default line
-            if (parsedLines[i + 1].type === "default") {
-              shakuDirectiveHighlightInline = {
-                type: "shaku",
-                line: shakuLine,
-                offset: line.offset,
-              };
-            }
-            continue;
-          }
-          default:
-            assertsNever(shakuLine);
+          i = j - 1;
+          continue;
         }
-
-        break;
-      }
-      case "default": {
-        const shouldHighlight =
-          isHighlightingBlock || shouldHighlighNextSourceLine;
-        const shouldFocus = isFocusBlock || shouldFocusNextSourceLine;
-        const shouldDim =
-          isDimBlock || shouldDimNextSourceLine || (hasFocus && !shouldFocus);
-        shouldHighlighNextSourceLine = false;
-        shouldFocusNextSourceLine = false;
-        shouldDimNextSourceLine = false;
-        const sourceLine = line.line;
-        const highlightClass = shouldHighlight ? " highlight" : "";
-        const dimClass = shouldDim ? " dim" : "";
-        const prefix = `<div class="line${highlightClass}${dimClass}">`;
-        html += prefix;
-
-        if (shakuDirectiveHighlightInline) {
-          html += renderSourceLineWithInlineHighlight(
-            sourceLine,
-            shakuDirectiveHighlightInline
-          );
-          shakuDirectiveHighlightInline = null;
-        } else {
-          html += renderSourceLine(sourceLine);
+        case "AnnotationLine":
+          // TODO
+          break;
+        case "DirectiveCollapse":
+          // TODO
+          break;
+        case "DirectiveHighlight": {
+          const mark = shakuLine.config.mark;
+          switch (mark) {
+            case "start":
+              isHighlightingBlock = true;
+              break;
+            case "end":
+              isHighlightingBlock = false;
+              break;
+            case "below":
+            default:
+              shouldHighlighNextSourceLine = true;
+              break;
+          }
+          break;
         }
+        case "DirectiveDim": {
+          const mark = shakuLine.config.mark;
+          switch (mark) {
+            case "start":
+              isDimBlock = true;
+              break;
+            case "end":
+              isDimBlock = false;
+              break;
+            case "below":
+            default:
+              shouldDimNextSourceLine = true;
+              break;
+          }
+          break;
+        }
+        case "DirectiveFocus": {
+          const mark = shakuLine.config.mark;
+          switch (mark) {
+            case "start":
+              isFocusBlock = true;
+              break;
+            case "end":
+              isFocusBlock = false;
+              break;
+            case "below":
+            default:
+              shouldFocusNextSourceLine = true;
+              break;
+          }
+          break;
+        }
+        case "DirectiveUnderline": {
+          const underlineOffset = shakuLine.config.offset;
+          const underlineContent = shakuLine.config.content;
+          const directiveOffset = underlineOffset + line.offset;
+          let minOffset = directiveOffset;
+          const contents = [];
 
-        html += `</div>`;
-        break;
+          let j = i + 1;
+          while (j < parsedLines.length) {
+            const nextLine = parsedLines[j];
+            if (
+              nextLine.type !== "shaku" ||
+              nextLine.line.type !== "AnnotationLine"
+            ) {
+              break;
+            }
+
+            minOffset = Math.min(
+              minOffset,
+              nextLine.line.config.offset + nextLine.offset
+            );
+            contents.push(
+              // some engines generates \n at line end
+              parseBasicMarkdown(nextLine.line.config.content).trim()
+              // String(
+              //   unifiedProcessor.processSync(nextLine.line.config.content)
+              // )
+            );
+
+            j += 1;
+          }
+
+          html += renderComponent({
+            type: "ShakuComponentUnderline",
+            config: {
+              offset: minOffset,
+              underlineOffset: directiveOffset - minOffset,
+              underlineContent,
+              underlineStyle: shakuLine.config.style,
+              contents: contents.join(""),
+            },
+          });
+
+          i = j - 1;
+          continue;
+        }
+        case "DirectiveHighlightInline": {
+          // only treat it as shaku line if next line is default line
+          if (parsedLines[i + 1].type === "default") {
+            shakuDirectiveHighlightInline = {
+              type: "shaku",
+              line: shakuLine,
+              offset: line.offset,
+            };
+          }
+          continue;
+        }
+        default:
+          assertsNever(shakuLine);
       }
-      default:
-        assertsNever(line);
+    } else {
+      const shouldHighlight =
+        isHighlightingBlock || shouldHighlighNextSourceLine;
+      const shouldFocus = isFocusBlock || shouldFocusNextSourceLine;
+      const shouldDim =
+        isDimBlock || shouldDimNextSourceLine || (hasFocus && !shouldFocus);
+      shouldHighlighNextSourceLine = false;
+      shouldFocusNextSourceLine = false;
+      shouldDimNextSourceLine = false;
+
+      const sourceLine = line.type === "default" ? line.line : line.sourceLine;
+
+      const highlightClass = shouldHighlight ? " highlight" : "";
+      const dimClass = shouldDim ? " dim" : "";
+      const prefix = `<div class="line${highlightClass}${dimClass}">`;
+      html += prefix;
+
+      if (shakuDirectiveHighlightInline) {
+        html += renderSourceLineWithInlineHighlight(
+          sourceLine,
+          shakuDirectiveHighlightInline
+        );
+        shakuDirectiveHighlightInline = null;
+      } else {
+        html += renderSourceLine(sourceLine);
+      }
+
+      html += `</div>`;
     }
   }
 
@@ -408,6 +404,7 @@ function parseLines(
           return {
             type: "shaku",
             line: shakuLine,
+            sourceLine: line,
             offset,
           } as const;
         }
