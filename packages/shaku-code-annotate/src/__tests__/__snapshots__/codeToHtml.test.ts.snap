@@ -6,3 +6,10 @@ exports[`codeToHtml() 1`] = `
   "skipped": false,
 }
 `;
+
+exports[`codeToHtml() 2`] = `
+{
+  "html": "<pre class=\\"shiki shaku github-light\\" style=\\"color:#24292e;background-color:#fff\\"><div class=\\"code-container\\"><code><div class=\\"line\\"><span style=\\"color: undefined\\"></span></div><div class=\\"line\\"><span style=\\"color: undefined\\">function hello() {</span></div><div class=\\"line\\"><span style=\\"color: undefined\\">  //        ^!</span></div><div class=\\"line\\"><span style=\\"color: undefined\\">  //    [Hello world!]!</span></div><div class=\\"line\\"><span style=\\"color: undefined\\">  //        ^</span></div><div class=\\"line\\"><span style=\\"color: undefined\\">  //    [Shaku Shaku]</span></div><div class=\\"line\\"><span style=\\"color: undefined\\">  const blog = \\"https://jser.dev\\"</span></div><div class=\\"line\\"><span style=\\"color: undefined\\">}</span></div><div class=\\"line\\"><span style=\\"color: undefined\\">  </span></div></code></div></pre>",
+  "skipped": false,
+}
+`;

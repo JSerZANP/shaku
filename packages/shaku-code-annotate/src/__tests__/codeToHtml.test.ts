@@ -20,6 +20,15 @@ function ChatRoom({ roomId }) {
   }, [serverUrl, roomId]);
 }
 `,
+  `
+function hello() {
+  //        ^!
+  //    [Hello world!]!
+  //        ^
+  //    [Shaku Shaku]
+  const blog = "https://jser.dev"
+}
+  `,
 ];
 
 test("codeToHtml()", async () => {
