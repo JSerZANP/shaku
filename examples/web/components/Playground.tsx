@@ -181,6 +181,21 @@ function component() {
 }
 \`\`\`
 
+## Escape with \`!\`
+
+For cases where rendering raw comments are desirable, we can
+put \`!\` at the end of shaku lines to escape.
+
+\`\`\`tsx annotate
+const Hello = "World!"
+//     ^!
+// [Hello World!]!
+//     ^
+// [Above two lines are not rendered into UI elements!]
+// [Because they have \`!\` at the end, ]
+// [and \`!\` is removed when rendered.]
+\`\`\`
+
 ## How to Use
 
 Visit [shaku on github](https://github.com/JSerZANP/shaku/tree/main) to find the right plugin.

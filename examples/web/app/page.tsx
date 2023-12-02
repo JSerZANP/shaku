@@ -26,12 +26,10 @@ export default async function Page({
           <a href="/snippet">Shaku Snippet</a>
         </$.nav>
         <$.h1 $textAlign="center">Shaku - code annotation made easy</$.h1>
-
         <p>
           <a href="https://github.com/JSerZANP/shaku">Shaku</a> makes it super
           easy to annotate code with special directives in comments.
         </p>
-
         <$.h2 $textAlign="center">A very basic example</$.h2>
         <CodeBlock
           code={`const Hello = "World!"
@@ -54,7 +52,6 @@ export default async function Page({
           Now code and annotation are visually separated, super cool to explain
           code, right?
         </$.p>
-
         <$.h2 $textAlign="center">Usage</$.h2>
         <$.p $lineHeight="1.5">Choose the right tool for your use case.</$.p>
         <$.ol $listStyle="disc" $lineHeight="1.5">
@@ -92,7 +89,6 @@ export default async function Page({
             </a>{" "}
           </$.li>
         </$.ol>
-
         <$.p>
           Or you can just inspect the source code of this website -{" "}
           <a href="https://github.com/JSerZANP/shaku/blob/main/examples/web/components/CodeBlock.tsx">
@@ -127,7 +123,6 @@ export default async function Page({
           The class names for each Shaku element will be explained in Syntax
           section.
         </p>
-
         <$.h3>Dark mode support</$.h3>
         <p>
           You can render multiple themes by setting <code>themes</code> in the
@@ -165,7 +160,6 @@ marked.use(
           lang="css"
           shakuEnabled
         />
-
         <$.h2 $textAlign="center">Syntax</$.h2>
         <blockquote>
           You can also try out the syntax on{" "}
@@ -173,7 +167,6 @@ marked.use(
           <a href="/snippet">Shaku Snippet</a>.
         </blockquote>
         <$.h3>Callout</$.h3>
-
         <CodeBlock
           code={`const blog = "https://jser.dev"
 //                    ^
@@ -224,7 +217,6 @@ marked.use(
           lang="css"
         />
         <$.h3>Underlines</$.h3>
-
         <CodeBlock
           code={`// This is normal comments from source code.
 const blog = "https://jser.dev"
@@ -265,7 +257,6 @@ const blog = "jser.dev"
 //            ........`}
           lang="js"
         />
-
         <$.p>
           <code>.shaku-underline</code> is the base style,{" "}
           <code>.shaku-underline-wavy</code>,{" "}
@@ -310,9 +301,7 @@ const blog = "jser.dev"
 }`}
           lang="css"
         />
-
         <$.h3>Highlight Lines</$.h3>
-
         <CodeBlock
           code={`// @highlight
 function useSomeEffect({blog}) {
@@ -347,7 +336,6 @@ function useSomeEffect({blog}) {
 }`}
           lang="js"
         />
-
         <$.p>
           <code>.shaku .line.highlight</code> could be used to set highlight
           style.
@@ -363,9 +351,7 @@ function useSomeEffect({blog}) {
 }`}
           lang="css"
         />
-
         <$.h3>Highlight words(inline)</$.h3>
-
         <CodeBlock
           code={`//       (           )
 function useSomeEffect({blog}) {
@@ -429,9 +415,7 @@ function useSomeEffect({blog}) {
 `}
           lang="css"
         />
-
         <$.h3>Dim lines</$.h3>
-
         <CodeBlock
           code={`function useSomeEffect({blog}) {
 // @dim
@@ -478,9 +462,7 @@ useEffect(() => {
 }`}
           lang="css"
         />
-
         <$.h3>Focus lines</$.h3>
-
         <CodeBlock
           code={`function useSomeEffect({blog}) {
 // @focus
@@ -520,7 +502,6 @@ useEffect(() => {
           Since it is a shorthand syntax, there is no special class for it.
         </$.p>
         <$.h3>Position Shift</$.h3>
-
         <CodeBlock
           code={`function component() {
 //^<<
@@ -551,6 +532,23 @@ useEffect(() => {
           />
 }`}
           lang="js"
+        />
+        <h3>
+          Escape with <code>!</code>
+        </h3>
+        <p>
+          For cases where rendering raw comments are desirable, we can put `!`
+          at the end of shaku lines to escape.{" "}
+        </p>
+        <CodeBlock
+          code={`const Hello = "World!"
+//     ^!
+// [Hello World!]!
+//     ^
+// [Above two lines are not rendered into UI elements!]
+// [Since they have \`!\` at the end and \`!\` is removed when rendered]`}
+          lang="js"
+          shakuEnabled
         />
         <$.hr $margin="2rem auto" $width={"50%"} />
         <p>
