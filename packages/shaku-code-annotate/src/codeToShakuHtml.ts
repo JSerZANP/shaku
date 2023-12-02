@@ -401,6 +401,16 @@ function parseLines(
         const { body, offset } = parsedComment;
         const shakuLine = parseLine(body);
         if (shakuLine != null) {
+          // for escaped shaku lines, we need to remove the trailing!
+          if (shakuLine.config.isEscaped) {
+            for (let i = line.length - 1; i >= 0; i--) {
+              if (/!\s*$/.test(line[i].content)) {
+                line[i].content = line[i].content.replace(/!(\s*)$/, "$1");
+                break;
+              }
+            }
+          }
+
           return {
             type: "shaku",
             line: shakuLine,
