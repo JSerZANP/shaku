@@ -128,6 +128,44 @@ export default async function Page({
           section.
         </p>
 
+        <$.h3>Dark mode support</$.h3>
+        <p>
+          You can render multiple themes by setting <code>themes</code> in the
+          Shaku plugins, the theme lang is put on the <code>&lt;pre&gt;</code>{" "}
+          tag. Thus we can control the visibility by CSS
+        </p>
+        <CodeBlock
+          code={`const marked = new Marked();
+
+marked.use(
+  markedShakuCodeAnnotate({
+    // @highlight
+    themes: ["github-light", "github-dark"],
+    langs: ["javascript", "css", "jsx", "html", "typescript", "tsx"],
+  })
+);`}
+          lang="js"
+          shakuEnabled
+        />
+        <CodeBlock
+          code={`pre.shaku.github-dark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  pre.shaku.github-dark {
+    display: block;
+  }
+
+  pre.shaku.github-light {
+    display: none;
+  }
+}
+`}
+          lang="css"
+          shakuEnabled
+        />
+
         <$.h2 $textAlign="center">Syntax</$.h2>
         <blockquote>
           You can also try out the syntax on{" "}

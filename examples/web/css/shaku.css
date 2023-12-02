@@ -1,6 +1,7 @@
 pre.shaku {
   padding: 1rem;
-  border: 1px solid #eee;
+  border: 1px solid var(--color-line-3rd);
+  overflow-x: auto;
 }
 
 pre.shaku .line {
@@ -135,4 +136,18 @@ pre.shaku.github-dark .shaku-underline-line {
 .shaku-inline-highlight[data-id="3"] {
   background-color: #05faa930;
   border-bottom: 2px solid green;
+}
+
+pre.shaku.github-dark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  pre.shaku.github-dark {
+    display: block;
+  }
+
+  pre.shaku.github-light {
+    display: none;
+  }
 }

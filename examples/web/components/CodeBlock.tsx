@@ -25,7 +25,7 @@ export async function CodeBlock({
 } & BaseProps) {
   const highlighters = await getShakuHighlighters({
     langs: [lang],
-    theme: "github-light",
+    themes: ["github-light", "github-dark"],
   });
 
   const html = highlighters

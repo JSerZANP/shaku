@@ -11,7 +11,7 @@ const marked = new Marked();
 
 marked.use(
   markedShakuCodeAnnotate({
-    theme: "github-light",
+    themes: ["github-light", "github-dark"],
     langs: ["javascript", "css", "jsx", "html", "typescript", "tsx"],
 
     paths: {

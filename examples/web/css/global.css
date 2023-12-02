@@ -19,11 +19,36 @@
 
   --color-line-main: #777;
   --color-line-sub: #aaa;
-  --color-link-coffee: #fedd00;
   --color-line-3rd: #eee;
 
   --font-code: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro",
     monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* text color */
+    --color-text-main: #eee;
+    --color-text-sub: #777;
+    /* third color */
+    --color-text-3rd: #eeeeee;
+
+    /* link color */
+    --color-link-main: #2973af;
+    /* link color sub */
+    --color-link-sub: #008eff;
+    --color-link-coffee: #fedd00;
+
+    --color-bg-main: #15202b;
+    background-color: #15202b;
+    --color-bg-sub: #777;
+    --color-bg-deemphasized: #1c2b3a;
+    --color-bg-3rd: #eee;
+
+    --color-line-main: #eee;
+    --color-line-sub: #aaa;
+    --color-line-3rd: rgb(56, 68, 77);
+  }
 }
 
 a {
@@ -32,4 +57,10 @@ a {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+}
+
+button {
+  color: var(--color-text-main);
 }
