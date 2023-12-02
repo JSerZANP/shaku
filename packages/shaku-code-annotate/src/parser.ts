@@ -6,29 +6,32 @@ type ShakuDirectiveUnderline = {
     style: "solid" | "dotted" | "wavy";
     content: string;
     offset: number;
+    isEscaped: boolean;
   };
 };
 const RegShakuDirectiveUnderlineSolid =
-  /^(?<leadingSpaces>\s*)(?<content>(-|_)+)\s*(?<shift><*)\s*$/;
+  /^(?<leadingSpaces>\s*)(?<content>(-|_)+)\s*(?<shift><*)\s*(?<escape>!?)\s*$/;
 const RegShakuDirectiveUnderlineWavy =
-  /^(?<leadingSpaces>\s*)(?<content>~+)\s*(?<shift><*)\s*$/;
+  /^(?<leadingSpaces>\s*)(?<content>~+)\s*(?<shift><*)\s*(?<escape>!?)\s*$/;
 const RegShakuDirectiveUnderlineDotted =
-  /^(?<leadingSpaces>\s*)(?<content>\.+)\s*(?<shift><*)\s*$/;
+  /^(?<leadingSpaces>\s*)(?<content>\.+)\s*(?<shift><*)\s*(?<escape>!?)\s*$/;
 
 type ShakuAnnotationLine = {
   type: "AnnotationLine";
   config: {
     offset: number;
     content: string;
+    isEscaped: boolean;
   };
 };
 
 const RegShakuAnnotationLine =
-  /^(?<leadingSpaces>\s*)\[(?<content>.+)\]\s*(?<shift><*)\s*$/;
+  /^(?<leadingSpaces>\s*)\[(?<content>.+)\]\s*(?<shift><*)\s*(?<escape>!?)\s*$/;
 
 export type ShakuDirectiveHighlightInline = {
   type: "DirectiveHighlightInline";
   config: {
+    isEscaped: boolean;
     parts: Array<{
       offset: number;
       length: number;
@@ -37,15 +40,18 @@ export type ShakuDirectiveHighlightInline = {
   };
 };
 
-const RegShakuDirectiveHighlightInline = /^(\(\d*\))+(?<shift><*)$/;
+const RegShakuDirectiveHighlightInline =
+  /^(\(\d*\))+(?<shift><*)(?<escape>!?)$/;
 const RegShakuDirectiveHighlightInlinePart = /\(\s*(?<id>\d*)\s*\)/g;
 function isShakuDirectiveHighlightInline(str: string): {
+  isEscaped: boolean;
   shift: number;
   isHighlightInline: boolean;
 } {
   const significantLine = str.replace(/ /g, "");
   const matches = significantLine.match(RegShakuDirectiveHighlightInline);
   return {
+    isEscaped: !!matches?.groups?.escape,
     isHighlightInline: !!matches,
     shift: matches?.groups?.shift.length ?? 0,
   };
@@ -54,11 +60,13 @@ function isShakuDirectiveHighlightInline(str: string): {
 type ShakuDirectiveCallout = {
   type: "DirectiveCallout";
   config: {
+    isEscaped: boolean;
     offset: number;
   };
 };
 
-const RegShakuDirectiveCallout = /^(?<leadingSpaces>\s*)\^\s*(?<shift><*)\s*$/;
+const RegShakuDirectiveCallout =
+  /^(?<leadingSpaces>\s*)\^\s*(?<shift><*)\s*(?<escape>!?)\s*$/;
 
 // type ShakuDirectiveFloatCallout = {
 //   type: 'DirectiveFloatCallout',
@@ -73,41 +81,45 @@ const RegShakuDirectiveCallout = /^(?<leadingSpaces>\s*)\^\s*(?<shift><*)\s*$/;
 type ShakuDirectiveCollapse = {
   type: "DirectiveCollapse";
   config: {
+    isEscaped: boolean;
     offset: number;
     mark: "start" | "end";
   };
 };
 const RegShakuDirectiveCollapse =
-  /^(?<leadingSpaces>\s*)@collapse\s+(?<mark>\S+)\s*$/;
+  /^(?<leadingSpaces>\s*)@collapse\s+(?<mark>\S+)\s*(?<escape>!?)\s*$/;
 
 type ShakuDirectiveHighlight = {
   type: "DirectiveHighlight";
   config: {
+    isEscaped: boolean;
     mark: "start" | "end" | "below";
   };
 };
 
 const RegShakuDirectiveHighlight =
-  /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>(\S+)?)\s*)?$/;
+  /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>(\S+)?)\s*)?\s*(?<escape>!?)\s*$/;
 
 type ShakuDirectiveDim = {
   type: "DirectiveDim";
   config: {
+    isEscaped: boolean;
     mark: "start" | "end" | "below";
   };
 };
 const RegShakuDirectiveDim =
-  /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>(\S+)?)\s*)?$/;
+  /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>(\S+)?)\s*)?\s*(?<escape>!?)\s*$/;
 
 type ShakuDirectiveFocus = {
   type: "DirectiveFocus";
   config: {
+    isEscaped: boolean;
     mark: "start" | "end" | "below";
   };
 };
 
 const RegShakuDirectiveFocus =
-  /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>(\S+)?)\s*)?$/;
+  /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>(\S+)?)\s*)?\s*(?<escape>!?)\s*$/;
 
 type ShakuLine =
   | ShakuDirectiveUnderline
@@ -127,6 +139,7 @@ export const parseLine = (line: string): ShakuLine | null => {
     return {
       type: "DirectiveUnderline",
       config: {
+        isEscaped: !!matchShakuDirectiveUnderlineSolid.groups?.escape,
         offset:
           (matchShakuDirectiveUnderlineSolid.groups?.leadingSpaces.length ??
             0) - (matchShakuDirectiveUnderlineSolid.groups?.shift.length ?? 0),
@@ -143,6 +156,7 @@ export const parseLine = (line: string): ShakuLine | null => {
     return {
       type: "DirectiveUnderline",
       config: {
+        isEscaped: !!matchShakuDirectiveUnderlineWavy.groups?.escape,
         offset:
           (matchShakuDirectiveUnderlineWavy.groups?.leadingSpaces.length ?? 0) -
           (matchShakuDirectiveUnderlineWavy.groups?.shift.length ?? 0),
@@ -158,6 +172,7 @@ export const parseLine = (line: string): ShakuLine | null => {
     return {
       type: "DirectiveUnderline",
       config: {
+        isEscaped: !!matchShakuDirectiveUnderlineDotted.groups?.escape,
         offset:
           (matchShakuDirectiveUnderlineDotted.groups?.leadingSpaces.length ??
             0) - (matchShakuDirectiveUnderlineDotted.groups?.shift.length ?? 0),
@@ -172,6 +187,7 @@ export const parseLine = (line: string): ShakuLine | null => {
     return {
       type: "AnnotationLine",
       config: {
+        isEscaped: !!matchShakuAnnotationLine.groups?.escape,
         offset:
           (matchShakuAnnotationLine.groups?.leadingSpaces.length ?? 0) -
           (matchShakuAnnotationLine.groups?.shift.length ?? 0),
@@ -185,6 +201,7 @@ export const parseLine = (line: string): ShakuLine | null => {
     return {
       type: "DirectiveCallout",
       config: {
+        isEscaped: !!matchShakuDirectiveCallout.groups?.escape,
         offset:
           (matchShakuDirectiveCallout.groups?.leadingSpaces.length ?? 0) -
           (matchShakuDirectiveCallout.groups?.shift.length ?? 0),
@@ -199,6 +216,7 @@ export const parseLine = (line: string): ShakuLine | null => {
       return {
         type: "DirectiveCollapse",
         config: {
+          isEscaped: !!matchShakuDirectiveCollapse.groups?.escape,
           offset: matchShakuDirectiveCollapse.groups?.leadingSpaces.length ?? 0,
           mark,
         },
@@ -213,6 +231,7 @@ export const parseLine = (line: string): ShakuLine | null => {
       return {
         type: "DirectiveHighlight",
         config: {
+          isEscaped: !!matchShakuDirectiveHighlight.groups?.escape,
           mark,
         },
       };
@@ -225,6 +244,7 @@ export const parseLine = (line: string): ShakuLine | null => {
       return {
         type: "DirectiveDim",
         config: {
+          isEscaped: !!matchShakuDirectiveDim.groups?.escape,
           mark,
         },
       };
@@ -237,18 +257,21 @@ export const parseLine = (line: string): ShakuLine | null => {
       return {
         type: "DirectiveFocus",
         config: {
+          isEscaped: !!matchShakuDirectiveFocus.groups?.escape,
           mark,
         },
       };
     }
   }
 
-  const { isHighlightInline, shift } = isShakuDirectiveHighlightInline(line);
+  const { isHighlightInline, shift, isEscaped } =
+    isShakuDirectiveHighlightInline(line);
   if (isHighlightInline) {
     const parts = [...line.matchAll(RegShakuDirectiveHighlightInlinePart)];
     return {
       type: "DirectiveHighlightInline",
       config: {
+        isEscaped,
         parts: parts.map((part) => {
           return {
             offset: part.index! - shift,

@@ -3,6 +3,7 @@
 exports[`parseLine() can parse comment lines >    (0)  (2 ) <<< 1`] = `
 {
   "config": {
+    "isEscaped": false,
     "parts": [
       {
         "id": 0,
@@ -23,6 +24,7 @@ exports[`parseLine() can parse comment lines >    (0)  (2 ) <<< 1`] = `
 exports[`parseLine() can parse comment lines >    @collapse end  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "end",
     "offset": 3,
   },
@@ -33,6 +35,7 @@ exports[`parseLine() can parse comment lines >    @collapse end  1`] = `
 exports[`parseLine() can parse comment lines >    @collapse start  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "start",
     "offset": 3,
   },
@@ -45,6 +48,7 @@ exports[`parseLine() can parse comment lines >    @collapse unexpected  1`] = `n
 exports[`parseLine() can parse comment lines >    @dim  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "below",
   },
   "type": "DirectiveDim",
@@ -54,6 +58,7 @@ exports[`parseLine() can parse comment lines >    @dim  1`] = `
 exports[`parseLine() can parse comment lines >    @dim below 1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "below",
   },
   "type": "DirectiveDim",
@@ -63,6 +68,7 @@ exports[`parseLine() can parse comment lines >    @dim below 1`] = `
 exports[`parseLine() can parse comment lines >    @dim end  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "end",
   },
   "type": "DirectiveDim",
@@ -72,6 +78,7 @@ exports[`parseLine() can parse comment lines >    @dim end  1`] = `
 exports[`parseLine() can parse comment lines >    @dim start  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "start",
   },
   "type": "DirectiveDim",
@@ -81,6 +88,7 @@ exports[`parseLine() can parse comment lines >    @dim start  1`] = `
 exports[`parseLine() can parse comment lines >    @focus  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "below",
   },
   "type": "DirectiveFocus",
@@ -90,6 +98,7 @@ exports[`parseLine() can parse comment lines >    @focus  1`] = `
 exports[`parseLine() can parse comment lines >    @focus below  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "below",
   },
   "type": "DirectiveFocus",
@@ -99,6 +108,7 @@ exports[`parseLine() can parse comment lines >    @focus below  1`] = `
 exports[`parseLine() can parse comment lines >    @focus below  2`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "below",
   },
   "type": "DirectiveFocus",
@@ -108,6 +118,7 @@ exports[`parseLine() can parse comment lines >    @focus below  2`] = `
 exports[`parseLine() can parse comment lines >    @focus end  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "end",
   },
   "type": "DirectiveFocus",
@@ -117,6 +128,7 @@ exports[`parseLine() can parse comment lines >    @focus end  1`] = `
 exports[`parseLine() can parse comment lines >    @focus start  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "start",
   },
   "type": "DirectiveFocus",
@@ -126,6 +138,7 @@ exports[`parseLine() can parse comment lines >    @focus start  1`] = `
 exports[`parseLine() can parse comment lines >    @highlight  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "below",
   },
   "type": "DirectiveHighlight",
@@ -135,6 +148,7 @@ exports[`parseLine() can parse comment lines >    @highlight  1`] = `
 exports[`parseLine() can parse comment lines >    @highlight below  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "below",
   },
   "type": "DirectiveHighlight",
@@ -144,6 +158,7 @@ exports[`parseLine() can parse comment lines >    @highlight below  1`] = `
 exports[`parseLine() can parse comment lines >    @highlight end  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "end",
   },
   "type": "DirectiveHighlight",
@@ -153,6 +168,7 @@ exports[`parseLine() can parse comment lines >    @highlight end  1`] = `
 exports[`parseLine() can parse comment lines >    @highlight start  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "mark": "start",
   },
   "type": "DirectiveHighlight",
@@ -165,6 +181,7 @@ exports[`parseLine() can parse comment lines >    [This is annotation]   1`] = `
 {
   "config": {
     "content": "This is annotation",
+    "isEscaped": false,
     "offset": 3,
   },
   "type": "AnnotationLine",
@@ -175,6 +192,7 @@ exports[`parseLine() can parse comment lines >    [This is annotation] <<<   1`]
 {
   "config": {
     "content": "This is annotation",
+    "isEscaped": false,
     "offset": 0,
   },
   "type": "AnnotationLine",
@@ -185,6 +203,7 @@ exports[`parseLine() can parse comment lines >    [This is annotation]<   1`] = 
 {
   "config": {
     "content": "This is annotation",
+    "isEscaped": false,
     "offset": 2,
   },
   "type": "AnnotationLine",
@@ -194,6 +213,7 @@ exports[`parseLine() can parse comment lines >    [This is annotation]<   1`] = 
 exports[`parseLine() can parse comment lines >    ^   1`] = `
 {
   "config": {
+    "isEscaped": false,
     "offset": 3,
   },
   "type": "DirectiveCallout",
@@ -203,6 +223,7 @@ exports[`parseLine() can parse comment lines >    ^   1`] = `
 exports[`parseLine() can parse comment lines >    ^ <<<  1`] = `
 {
   "config": {
+    "isEscaped": false,
     "offset": 0,
   },
   "type": "DirectiveCallout",
@@ -212,6 +233,7 @@ exports[`parseLine() can parse comment lines >    ^ <<<  1`] = `
 exports[`parseLine() can parse comment lines >    ^<   1`] = `
 {
   "config": {
+    "isEscaped": false,
     "offset": 2,
   },
   "type": "DirectiveCallout",
@@ -222,6 +244,7 @@ exports[`parseLine() can parse comment lines >   ......   1`] = `
 {
   "config": {
     "content": "......",
+    "isEscaped": false,
     "offset": 2,
     "style": "dotted",
   },
@@ -233,6 +256,7 @@ exports[`parseLine() can parse comment lines >   ...... <<   1`] = `
 {
   "config": {
     "content": "......",
+    "isEscaped": false,
     "offset": 0,
     "style": "dotted",
   },
@@ -244,6 +268,7 @@ exports[`parseLine() can parse comment lines >   ......<   1`] = `
 {
   "config": {
     "content": "......",
+    "isEscaped": false,
     "offset": 1,
     "style": "dotted",
   },
@@ -255,6 +280,7 @@ exports[`parseLine() can parse comment lines >   ~~~~~~~~ <<  1`] = `
 {
   "config": {
     "content": "~~~~~~~~",
+    "isEscaped": false,
     "offset": 0,
     "style": "wavy",
   },
@@ -266,6 +292,7 @@ exports[`parseLine() can parse comment lines >   ~~~~~~~~<   1`] = `
 {
   "config": {
     "content": "~~~~~~~~",
+    "isEscaped": false,
     "offset": 1,
     "style": "wavy",
   },
@@ -277,6 +304,7 @@ exports[`parseLine() can parse comment lines >   -------   1`] = `
 {
   "config": {
     "content": "-------",
+    "isEscaped": false,
     "offset": 2,
     "style": "solid",
   },
@@ -288,6 +316,7 @@ exports[`parseLine() can parse comment lines >   ------- <<   1`] = `
 {
   "config": {
     "content": "-------",
+    "isEscaped": false,
     "offset": 0,
     "style": "solid",
   },
@@ -299,6 +328,7 @@ exports[`parseLine() can parse comment lines >   -------<   1`] = `
 {
   "config": {
     "content": "-------",
+    "isEscaped": false,
     "offset": 1,
     "style": "solid",
   },
@@ -309,6 +339,7 @@ exports[`parseLine() can parse comment lines >   -------<   1`] = `
 exports[`parseLine() can parse comment lines >  ( )  ( )   ()    1`] = `
 {
   "config": {
+    "isEscaped": false,
     "parts": [
       {
         "id": undefined,
@@ -336,6 +367,7 @@ exports[`parseLine() can parse comment lines >  (( 1`] = `null`;
 exports[`parseLine() can parse comment lines >  (0)  (2 )   (0)    1`] = `
 {
   "config": {
+    "isEscaped": false,
     "parts": [
       {
         "id": 0,
@@ -363,6 +395,7 @@ exports[`parseLine() can parse comment lines >  (0)  (2 )   0 1`] = `null`;
 exports[`parseLine() can parse comment lines >  (0)  (2 )< 1`] = `
 {
   "config": {
+    "isEscaped": false,
     "parts": [
       {
         "id": 0,
@@ -383,6 +416,7 @@ exports[`parseLine() can parse comment lines >  (0)  (2 )< 1`] = `
 exports[`parseLine() can parse comment lines > () 1`] = `
 {
   "config": {
+    "isEscaped": false,
     "parts": [
       {
         "id": undefined,
@@ -398,6 +432,7 @@ exports[`parseLine() can parse comment lines > () 1`] = `
 exports[`parseLine() can parse comment lines > ()()() 1`] = `
 {
   "config": {
+    "isEscaped": false,
     "parts": [
       {
         "id": undefined,
@@ -423,6 +458,7 @@ exports[`parseLine() can parse comment lines > ()()() 1`] = `
 exports[`parseLine() can parse comment lines > (1) 1`] = `
 {
   "config": {
+    "isEscaped": false,
     "parts": [
       {
         "id": 1,
@@ -438,6 +474,7 @@ exports[`parseLine() can parse comment lines > (1) 1`] = `
 exports[`parseLine() can parse comment lines > (1)(1)(10) 1`] = `
 {
   "config": {
+    "isEscaped": false,
     "parts": [
       {
         "id": 1,
