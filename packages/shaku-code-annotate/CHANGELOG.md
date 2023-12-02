@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.1.4
+
+### Patch Changes
+
+- support escape
+
 ## 0.1.3
 
 ### Patch Changes

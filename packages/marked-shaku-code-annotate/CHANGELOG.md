@@ -1,5 +1,11 @@
 # marked-shaku-code-annotate
 
+## 0.0.4
+
+### Patch Changes
+
+- support escape
+
 ## 0.0.3
 
 ### Patch Changes
