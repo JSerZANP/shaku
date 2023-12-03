@@ -25,6 +25,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
     "remark-shaku-code-annotate": "*",
+    "shaku-code-annotate-sugar-high": "*",
     "sanitize-html": "^2.11.0",
     "shaku-ui": "*",
     "shiki": "^0.14.5"

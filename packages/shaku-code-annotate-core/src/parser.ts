@@ -48,7 +48,7 @@ function isShakuDirectiveHighlightInline(str: string): {
   shift: number;
   isHighlightInline: boolean;
 } {
-  const significantLine = str.replace(/ /g, "");
+  const significantLine = str.replace(/\s/g, "");
   const matches = significantLine.match(RegShakuDirectiveHighlightInline);
   return {
     isEscaped: !!matches?.groups?.escape,

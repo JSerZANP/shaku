@@ -1,5 +1,5 @@
-import { IThemedToken } from "shiki";
 import { ShakuDirectiveHighlightInline } from "shaku-code-annotate-core";
+import { Token } from "./types.mjs";
 
 export const renderMarkStart = (id?: number) =>
   `<mark class="shaku-inline-highlight" ${
@@ -18,14 +18,14 @@ export function renderInsertion(insertion: Insertion) {
   return renderMarkStart(insertion.id);
 }
 
-function renderToken(token: IThemedToken) {
-  return `<span style="color: ${token.color}">${escapeHtml(
-    token.content
-  )}</span>`;
+function renderToken(token: Token) {
+  return `<span class="sh__token--${token.type}" style="color: var(--sh-${
+    token.type
+  })">${escapeHtml(token.content)}</span>`;
 }
 
 export function renderSourceLineWithInlineHighlight(
-  sourceLine: IThemedToken[],
+  sourceLine: Token[],
   shakuLine: {
     type: "shaku";
     line: ShakuDirectiveHighlightInline;
@@ -110,15 +110,8 @@ export function renderSourceLineWithInlineHighlight(
   return html;
 }
 
-export function renderSourceLine(sourceLine: IThemedToken[]) {
-  return sourceLine
-    .map(
-      (token) =>
-        `<span style="color: ${token.color}">${escapeHtml(
-          token.content
-        )}</span>`
-    )
-    .join("");
+export function renderSourceLine(sourceLine: Token[]) {
+  return sourceLine.map(renderToken).join("");
 }
 
 function escapeHtml(html: string) {
