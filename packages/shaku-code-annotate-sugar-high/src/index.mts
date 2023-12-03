@@ -20,7 +20,6 @@ export function highlight(code: string) {
   const tokens = sh.tokenize(code);
   const lines = toLines(tokens);
   const parsedLines = parseLines(lines, "javascript", true);
-  console.log(parsedLines);
 
   let html = `<pre class="shaku"><code>`;
 
@@ -265,7 +264,6 @@ function parseLines(
   return lines.map((line) => {
     if (shouldAnnotate) {
       const parsedComment = parseComment(line, lang);
-      console.log("parsedComment", parsedComment);
       if (parsedComment != null) {
         const { body, offset } = parsedComment;
         const shakuLine = parseLine(body);
