@@ -11,7 +11,6 @@ export default function CodeSnippetPreviewSugarHigh({
   code: string;
 }) {
   const preview = highlight(code);
-  console.log("preview", preview);
   const refPreview = useRef<HTMLDivElement>(null);
 
   return (
@@ -31,43 +30,5 @@ export default function CodeSnippetPreviewSugarHigh({
         ></$.div>
       </View>
     </View>
-  );
-}
-
-function Dot({ color }: { color: string }) {
-  return (
-    <$.span
-      $backgroundColor={color}
-      $width="12px"
-      $height="12px"
-      $display="inline-block"
-      $borderRadius="15px"
-    ></$.span>
-  );
-}
-
-function ThemePicker({
-  onClick,
-  name,
-  selected,
-  background,
-}: {
-  onClick: () => void;
-  name: string;
-  selected?: boolean;
-  background: string;
-}) {
-  return (
-    <button
-      onClick={onClick}
-      aria-label={name}
-      style={{
-        border: selected ? "1px solid #000" : 0,
-        width: "20px",
-        height: "20px",
-        display: "inline-block",
-        background,
-      }}
-    ></button>
   );
 }
