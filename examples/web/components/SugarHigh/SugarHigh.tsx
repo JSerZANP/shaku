@@ -1,7 +1,7 @@
 import { $ } from "migacss";
 import { useRef } from "react";
 import { highlight } from "shaku-code-annotate-sugar-high";
-import { View } from "./bare";
+import { View } from "../bare";
 
 export default function CodeSnippetPreviewSugarHigh({
   lang,

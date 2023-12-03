@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { CodeSnippetSugarHigh } from "../../components/CodeSnippetSugarHigh";
+import { CodeSnippetSugarHigh } from "../../components/SugarHigh/CodeSnippetSugarHigh";
 
 export default async function Page({
   searchParams,

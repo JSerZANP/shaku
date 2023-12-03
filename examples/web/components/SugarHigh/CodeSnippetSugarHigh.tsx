@@ -2,16 +2,11 @@
 
 import { Editor } from "@monaco-editor/react";
 import { $ } from "migacss";
-import dynamic from "next/dynamic";
 import { useState } from "react";
 import { BsStars } from "react-icons/bs";
 import { defaultCode } from "remark-shaku-code-annotate";
-import CodeSnippetPreviewSugarHigh from "./CodeSnippetPreviewSugarHigh";
-import { Column, Row, Text, View } from "./bare";
-
-const CodeSnippetPreview = dynamic(() => import("./CodeSnippetPreview"), {
-  ssr: false,
-});
+import { Column, Row, Text, View } from "../bare";
+import CodeSnippetPreviewSugarHigh from "./SugarHigh";
 
 export function CodeSnippetSugarHigh({
   code: _code,
