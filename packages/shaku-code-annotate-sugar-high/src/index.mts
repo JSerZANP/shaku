@@ -1,4 +1,3 @@
-export { defaultCode } from "./defaultCode.mjs";
 import {
   ShakuDirectiveHighlightInline,
   parseLine,
