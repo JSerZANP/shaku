@@ -4,13 +4,13 @@ import {
   parseLine,
   renderComponent,
   shouldApplyAnnotation,
-} from "./parser";
+} from "shaku-code-annotate-core";
 import { supportedLangs } from "./defaultCode";
 import { ShakuHighlighter } from "./getHighlighters";
 import {
   renderSourceLine,
   renderSourceLineWithInlineHighlight,
-} from "./render";
+} from "shaku-code-annotate-core";
 
 export let codeToShakuHtml = function (
   this: ShakuHighlighter,

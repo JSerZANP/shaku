@@ -1,6 +1,6 @@
 import sanitizeHtml from "sanitize-html";
 
-type ShakuDirectiveUnderline = {
+export type ShakuDirectiveUnderline = {
   type: "DirectiveUnderline";
   config: {
     style: "solid" | "dotted" | "wavy";
@@ -16,7 +16,7 @@ const RegShakuDirectiveUnderlineWavy =
 const RegShakuDirectiveUnderlineDotted =
   /^(?<leadingSpaces>\s*)(?<content>\.+)\s*(?<shift><*)\s*(?<escape>!?)\s*$/;
 
-type ShakuAnnotationLine = {
+export type ShakuAnnotationLine = {
   type: "AnnotationLine";
   config: {
     offset: number;
@@ -57,7 +57,7 @@ function isShakuDirectiveHighlightInline(str: string): {
   };
 }
 
-type ShakuDirectiveCallout = {
+export type ShakuDirectiveCallout = {
   type: "DirectiveCallout";
   config: {
     isEscaped: boolean;
@@ -78,7 +78,7 @@ const RegShakuDirectiveCallout =
 
 // const RegShakuDirectiveFloatCallout = /^(?<leadingSpaces>\s*)(\<~|~>)\s*$/
 
-type ShakuDirectiveCollapse = {
+export type ShakuDirectiveCollapse = {
   type: "DirectiveCollapse";
   config: {
     isEscaped: boolean;
@@ -89,7 +89,7 @@ type ShakuDirectiveCollapse = {
 const RegShakuDirectiveCollapse =
   /^(?<leadingSpaces>\s*)@collapse\s+(?<mark>[a-z]+)\s*(?<escape>!?)\s*$/;
 
-type ShakuDirectiveHighlight = {
+export type ShakuDirectiveHighlight = {
   type: "DirectiveHighlight";
   config: {
     isEscaped: boolean;
@@ -100,7 +100,7 @@ type ShakuDirectiveHighlight = {
 const RegShakuDirectiveHighlight =
   /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>([a-z]+)?)\s*)?\s*(?<escape>!?)\s*$/;
 
-type ShakuDirectiveDim = {
+export type ShakuDirectiveDim = {
   type: "DirectiveDim";
   config: {
     isEscaped: boolean;
@@ -110,7 +110,7 @@ type ShakuDirectiveDim = {
 const RegShakuDirectiveDim =
   /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>([a-z]+)?)\s*)?\s*(?<escape>!?)\s*$/;
 
-type ShakuDirectiveFocus = {
+export type ShakuDirectiveFocus = {
   type: "DirectiveFocus";
   config: {
     isEscaped: boolean;
@@ -121,7 +121,7 @@ type ShakuDirectiveFocus = {
 const RegShakuDirectiveFocus =
   /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>([a-z]+)?)\s*)?\s*(?<escape>!?)\s*$/;
 
-type ShakuLine =
+export type ShakuLine =
   | ShakuDirectiveUnderline
   | ShakuAnnotationLine
   | ShakuDirectiveCallout

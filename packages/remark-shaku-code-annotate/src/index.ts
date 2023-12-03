@@ -7,7 +7,7 @@ import rehypeStringify from "rehype-stringify";
 import {
   ShakuHighlighterOptions,
   getShakuHighlighters,
-} from "shaku-code-annotate-core";
+} from "shaku-code-annotate-shiki";
 
 export const remarkShakuCodeAnnotate = (
   options: ShakuHighlighterOptions
@@ -50,4 +50,4 @@ export const remarkShakuCodeAnnotate = (
   };
 };
 
-export { supportedLangs, defaultCode } from "shaku-code-annotate-core";
+export { supportedLangs, defaultCode } from "shaku-code-annotate-shiki";

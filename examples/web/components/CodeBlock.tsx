@@ -4,7 +4,7 @@ import { $ } from "migacss";
 import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import { getShakuHighlighters } from "shaku-code-annotate-core";
+import { getShakuHighlighters } from "shaku-code-annotate-shiki";
 import { unified } from "unified";
 import { BaseProps } from "./bare";
 

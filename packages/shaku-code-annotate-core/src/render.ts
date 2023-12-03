@@ -1,7 +1,7 @@
 import { IThemedToken } from "shiki";
 import { ShakuDirectiveHighlightInline } from "./parser";
 
-const renderMarkStart = (id?: number) =>
+export const renderMarkStart = (id?: number) =>
   `<mark class="shaku-inline-highlight" ${
     id != null ? `data-id="${id}"` : ""
   }>`;
@@ -13,7 +13,7 @@ type Insertion = {
   id?: number;
 };
 
-function renderInsertion(insertion: Insertion) {
+export function renderInsertion(insertion: Insertion) {
   if (insertion.type === "closing") return MarkEnd;
   return renderMarkStart(insertion.id);
 }

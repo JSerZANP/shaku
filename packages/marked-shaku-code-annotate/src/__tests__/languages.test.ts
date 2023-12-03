@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { Marked } from "marked";
 import markedShakuCodeAnnotate from "../index";
-import { defaultCode } from "shaku-code-annotate-core";
+import { defaultCode } from "shaku-code-annotate-shiki";
 
 const marked = new Marked(markedShakuCodeAnnotate());
 

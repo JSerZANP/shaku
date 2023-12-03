@@ -1,7 +1,7 @@
 import {
   ShakuHighlighterOptions,
   getShakuHighlighters,
-} from "shaku-code-annotate-core";
+} from "shaku-code-annotate-shiki";
 import { MarkedExtension, Token, Tokens, marked } from "marked";
 
 export default function markedShakuCodeAnnotate(
