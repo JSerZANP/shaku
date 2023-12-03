@@ -10,6 +10,18 @@
   --sh-jsxliterals: #6266d1;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sh-class: #b392f0;
+    --sh-identifier: #79b8ff;
+    --sh-sign: #e1e4e8;
+    --sh-string: #9ecbff;
+    --sh-keyword: #f97583;
+    --sh-comment: #6a737d;
+    --sh-jsxliterals: #85e89d;
+  }
+}
+
 .sh__line {
   line-height: 1.5;
 }

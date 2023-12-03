@@ -48,7 +48,7 @@ export function SugarHigh({
           <a href="https://github.com/JSerZANP/shaku/tree/main/packages/shaku-code-annotate-sugar-high">
             shaku-code-annotate-sugar-high
           </a>
-          . Created by <a href="https://twitter.com/JSer_ZANP">JSer</a>.
+          . created by <a href="https://twitter.com/JSer_ZANP">JSer</a>.
         </Text>
       </View>
 

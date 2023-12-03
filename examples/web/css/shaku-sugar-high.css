@@ -17,6 +17,12 @@ pre.shaku .sh__line.highlight {
   display: block;
 }
 
+@media (prefers-color-scheme: dark) {
+  pre.shaku .sh__line.highlight {
+    background-color: var(--color-shaku-highlight-dark, #2b4a70);
+  }
+}
+
 pre.shaku .sh__line.dim {
   opacity: 0.3;
 }
