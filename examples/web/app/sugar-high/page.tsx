@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { CodeSnippetSugarHigh } from "../../components/SugarHigh/CodeSnippetSugarHigh";
+import { SugarHigh } from "../../components/SugarHigh/SugarHigh";
 
 export default async function Page({
   searchParams,
@@ -16,7 +16,7 @@ export default async function Page({
       <Head>
         <title>Shaku x Sugar High</title>
       </Head>
-      <CodeSnippetSugarHigh code={code} lang={lang} />
+      <SugarHigh code={code} lang={lang} />
     </>
   );
 }
