@@ -4,12 +4,12 @@ pre.shaku {
   overflow-x: auto;
 }
 
-pre.shaku .line {
+pre.shaku .sh__line {
   min-height: 1em;
   line-height: 1.5;
 }
 
-pre.shaku.github-light .line.highlight {
+pre.shaku .sh__line.highlight {
   background-color: var(
     --color-shaku-highlight-light,
     color-mix(in srgb, rgb(5, 118, 149) 15%, #fff)
@@ -17,12 +17,7 @@ pre.shaku.github-light .line.highlight {
   display: block;
 }
 
-pre.shaku.github-dark .line.highlight {
-  background-color: var(--color-shaku-highlight-dark, #2b4a70);
-  display: block;
-}
-
-pre.shaku .line.dim {
+pre.shaku .sh__line.dim {
   opacity: 0.3;
 }
 
