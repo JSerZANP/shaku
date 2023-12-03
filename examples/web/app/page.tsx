@@ -56,10 +56,19 @@ export default async function Page({
         <$.p $lineHeight="1.5">Choose the right tool for your use case.</$.p>
         <$.ol $listStyle="disc" $lineHeight="1.5">
           <$.li $margin="8px 0">
-            <a href="https://github.com/JSerZANP/shaku/tree/main/packages/shaku-code-annotate">
-              shaku-code-annotate
+            <a href="https://github.com/JSerZANP/shaku/tree/main/packages/shaku-code-annotate-core">
+              shaku-code-annotate-core
             </a>{" "}
-            - the core of Shaku that you can use directly in node.js or browser.
+            - Shaku parser that parses the syntax in the comments. Tokenizer not
+            included.
+          </$.li>
+          <$.li $margin="8px 0">
+            <a href="https://github.com/JSerZANP/shaku/tree/main/packages/shaku-code-annotate-shiki">
+              shaku-code-annotate-shiki
+            </a>{" "}
+            - Shaku code annotation based on the tokenizer from{" "}
+            <a href="https://github.com/shikijs/shiki">shiki</a>. You can use
+            this package directly in node.js or browser.
           </$.li>
           <$.li $margin="8px 0">
             <a href="https://github.com/JSerZANP/shaku/tree/main/packages/remark-shaku-code-annotate">

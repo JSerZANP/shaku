@@ -1,4 +1,4 @@
-# shaku-code-annotate
+# shaku-code-annotate-shiki
 
 <ruby>釈<rp>(<rp><rt>Shaku</rt><rp>)<rp></ruby>- _elucidate, explain_
 

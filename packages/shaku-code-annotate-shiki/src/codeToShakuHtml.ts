@@ -10,7 +10,7 @@ import { ShakuHighlighter } from "./getHighlighters";
 import {
   renderSourceLine,
   renderSourceLineWithInlineHighlight,
-} from "shaku-code-annotate-core";
+} from "./render";
 
 export let codeToShakuHtml = function (
   this: ShakuHighlighter,
