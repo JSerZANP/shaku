@@ -7,9 +7,12 @@ out of my frustration while writing articles for my personal blog - [jser.dev](h
 
 ## Tools
 
-1. [shaku-code-annotate](./packages/shaku-code-annotate/) - plugins to annotate code snippets in markdown.
-2. [Shaku Playground](https://shaku-web.vercel.app/) - a playground to try out shaku-code-annotate.
-3. [Shaku Snippet](https://shaku-web.vercel.app/snippet) - generate beautiful code snippet screenshots with annotation.
+1. [shaku-code-annotate-core](./packages/shaku-code-annotate-core/) - core parser of Shaku. Tokenizer not included.
+2. [shaku-code-annotate-shiki](./packages/shaku-code-annotate-shiki/) - Shaku syntax highlighter based on shiki/
+3. [remark-shaku-code-annotate](./packages/remark-shaku-code-annotate/) - plugin for remark.
+4. [marked-shaku-code-annotate](./packages/marked-shaku-code-annotate/) - plugin for marked.
+5. [Shaku Playground](https://shaku-web.vercel.app/) - a playground to try out shaku-code-annotate.
+6. [Shaku Snippet](https://shaku-web.vercel.app/snippet) - generate beautiful code snippet screenshots with annotation.
 
 ## Dev Tools
 
