@@ -8,7 +8,7 @@ import { AiFillGithub } from "react-icons/ai";
 import { BsStars } from "react-icons/bs";
 import { RiShareBoxLine } from "react-icons/ri";
 import { defaultCode } from "remark-shaku-code-annotate";
-import { supportedLangs } from "shaku-code-annotate";
+import { supportedLangs } from "shaku-code-annotate-core";
 import { Button, Column, Row, Text, View } from "./bare";
 
 const CodeSnippetPreview = dynamic(() => import("./CodeSnippetPreview"), {

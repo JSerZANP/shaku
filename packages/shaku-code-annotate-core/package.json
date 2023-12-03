@@ -1,5 +1,5 @@
 {
-  "name": "shaku-code-annotate",
+  "name": "shaku-code-annotate-core",
   "version": "0.1.4",
   "dependencies": {
     "mdast": "^3.0.0",

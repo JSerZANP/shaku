@@ -2,7 +2,7 @@ import { expect, test } from "vitest";
 import html from "remark-html";
 import { remark } from "remark";
 import { remarkShakuCodeAnnotate } from "../index";
-import { defaultCode } from "shaku-code-annotate";
+import { defaultCode } from "shaku-code-annotate-core";
 
 async function process(md: string) {
   const processor = remark()

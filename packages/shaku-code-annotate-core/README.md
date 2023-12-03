@@ -16,7 +16,7 @@ Take a look at the live demo from
 ## Usage
 
 ```ts
-import { getShakuHighlighters } from "shaku-code-annotate";
+import { getShakuHighlighters } from "shaku-code-annotate-core";
 
 // 1. get highlighters of one theme or multiple themes
 const highlighters = await getShakuHighlighters({
