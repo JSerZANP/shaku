@@ -15,7 +15,6 @@ test("should support popular languages", async () => {
           highlighter.codeToShakuHtml({
             code,
             meta: "annotate",
-            parseBasicMarkdown: (code) => code,
             options: {
               lang,
             },

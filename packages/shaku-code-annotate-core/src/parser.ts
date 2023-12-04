@@ -1,5 +1,3 @@
-import sanitizeHtml from "sanitize-html";
-
 export type ShakuDirectiveUnderline = {
   type: "DirectiveUnderline";
   config: {

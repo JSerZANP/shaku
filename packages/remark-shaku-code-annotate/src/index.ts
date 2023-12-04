@@ -28,9 +28,10 @@ export const remarkShakuCodeAnnotate = (
         const { html, skipped: _skipped } = highlighter.codeToShakuHtml({
           code: node.value,
           meta: node.meta ?? "",
-          parseBasicMarkdown: (code) =>
-            unifiedProcessor.processSync(code).toString(),
           options: {
+            useDangerousRawHTML: true,
+            markdownToHtmlAndSanitize: (code) =>
+              unifiedProcessor.processSync(code).toString(),
             lang: node.lang ?? "txt",
           },
         });

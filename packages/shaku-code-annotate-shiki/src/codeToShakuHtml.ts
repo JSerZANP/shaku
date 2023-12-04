@@ -1,4 +1,4 @@
-import { Highlighter, IThemedToken } from "shiki";
+import { Highlighter, IThemedToken, Lang, Theme } from "shiki";
 import {
   ShakuDirectiveHighlightInline,
   parseLine,
@@ -12,18 +12,24 @@ import {
   renderSourceLineWithInlineHighlight,
 } from "./render";
 
+type StringLiteralUnion<T extends U, U = string> = T | (U & {});
+interface CodeToShakuHtmlOptions {
+  lang?: StringLiteralUnion<Lang>;
+  theme?: StringLiteralUnion<Theme>;
+  useDangerousRawHTML?: boolean;
+  markdownToHtmlAndSanitize?: (md: string) => string;
+}
+
 export let codeToShakuHtml = function (
   this: ShakuHighlighter,
   {
     code,
     meta,
-    parseBasicMarkdown,
     options,
   }: {
     code: string;
     meta: string;
-    parseBasicMarkdown: (md: string) => string;
-    options: Parameters<Highlighter["codeToHtml"]>[1];
+    options?: CodeToShakuHtmlOptions;
   }
 ): {
   skipped: boolean;
@@ -50,6 +56,10 @@ export let codeToShakuHtml = function (
   const foregroundColor = highlighter.getForegroundColor();
   const backgroundColor = highlighter.getBackgroundColor();
 
+  const useDangerousRawHTML = options?.useDangerousRawHTML;
+  const markdownToHtmlAndSanitize =
+    options?.markdownToHtmlAndSanitize ?? ((md: string) => md);
+
   // generate the html from the tokens
   let html = `<pre class="shiki shaku ${theme.name}" style="color:${foregroundColor};background-color:${backgroundColor}">`;
   html += `<div class="code-container"><code>`;
@@ -71,7 +81,6 @@ export let codeToShakuHtml = function (
 
   for (let i = 0; i < parsedLines.length; i++) {
     const line = parsedLines[i];
-
     const isShakuLine = line.type === "shaku" && !line.line.config.isEscaped;
     if (isShakuLine) {
       const shakuLine = line.line;
@@ -97,21 +106,26 @@ export let codeToShakuHtml = function (
               nextLine.line.config.offset + nextLine.offset
             );
             contents.push(
-              parseBasicMarkdown(nextLine.line.config.content).trim()
+              markdownToHtmlAndSanitize(nextLine.line.config.content).trim()
               // String(
               //   unifiedProcessor.processSync(nextLine.line.config.content)
               // )
             );
             j += 1;
           }
-          html += renderComponent({
-            type: "ShakuComponentCallout",
-            config: {
-              offset: minOffset,
-              arrowOffset: directiveOffset - minOffset,
-              contents: contents.join(""),
+          html += renderComponent(
+            {
+              type: "ShakuComponentCallout",
+              config: {
+                offset: minOffset,
+                arrowOffset: directiveOffset - minOffset,
+                contents: contents.join(""),
+              },
             },
-          });
+            {
+              useDangerousRawHTML,
+            }
+          );
 
           i = j - 1;
           continue;
@@ -193,7 +207,7 @@ export let codeToShakuHtml = function (
             );
             contents.push(
               // some engines generates \n at line end
-              parseBasicMarkdown(nextLine.line.config.content).trim()
+              markdownToHtmlAndSanitize(nextLine.line.config.content).trim()
               // String(
               //   unifiedProcessor.processSync(nextLine.line.config.content)
               // )
@@ -201,17 +215,21 @@ export let codeToShakuHtml = function (
 
             j += 1;
           }
-
-          html += renderComponent({
-            type: "ShakuComponentUnderline",
-            config: {
-              offset: minOffset,
-              underlineOffset: directiveOffset - minOffset,
-              underlineContent,
-              underlineStyle: shakuLine.config.style,
-              contents: contents.join(""),
+          html += renderComponent(
+            {
+              type: "ShakuComponentUnderline",
+              config: {
+                offset: minOffset,
+                underlineOffset: directiveOffset - minOffset,
+                underlineContent,
+                underlineStyle: shakuLine.config.style,
+                contents: contents.join(""),
+              },
             },
-          });
+            {
+              useDangerousRawHTML,
+            }
+          );
 
           i = j - 1;
           continue;

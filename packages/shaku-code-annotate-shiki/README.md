@@ -33,10 +33,12 @@ const html = highlighters
         code,
         meta: "annotate",
         // by default Shaku falls back to shiki if meta doesn't contain "annotate"
-        // you can turn this off by following option
-        // fallbackToShiki: false
         parseBasicMarkdown: (code) => code,
         options: {
+          // by default, shaku escapes, but you can use following combination
+          // to do custom markdown parsing
+          useDangerousRawHTML: true,
+          markdownToHtmlAndSanitize: (code) => html
           lang,
         },
       }).html
