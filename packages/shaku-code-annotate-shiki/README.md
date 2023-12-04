@@ -32,8 +32,6 @@ const html = highlighters
       highlighter.codeToShakuHtml({
         code,
         meta: "annotate",
-        // by default Shaku falls back to shiki if meta doesn't contain "annotate"
-        parseBasicMarkdown: (code) => code,
         options: {
           // by default, shaku escapes, but you can use following combination
           // to do custom markdown parsing
