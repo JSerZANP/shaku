@@ -85,7 +85,7 @@ function Line({
 }) {
   return (
     <>
-      <span className="line">
+      <span className={styles.line}>
         {line.map((token) => (
           <span
             style={{ color: token.color }}
@@ -216,17 +216,5 @@ export default function ShikiTokenPreview({
         </$.div>
       </Column>
     </Column>
-  );
-}
-
-function Dot({ color }: { color: string }) {
-  return (
-    <$.span
-      $backgroundColor={color}
-      $width="12px"
-      $height="12px"
-      $display="inline-block"
-      $borderRadius="15px"
-    ></$.span>
   );
 }
