@@ -44,7 +44,8 @@ export function SugarHigh({
         </Row>
         <Text type="body">
           <a href="https://github.com/huozhi/sugar-high">Sugar High</a> is a
-          super lightweight syntax highlighter, Shaku could be enabled through{" "}
+          super lightweight syntax highlighter for JS/JSX, Shaku could be
+          enabled through{" "}
           <a href="https://github.com/JSerZANP/shaku/tree/main/packages/shaku-code-annotate-sugar-high">
             shaku-code-annotate-sugar-high
           </a>
