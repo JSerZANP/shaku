@@ -1,8 +1,8 @@
 import { $ } from "migacss";
 import Head from "next/head";
+import { FaDiscord } from "react-icons/fa";
 import { CodeBlock } from "../components/CodeBlock";
 import styles from "../components/CodePreview/CodePreview.module.css";
-
 export default async function Page({
   searchParams,
 }: {
@@ -16,6 +16,7 @@ export default async function Page({
       <$.div $maxWidth={690} $margin="0 auto" $padding={"0 2rem 2rem"}>
         <$.nav
           $display="flex"
+          $alignItems="center"
           $justifyContent="center"
           $padding="1rem"
           $gap="1rem"
@@ -25,6 +26,13 @@ export default async function Page({
           <a href="/playground">Playground</a>
           <a href="/snippet">Snippet</a>
           <a href="/sugar-high">Shaku &times; Sugar High</a>
+          <$.a
+            href="https://discord.com/invite/bFh8EzW7kv"
+            $display="inline-flex"
+            title="discord"
+          >
+            <FaDiscord size="20"></FaDiscord>
+          </$.a>
         </$.nav>
         <$.h1 $textAlign="center">Shaku - code annotation made easy</$.h1>
         <p>
