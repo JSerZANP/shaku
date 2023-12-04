@@ -1,5 +1,12 @@
 # shaku-code-annotate
 
+## 0.1.5
+
+### Patch Changes
+
+- Updated dependencies
+  - shaku-code-annotate-core@0.2.0
+
 ## 0.1.4
 
 ### Patch Changes

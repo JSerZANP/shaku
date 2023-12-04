@@ -1,10 +1,10 @@
 {
   "name": "shaku-code-annotate-sugar-high",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "sugar-high": "^0.5.5",
     "sanitize-html": "^2.10.0",
-    "shaku-code-annotate-core": "^0.1.4"
+    "shaku-code-annotate-core": "^0.2.0"
   },
   "devDependencies": {
     "@types/sanitize-html": "^2.9.0",
