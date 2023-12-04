@@ -29,7 +29,7 @@ export const remarkShakuCodeAnnotate = (
           code: node.value,
           options: {
             useDangerousRawHtml: true,
-            isShakuSyntaxEnabled: node.meta?.includes("annotate"),
+            isShakuSyntaxEnabled: !!node.meta?.includes("annotate"),
             markdownToHtmlAndSanitize: (code) =>
               unifiedProcessor.processSync(code).toString(),
             lang: node.lang ?? "txt",
