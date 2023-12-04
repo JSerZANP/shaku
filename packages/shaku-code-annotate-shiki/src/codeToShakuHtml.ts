@@ -1,9 +1,8 @@
-import { Highlighter, IThemedToken, Lang, Theme } from "shiki";
+import { IThemedToken, Lang, Theme } from "shiki";
 import {
   ShakuDirectiveHighlightInline,
   parseLine,
   renderComponent,
-  shouldApplyAnnotation,
 } from "shaku-code-annotate-core";
 import { supportedLangs } from "./defaultCode";
 import { ShakuHighlighter } from "./getHighlighters";
@@ -14,9 +13,24 @@ import {
 
 type StringLiteralUnion<T extends U, U = string> = T | (U & {});
 interface CodeToShakuHtmlOptions {
+  /**
+   * by default Shaku syntax is supported
+   * you can disable shaku syntax by this flag
+   * then it just renders as normal shiki
+   */
+  isShakuSyntaxEnabled?: boolean;
   lang?: StringLiteralUnion<Lang>;
   theme?: StringLiteralUnion<Theme>;
+  /**
+   * whether or not to escape the annotation
+   * @default false
+   */
   useDangerousRawHtml?: boolean;
+  /**
+   * by default shaku doesn't parse the markdown
+   * you can pass your own parser with `useDangerousRawHtml: false`
+   * do remember to sanitize
+   */
   markdownToHtmlAndSanitize?: (md: string) => string;
 }
 
@@ -24,11 +38,9 @@ export let codeToShakuHtml = function (
   this: ShakuHighlighter,
   {
     code,
-    meta,
     options,
   }: {
     code: string;
-    meta: string;
     options?: CodeToShakuHtmlOptions;
   }
 ): {
@@ -40,9 +52,9 @@ export let codeToShakuHtml = function (
   lang = supportedLangs.includes(lang) ? lang : "";
   const theme = highlighter.getTheme();
 
-  const shouldAnnotate = shouldApplyAnnotation(meta);
+  const isShakuSyntaxEnabled = options?.isShakuSyntaxEnabled ?? true;
 
-  if (!shouldAnnotate) {
+  if (!isShakuSyntaxEnabled) {
     // do nothing
     if (this.fallbackToShiki === false) {
       return {
@@ -64,7 +76,7 @@ export let codeToShakuHtml = function (
   let html = `<pre class="shiki shaku ${theme.name}" style="color:${foregroundColor};background-color:${backgroundColor}">`;
   html += `<div class="code-container"><code>`;
 
-  const parsedLines = parseLines(lines, lang, shouldAnnotate);
+  const parsedLines = parseLines(lines, lang, isShakuSyntaxEnabled);
   const hasFocus = hasShakuDirectiveFocus(parsedLines);
 
   let shouldHighlighNextSourceLine = false;
@@ -410,10 +422,10 @@ function parseComment(
 function parseLines(
   lines: IThemedToken[][],
   lang: string | null,
-  shouldAnnotate: boolean
+  isShakuSyntaxEnabled: boolean
 ) {
   return lines.map((line) => {
-    if (shouldAnnotate) {
+    if (isShakuSyntaxEnabled) {
       const parsedComment = parseComment(line, lang);
       if (parsedComment != null) {
         const { body, offset } = parsedComment;

@@ -31,8 +31,8 @@ export default function markedShakuCodeAnnotate(
       highlighters.forEach((highlighter) => {
         const { html, skipped: _skipped } = highlighter.codeToShakuHtml({
           code,
-          meta,
           options: {
+            isShakuSyntaxEnabled: meta.includes("annotate"),
             markdownToHtmlAndSanitize: (code) => sanitize(marked(code)),
             useDangerousRawHtml: true,
             lang,

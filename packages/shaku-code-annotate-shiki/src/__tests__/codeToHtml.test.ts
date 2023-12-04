@@ -42,7 +42,6 @@ test("codeToHtml()", async () => {
   snippets.forEach((code) => {
     const html = highlighters[0].codeToShakuHtml({
       code,
-      meta: "annotate",
       options: {
         lang: "js",
       },
@@ -61,7 +60,6 @@ test("codeToHtml() + raw HTML", async () => {
   snippets.forEach((code) => {
     const html = highlighters[0].codeToShakuHtml({
       code,
-      meta: "annotate",
       options: {
         lang: "js",
         useDangerousRawHtml: true,

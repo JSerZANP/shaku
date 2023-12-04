@@ -31,8 +31,10 @@ const html = highlighters
     (highlighter) =>
       highlighter.codeToShakuHtml({
         code,
-        meta: "annotate",
         options: {
+          // you can disable shaku syntax by following flag
+          // isShakuSyntaxEnabled: false,
+
           // by default, shaku escapes, but you can use following combination
           // to do custom markdown parsing
           useDangerousRawHtml: true,

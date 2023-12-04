@@ -33,8 +33,8 @@ export async function CodeBlock({
       (highlighter) =>
         highlighter.codeToShakuHtml({
           code,
-          meta: shakuEnabled ? "annotate" : "",
           options: {
+            isShakuSyntaxEnabled: shakuEnabled,
             useDangerousRawHtml: true,
             markdownToHtmlAndSanitize: (code) =>
               unifiedProcessor.processSync(code).toString(),
