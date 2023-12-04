@@ -1,0 +1,154 @@
+pre.shaku {
+  padding: 1rem;
+  border: 1px solid var(--color-line-3rd);
+  overflow-x: auto;
+}
+
+pre.shaku .sh__line {
+  min-height: 1em;
+  line-height: 1.5;
+}
+
+pre.shaku .sh__line.highlight {
+  background-color: var(
+    --color-shaku-highlight-light,
+    color-mix(in srgb, rgb(5, 118, 149) 15%, #fff)
+  );
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  pre.shaku .sh__line.highlight {
+    background-color: var(--color-shaku-highlight-dark, #2b4a70);
+  }
+}
+
+pre.shaku .sh__line.dim {
+  opacity: 0.3;
+}
+
+.shaku-callout {
+  background-color: var(--color-shaku-callout-light, #0685ce);
+  color: #fff;
+  padding: 0.5em 1ch;
+  position: relative;
+  margin: 0.5em 0 0 -0.2ch;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+pre.shaku.github-dark .shaku-callout {
+  background-color: var(--color-shaku-callout-dark, #0685ce);
+}
+
+.shaku-callout p {
+  margin: 0;
+}
+
+.shaku-callout p a {
+  color: #fff;
+}
+
+.shaku-callout-arrow {
+  width: 1ch;
+  height: 1ch;
+  display: inline-block;
+  background-color: var(--color-shaku-callout-light, #0685ce);
+  position: absolute;
+  top: -0.5ch;
+  transform: rotate(45deg);
+  margin-left: 0.2ch;
+}
+pre.shaku.github-dark .shaku-callout-arrow {
+  background-color: var(--color-shaku-callout-dark, #0685ce);
+}
+
+.shaku-underline {
+  padding: 0 1ch;
+  position: relative;
+  display: block;
+  border-radius: 3px;
+  color: var(--color-shaku-underline-light, red);
+  margin: 0;
+  width: min-content;
+}
+pre.shaku.github-dark .shaku-underline {
+  color: var(--color-shaku-underline-dark, red);
+}
+
+.shaku-underline p {
+  margin: 0;
+}
+
+.shaku-underline a {
+  color: var(--color-shaku-underline-light, red);
+}
+pre.shaku.github-dark .shaku-underline a {
+  color: var(--color-shaku-underline-dark, red);
+}
+
+.shaku-underline-line {
+  line-height: 0;
+  top: 0.5em;
+  position: absolute;
+  text-decoration-line: overline;
+  text-decoration-color: var(--color-shaku-underline-light, red);
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+  text-decoration-thickness: 2px;
+}
+
+pre.shaku.github-dark .shaku-underline-line {
+  text-decoration-color: var(--color-shaku-underline-dark, red);
+}
+
+.shaku-underline-wavy > .shaku-underline-line {
+  text-decoration-style: wavy;
+  top: 0.7em;
+}
+
+.shaku-underline-solid > .shaku-underline-line {
+  text-decoration-style: solid;
+}
+
+.shaku-underline-dotted > .shaku-underline-line {
+  text-decoration-style: dotted;
+}
+
+.shaku-inline-highlight {
+  background-color: #05a4fa30;
+  border-bottom: 2px solid rgb(9, 113, 239);
+  margin: 0 1px;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+
+.shaku-inline-highlight[data-id="1"] {
+  background-color: #05a4fa30;
+  border-bottom: 2px solid rgb(9, 113, 239);
+}
+
+.shaku-inline-highlight[data-id="2"] {
+  background-color: #fa05f230;
+  border-bottom: 2px solid rgb(235, 4, 158);
+}
+
+.shaku-inline-highlight[data-id="3"] {
+  background-color: #05faa930;
+  border-bottom: 2px solid green;
+}
+
+pre.shaku.github-dark {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  pre.shaku.github-dark {
+    display: block;
+  }
+
+  pre.shaku.github-light {
+    display: none;
+  }
+}

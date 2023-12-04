@@ -1,3 +1,5 @@
+import sanitizeHtml from "sanitize-html";
+
 import {
   ShakuHighlighterOptions,
   getShakuHighlighters,
@@ -29,9 +31,10 @@ export default function markedShakuCodeAnnotate(
       highlighters.forEach((highlighter) => {
         const { html, skipped: _skipped } = highlighter.codeToShakuHtml({
           code,
-          meta,
-          parseBasicMarkdown: (code) => marked(code),
           options: {
+            isShakuSyntaxEnabled: meta.includes("annotate"),
+            markdownToHtmlAndSanitize: (code) => sanitize(marked(code)),
+            useDangerousRawHtml: true,
             lang,
           },
         });
@@ -76,4 +79,15 @@ function getLangAndMeta(token: Tokens.Code): {
     meta = words.join(" ");
   }
   return { lang, meta };
+}
+
+/* only allow restricted html in shaku annotation */
+function sanitize(html: string = "") {
+  const result = sanitizeHtml(html, {
+    allowedTags: ["b", "i", "em", "strong", "a", "p"],
+    allowedAttributes: {
+      a: ["href", "target"],
+    },
+  });
+  return result;
 }

@@ -348,3 +348,16 @@ const a = 1;
 
   expect(result).toMatchSnapshot();
 });
+
+test("support basic markdown but not other html tags", async () => {
+  const result = await markedWithThemes.parse(`
+\`\`\`js annotate
+const a = 1;
+//    ^
+//    [*This*  **is** [jser.dev](https://jser.dev)]
+//    [<button>click me</button> <script>alert('hi')</script>]
+\`\`\`
+`);
+
+  expect(result).toMatchSnapshot();
+});

@@ -1,5 +1,3 @@
-import sanitizeHtml from "sanitize-html";
-
 export type ShakuDirectiveUnderline = {
   type: "DirectiveUnderline";
   config: {
@@ -48,7 +46,7 @@ function isShakuDirectiveHighlightInline(str: string): {
   shift: number;
   isHighlightInline: boolean;
 } {
-  const significantLine = str.replace(/ /g, "");
+  const significantLine = str.replace(/\s/g, "");
   const matches = significantLine.match(RegShakuDirectiveHighlightInline);
   return {
     isEscaped: !!matches?.groups?.escape,
@@ -327,14 +325,25 @@ type ShakuComponentUnderline = {
 };
 
 type ShakuComponent = ShakuComponentCallout | ShakuComponentUnderline;
-export function renderComponent(component: ShakuComponent) {
+
+export function renderComponent(
+  component: ShakuComponent,
+  options?: {
+    useDangerousRawHtml?: boolean;
+  }
+) {
+  const useDangerousRawHtml = options?.useDangerousRawHtml;
   switch (component.type) {
     case "ShakuComponentCallout":
       return `<div class="shaku-callout" style="left:${
         component.config.offset
       }ch"><span class="shaku-callout-arrow" style="left:${
         component.config.arrowOffset
-      }ch"></span>${sanitize(component.config.contents)}</div>`;
+      }ch"></span>${
+        useDangerousRawHtml
+          ? component.config.contents
+          : escapeHtml(component.config.contents)
+      }</div>`;
     case "ShakuComponentUnderline":
       return `<div class="shaku-underline shaku-underline-${
         component.config.underlineStyle
@@ -342,9 +351,11 @@ export function renderComponent(component: ShakuComponent) {
         component.config.offset
       }ch"><span class="shaku-underline-line" style="left:${
         component.config.underlineOffset
-      }ch">${component.config.underlineContent}</span>${sanitize(
-        component.config.contents
-      )}</div>`;
+      }ch">${component.config.underlineContent}</span>${
+        useDangerousRawHtml
+          ? component.config.contents
+          : escapeHtml(component.config.contents)
+      }</div>`;
     default:
       assertsNever(component);
   }
@@ -354,13 +365,11 @@ function assertsNever(data: never) {
   throw new Error("expected never but got: " + data);
 }
 
-/* only allow restricted html in shaku annotation */
-function sanitize(html: string = "") {
-  const result = sanitizeHtml(html, {
-    allowedTags: ["b", "i", "em", "strong", "a", "p"],
-    allowedAttributes: {
-      a: ["href", "target"],
-    },
-  });
-  return result;
+function escapeHtml(html: string) {
+  return html
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }

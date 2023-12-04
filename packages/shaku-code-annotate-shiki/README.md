@@ -31,12 +31,14 @@ const html = highlighters
     (highlighter) =>
       highlighter.codeToShakuHtml({
         code,
-        meta: "annotate",
-        // by default Shaku falls back to shiki if meta doesn't contain "annotate"
-        // you can turn this off by following option
-        // fallbackToShiki: false
-        parseBasicMarkdown: (code) => code,
         options: {
+          // you can disable shaku syntax by following flag
+          // isShakuSyntaxEnabled: false,
+
+          // by default, shaku escapes, but you can use following combination
+          // to do custom markdown parsing
+          useDangerousRawHtml: true,
+          markdownToHtmlAndSanitize: (code) => html
           lang,
         },
       }).html

@@ -1,11 +1,7 @@
 {
   "name": "shaku-code-annotate-core",
   "version": "0.1.4",
-  "dependencies": {
-    "sanitize-html": "^2.10.0"
-  },
   "devDependencies": {
-    "@types/sanitize-html": "^2.9.0",
     "tsup": "^6.7.0",
     "typescript": "latest",
     "vitest": "^0.30.1"

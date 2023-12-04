@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`renderComponent() can render shaku lines + raw HTML  > ShakuComponentCallout 1`] = `"<div class=\\"shaku-callout\\" style=\\"left:5ch\\"><span class=\\"shaku-callout-arrow\\" style=\\"left:3ch\\"></span><p><b>This is</b> <em>line</em> <i>1</i> <a href=\\"https://jser.dev\\">jser.dev</a></p><p><strong>This</strong> <script>alert(3)</script><div>is</div>line 2</p></div>"`;
+
+exports[`renderComponent() can render shaku lines + raw HTML  > ShakuComponentCallout 2`] = `"<div class=\\"shaku-callout\\" style=\\"left:5ch\\"><span class=\\"shaku-callout-arrow\\" style=\\"left:3ch\\"></span><p><b>This is</b> <em>line</em> <i>1</i> <a href=\\"https://jser.dev\\">jser.dev</a></p><p><strong>This</strong> <script>alert(3)</script><div>is</div>line 2</p></div>"`;
+
+exports[`renderComponent() can render shaku lines and escape HTML by default  > ShakuComponentCallout 1`] = `"<div class=\\"shaku-callout\\" style=\\"left:5ch\\"><span class=\\"shaku-callout-arrow\\" style=\\"left:3ch\\"></span>&lt;p&gt;&lt;b&gt;This is&lt;/b&gt; &lt;em&gt;line&lt;/em&gt; &lt;i&gt;1&lt;/i&gt; &lt;a href=&quot;https://jser.dev&quot;&gt;jser.dev&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;This&lt;/strong&gt; &lt;script&gt;alert(3)&lt;/script&gt;&lt;div&gt;is&lt;/div&gt;line 2&lt;/p&gt;</div>"`;
+
+exports[`renderComponent() can render shaku lines and escape HTML by default  > ShakuComponentCallout 2`] = `"<div class=\\"shaku-callout\\" style=\\"left:5ch\\"><span class=\\"shaku-callout-arrow\\" style=\\"left:3ch\\"></span>&lt;p&gt;&lt;b&gt;This is&lt;/b&gt; &lt;em&gt;line&lt;/em&gt; &lt;i&gt;1&lt;/i&gt; &lt;a href=&quot;https://jser.dev&quot;&gt;jser.dev&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;This&lt;/strong&gt; &lt;script&gt;alert(3)&lt;/script&gt;&lt;div&gt;is&lt;/div&gt;line 2&lt;/p&gt;</div>"`;

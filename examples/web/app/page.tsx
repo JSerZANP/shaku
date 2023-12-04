@@ -24,6 +24,7 @@ export default async function Page({
         >
           <a href="/playground">Shaku Playground</a>
           <a href="/snippet">Shaku Snippet</a>
+          <a href="/sugar-high">Shaku &times; Sugar High</a>
         </$.nav>
         <$.h1 $textAlign="center">Shaku - code annotation made easy</$.h1>
         <p>
@@ -69,6 +70,13 @@ export default async function Page({
             - Shaku code annotation based on the tokenizer from{" "}
             <a href="https://github.com/shikijs/shiki">shiki</a>. You can use
             this package directly in node.js or browser.
+          </$.li>
+          <$.li $margin="8px 0">
+            <a href="https://github.com/JSerZANP/shaku/tree/main/packages/shaku-code-annotate-sugar-high">
+              shaku-code-annotate-sugar-high
+            </a>{" "}
+            - Enable Shaku on the lightweight syntax highlighter -{" "}
+            <a href="https://github.com/huozhi/sugar-high">Sugar High</a>.
           </$.li>
           <$.li $margin="8px 0">
             <a href="https://github.com/JSerZANP/shaku/tree/main/packages/remark-shaku-code-annotate">

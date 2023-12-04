@@ -1,0 +1,34 @@
+{
+  "name": "shaku-code-annotate-sugar-high",
+  "version": "0.0.1",
+  "dependencies": {
+    "sugar-high": "^0.5.5",
+    "sanitize-html": "^2.10.0",
+    "shaku-code-annotate-core": "^0.1.4"
+  },
+  "devDependencies": {
+    "@types/sanitize-html": "^2.9.0",
+    "tsup": "^6.7.0",
+    "typescript": "latest",
+    "vitest": "^0.30.1"
+  },
+  "files": [
+    "dist",
+    "docs"
+  ],
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "vitest",
+    "update-snapshot": "vitest -u",
+    "build": "tsup src/index.mts --format esm --dts",
+    "dev": "npm run build -- --watch"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JSerZANP/shaku.git",
+    "directory": "packages/shaku-code-annotate"
+  }
+}
