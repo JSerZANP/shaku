@@ -22,8 +22,8 @@ export default async function Page({
           $fontSize={"14px"}
           $borderBottom={"1px solid var(--color-line-3rd)"}
         >
-          <a href="/playground">Shaku Playground</a>
-          <a href="/snippet">Shaku Snippet</a>
+          <a href="/playground">Playground</a>
+          <a href="/snippet">Snippet</a>
           <a href="/sugar-high">Shaku &times; Sugar High</a>
         </$.nav>
         <$.h1 $textAlign="center">Shaku - code annotation made easy</$.h1>

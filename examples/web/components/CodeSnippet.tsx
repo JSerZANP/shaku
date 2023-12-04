@@ -55,7 +55,7 @@ export function CodeSnippet({
           <$.a href="/" $textDecoration="none">
             <Text type="headline5" $color="#0e67e4">
               <BsStars />
-              Shaku Playground →
+              Shaku →
             </Text>
           </$.a>
         </Row>

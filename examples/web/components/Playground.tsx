@@ -231,15 +231,15 @@ export function Playground({ code: _code }: { code?: string }) {
               <AiFillGithub />
             </$.a>
           </Text>
-          <$.a href="/snippet" $textDecoration="none">
+          <$.a href="/" $textDecoration="none">
             <Text type="headline5" $color="#dc0bf0">
               <BsStars />
-              Shaku Snippet →
+              Shaku →
             </Text>
           </$.a>
         </Row>
         <Text type="body">
-          <a href="https://github.com/JSerZANP/shaku/tree/main" target="_blank">
+          <a href="/" target="_blank">
             Shaku
           </a>{" "}
           allows you to annotate your code easily. Created by{" "}

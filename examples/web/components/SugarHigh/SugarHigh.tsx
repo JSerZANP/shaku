@@ -34,22 +34,22 @@ export function SugarHigh({
     <Column $height={"100vh"} $padding={12} $gap={12}>
       <View>
         <Row $alignItems="center" $justifyContent="space-between" $gap={20}>
-          <Text type="headline1">Shaku Snippet &times; Sugar High</Text>
+          <Text type="headline1">Shaku &times; Sugar High</Text>
           <$.a href="/" $textDecoration="none">
             <Text type="headline5" $color="#0e67e4">
               <BsStars />
-              Shaku Playground →
+              Shaku →
             </Text>
           </$.a>
         </Row>
         <Text type="body">
           <a href="https://github.com/huozhi/sugar-high">Sugar High</a> is a
-          super lightweight syntax highlighter for JS/JSX, Shaku could be
-          enabled through{" "}
+          super lightweight syntax highlighter for JS/JSX, <a href="/">Shaku</a>{" "}
+          could be enabled through{" "}
           <a href="https://github.com/JSerZANP/shaku/tree/main/packages/shaku-code-annotate-sugar-high">
             shaku-code-annotate-sugar-high
           </a>
-          . created by <a href="https://twitter.com/JSer_ZANP">JSer</a>.
+          .
         </Text>
       </View>
 
