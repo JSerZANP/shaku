@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.3.0
+
+### Minor Changes
+
+- update core
+
 ## 0.2.0
 
 ### Minor Changes
