@@ -64,7 +64,7 @@ test("codeToHtml() + raw HTML", async () => {
       meta: "annotate",
       options: {
         lang: "js",
-        useDangerousRawHTML: true,
+        useDangerousRawHtml: true,
       },
     });
 

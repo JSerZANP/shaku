@@ -329,10 +329,10 @@ type ShakuComponent = ShakuComponentCallout | ShakuComponentUnderline;
 export function renderComponent(
   component: ShakuComponent,
   options?: {
-    useDangerousRawHTML?: boolean;
+    useDangerousRawHtml?: boolean;
   }
 ) {
-  const useDangerousRawHTML = options?.useDangerousRawHTML;
+  const useDangerousRawHtml = options?.useDangerousRawHtml;
   switch (component.type) {
     case "ShakuComponentCallout":
       return `<div class="shaku-callout" style="left:${
@@ -340,7 +340,7 @@ export function renderComponent(
       }ch"><span class="shaku-callout-arrow" style="left:${
         component.config.arrowOffset
       }ch"></span>${
-        useDangerousRawHTML
+        useDangerousRawHtml
           ? component.config.contents
           : escapeHtml(component.config.contents)
       }</div>`;
@@ -352,7 +352,7 @@ export function renderComponent(
       }ch"><span class="shaku-underline-line" style="left:${
         component.config.underlineOffset
       }ch">${component.config.underlineContent}</span>${
-        useDangerousRawHTML
+        useDangerousRawHtml
           ? component.config.contents
           : escapeHtml(component.config.contents)
       }</div>`;

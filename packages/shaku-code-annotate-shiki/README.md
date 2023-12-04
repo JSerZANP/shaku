@@ -37,7 +37,7 @@ const html = highlighters
         options: {
           // by default, shaku escapes, but you can use following combination
           // to do custom markdown parsing
-          useDangerousRawHTML: true,
+          useDangerousRawHtml: true,
           markdownToHtmlAndSanitize: (code) => html
           lang,
         },

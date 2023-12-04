@@ -16,7 +16,7 @@ type StringLiteralUnion<T extends U, U = string> = T | (U & {});
 interface CodeToShakuHtmlOptions {
   lang?: StringLiteralUnion<Lang>;
   theme?: StringLiteralUnion<Theme>;
-  useDangerousRawHTML?: boolean;
+  useDangerousRawHtml?: boolean;
   markdownToHtmlAndSanitize?: (md: string) => string;
 }
 
@@ -56,7 +56,7 @@ export let codeToShakuHtml = function (
   const foregroundColor = highlighter.getForegroundColor();
   const backgroundColor = highlighter.getBackgroundColor();
 
-  const useDangerousRawHTML = options?.useDangerousRawHTML;
+  const useDangerousRawHtml = options?.useDangerousRawHtml;
   const markdownToHtmlAndSanitize =
     options?.markdownToHtmlAndSanitize ?? ((md: string) => md);
 
@@ -123,7 +123,7 @@ export let codeToShakuHtml = function (
               },
             },
             {
-              useDangerousRawHTML,
+              useDangerousRawHtml,
             }
           );
 
@@ -227,7 +227,7 @@ export let codeToShakuHtml = function (
               },
             },
             {
-              useDangerousRawHTML,
+              useDangerousRawHtml,
             }
           );
 

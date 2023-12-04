@@ -34,7 +34,7 @@ export default function markedShakuCodeAnnotate(
           meta,
           options: {
             markdownToHtmlAndSanitize: (code) => sanitize(marked(code)),
-            useDangerousRawHTML: true,
+            useDangerousRawHtml: true,
             lang,
           },
         });

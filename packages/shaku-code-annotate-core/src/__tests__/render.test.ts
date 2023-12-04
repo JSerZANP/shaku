@@ -13,7 +13,7 @@ describe("renderComponent() can render shaku lines + raw HTML ", () => {
       },
     } as const;
     expect(
-      renderComponent(callout, { useDangerousRawHTML: true })
+      renderComponent(callout, { useDangerousRawHtml: true })
     ).toMatchSnapshot();
   });
 
@@ -28,7 +28,7 @@ describe("renderComponent() can render shaku lines + raw HTML ", () => {
       },
     } as const;
     expect(
-      renderComponent(underline, { useDangerousRawHTML: true })
+      renderComponent(underline, { useDangerousRawHtml: true })
     ).toMatchSnapshot();
   });
 });
