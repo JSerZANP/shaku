@@ -379,5 +379,5 @@ const a = 1;
 \`\`\`
 `);
 
-  expect(result).toMatchSnapshot();
+  expect(result.value).toMatchSnapshot();
 });
