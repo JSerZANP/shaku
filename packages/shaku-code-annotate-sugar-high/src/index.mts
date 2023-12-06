@@ -14,13 +14,9 @@ import { Token } from "./types.mjs";
 // this type is missing from sugar-high
 const TokenTypes = sh.SugarHigh.TokenTypes;
 
-type RawToken = [number, string];
-
 export function highlight(code: string) {
-  const tokens = sh.tokenize(code);
-  const lines = toLines(tokens);
+  const lines = getShakuTokenLines(code);
   const parsedLines = parseLines(lines, "javascript", true);
-
   let html = `<pre class="shaku"><code>`;
 
   const hasFocus = hasShakuDirectiveFocus(parsedLines);
@@ -232,7 +228,8 @@ export function highlight(code: string) {
 // while Shaku has the concept of lines
 // this function groups tokens into lines by
 // searching for line break
-function toLines(tokens: Array<RawToken>): Array<Array<Token>> {
+export function getShakuTokenLines(code: string): Array<Array<Token>> {
+  const tokens = sh.tokenize(code);
   const result: Array<Array<Token>> = [];
   let buffer: Array<Token> = [];
 

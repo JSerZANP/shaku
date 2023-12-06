@@ -1,0 +1,23 @@
+.code pre {
+  border: 0;
+  margin: 0;
+  font-size: 14px;
+  border: 1px solid var(--color-line-3rd);
+}
+
+.token {
+  border: 1px solid rgb(218 145 31 / 73%);
+  margin: 0 1px;
+  border-radius: 3px;
+  min-width: 3px;
+}
+
+.token.selected,
+.token:hover {
+  background-color: rgba(255, 255, 0, 0.334);
+  cursor: pointer;
+}
+
+.line {
+  line-height: 1.5;
+}

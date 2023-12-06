@@ -12,7 +12,7 @@ out of my frustration while writing articles for my personal blog - [jser.dev](h
 3. [shaku-code-annotate-sugar-high](./packages/shaku-code-annotate-sugar-high/) - Shaku syntax highlighter based on Sugar High.
 4. [remark-shaku-code-annotate](./packages/remark-shaku-code-annotate/) - plugin for remark.
 5. [marked-shaku-code-annotate](./packages/marked-shaku-code-annotate/) - plugin for marked.
-6. [Shaku Playground](https://shaku-web.vercel.app/) - a playground to try out shaku-code-annotate.
+6. [Shaku Playground](https://shaku-web.vercel.app/playground) - a playground to try out shaku-code-annotate.
 7. [Shaku Snippet](https://shaku-web.vercel.app/snippet) - generate beautiful code snippet screenshots with annotation.
 
 ## Dev Tools

@@ -130,8 +130,9 @@ export default async function Page({
         </$.p>
         <$.h2 $textAlign="center">Supported Languages</$.h2>
         <$.p>
-          Shaku supports most languages that are supported by Shiki. You can
-          find the +150 languages from <a href="/snippet">Shaku Snippet</a>.
+          Shaku on Shiki supports most languages that are supported by Shiki.
+          You can find the +150 languages from{" "}
+          <a href="/snippet">Shaku Snippet</a>.
         </$.p>
         <$.h2 $textAlign="center">Styling</$.h2>
         <p>
@@ -575,11 +576,17 @@ useEffect(() => {
           lang="js"
           shakuEnabled
         />
-        <$.hr $margin="2rem auto" $width={"50%"} />
+        <$.h2 $textAlign="center">Dev Tools</$.h2>
         <p>
-          Got an issue or have better ideas? Raise an issue on{" "}
-          <a href="https://github.com/JSerZANP/shaku">shaku repo</a>.
+          We got some tools to understand how Shaku works, such as{" "}
+          <a href="/shiki-token-inspector">Shiki Token Inspector</a> and{" "}
+          <a href="/sugar-high-token-inspector">Sugar High Token Inspector</a>
         </p>
+        <$.hr $margin="2rem auto" $width={"50%"} />
+        <$.p $textAlign="center">
+          Got a bug or have better ideas? Raise an issue on{" "}
+          <a href="https://github.com/JSerZANP/shaku">shaku repo</a>.
+        </$.p>
       </$.div>
     </div>
   );
