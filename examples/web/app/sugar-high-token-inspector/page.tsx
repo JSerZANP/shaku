@@ -16,7 +16,7 @@ export default async function Page({
       <Head>
         <title>Sugar High Token Visualizer</title>
       </Head>
-      <SugarHighTokenInspector code={code} lang={lang} />
+      <SugarHighTokenInspector code={code} />
     </>
   );
 }
