@@ -504,12 +504,7 @@ useEffect(() => {
           lang="js"
           shakuEnabled
         />
-        <$.p>
-          Focus means to highlight some lines and dim the others, it is a
-          shorthand of <code>@highlight</code> and <code>@dim</code>. Use{" "}
-          <code>@focus</code> to focus next line, <code>@focus start</code> and
-          <code>@focus end</code> for multiple lines.
-        </$.p>
+        <$.p>Focus means to highlight some by dimming the other lines.</$.p>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
 // @focus
@@ -525,7 +520,7 @@ useEffect(() => {
           lang="js"
         />
         <$.p>
-          Since it is a shorthand syntax, there is no special class for it.
+          Since it is actually `@dim`, there is no special class for it.
         </$.p>
         <$.h3>Position Shift</$.h3>
         <CodeBlock
