@@ -468,11 +468,11 @@ useEffect(() => {
 // @dim
 useEffect(() => {
   //  do some stuff
+  // @dim start
     return () => {
-      // @dim start
       location.href = 'https://jser.dev'
-      // @dim end
     }
+    // @dim end
 
   }, [blog])
 }`}
@@ -484,7 +484,7 @@ useEffect(() => {
         <CodeBlock
           $marginTop={"1rem"}
           code={`.shaku .line.dim {
-  opacity: 0.3;
+  filter: blur(2px) brightness(0.5);
 }`}
           lang="css"
         />

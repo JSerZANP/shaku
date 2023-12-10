@@ -24,7 +24,7 @@ pre.shaku .sh__line.highlight {
 }
 
 pre.shaku .sh__line.dim {
-  opacity: 0.3;
+  filter: blur(2px) brightness(0.5);
 }
 
 .shaku-callout {

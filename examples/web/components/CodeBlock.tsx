@@ -16,7 +16,7 @@ const unifiedProcessor = unified()
 export async function CodeBlock({
   code,
   lang,
-  shakuEnabled,
+  shakuEnabled = false,
   ...rest
 }: {
   code: string;

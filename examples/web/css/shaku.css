@@ -23,7 +23,7 @@ pre.shaku.github-dark .line.highlight {
 }
 
 pre.shaku .line.dim {
-  opacity: 0.3;
+  filter: blur(2px) brightness(0.5);
 }
 
 .shaku-callout {
