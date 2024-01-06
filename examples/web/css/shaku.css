@@ -1,11 +1,13 @@
 pre.shaku {
-  padding: 1rem;
+  padding: 1rem 0;
   border: 1px solid var(--color-line-3rd);
   overflow-x: auto;
+  --padding-horizontal: 1rem;
 }
 
 pre.shaku .line {
   min-height: 1em;
+  padding: 0 var(--padding-horizontal);
   line-height: 1.5;
 }
 
@@ -31,7 +33,7 @@ pre.shaku .line.dim {
   color: #fff;
   padding: 0.5em 1ch;
   position: relative;
-  margin: 0.5em 0 0 -0.2ch;
+  margin: 0.5em 0 0 calc(var(--padding-horizontal) - 0.2ch);
   display: inline-block;
   border-radius: 2px;
 }
@@ -68,7 +70,7 @@ pre.shaku.github-dark .shaku-callout-arrow {
   display: block;
   border-radius: 3px;
   color: var(--color-shaku-underline-light, red);
-  margin: 0;
+  margin: 0 0 0 var(--padding-horizontal);
   width: min-content;
 }
 pre.shaku.github-dark .shaku-underline {
