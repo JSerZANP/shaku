@@ -441,6 +441,71 @@ function useSomeEffect({blog}) {
 `}
           lang="css"
         />
+        <$.h3>Diff lines</$.h3>
+        <CodeBlock
+          code={`function useSomeEffect({blog}) {
+  useEffect(() => {
+      // @diff + start
+      return () => {
+        location.href = 'https://jser.dev'
+      }
+      // @diff + end
+
+      // @diff - 
+      console.log('remove this')
+    }, [blog])
+}`}
+          lang="js"
+          shakuEnabled
+        />
+        <$.p>
+          Use <code>@diff +</code> and <code>@diff -</code> to mark next line as
+          diff. To mark multiple lines, use <code>@diff + start</code>/
+          <code>@diff + end</code> or <code>@diff - start</code>/
+          <code>@diff - end</code>.
+        </$.p>
+        <CodeBlock
+          code={`function useSomeEffect({blog}) {
+  useEffect(() => {
+      // @diff + start
+      return () => {
+        location.href = 'https://jser.dev'
+      }
+      // @diff + end
+
+      // @diff - 
+      console.log('remove this')
+    }, [blog])
+}`}
+          lang="js"
+        />
+        <$.p>
+          <code>.diff</code>, <code>.diff-insert</code> and{" "}
+          <code>.diff-delete</code> are used to style the diff lines.
+        </$.p>
+        <CodeBlock
+          $marginTop={"1rem"}
+          code={`pre.shaku .line.diff::before {
+  position: absolute;
+  margin-left: -1ch;
+}
+
+pre.shaku .line.diff-insert {
+  background-color: rgba(46, 160, 67, 0.2);
+}
+
+pre.shaku .line.diff-insert::before {
+  content: "+";
+}
+
+pre.shaku .line.diff-delete {
+  background-color: rgba(248, 81, 73, 0.2);
+}
+pre.shaku .line.diff-delete::before {
+  content: "-";
+}`}
+          lang="css"
+        />
         <$.h3>Dim lines</$.h3>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
@@ -520,7 +585,8 @@ useEffect(() => {
           lang="js"
         />
         <$.p>
-          Since it is actually `@dim`, there is no special class for it.
+          Since it is actually <code>@dim</code>, there is no special class for
+          it.
         </$.p>
         <$.h3>Position Shift</$.h3>
         <CodeBlock
@@ -558,7 +624,8 @@ useEffect(() => {
           Escape with <code>!</code>
         </h3>
         <p>
-          For cases where rendering raw comments are desirable, we can put `!`
+          For cases where rendering raw comments are desirable, we can put{" "}
+          <code>!</code>
           at the end of shaku lines to escape.{" "}
         </p>
         <CodeBlock
