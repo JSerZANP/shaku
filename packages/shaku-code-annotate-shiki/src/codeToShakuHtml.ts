@@ -274,7 +274,6 @@ export let codeToShakuHtml = function (
               break;
           }
           break;
-          continue;
         }
         default:
           assertsNever(shakuLine);

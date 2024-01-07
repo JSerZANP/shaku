@@ -1,6 +1,6 @@
 {
   "name": "shaku-code-annotate-core",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "devDependencies": {
     "tsup": "^6.7.0",
     "typescript": "latest",
