@@ -119,6 +119,18 @@ export type ShakuDirectiveFocus = {
 const RegShakuDirectiveFocus =
   /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>([a-z]+)?)\s*)?\s*(?<escape>!?)\s*$/;
 
+export type ShakuDirectiveDiff = {
+  type: "DirectiveDiff";
+  config: {
+    isEscaped: boolean;
+    type: "+" | "-";
+    mark: "start" | "end" | "below";
+  };
+};
+
+const RegShakuDirectiveDiff =
+  /^(?<leadingSpaces>\s*)@diff\s+(?<type>(\+|\-))\s*((?<mark>([a-z]+)?)\s*)?(?<escape>!?)\s*$/;
+
 export type ShakuLine =
   | ShakuDirectiveUnderline
   | ShakuAnnotationLine
@@ -127,7 +139,8 @@ export type ShakuLine =
   | ShakuDirectiveHighlight
   | ShakuDirectiveDim
   | ShakuDirectiveFocus
-  | ShakuDirectiveHighlightInline;
+  | ShakuDirectiveHighlightInline
+  | ShakuDirectiveDiff;
 
 export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveUnderlineSolid = line.match(
@@ -256,6 +269,26 @@ export const parseLine = (line: string): ShakuLine | null => {
         type: "DirectiveFocus",
         config: {
           isEscaped: !!matchShakuDirectiveFocus.groups?.escape,
+          mark,
+        },
+      };
+    }
+  }
+
+  const matchShakuDirectiveDiff = line.match(RegShakuDirectiveDiff);
+  if (matchShakuDirectiveDiff) {
+    const type = matchShakuDirectiveDiff.groups?.type;
+    const mark = matchShakuDirectiveDiff.groups?.mark ?? "below";
+
+    if (
+      (type === "+" || type === "-") &&
+      (mark === "start" || mark === "end" || mark === "below")
+    ) {
+      return {
+        type: "DirectiveDiff",
+        config: {
+          isEscaped: !!matchShakuDirectiveDiff.groups?.escape,
+          type,
           mark,
         },
       };

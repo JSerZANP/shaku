@@ -9,6 +9,16 @@ function ChatRoom({ roomId }) {
   const [serverUrl, setServerUrl] = useState('https://localhost:1234');
   //      ^
   // [Hello]
+  
+  // @diff + start
+  // Welcome
+  // To
+  // JSer!
+  // @diff - start
+
+  // @diff -
+  console.log('hello')
+
   // @dim
   useEffect(() => {
      // (                                                     )

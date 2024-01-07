@@ -101,6 +101,74 @@ exports[`parseLine() can parse comment lines >    @collapse unexpected  1`] = `n
 
 exports[`parseLine() can parse comment lines >    @collapse unexpected ! 1`] = `null`;
 
+exports[`parseLine() can parse comment lines >    @diff  -   1`] = `
+{
+  "config": {
+    "isEscaped": false,
+    "mark": "below",
+    "type": "-",
+  },
+  "type": "DirectiveDiff",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @diff  -  end    1`] = `
+{
+  "config": {
+    "isEscaped": false,
+    "mark": "end",
+    "type": "-",
+  },
+  "type": "DirectiveDiff",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @diff +  1`] = `
+{
+  "config": {
+    "isEscaped": false,
+    "mark": "below",
+    "type": "+",
+  },
+  "type": "DirectiveDiff",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @diff + below 1`] = `
+{
+  "config": {
+    "isEscaped": false,
+    "mark": "below",
+    "type": "+",
+  },
+  "type": "DirectiveDiff",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @diff + start 1`] = `
+{
+  "config": {
+    "isEscaped": false,
+    "mark": "start",
+    "type": "+",
+  },
+  "type": "DirectiveDiff",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @diff - ! 1`] = `
+{
+  "config": {
+    "isEscaped": true,
+    "mark": "below",
+    "type": "-",
+  },
+  "type": "DirectiveDiff",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @diff unexpected  1`] = `null`;
+
 exports[`parseLine() can parse comment lines >    @dim  1`] = `
 {
   "config": {
@@ -851,6 +919,10 @@ exports[`parseLine() can parse comment lines >  (0)  (2 )<! 1`] = `
 }
 `;
 
+exports[`parseLine() can parse comment lines >  @diff ! 1`] = `null`;
+
+exports[`parseLine() can parse comment lines >  @diff + unexpected  1`] = `null`;
+
 exports[`parseLine() can parse comment lines > () ! 1`] = `
 {
   "config": {
@@ -1072,3 +1144,7 @@ exports[`parseLine() can parse comment lines > (1)(1)(10) 1`] = `
   "type": "DirectiveHighlightInline",
 }
 `;
+
+exports[`parseLine() can parse comment lines > @diff  1`] = `null`;
+
+exports[`parseLine() can parse comment lines > @diff unexpected ! 1`] = `null`;

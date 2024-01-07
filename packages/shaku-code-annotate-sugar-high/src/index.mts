@@ -32,6 +32,8 @@ export function highlight(code: string) {
     line: ShakuDirectiveHighlightInline;
     offset: number;
   } = null;
+  let diffNextSourceLine: false | "+" | "-" = false;
+  let diffBlock: false | "+" | "-" = false;
 
   for (let i = 0; i < parsedLines.length; i++) {
     const line = parsedLines[i];
@@ -186,6 +188,22 @@ export function highlight(code: string) {
           }
           continue;
         }
+        case "DirectiveDiff": {
+          const mark = shakuLine.config.mark;
+          switch (mark) {
+            case "start":
+              diffBlock = shakuLine.config.type;
+              break;
+            case "end":
+              diffBlock = false;
+              break;
+            case "below":
+            default:
+              diffNextSourceLine = shakuLine.config.type;
+              break;
+          }
+          break;
+        }
         default:
           assertsNever(shakuLine);
       }
@@ -195,15 +213,24 @@ export function highlight(code: string) {
       const shouldFocus = isFocusBlock || shouldFocusNextSourceLine;
       const shouldDim =
         isDimBlock || shouldDimNextSourceLine || (hasFocus && !shouldFocus);
+      const diff = diffBlock || diffNextSourceLine;
+
       shouldHighlighNextSourceLine = false;
       shouldFocusNextSourceLine = false;
       shouldDimNextSourceLine = false;
+      diffNextSourceLine = false;
 
       const sourceLine = line.type === "default" ? line.line : line.sourceLine;
 
       const highlightClass = shouldHighlight ? " highlight" : "";
       const dimClass = shouldDim ? " dim" : "";
-      const prefix = `<div class="sh__line${highlightClass}${dimClass}">`;
+      const diffClass =
+        diff === "+"
+          ? " diff diff-insert"
+          : diff === "-"
+          ? " diff diff-delete"
+          : "";
+      const prefix = `<div class="sh__line${highlightClass}${dimClass}${diffClass}">`;
       html += prefix;
 
       if (shakuDirectiveHighlightInline) {

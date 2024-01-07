@@ -91,6 +91,17 @@ describe("parseLine() can parse comment lines", () => {
     " (0)  (2 )<!",
     "   (0)  (2 ) <<<",
     "   (0)  (2 ) <<<  !",
+    "@diff ",
+    " @diff !",
+    "   @diff + ",
+    "   @diff  -  ",
+    "   @diff - !",
+    "   @diff + below",
+    "   @diff + start",
+    "   @diff  -  end   ",
+    "   @diff unexpected ",
+    "@diff unexpected !",
+    " @diff + unexpected ",
   ];
   for (const input of inputs) {
     test(input, () => {

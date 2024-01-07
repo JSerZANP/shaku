@@ -29,6 +29,26 @@ pre.shaku .sh__line.dim {
   filter: blur(2px) brightness(0.5);
 }
 
+pre.shaku .sh__line.diff::before {
+  position: absolute;
+  margin-left: -1ch;
+}
+
+pre.shaku .sh__line.diff-insert {
+  background-color: rgba(46, 160, 67, 0.2);
+}
+
+pre.shaku .sh__line.diff-insert::before {
+  content: "+";
+}
+
+pre.shaku .sh__line.diff-delete {
+  background-color: rgba(248, 81, 73, 0.2);
+}
+pre.shaku .sh__line.diff-delete::before {
+  content: "-";
+}
+
 .shaku-callout {
   background-color: var(--color-shaku-callout-light, #0685ce);
   color: #fff;

@@ -471,6 +471,11 @@ export default function Counter() {
   const [count, setCount] = useState(0);
               //~~~~~~~~
   
+  // @diff + start
+  // This
+  // is
+  // Comment
+  // @diff + end
   function handleClick() {
     setCount(count + 1);
   //-------------------
@@ -478,6 +483,8 @@ export default function Counter() {
   //[Underline and callout!]
   }
 
+  // @diff - 
+  console.log('jser.dev')
   return (
     <button onClick={handleClick}>
     {/*       ^           */}

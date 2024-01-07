@@ -14,18 +14,38 @@ pre.shaku .line {
 pre.shaku.github-light .line.highlight {
   background-color: var(
     --color-shaku-highlight-light,
-    color-mix(in srgb, rgb(5, 118, 149) 15%, #fff)
+    color-mix(in srgb, rgb(5, 118, 149) 15%, var(--color-bg-main))
   );
   display: block;
 }
 
 pre.shaku.github-dark .line.highlight {
-  background-color: var(--color-shaku-highlight-dark, #2b4a70);
+  background-color: var(--color-shaku-highlight-dark, var(--color-bg-main));
   display: block;
 }
 
 pre.shaku .line.dim {
   filter: blur(2px) brightness(0.5);
+}
+
+pre.shaku .line.diff::before {
+  position: absolute;
+  margin-left: -1ch;
+}
+
+pre.shaku .line.diff-insert {
+  background-color: rgba(46, 160, 67, 0.2);
+}
+
+pre.shaku .line.diff-insert::before {
+  content: "+";
+}
+
+pre.shaku .line.diff-delete {
+  background-color: rgba(248, 81, 73, 0.2);
+}
+pre.shaku .line.diff-delete::before {
+  content: "-";
 }
 
 .shaku-callout {
