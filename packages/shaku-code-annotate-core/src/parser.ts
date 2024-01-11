@@ -96,7 +96,7 @@ export type ShakuDirectiveHighlight = {
 };
 
 const RegShakuDirectiveHighlight =
-  /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>([a-z]+)?)\s*)?\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>[a-z]+)?)?\s*(?<escape>!?)\s*$/;
 
 export type ShakuDirectiveDim = {
   type: "DirectiveDim";
@@ -106,7 +106,7 @@ export type ShakuDirectiveDim = {
   };
 };
 const RegShakuDirectiveDim =
-  /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>([a-z]+)?)\s*)?\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>[a-z]+)?)?\s*(?<escape>!?)\s*$/;
 
 export type ShakuDirectiveFocus = {
   type: "DirectiveFocus";
@@ -117,7 +117,7 @@ export type ShakuDirectiveFocus = {
 };
 
 const RegShakuDirectiveFocus =
-  /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>([a-z]+)?)\s*)?\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>[a-z]+)?)?\s*(?<escape>!?)\s*$/;
 
 export type ShakuDirectiveDiff = {
   type: "DirectiveDiff";
