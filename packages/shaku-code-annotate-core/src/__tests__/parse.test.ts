@@ -102,6 +102,16 @@ describe("parseLine() can parse comment lines", () => {
     "   @diff unexpected ",
     "@diff unexpected !",
     " @diff + unexpected ",
+    "    @highlight v   ",
+    "    @highlight ^",
+    " @dim v",
+    " @dim ^ ",
+    "   @focus v  ",
+    " @focus ^",
+    " @diff   +   v   ",
+    "   @diff   +   ^   ",
+    "@diff - v",
+    "@diff -   ^  ",
   ];
   for (const input of inputs) {
     test(input, () => {

@@ -344,9 +344,9 @@ function useSomeEffect({blog}) {
           shakuEnabled
         />
         <$.p>
-          Use <code>@highlight</code> to highlight next line,{" "}
-          <code>@highlight start</code> and
-          <code>@highlight end</code> for multiple lines.
+          Use <code>@highlight</code> to highlight next line, append{" "}
+          <code>start</code> /<code>end</code>(or <code>v</code> /{" "}
+          <code>^</code>) to mark multiple lines.
         </$.p>
         <CodeBlock
           code={`// @highlight
@@ -460,9 +460,8 @@ function useSomeEffect({blog}) {
         />
         <$.p>
           Use <code>@diff +</code> and <code>@diff -</code> to mark next line as
-          diff. To mark multiple lines, use <code>@diff + start</code>/
-          <code>@diff + end</code> or <code>@diff - start</code>/
-          <code>@diff - end</code>.
+          diff, append <code>start</code> /<code>end</code>(or <code>v</code> /{" "}
+          <code>^</code>) to diff multiple lines.
         </$.p>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
@@ -524,9 +523,9 @@ useEffect(() => {
           shakuEnabled
         />
         <$.p>
-          Similar to highlighting, use <code>@dim</code> to dim next line,{" "}
-          <code>@dim start</code> and
-          <code>@dim end</code> for multiple lines.
+          Similar to highlighting, use <code>@dim</code> to dim next line,
+          append <code>start</code> /<code>end</code>(or <code>v</code> /{" "}
+          <code>^</code>) to dim multiple lines.
         </$.p>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
@@ -569,7 +568,12 @@ useEffect(() => {
           lang="js"
           shakuEnabled
         />
-        <$.p>Focus means to highlight some by dimming the other lines.</$.p>
+        <$.p>
+          Focus means to highlight some by dimming the other lines. Use{" "}
+          <code>@focus</code> to focus next line, append <code>start</code> /
+          <code>end</code>(or <code>v</code> / <code>^</code>) to focus multiple
+          lines.{" "}
+        </$.p>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
 // @focus

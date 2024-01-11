@@ -96,7 +96,7 @@ export type ShakuDirectiveHighlight = {
 };
 
 const RegShakuDirectiveHighlight =
-  /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>[a-z]+)?)?\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@highlight(\s+(?<mark>[a-z\^]+)?)?\s*(?<escape>!?)\s*$/;
 
 export type ShakuDirectiveDim = {
   type: "DirectiveDim";
@@ -106,7 +106,7 @@ export type ShakuDirectiveDim = {
   };
 };
 const RegShakuDirectiveDim =
-  /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>[a-z]+)?)?\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@dim(\s+(?<mark>[a-z\^]+)?)?\s*(?<escape>!?)\s*$/;
 
 export type ShakuDirectiveFocus = {
   type: "DirectiveFocus";
@@ -117,7 +117,7 @@ export type ShakuDirectiveFocus = {
 };
 
 const RegShakuDirectiveFocus =
-  /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>[a-z]+)?)?\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@focus(\s+(?<mark>[a-z\^]+)?)?\s*(?<escape>!?)\s*$/;
 
 export type ShakuDirectiveDiff = {
   type: "DirectiveDiff";
@@ -129,7 +129,7 @@ export type ShakuDirectiveDiff = {
 };
 
 const RegShakuDirectiveDiff =
-  /^(?<leadingSpaces>\s*)@diff\s+(?<type>(\+|\-))\s*((?<mark>([a-z]+)?)\s*)?(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@diff\s+(?<type>(\+|\-))\s*((?<mark>([a-z\^]+)?)\s*)?(?<escape>!?)\s*$/;
 
 export type ShakuLine =
   | ShakuDirectiveUnderline
@@ -237,7 +237,9 @@ export const parseLine = (line: string): ShakuLine | null => {
 
   const matchShakuDirectiveHighlight = line.match(RegShakuDirectiveHighlight);
   if (matchShakuDirectiveHighlight) {
-    const mark = matchShakuDirectiveHighlight.groups?.mark || "below";
+    const mark = getCanonicalMark(
+      matchShakuDirectiveHighlight.groups?.mark || "below"
+    );
     if (mark === "start" || mark === "end" || mark === "below") {
       return {
         type: "DirectiveHighlight",
@@ -250,7 +252,9 @@ export const parseLine = (line: string): ShakuLine | null => {
   }
   const matchShakuDirectiveDim = line.match(RegShakuDirectiveDim);
   if (matchShakuDirectiveDim) {
-    const mark = matchShakuDirectiveDim.groups?.mark || "below";
+    const mark = getCanonicalMark(
+      matchShakuDirectiveDim.groups?.mark || "below"
+    );
     if (mark === "start" || mark === "end" || mark === "below") {
       return {
         type: "DirectiveDim",
@@ -263,7 +267,9 @@ export const parseLine = (line: string): ShakuLine | null => {
   }
   const matchShakuDirectiveFocus = line.match(RegShakuDirectiveFocus);
   if (matchShakuDirectiveFocus) {
-    const mark = matchShakuDirectiveFocus.groups?.mark || "below";
+    const mark = getCanonicalMark(
+      matchShakuDirectiveFocus.groups?.mark || "below"
+    );
     if (mark === "start" || mark === "end" || mark === "below") {
       return {
         type: "DirectiveFocus",
@@ -278,7 +284,9 @@ export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveDiff = line.match(RegShakuDirectiveDiff);
   if (matchShakuDirectiveDiff) {
     const type = matchShakuDirectiveDiff.groups?.type;
-    const mark = matchShakuDirectiveDiff.groups?.mark ?? "below";
+    const mark = getCanonicalMark(
+      matchShakuDirectiveDiff.groups?.mark ?? "below"
+    );
 
     if (
       (type === "+" || type === "-") &&
@@ -405,4 +413,10 @@ function escapeHtml(html: string) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+function getCanonicalMark(mark: string) {
+  if (mark === "v") return "start";
+  if (mark === "^") return "end";
+  return mark;
 }
