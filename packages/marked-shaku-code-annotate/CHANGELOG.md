@@ -1,5 +1,16 @@
 # marked-shaku-code-annotate
 
+## 0.3.0
+
+### Minor Changes
+
+- support v^ as alias for start/end
+
+### Patch Changes
+
+- Updated dependencies
+  - shaku-code-annotate-shiki@0.4.0
+
 ## 0.2.0
 
 ### Minor Changes
