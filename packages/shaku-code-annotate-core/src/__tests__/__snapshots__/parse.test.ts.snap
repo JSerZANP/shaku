@@ -26,12 +26,12 @@ exports[`parseLine() can parse comment lines >    (0)  (2 ) <<<  ! 1`] = `
     "isEscaped": true,
     "parts": [
       {
-        "id": 0,
+        "id": "0",
         "length": 3,
         "offset": 0,
       },
       {
-        "id": 2,
+        "id": "2",
         "length": 4,
         "offset": 5,
       },
@@ -47,14 +47,40 @@ exports[`parseLine() can parse comment lines >    (0)  (2 ) <<< 1`] = `
     "isEscaped": false,
     "parts": [
       {
-        "id": 0,
+        "id": "0",
         "length": 3,
         "offset": 0,
       },
       {
-        "id": 2,
+        "id": "2",
         "length": 4,
         "offset": 5,
+      },
+    ],
+  },
+  "type": "DirectiveHighlightInline",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    (r)(g)(b)  1`] = `
+{
+  "config": {
+    "isEscaped": false,
+    "parts": [
+      {
+        "id": "r",
+        "length": 3,
+        "offset": 3,
+      },
+      {
+        "id": "g",
+        "length": 3,
+        "offset": 6,
+      },
+      {
+        "id": "b",
+        "length": 3,
+        "offset": 9,
       },
     ],
   },
@@ -868,17 +894,17 @@ exports[`parseLine() can parse comment lines >  (0)  (2 )   (0)    1`] = `
     "isEscaped": false,
     "parts": [
       {
-        "id": 0,
+        "id": "0",
         "length": 3,
         "offset": 1,
       },
       {
-        "id": 2,
+        "id": "2",
         "length": 4,
         "offset": 6,
       },
       {
-        "id": 0,
+        "id": "0",
         "length": 3,
         "offset": 13,
       },
@@ -894,17 +920,17 @@ exports[`parseLine() can parse comment lines >  (0)  (2 )   (0)   ! 1`] = `
     "isEscaped": true,
     "parts": [
       {
-        "id": 0,
+        "id": "0",
         "length": 3,
         "offset": 1,
       },
       {
-        "id": 2,
+        "id": "2",
         "length": 4,
         "offset": 6,
       },
       {
-        "id": 0,
+        "id": "0",
         "length": 3,
         "offset": 13,
       },
@@ -924,12 +950,12 @@ exports[`parseLine() can parse comment lines >  (0)  (2 )< 1`] = `
     "isEscaped": false,
     "parts": [
       {
-        "id": 0,
+        "id": "0",
         "length": 3,
         "offset": 0,
       },
       {
-        "id": 2,
+        "id": "2",
         "length": 4,
         "offset": 5,
       },
@@ -945,14 +971,40 @@ exports[`parseLine() can parse comment lines >  (0)  (2 )<! 1`] = `
     "isEscaped": true,
     "parts": [
       {
-        "id": 0,
+        "id": "0",
         "length": 3,
         "offset": 0,
       },
       {
-        "id": 2,
+        "id": "2",
         "length": 4,
         "offset": 5,
+      },
+    ],
+  },
+  "type": "DirectiveHighlightInline",
+}
+`;
+
+exports[`parseLine() can parse comment lines >  (red) (green) (blue)  1`] = `
+{
+  "config": {
+    "isEscaped": false,
+    "parts": [
+      {
+        "id": "red",
+        "length": 5,
+        "offset": 1,
+      },
+      {
+        "id": "green",
+        "length": 7,
+        "offset": 7,
+      },
+      {
+        "id": "blue",
+        "length": 6,
+        "offset": 15,
       },
     ],
   },
@@ -1122,7 +1174,7 @@ exports[`parseLine() can parse comment lines > (1) 1`] = `
     "isEscaped": false,
     "parts": [
       {
-        "id": 1,
+        "id": "1",
         "length": 3,
         "offset": 0,
       },
@@ -1138,7 +1190,7 @@ exports[`parseLine() can parse comment lines > (1)! 1`] = `
     "isEscaped": true,
     "parts": [
       {
-        "id": 1,
+        "id": "1",
         "length": 3,
         "offset": 0,
       },
@@ -1155,17 +1207,17 @@ exports[`parseLine() can parse comment lines > (1)(1)(10)
     "isEscaped": false,
     "parts": [
       {
-        "id": 1,
+        "id": "1",
         "length": 3,
         "offset": 0,
       },
       {
-        "id": 1,
+        "id": "1",
         "length": 3,
         "offset": 3,
       },
       {
-        "id": 10,
+        "id": "10",
         "length": 4,
         "offset": 6,
       },
@@ -1181,17 +1233,17 @@ exports[`parseLine() can parse comment lines > (1)(1)(10) ! 1`] = `
     "isEscaped": true,
     "parts": [
       {
-        "id": 1,
+        "id": "1",
         "length": 3,
         "offset": 0,
       },
       {
-        "id": 1,
+        "id": "1",
         "length": 3,
         "offset": 3,
       },
       {
-        "id": 10,
+        "id": "10",
         "length": 4,
         "offset": 6,
       },
@@ -1207,17 +1259,17 @@ exports[`parseLine() can parse comment lines > (1)(1)(10) 1`] = `
     "isEscaped": false,
     "parts": [
       {
-        "id": 1,
+        "id": "1",
         "length": 3,
         "offset": 0,
       },
       {
-        "id": 1,
+        "id": "1",
         "length": 3,
         "offset": 3,
       },
       {
-        "id": 10,
+        "id": "10",
         "length": 4,
         "offset": 6,
       },

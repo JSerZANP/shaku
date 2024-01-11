@@ -33,14 +33,14 @@ export type ShakuDirectiveHighlightInline = {
     parts: Array<{
       offset: number;
       length: number;
-      id?: number;
+      id?: string;
     }>;
   };
 };
 
 const RegShakuDirectiveHighlightInline =
-  /^(\(\d*\))+(?<shift><*)(?<escape>!?)$/;
-const RegShakuDirectiveHighlightInlinePart = /\(\s*(?<id>\d*)\s*\)/g;
+  /^(\([a-zA-Z0-9]*\))+(?<shift><*)(?<escape>!?)$/;
+const RegShakuDirectiveHighlightInlinePart = /\(\s*(?<id>[a-zA-Z0-9]*)\s*\)/g;
 function isShakuDirectiveHighlightInline(str: string): {
   isEscaped: boolean;
   shift: number;
@@ -238,7 +238,7 @@ export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveHighlight = line.match(RegShakuDirectiveHighlight);
   if (matchShakuDirectiveHighlight) {
     const mark = getCanonicalMark(
-      matchShakuDirectiveHighlight.groups?.mark || "below"
+      matchShakuDirectiveHighlight.groups?.mark ?? "below"
     );
     if (mark === "start" || mark === "end" || mark === "below") {
       return {
@@ -253,7 +253,7 @@ export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveDim = line.match(RegShakuDirectiveDim);
   if (matchShakuDirectiveDim) {
     const mark = getCanonicalMark(
-      matchShakuDirectiveDim.groups?.mark || "below"
+      matchShakuDirectiveDim.groups?.mark ?? "below"
     );
     if (mark === "start" || mark === "end" || mark === "below") {
       return {
@@ -268,7 +268,7 @@ export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveFocus = line.match(RegShakuDirectiveFocus);
   if (matchShakuDirectiveFocus) {
     const mark = getCanonicalMark(
-      matchShakuDirectiveFocus.groups?.mark || "below"
+      matchShakuDirectiveFocus.groups?.mark ?? "below"
     );
     if (mark === "start" || mark === "end" || mark === "below") {
       return {
@@ -315,7 +315,7 @@ export const parseLine = (line: string): ShakuLine | null => {
           return {
             offset: part.index! - shift,
             length: part[0].length,
-            id: part[1] ? Number(part[1]) : undefined,
+            id: part[1] || undefined,
           };
         }),
       },

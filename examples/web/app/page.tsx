@@ -381,10 +381,10 @@ function useSomeEffect({blog}) {
         <CodeBlock
           code={`//       (           )
 function useSomeEffect({blog}) {
-//( 2      )
+//( r      )
   useEffect(() => {
       return () => {
-      //( 3    )        (          3     ) 
+      //( g    )        (          b     ) 
         location.href = 'https://jser.dev'
       }
     }, [blog])
@@ -394,15 +394,15 @@ function useSomeEffect({blog}) {
         />
         <$.p>
           <code>(</code> and <code>)</code> are used to mark the selection of
-          next line. optional id inside could be used to set different color.
+          next line. optional id inside could be used to map to different color.
         </$.p>
         <CodeBlock
           code={`//       (           )
 function useSomeEffect({blog}) {
-//( 2      )
+//( r      )
   useEffect(() => {
       return () => {
-      //( 3    )        (          3     ) 
+      //( g    )        (          b     ) 
         location.href = 'https://jser.dev'
       }
     }, [blog])
@@ -417,27 +417,28 @@ function useSomeEffect({blog}) {
         <CodeBlock
           $marginTop={"1rem"}
           code={`.shaku-inline-highlight {
-  background-color: #05a4fa30;
-  border-bottom: 2px solid rgb(9, 113, 239);
+  background-color: #fa05f230;
+  border-bottom: 2px solid rgb(235, 4, 158);
   margin: 0 1px;
   border-radius: 3px;
   padding: 0 3px;
 }
 
-.shaku-inline-highlight[data-id="1"] {
-  background-color: #05a4fa30;
-  border-bottom: 2px solid rgb(9, 113, 239);
-}
-
-.shaku-inline-highlight[data-id="2"] {
+.shaku-inline-highlight[data-id="r"] {
   background-color: #fa05f230;
   border-bottom: 2px solid rgb(235, 4, 158);
 }
 
-.shaku-inline-highlight[data-id="3"] {
+.shaku-inline-highlight[data-id="g"] {
   background-color: #05faa930;
   border-bottom: 2px solid green;
 }
+
+.shaku-inline-highlight[data-id="b"] {
+  background-color: #05a4fa30;
+  border-bottom: 2px solid rgb(9, 113, 239);
+}
+
 `}
           lang="css"
         />
