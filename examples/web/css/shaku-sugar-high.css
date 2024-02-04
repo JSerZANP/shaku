@@ -21,7 +21,10 @@ pre.shaku .sh__line.highlight {
 
 @media (prefers-color-scheme: dark) {
   pre.shaku .sh__line.highlight {
-    background-color: var(--color-shaku-highlight-dark, #2b4a70);
+    background-color: var(
+      --color-shaku-highlight-dark,
+      color-mix(in srgb, rgb(239, 242, 242) 15%, var(--color-bg-main))
+    );
   }
 }
 

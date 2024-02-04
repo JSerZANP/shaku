@@ -14,13 +14,16 @@ pre.shaku .line {
 pre.shaku.github-light .line.highlight {
   background-color: var(
     --color-shaku-highlight-light,
-    color-mix(in srgb, rgb(5, 118, 149) 15%, var(--color-bg-main))
+    color-mix(in srgb, rgb(36, 155, 188) 15%, var(--color-bg-main))
   );
   display: block;
 }
 
 pre.shaku.github-dark .line.highlight {
-  background-color: var(--color-shaku-highlight-dark, var(--color-bg-main));
+  background-color: var(
+    --color-shaku-highlight-dark,
+    color-mix(in srgb, rgb(239, 242, 242) 15%, var(--color-bg-main))
+  );
   display: block;
 }
 
@@ -172,4 +175,11 @@ pre.shaku.github-dark {
   pre.shaku.github-light {
     display: none;
   }
+}
+
+.shiki.shaku.github-dark {
+  background-color: #15202b !important;
+}
+.shiki.shaku.github-light {
+  background-color: #f8f8f8 !important;
 }

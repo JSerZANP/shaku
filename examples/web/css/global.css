@@ -17,6 +17,7 @@
   --color-bg-sub: #aaa;
   --color-bg-3rd: #555;
   --color-bg-deemphasized: #eee;
+  --color-bg-embed: #f8f8f8;
 
   --color-line-main: #777;
   --color-line-sub: #aaa;
@@ -40,11 +41,12 @@
     --color-link-sub: #008eff;
     --color-link-coffee: #fedd00;
 
-    --color-bg-main: #15202b;
+    --color-bg-main: #0d1117;
     background-color: #15202b;
     --color-bg-sub: #777;
     --color-bg-deemphasized: #1c2b3a;
     --color-bg-3rd: #eee;
+    --color-bg-embed: #15202b;
 
     --color-line-main: #eee;
     --color-line-sub: #aaa;

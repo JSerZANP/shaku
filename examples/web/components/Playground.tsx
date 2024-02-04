@@ -263,7 +263,7 @@ export function Playground({ code: _code }: { code?: string }) {
           </select>
         </span>
       </Row>
-      <Row $gap={20} $flex="1 0 0 ">
+      <Row $gap={20} $flex="1 0 0 " $overflow="auto" $alignItems="stretch">
         <Column $flex="1 0 0" $maxWidth={700}>
           <Editor
             defaultLanguage="markdown"

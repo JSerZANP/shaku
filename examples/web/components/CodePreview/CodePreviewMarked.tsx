@@ -50,6 +50,7 @@ export default function PlaygroundPreview({ code }: { code: string }) {
       $flex="1 0 0"
       $border="1px solid var(--color-line-3rd)"
       $padding={"1rem"}
+      $overflowY="auto"
     >
       <div
         dangerouslySetInnerHTML={{ __html: processedResult }}

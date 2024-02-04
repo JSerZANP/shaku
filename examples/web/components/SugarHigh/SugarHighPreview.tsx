@@ -20,6 +20,7 @@ export default function SugarHighPreview({
         $width="max-content"
         // @ts-ignore
         ref={refPreview}
+        $backgroundColor="var(--color-bg-embed)"
       >
         <$.div
           $whiteSpace="pre-wrap"
