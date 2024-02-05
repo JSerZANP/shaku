@@ -83,7 +83,7 @@ export function highlight(code: string) {
         case "AnnotationLine":
           // TODO
           break;
-        case "DirectiveCollapse":
+        case "DirectiveFold":
           // TODO
           break;
         case "DirectiveHighlight": {

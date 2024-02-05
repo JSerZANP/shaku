@@ -147,7 +147,7 @@ export let codeToShakuHtml = function (
         case "AnnotationLine":
           // TODO
           break;
-        case "DirectiveCollapse":
+        case "DirectiveFold":
           // TODO
           break;
         case "DirectiveHighlight": {

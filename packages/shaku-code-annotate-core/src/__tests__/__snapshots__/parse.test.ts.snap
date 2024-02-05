@@ -88,65 +88,6 @@ exports[`parseLine() can parse comment lines >    (r)(g)(b)  1`] = `
 }
 `;
 
-exports[`parseLine() can parse comment lines >    @collapse end  1`] = `
-{
-  "config": {
-    "isEscaped": false,
-    "mark": "end",
-    "offset": 3,
-  },
-  "type": "DirectiveCollapse",
-}
-`;
-
-exports[`parseLine() can parse comment lines >    @collapse end ! 1`] = `
-{
-  "config": {
-    "isEscaped": true,
-    "mark": "end",
-    "offset": 3,
-  },
-  "type": "DirectiveCollapse",
-}
-`;
-
-exports[`parseLine() can parse comment lines >    @collapse start  1`] = `
-{
-  "config": {
-    "isEscaped": false,
-    "mark": "start",
-    "offset": 3,
-  },
-  "type": "DirectiveCollapse",
-}
-`;
-
-exports[`parseLine() can parse comment lines >    @collapse start !  1`] = `
-{
-  "config": {
-    "isEscaped": true,
-    "mark": "start",
-    "offset": 3,
-  },
-  "type": "DirectiveCollapse",
-}
-`;
-
-exports[`parseLine() can parse comment lines >    @collapse start!  1`] = `
-{
-  "config": {
-    "isEscaped": true,
-    "mark": "start",
-    "offset": 3,
-  },
-  "type": "DirectiveCollapse",
-}
-`;
-
-exports[`parseLine() can parse comment lines >    @collapse unexpected  1`] = `null`;
-
-exports[`parseLine() can parse comment lines >    @collapse unexpected ! 1`] = `null`;
-
 exports[`parseLine() can parse comment lines >    @diff   +   ^    1`] = `
 {
   "config": {
@@ -405,6 +346,60 @@ exports[`parseLine() can parse comment lines >    @focus v   1`] = `
   "type": "DirectiveFocus",
 }
 `;
+
+exports[`parseLine() can parse comment lines >    @fold end  1`] = `
+{
+  "config": {
+    "isEscaped": false,
+    "mark": "end",
+  },
+  "type": "DirectiveFold",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @fold end ! 1`] = `
+{
+  "config": {
+    "isEscaped": true,
+    "mark": "end",
+  },
+  "type": "DirectiveFold",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @fold start  1`] = `
+{
+  "config": {
+    "isEscaped": false,
+    "mark": "start",
+  },
+  "type": "DirectiveFold",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @fold start !  1`] = `
+{
+  "config": {
+    "isEscaped": true,
+    "mark": "start",
+  },
+  "type": "DirectiveFold",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @fold start!  1`] = `
+{
+  "config": {
+    "isEscaped": true,
+    "mark": "start",
+  },
+  "type": "DirectiveFold",
+}
+`;
+
+exports[`parseLine() can parse comment lines >    @fold unexpected  1`] = `null`;
+
+exports[`parseLine() can parse comment lines >    @fold unexpected ! 1`] = `null`;
 
 exports[`parseLine() can parse comment lines >    @highlight  1`] = `
 {

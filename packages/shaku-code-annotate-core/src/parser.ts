@@ -76,16 +76,15 @@ const RegShakuDirectiveCallout =
 
 // const RegShakuDirectiveFloatCallout = /^(?<leadingSpaces>\s*)(\<~|~>)\s*$/
 
-export type ShakuDirectiveCollapse = {
-  type: "DirectiveCollapse";
+export type ShakuDirectiveFold = {
+  type: "DirectiveFold";
   config: {
     isEscaped: boolean;
-    offset: number;
     mark: "start" | "end";
   };
 };
-const RegShakuDirectiveCollapse =
-  /^(?<leadingSpaces>\s*)@collapse\s+(?<mark>[a-z]+)\s*(?<escape>!?)\s*$/;
+const RegShakuDirectiveFold =
+  /^(?<leadingSpaces>\s*)@fold(\s+(?<mark>[a-z]+)?)?\s*(?<escape>!?)\s*$/;
 
 export type ShakuDirectiveHighlight = {
   type: "DirectiveHighlight";
@@ -135,7 +134,7 @@ export type ShakuLine =
   | ShakuDirectiveUnderline
   | ShakuAnnotationLine
   | ShakuDirectiveCallout
-  | ShakuDirectiveCollapse
+  | ShakuDirectiveFold
   | ShakuDirectiveHighlight
   | ShakuDirectiveDim
   | ShakuDirectiveFocus
@@ -220,15 +219,16 @@ export const parseLine = (line: string): ShakuLine | null => {
     };
   }
 
-  const matchShakuDirectiveCollapse = line.match(RegShakuDirectiveCollapse);
-  if (matchShakuDirectiveCollapse) {
-    const mark = matchShakuDirectiveCollapse.groups?.mark;
+  const matchShakuDirectiveFold = line.match(RegShakuDirectiveFold);
+  if (matchShakuDirectiveFold) {
+    const mark = getCanonicalMark(
+      matchShakuDirectiveFold.groups?.mark ?? "below"
+    );
     if (mark === "start" || mark === "end") {
       return {
-        type: "DirectiveCollapse",
+        type: "DirectiveFold",
         config: {
-          isEscaped: !!matchShakuDirectiveCollapse.groups?.escape,
-          offset: matchShakuDirectiveCollapse.groups?.leadingSpaces.length ?? 0,
+          isEscaped: !!matchShakuDirectiveFold.groups?.escape,
           mark,
         },
       };
@@ -339,7 +339,7 @@ export function shouldApplyAnnotation(meta: string): boolean {
  * 1. DirectiveUnderline
  * 2. one ore more AnnotationLine
  *
- * DirectiveCollapse also render a few lines of source code
+ * DirectiveFold also render a few lines of source code
  * So this function should render component
  */
 
