@@ -183,3 +183,22 @@ pre.shaku.github-dark {
 .shiki.shaku.github-light {
   background-color: #f8f8f8 !important;
 }
+
+.shaku-expand summary {
+  padding-left: var(--padding-horizontal);
+}
+.shaku-expand summary mark {
+  color: var(--color-text-sub);
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.shaku-expand summary::-webkit-details-marker,
+.shaku-expand summary::marker {
+  display: none;
+  content: "";
+}
+
+.shaku-expand[open] summary {
+  display: none;
+}

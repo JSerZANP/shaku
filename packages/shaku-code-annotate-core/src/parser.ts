@@ -84,7 +84,7 @@ export type ShakuDirectiveFold = {
   };
 };
 const RegShakuDirectiveFold =
-  /^(?<leadingSpaces>\s*)@fold(\s+(?<mark>[a-z]+)?)?\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@fold(\s+(?<mark>[a-z\^]+)?)?\s*(?<escape>!?)\s*$/;
 
 export type ShakuDirectiveHighlight = {
   type: "DirectiveHighlight";

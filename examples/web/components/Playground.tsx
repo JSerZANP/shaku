@@ -123,6 +123,22 @@ function useSomeEffect({blog}) {
 }
 \`\`\`
 
+## Fold lines
+
+
+\`\`\`js annotate
+function useSomeEffect({blog}) {
+  useEffect(() => {
+    //  do some stuff
+      // @fold start
+      return () => {
+        location.href = 'https://jser.dev'
+      }
+      // @fold end
+    }, [blog])
+}
+\`\`\`
+
 
 ## Easily Focus lines
 

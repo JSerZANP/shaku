@@ -509,9 +509,9 @@ pre.shaku .line.diff-delete::before {
         <$.h3>Dim lines</$.h3>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
-// @dim
-useEffect(() => {
-  //  do some stuff
+  // @dim
+  useEffect(() => {
+    //  do some stuff
     return () => {
       // @dim start
       location.href = 'https://jser.dev'
@@ -530,10 +530,10 @@ useEffect(() => {
         </$.p>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
-// @dim
-useEffect(() => {
-  //  do some stuff
-  // @dim start
+  // @dim
+  useEffect(() => {
+    //  do some stuff
+    // @dim start
     return () => {
       location.href = 'https://jser.dev'
     }
@@ -556,9 +556,9 @@ useEffect(() => {
         <$.h3>Focus lines</$.h3>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
-// @focus
-useEffect(() => {
-  // do some stuff
+  // @focus
+  useEffect(() => {
+    // do some stuff
     return () => {
       // @focus start
       location.href = 'https://jser.dev'
@@ -577,9 +577,9 @@ useEffect(() => {
         </$.p>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
-// @focus
-useEffect(() => {
-  // do some stuff
+  // @focus
+  useEffect(() => {
+    // do some stuff
     return () => {
       // @focus start
       location.href = 'https://jser.dev'
@@ -593,6 +593,66 @@ useEffect(() => {
           Since it is actually <code>@dim</code>, there is no special class for
           it.
         </$.p>
+        <$.h3>Fold lines</$.h3>
+        <CodeBlock
+          code={`function useSomeEffect({blog}) {
+  useEffect(() => {
+    // @fold start
+    // do some stuff
+    return () => {
+      location.href = 'https://jser.dev'
+    }
+    // @fold end
+  }, [blog])
+}`}
+          lang="js"
+          shakuEnabled
+        />
+        <$.p>
+          <code>@fold</code> is to collapse lines, append <code>start</code> /{" "}
+          <code>end</code> (or <code>v</code> / <code>^</code>) to mark the
+          lines.
+        </$.p>
+        <CodeBlock
+          code={`function useSomeEffect({blog}) {
+  useEffect(() => {
+    // @fold start
+    // do some stuff
+    return () => {
+      location.href = 'https://jser.dev'
+    }
+    // @fold end
+  }, [blog])
+}`}
+          lang="js"
+        />
+        <$.p>
+          <code>@fold</code> renders{" "}
+          <code>
+            &lt;details&gt;&lt;summary&gt;&lt;mark&gt;&lt;/mark&gt;&lt;/summary&gt;&lt;/details&gt;
+          </code>
+          , class <code>.shaku-expand</code>
+          could be used to style.
+        </$.p>
+        <CodeBlock
+          $marginTop={"1rem"}
+          code={`.shaku-expand summary mark {
+  color: var(--color-text-sub);
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.shaku-expand summary::-webkit-details-marker,
+.shaku-expand summary::marker {
+  display: none;
+  content: "";
+}
+
+.shaku-expand[open] summary {
+  display: none;
+}`}
+          lang="css"
+        />
         <$.h3>Position Shift</$.h3>
         <CodeBlock
           code={`function component() {

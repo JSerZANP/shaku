@@ -31,6 +31,19 @@ function hello() {
   const blog = "https://jser.dev"
 }
   `,
+  `
+function useSomeEffect({blog}) {
+  useEffect(() => {
+    //  do some stuff
+      // @fold start
+      return () => {
+        // @highlight
+        location.href = 'https://jser.dev'
+      }
+      // @fold ^
+    }, [blog])
+}
+  `,
 ];
 
 test("codeToHtml()", async () => {

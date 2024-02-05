@@ -32,6 +32,8 @@ export const sanitize = (html: string) => {
       "td",
       "mark",
       "div",
+      "details",
+      "summary",
     ],
     allowedAttributes: {
       a: ["href", "target"],
@@ -40,6 +42,8 @@ export const sanitize = (html: string) => {
       pre: ["class", "style"],
       p: ["class", "style"],
       mark: ["data-*", "class"],
+      details: ["class"],
+      summary: ["style"],
     },
   });
 };
