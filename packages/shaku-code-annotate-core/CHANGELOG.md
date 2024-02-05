@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.6.0
+
+### Minor Changes
+
+- support @fold
+
 ## 0.5.0
 
 ### Minor Changes

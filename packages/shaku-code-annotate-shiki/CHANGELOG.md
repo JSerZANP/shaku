@@ -1,5 +1,16 @@
 # shaku-code-annotate
 
+## 0.5.0
+
+### Minor Changes
+
+- support @fold
+
+### Patch Changes
+
+- Updated dependencies
+  - shaku-code-annotate-core@0.6.0
+
 ## 0.4.0
 
 ### Minor Changes

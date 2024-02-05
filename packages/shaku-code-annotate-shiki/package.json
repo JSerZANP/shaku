@@ -1,13 +1,13 @@
 {
   "name": "shaku-code-annotate-shiki",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "dependencies": {
     "mdast": "^3.0.0",
     "remark": "^14.0.2",
     "remark-html": "^15.0.2",
     "sanitize-html": "^2.10.0",
     "shiki": "^0.14.2",
-    "shaku-code-annotate-core": "^0.5.0",
+    "shaku-code-annotate-core": "^0.6.0",
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.2"
   },
