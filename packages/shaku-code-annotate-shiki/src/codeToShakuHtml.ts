@@ -34,7 +34,7 @@ interface CodeToShakuHtmlOptions {
   markdownToHtmlAndSanitize?: (md: string) => string;
 }
 
-export let codeToShakuHtml = function (
+export let codeToShakuHtml = function(
   this: ShakuHighlighter,
   {
     code,
@@ -64,7 +64,7 @@ export let codeToShakuHtml = function (
     }
   }
 
-  const lines = highlighter.codeToThemedTokens(code, lang);
+  const lines = transformLines(highlighter.codeToThemedTokens(code, lang));
   const foregroundColor = highlighter.getForegroundColor();
   const backgroundColor = highlighter.getBackgroundColor();
 
@@ -329,8 +329,8 @@ export let codeToShakuHtml = function (
         diff === "+"
           ? " diff diff-insert"
           : diff === "-"
-          ? " diff diff-delete"
-          : "";
+            ? " diff diff-delete"
+            : "";
 
       const prefix = `<div class="line${highlightClass}${dimClass}${diffClass}">`;
       html += prefix;
@@ -356,6 +356,37 @@ export let codeToShakuHtml = function (
     skipped: false,
   };
 };
+
+function transformLines(lines: IThemedToken[][]) {
+  let isMultiLineCommentsStart: Boolean = false;
+
+  return lines
+    .map((line) => {
+      if (line[0]) {
+        if (line[0].content.indexOf("/*") > -1) {
+          isMultiLineCommentsStart = true;
+          line[0].content = line[0].content.replace("/*", "//");
+        }
+
+        if (line[0].content.indexOf("*/") > -1) {
+          isMultiLineCommentsStart = false;
+          line[0].content = line[0].content.replace("*/", "@removed");
+        } else {
+          if (isMultiLineCommentsStart) {
+            if (
+              line[0].content.trim() &&
+              line[0].content.trim().slice(0, 2) !== "//"
+            ) {
+              line[0].content = "//" + line[0].content;
+            }
+          }
+        }
+      }
+
+      return line;
+    })
+    .filter((line) => line[0]?.content !== "@removed");
+}
 
 /**
  * different kinds of comments have different interpretations
