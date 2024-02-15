@@ -34,7 +34,7 @@ interface CodeToShakuHtmlOptions {
   markdownToHtmlAndSanitize?: (md: string) => string;
 }
 
-export let codeToShakuHtml = function(
+export let codeToShakuHtml = function (
   this: ShakuHighlighter,
   {
     code,
@@ -329,8 +329,8 @@ export let codeToShakuHtml = function(
         diff === "+"
           ? " diff diff-insert"
           : diff === "-"
-            ? " diff diff-delete"
-            : "";
+          ? " diff diff-delete"
+          : "";
 
       const prefix = `<div class="line${highlightClass}${dimClass}${diffClass}">`;
       html += prefix;
