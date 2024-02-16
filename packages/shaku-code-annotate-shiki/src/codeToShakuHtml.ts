@@ -385,7 +385,7 @@ function transformLines(lines: IThemedToken[][]) {
 
       return line;
     })
-    .filter((line) => line[0]?.content !== "@removed");
+    .filter((line) => line[0]?.content.trim() !== "@removed");
 }
 
 /**
