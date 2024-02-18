@@ -252,7 +252,7 @@ export default function CodeSnippetPreview({
       >
         <View $flex="0 0 0" $width="max-content" $margin="auto auto">
           <$.p
-            $backgroundColor="#24292e"
+            $backgroundColor="#15202b"
             $margin={0}
             $padding="15px 15px 0"
             $display="flex"
@@ -272,7 +272,7 @@ export default function CodeSnippetPreview({
             dangerouslySetInnerHTML={{ __html: preview }}
           ></div>
           <$.p
-            $backgroundColor="#24292e"
+            $backgroundColor="#15202b"
             $margin={0}
             $padding="10px 10px 0"
             $display="flex"
