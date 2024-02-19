@@ -759,7 +759,6 @@ function assertsNever(data: never) {
 }
 
 function getLeadingSpaceCount(str: string) {
-  console.log("getLeadingSpaceCount", str);
   for (let i = 0; i < str.length; i++) {
     if (!/\s/.test(str[i])) {
       return i;
