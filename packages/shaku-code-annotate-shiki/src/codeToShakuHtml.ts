@@ -64,7 +64,10 @@ export let codeToShakuHtml = function (
     }
   }
 
-  const lines = highlighter.codeToThemedTokens(code, lang);
+  const lines = transformLines(
+    highlighter.codeToThemedTokens(code, lang),
+    lang
+  );
   const foregroundColor = highlighter.getForegroundColor();
   const backgroundColor = highlighter.getBackgroundColor();
 
@@ -356,6 +359,46 @@ export let codeToShakuHtml = function (
     skipped: false,
   };
 };
+
+const commentPatternMap: { [key: string]: string[] } = {
+  js: ["/*", "*/", "//"],
+  html: ["<!--", "-->", ""],
+};
+
+function transformLines(lines: IThemedToken[][], lang: string) {
+  if (!commentPatternMap[lang]) {
+    return lines;
+  }
+
+  let isMultiLineCommentsStart: Boolean = false;
+
+  const [left, right, replacement] = commentPatternMap[lang];
+  return lines
+    .map((line) => {
+      if (line[0]) {
+        if (line[0].content.indexOf(left) > -1) {
+          isMultiLineCommentsStart = true;
+          line[0].content = line[0].content.replace(left, replacement);
+        }
+
+        if (line[0].content.indexOf(right) > -1) {
+          isMultiLineCommentsStart = false;
+        } else {
+          if (isMultiLineCommentsStart) {
+            if (
+              line[0].content.trim() &&
+              line[0].content.trim().slice(0, 2) !== replacement
+            ) {
+              line[0].content = replacement + line[0].content;
+            }
+          }
+        }
+      }
+
+      return line;
+    })
+    .filter((line) => line[0]?.content.trim() !== right);
+}
 
 /**
  * different kinds of comments have different interpretations
