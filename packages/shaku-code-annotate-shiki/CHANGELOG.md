@@ -1,5 +1,16 @@
 # shaku-code-annotate
 
+## 0.6.0
+
+### Minor Changes
+
+- support @class directive
+
+### Patch Changes
+
+- Updated dependencies
+  - shaku-code-annotate-core@0.7.0
+
 ## 0.5.0
 
 ### Minor Changes

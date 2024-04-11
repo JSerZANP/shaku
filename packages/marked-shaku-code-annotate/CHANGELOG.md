@@ -1,5 +1,16 @@
 # marked-shaku-code-annotate
 
+## 0.5.0
+
+### Minor Changes
+
+- support @class directive
+
+### Patch Changes
+
+- Updated dependencies
+  - shaku-code-annotate-shiki@0.6.0
+
 ## 0.4.0
 
 ### Minor Changes
