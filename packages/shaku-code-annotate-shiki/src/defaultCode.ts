@@ -483,6 +483,10 @@ export default function Counter() {
   //[Underline and callout!]
   }
 
+  // @class clickable
+  // @data jser=dev
+  const blog = "https://jser.dev"
+
   // @diff - 
   console.log('jser.dev')
   return (

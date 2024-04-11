@@ -719,6 +719,23 @@ const Hello = "World!"
           lang="js"
           shakuEnabled
         />
+        <h3>Custom data attributes</h3>
+        <p>
+          You can also use <code>@data</code> to add custom data attributes to a
+          line, which could be useful if you are building something on top of
+          Shaku.
+        </p>
+        <CodeBlock
+          code={`// @data hello=world jser=dev !
+// @data hello=world jser=dev
+// @highlight
+const Hello = "World!"
+//     ^
+// [Open the dev console and inspect this line,]
+// [you'll see this line is rendered with the custom data attributes]`}
+          lang="js"
+          shakuEnabled
+        />
         <$.h2 $textAlign="center">Dev Tools</$.h2>
         <p>
           We got some tools to understand how Shaku works, such as{" "}

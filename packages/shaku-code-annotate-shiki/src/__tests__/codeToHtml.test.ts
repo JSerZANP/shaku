@@ -56,6 +56,17 @@ function useSomeEffect({blog}) {
     }, [blog])
 }
   `,
+  `
+function useSomeEffect({blog}) {
+  useEffect(() => {
+    // @data a=1
+      return () => {
+        // @data a-b-c=1-2-3 beg-1=hello-2
+        location.href = 'https://jser.dev'
+      }
+    }, [blog])
+}
+  `,
 ];
 
 test("codeToHtml()", async () => {

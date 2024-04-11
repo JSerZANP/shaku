@@ -1,5 +1,6 @@
 import { IThemedToken } from "shiki";
 import { ShakuDirectiveHighlightInline } from "shaku-code-annotate-core";
+import { escapeHtml } from "./escapeHtml";
 
 export const renderMarkStart = (id?: number) =>
   `<mark class="shaku-inline-highlight" ${
@@ -119,13 +120,4 @@ export function renderSourceLine(sourceLine: IThemedToken[]) {
         )}</span>`
     )
     .join("");
-}
-
-function escapeHtml(html: string) {
-  return html
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
 }

@@ -10,6 +10,7 @@ import {
   renderSourceLine,
   renderSourceLineWithInlineHighlight,
 } from "./render";
+import { escapeHtml } from "./escapeHtml";
 
 type StringLiteralUnion<T extends U, U = string> = T | (U & {});
 interface CodeToShakuHtmlOptions {
@@ -94,6 +95,9 @@ export let codeToShakuHtml = function (
   let diffBlock: false | "+" | "-" = false;
   let isFoldBlock = false;
   let classNamesForNextSourceLine = "";
+  let dataAttrsForNextSourceLine:
+    | false
+    | Array<{ key: string; value: string }> = false;
 
   for (let i = 0; i < parsedLines.length; i++) {
     const line = parsedLines[i];
@@ -167,7 +171,6 @@ export let codeToShakuHtml = function (
                 }
                 j += 1;
               }
-              console.log(indent);
               html += `<details class="shaku-expand"><summary style="margin-left:${indent}ch"><mark>{...}</mark></summary>`;
               break;
             }
@@ -310,6 +313,10 @@ export let codeToShakuHtml = function (
           classNamesForNextSourceLine = shakuLine.config.classNames;
           break;
         }
+        case "DirectiveData": {
+          dataAttrsForNextSourceLine = shakuLine.config.entries;
+          break;
+        }
         default:
           assertsNever(shakuLine);
       }
@@ -323,12 +330,14 @@ export let codeToShakuHtml = function (
       const classNames = classNamesForNextSourceLine
         ? " " + classNamesForNextSourceLine
         : "";
+      const dataAttrs = dataAttrsForNextSourceLine;
 
       shouldHighlighNextSourceLine = false;
       shouldFocusNextSourceLine = false;
       shouldDimNextSourceLine = false;
       diffNextSourceLine = false;
       classNamesForNextSourceLine = "";
+      dataAttrsForNextSourceLine = false;
 
       const sourceLine = line.type === "default" ? line.line : line.sourceLine;
 
@@ -341,7 +350,17 @@ export let codeToShakuHtml = function (
           ? " diff diff-delete"
           : "";
 
-      const prefix = `<div class="line${highlightClass}${dimClass}${diffClass}${classNames}">`;
+      const classString = `line${highlightClass}${dimClass}${diffClass}${classNames}`;
+      const dataString = dataAttrs
+        ? " " +
+          dataAttrs
+            .map(
+              ({ key, value }) =>
+                `${escapeHtml(`data-${key}`)}="${escapeHtml(value)}"`
+            )
+            .join(" ")
+        : "";
+      const prefix = `<div class="${escapeHtml(classString)}"${dataString}>`;
       html += prefix;
 
       if (shakuDirectiveHighlightInline) {

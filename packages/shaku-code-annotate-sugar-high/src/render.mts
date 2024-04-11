@@ -1,5 +1,6 @@
 import { ShakuDirectiveHighlightInline } from "shaku-code-annotate-core";
 import { Token } from "./types.mjs";
+import { escapeHtml } from "./escapeHtml.mjs";
 
 export const renderMarkStart = (id?: number) =>
   `<mark class="shaku-inline-highlight" ${
@@ -112,13 +113,4 @@ export function renderSourceLineWithInlineHighlight(
 
 export function renderSourceLine(sourceLine: Token[]) {
   return sourceLine.map(renderToken).join("");
-}
-
-function escapeHtml(html: string) {
-  return html
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
 }

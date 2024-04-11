@@ -227,6 +227,22 @@ const Hello = "World!"
 // [you'll see this line is rendered with the custom class names!]
 \`\`\`
 
+## Custom data attributes
+
+You can also use \`@data\` to add custom data attributes to a
+  line, which could be useful if you are building something on top of
+  Shaku.
+
+\`\`\`tsx annotate
+// @data hello=world jser=dev !
+// @data hello=world jser=dev
+// @highlight
+const Hello = "World!"
+//     ^
+// [Open the dev console and inspect this line,]
+// [you'll see this line is rendered with the custom data attributes!]
+\`\`\`
+
 
 ## How to Use
 

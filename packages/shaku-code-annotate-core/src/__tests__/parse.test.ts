@@ -119,6 +119,9 @@ describe("parseLine() can parse comment lines", () => {
     "@class abc efg h123   ",
     "@class abc efg h123!",
     "@class abc-1 efg-2 h123!",
+    "@data abc=123",
+    "@data abc=123 ed1=abc   ",
+    "@data abc=123 ed1=abc  !",
   ];
   for (const input of inputs) {
     test(input, () => {

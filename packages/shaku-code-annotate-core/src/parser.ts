@@ -141,6 +141,17 @@ export type ShakuDirectiveClass = {
 const RegShakuDirectiveClass =
   /^(?<leadingSpaces>\s*)@class\s+(?<classNames>([a-zA-Z0-9 \-_]+))\s*(?<escape>!?)\s*$/;
 
+export type ShakuDirectiveData = {
+  type: "DirectiveData";
+  config: {
+    isEscaped: boolean;
+    entries: Array<{ key: string; value: string }>;
+  };
+};
+
+const RegShakuDirectiveData =
+  /^(?<leadingSpaces>\s*)@data\s+(?<entries>([a-zA-Z0-9 \-=_]+))\s*(?<escape>!?)\s*$/;
+
 export type ShakuLine =
   | ShakuDirectiveUnderline
   | ShakuAnnotationLine
@@ -151,7 +162,8 @@ export type ShakuLine =
   | ShakuDirectiveFocus
   | ShakuDirectiveHighlightInline
   | ShakuDirectiveDiff
-  | ShakuDirectiveClass;
+  | ShakuDirectiveClass
+  | ShakuDirectiveData;
 
 export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveUnderlineSolid = line.match(
@@ -347,6 +359,32 @@ export const parseLine = (line: string): ShakuLine | null => {
     };
   }
 
+  const matchShakuDirectiveData = line.match(RegShakuDirectiveData);
+  if (matchShakuDirectiveData) {
+    const entriesStr = matchShakuDirectiveData.groups?.entries ?? "";
+    const entries = filterNonNull(
+      entriesStr
+        .trim()
+        .split(/\s+/)
+        .map((entry) => {
+          const segs = entry.split("=");
+          if (segs.length !== 2) return null;
+          return {
+            key: segs[0],
+            value: segs[1],
+          };
+        })
+    );
+
+    return {
+      type: "DirectiveData",
+      config: {
+        isEscaped: !!matchShakuDirectiveData.groups?.escape,
+        entries,
+      },
+    };
+  }
+
   return null;
 };
 
@@ -444,4 +482,8 @@ function getCanonicalMark(mark: string) {
   if (mark === "v") return "start";
   if (mark === "^") return "end";
   return mark;
+}
+
+function filterNonNull<T>(arr: (T | null)[]): T[] {
+  return arr.filter((item): item is T => item !== null);
 }

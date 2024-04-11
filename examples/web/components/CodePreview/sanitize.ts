@@ -44,6 +44,7 @@ export const sanitize = (html: string) => {
       mark: ["data-*", "class"],
       details: ["class"],
       summary: ["style"],
+      "*": ["data-*"],
     },
   });
 };

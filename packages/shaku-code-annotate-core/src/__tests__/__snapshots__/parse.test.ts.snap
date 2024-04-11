@@ -1324,6 +1324,59 @@ exports[`parseLine() can parse comment lines > @class abc-1 efg-2 h123! 1`] = `
 }
 `;
 
+exports[`parseLine() can parse comment lines > @data abc=123 1`] = `
+{
+  "config": {
+    "entries": [
+      {
+        "key": "abc",
+        "value": "123",
+      },
+    ],
+    "isEscaped": false,
+  },
+  "type": "DirectiveData",
+}
+`;
+
+exports[`parseLine() can parse comment lines > @data abc=123 ed1=abc    1`] = `
+{
+  "config": {
+    "entries": [
+      {
+        "key": "abc",
+        "value": "123",
+      },
+      {
+        "key": "ed1",
+        "value": "abc",
+      },
+    ],
+    "isEscaped": false,
+  },
+  "type": "DirectiveData",
+}
+`;
+
+exports[`parseLine() can parse comment lines > @data abc=123 ed1=abc  ! 1`] = `
+{
+  "config": {
+    "entries": [
+      {
+        "key": "abc",
+        "value": "123",
+      },
+      {
+        "key": "ed1",
+        "value": "abc",
+      },
+    ],
+    "isEscaped": true,
+  },
+  "type": "DirectiveData",
+}
+`;
+
 exports[`parseLine() can parse comment lines > @diff  1`] = `null`;
 
 exports[`parseLine() can parse comment lines > @diff -   ^   1`] = `

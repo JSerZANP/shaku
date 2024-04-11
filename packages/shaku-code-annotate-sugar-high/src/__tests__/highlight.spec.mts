@@ -64,6 +64,24 @@ function hello() {
   </div>
   }
     `,
+  `
+    // @fold start
+    function hello() {
+    // @fold end
+    // @fold v
+      const blog = "https://jser.dev"
+      return blog
+      // @fold ^
+    
+    }
+      `,
+  `
+    function hello() {
+      // @data a-1=a-1 b-2=hello
+      const blog = "https://jser.dev"
+      return blog
+    }
+      `,
 ];
 
 test("highlight()", async () => {

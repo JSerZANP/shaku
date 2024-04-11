@@ -9,6 +9,7 @@ import {
   renderSourceLineWithInlineHighlight,
 } from "./render.mjs";
 import { Token } from "./types.mjs";
+import { escapeHtml } from "./escapeHtml.mjs";
 
 // @ts-ignore
 // this type is missing from sugar-high
@@ -34,7 +35,11 @@ export function highlight(code: string) {
   } = null;
   let diffNextSourceLine: false | "+" | "-" = false;
   let diffBlock: false | "+" | "-" = false;
+  let isFoldBlock = false;
   let classNamesForNextSourceLine = "";
+  let dataAttrsForNextSourceLine:
+    | false
+    | Array<{ key: string; value: string }> = false;
 
   for (let i = 0; i < parsedLines.length; i++) {
     const line = parsedLines[i];
@@ -85,7 +90,35 @@ export function highlight(code: string) {
           // TODO
           break;
         case "DirectiveFold":
-          // TODO
+          const mark = shakuLine.config.mark;
+          switch (mark) {
+            case "start": {
+              isFoldBlock = true;
+              // find the next non-shaku-line to determine the indent
+              let j = i + 1;
+              let indent = 0;
+              while (j < parsedLines.length) {
+                const parsedLine = parsedLines[j];
+                if (parsedLine.type !== "shaku") {
+                  indent = getLeadingSpaceCount(
+                    parsedLine.line.map((token) => token.content).join("")
+                  );
+                  break;
+                }
+                j += 1;
+              }
+              html += `<details class="shaku-expand"><summary style="margin-left:${indent}ch"><mark>{...}</mark></summary>`;
+              break;
+            }
+            case "end":
+              if (isFoldBlock) {
+                isFocusBlock = false;
+                html += "</details>";
+              }
+              break;
+            default:
+              assertsNever(mark);
+          }
           break;
         case "DirectiveHighlight": {
           const mark = shakuLine.config.mark;
@@ -209,6 +242,10 @@ export function highlight(code: string) {
           classNamesForNextSourceLine = shakuLine.config.classNames;
           break;
         }
+        case "DirectiveData": {
+          dataAttrsForNextSourceLine = shakuLine.config.entries;
+          break;
+        }
         default:
           assertsNever(shakuLine);
       }
@@ -222,12 +259,13 @@ export function highlight(code: string) {
       const classNames = classNamesForNextSourceLine
         ? " " + classNamesForNextSourceLine
         : "";
-
+      const dataAttrs = dataAttrsForNextSourceLine;
       shouldHighlighNextSourceLine = false;
       shouldFocusNextSourceLine = false;
       shouldDimNextSourceLine = false;
       diffNextSourceLine = false;
       classNamesForNextSourceLine = "";
+      dataAttrsForNextSourceLine = false;
 
       const sourceLine = line.type === "default" ? line.line : line.sourceLine;
 
@@ -239,7 +277,17 @@ export function highlight(code: string) {
           : diff === "-"
           ? " diff diff-delete"
           : "";
-      const prefix = `<div class="sh__line${highlightClass}${dimClass}${diffClass}${classNames}">`;
+      const classString = `sh__line${highlightClass}${dimClass}${diffClass}${classNames}`;
+      const dataString = dataAttrs
+        ? " " +
+          dataAttrs
+            .map(
+              ({ key, value }) =>
+                `${escapeHtml(`data-${key}`)}="${escapeHtml(value)}"`
+            )
+            .join(" ")
+        : "";
+      const prefix = `<div class="${escapeHtml(classString)}"${dataString}>`;
       html += prefix;
 
       if (shakuDirectiveHighlightInline) {
@@ -422,4 +470,13 @@ function hasShakuDirectiveFocus(lines: ReturnType<typeof parseLines>) {
 
 function assertsNever(data: never) {
   throw new Error("expected never but got: " + data);
+}
+
+function getLeadingSpaceCount(str: string) {
+  for (let i = 0; i < str.length; i++) {
+    if (!/\s/.test(str[i])) {
+      return i;
+    }
+  }
+  return 0;
 }
