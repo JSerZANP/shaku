@@ -732,7 +732,7 @@ const Hello = "World!"
 const Hello = "World!"
 //     ^
 // [Open the dev console and inspect this line,]
-// [you'll see this line is rendered with the custom data attributes]`}
+// [you'll see this line is rendered with the custom data attributes!]`}
           lang="js"
           shakuEnabled
         />
