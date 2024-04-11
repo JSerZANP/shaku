@@ -130,6 +130,17 @@ export type ShakuDirectiveDiff = {
 const RegShakuDirectiveDiff =
   /^(?<leadingSpaces>\s*)@diff\s+(?<type>(\+|\-))\s*((?<mark>([a-z\^]+)?)\s*)?(?<escape>!?)\s*$/;
 
+export type ShakuDirectiveClass = {
+  type: "DirectiveClass";
+  config: {
+    isEscaped: boolean;
+    classNames: string;
+  };
+};
+
+const RegShakuDirectiveClass =
+  /^(?<leadingSpaces>\s*)@class\s+(?<classNames>([a-zA-Z0-9 \-_]+))\s*(?<escape>!?)\s*$/;
+
 export type ShakuLine =
   | ShakuDirectiveUnderline
   | ShakuAnnotationLine
@@ -139,7 +150,8 @@ export type ShakuLine =
   | ShakuDirectiveDim
   | ShakuDirectiveFocus
   | ShakuDirectiveHighlightInline
-  | ShakuDirectiveDiff;
+  | ShakuDirectiveDiff
+  | ShakuDirectiveClass;
 
 export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveUnderlineSolid = line.match(
@@ -318,6 +330,19 @@ export const parseLine = (line: string): ShakuLine | null => {
             id: part[1] || undefined,
           };
         }),
+      },
+    };
+  }
+
+  const matchShakuDirectiveClass = line.match(RegShakuDirectiveClass);
+  if (matchShakuDirectiveClass) {
+    const classNames = matchShakuDirectiveClass.groups?.classNames ?? "";
+
+    return {
+      type: "DirectiveClass",
+      config: {
+        isEscaped: !!matchShakuDirectiveClass.groups?.escape,
+        classNames: classNames.trim(),
       },
     };
   }

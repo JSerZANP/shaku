@@ -114,6 +114,11 @@ describe("parseLine() can parse comment lines", () => {
     "@diff -   ^  ",
     "   (r)(g)(b) ",
     " (red) (green) (blue) ",
+    "@class a",
+    "@class a!  ",
+    "@class abc efg h123   ",
+    "@class abc efg h123!",
+    "@class abc-1 efg-2 h123!",
   ];
   for (const input of inputs) {
     test(input, () => {

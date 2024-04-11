@@ -212,6 +212,22 @@ const Hello = "World!"
 // [and \`!\` is removed when rendered.]
 \`\`\`
 
+## Custom class names
+
+Sometimes you might want to add custom class names for a line, this
+could be easily done by \`@class\` directive.
+
+\`\`\`tsx annotate
+// @class custom-class1 custom-class2 !
+// @class custom-class1 custom-class2
+// @highlight
+const Hello = "World!"
+//     ^
+// [Open the dev console and inspect this line,]
+// [you'll see this line is rendered with the custom class names!]
+\`\`\`
+
+
 ## How to Use
 
 Visit [shaku on github](https://github.com/JSerZANP/shaku/tree/main) to find the right plugin.

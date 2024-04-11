@@ -55,6 +55,15 @@ function hello() {
   </div>
   }
     `,
+  `
+  // @highlight
+  // @class abc e123
+  function hello() {
+    return <div>
+    Hello world!
+  </div>
+  }
+    `,
 ];
 
 test("highlight()", async () => {

@@ -703,6 +703,22 @@ pre.shaku .line.diff-delete::before {
           lang="js"
           shakuEnabled
         />
+        <h3>Custom class names for lines</h3>
+        <p>
+          Sometimes you might want to add custom class names for a line, this
+          could be easily done by <code>@class</code> directive.
+        </p>
+        <CodeBlock
+          code={`// @class custom-class1 custom-class2 !
+// @class custom-class1 custom-class2
+// @highlight
+const Hello = "World!"
+//     ^
+// [Open the dev console and inspect this line,]
+// [you'll see this line is rendered with the custom class names!]`}
+          lang="js"
+          shakuEnabled
+        />
         <$.h2 $textAlign="center">Dev Tools</$.h2>
         <p>
           We got some tools to understand how Shaku works, such as{" "}

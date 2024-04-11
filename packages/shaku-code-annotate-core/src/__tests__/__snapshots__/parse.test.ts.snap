@@ -1274,6 +1274,56 @@ exports[`parseLine() can parse comment lines > (1)(1)(10) 1`] = `
 }
 `;
 
+exports[`parseLine() can parse comment lines > @class a 1`] = `
+{
+  "config": {
+    "classNames": "a",
+    "isEscaped": false,
+  },
+  "type": "DirectiveClass",
+}
+`;
+
+exports[`parseLine() can parse comment lines > @class a!   1`] = `
+{
+  "config": {
+    "classNames": "a",
+    "isEscaped": true,
+  },
+  "type": "DirectiveClass",
+}
+`;
+
+exports[`parseLine() can parse comment lines > @class abc efg h123    1`] = `
+{
+  "config": {
+    "classNames": "abc efg h123",
+    "isEscaped": false,
+  },
+  "type": "DirectiveClass",
+}
+`;
+
+exports[`parseLine() can parse comment lines > @class abc efg h123! 1`] = `
+{
+  "config": {
+    "classNames": "abc efg h123",
+    "isEscaped": true,
+  },
+  "type": "DirectiveClass",
+}
+`;
+
+exports[`parseLine() can parse comment lines > @class abc-1 efg-2 h123! 1`] = `
+{
+  "config": {
+    "classNames": "abc-1 efg-2 h123",
+    "isEscaped": true,
+  },
+  "type": "DirectiveClass",
+}
+`;
+
 exports[`parseLine() can parse comment lines > @diff  1`] = `null`;
 
 exports[`parseLine() can parse comment lines > @diff -   ^   1`] = `

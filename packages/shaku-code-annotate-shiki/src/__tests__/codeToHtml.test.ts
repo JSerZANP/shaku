@@ -44,6 +44,18 @@ function useSomeEffect({blog}) {
     }, [blog])
 }
   `,
+
+  `
+// @class abc h123
+// @highlight
+function useSomeEffect({blog}) {
+  useEffect(() => {
+      return () => {
+        location.href = 'https://jser.dev'
+      }
+    }, [blog])
+}
+  `,
 ];
 
 test("codeToHtml()", async () => {
