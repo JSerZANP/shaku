@@ -1,5 +1,16 @@
 # marked-shaku-code-annotate
 
+## 0.6.0
+
+### Minor Changes
+
+- support custom data attributes
+
+### Patch Changes
+
+- Updated dependencies
+  - shaku-code-annotate-shiki@0.7.0
+
 ## 0.5.0
 
 ### Minor Changes

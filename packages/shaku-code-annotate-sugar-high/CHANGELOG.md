@@ -1,5 +1,16 @@
 # shaku-code-annotate-sugar-high
 
+## 0.5.0
+
+### Minor Changes
+
+- support custom data attributes
+
+### Patch Changes
+
+- Updated dependencies
+  - shaku-code-annotate-core@0.8.0
+
 ## 0.4.0
 
 ### Minor Changes

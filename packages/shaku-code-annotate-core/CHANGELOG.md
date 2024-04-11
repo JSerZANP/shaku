@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.8.0
+
+### Minor Changes
+
+- support custom data attributes
+
 ## 0.7.0
 
 ### Minor Changes
