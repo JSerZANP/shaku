@@ -746,7 +746,7 @@ pre.shaku .line.diff-delete::before {
           In case you want to remove some lines from the rendered output but
           keep them in the source code, you can use <code>@cut</code> to cut one
           line, or append <code>start</code> / <code>end</code> (or{" "}
-          <code>v</code> / <code>^</code>) to cut multiple lines
+          <code>v</code> / <code>^</code>) to cut multiple lines.
         </$.p>
         <CodeBlock
           code={`// @cut v 
@@ -761,7 +761,7 @@ function component() {
 }`}
           lang="js"
         />
-        Above annotation will be rendered as:
+        Above annotation will be rendered as below.
         <CodeBlock
           code={`// @cut v 
 import Button from './Button'
