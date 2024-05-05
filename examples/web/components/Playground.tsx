@@ -179,6 +179,23 @@ function component() {
   }
 \`\`\`
 
+## Cut lines
+
+In case you want to remove some lines from the rendered output but keep them in the source code, you can use \`@cut\` to cut one line, or append \`start\` / \`end\` (or \`v\` / \`^\`) to cut multiple lines
+
+\`\`\`tsx annotate
+// @cut v 
+import Button from './Button'
+import { useEffect } from 'react'
+// @cut ^ 
+function component() {
+  return <Button
+          class="button"
+          disabled
+        />
+}
+\`\`\`
+
 ## Shift position with \`<\`
 
 Sometimes it could be annoying when you want to target the start of the line. You can use \`<\` to shift left the annotation with one unit,
