@@ -67,6 +67,21 @@ function useSomeEffect({blog}) {
     }, [blog])
 }
   `,
+  `
+  function useSomeEffect({blog}) {
+    // @cut v
+    useEffect(() => {
+        return () => {
+          // @cut ^
+          location.href = 'https://jser.dev'
+          // @cut start
+        }
+      }, [blog])
+      // @cut end
+    // @cut
+    // a comment to cut
+  }
+    `,
 ];
 
 test("codeToHtml()", async () => {

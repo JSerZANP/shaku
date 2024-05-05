@@ -98,6 +98,8 @@ export let codeToShakuHtml = function (
   let dataAttrsForNextSourceLine:
     | false
     | Array<{ key: string; value: string }> = false;
+  let isCutBlock = false;
+  let shouldCutNextSourceLine = false;
 
   for (let i = 0; i < parsedLines.length; i++) {
     const line = parsedLines[i];
@@ -317,6 +319,22 @@ export let codeToShakuHtml = function (
           dataAttrsForNextSourceLine = shakuLine.config.entries;
           break;
         }
+        case "DirectiveCut": {
+          const mark = shakuLine.config.mark;
+          switch (mark) {
+            case "start":
+              isCutBlock = true;
+              break;
+            case "end":
+              isCutBlock = false;
+              break;
+            case "below":
+            default:
+              shouldCutNextSourceLine = true;
+              break;
+          }
+          break;
+        }
         default:
           assertsNever(shakuLine);
       }
@@ -331,6 +349,7 @@ export let codeToShakuHtml = function (
         ? " " + classNamesForNextSourceLine
         : "";
       const dataAttrs = dataAttrsForNextSourceLine;
+      const shouldCut = isCutBlock || shouldCutNextSourceLine;
 
       shouldHighlighNextSourceLine = false;
       shouldFocusNextSourceLine = false;
@@ -338,6 +357,11 @@ export let codeToShakuHtml = function (
       diffNextSourceLine = false;
       classNamesForNextSourceLine = "";
       dataAttrsForNextSourceLine = false;
+      shouldCutNextSourceLine = false;
+
+      if (shouldCut) {
+        continue;
+      }
 
       const sourceLine = line.type === "default" ? line.line : line.sourceLine;
 

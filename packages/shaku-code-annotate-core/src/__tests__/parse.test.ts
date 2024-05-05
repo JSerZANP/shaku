@@ -123,6 +123,11 @@ describe("parseLine() can parse comment lines", () => {
     "@data abc=123 ed1=abc   ",
     "@data abc=123 ed1=abc  !",
     '@data abc=123 ed1="abc def"  !',
+    "@cut ",
+    "@cut start ",
+    "@cut end !",
+    "@cut v",
+    "@cut ^",
   ];
   for (const input of inputs) {
     test(input, () => {

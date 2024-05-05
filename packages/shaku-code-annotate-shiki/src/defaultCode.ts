@@ -489,6 +489,11 @@ export default function Counter() {
 
   // @diff - 
   console.log('jser.dev')
+
+  // @cut v
+  // comment to cut
+  // @cut  ^
+  
   return (
     <button onClick={handleClick}>
     {/*       ^           */}

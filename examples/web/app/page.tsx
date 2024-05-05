@@ -37,12 +37,10 @@ export default async function Page({
           </$.a>
         </$.nav>
         <$.h1 $textAlign="center">Shaku - code annotation made easy</$.h1>
-
         <p>
           <a href="https://github.com/JSerZANP/shaku">Shaku</a> makes it super
           easy to annotate code with special directives in comments.
         </p>
-
         <TOC>
           <ul>
             <li>
@@ -91,6 +89,9 @@ export default async function Page({
                   <a href="#fold-lines">Fold lines</a>
                 </li>
                 <li>
+                  <a href="#cut-lines">Cut lines</a>
+                </li>
+                <li>
                   <a href="#position-shift">Position Shift</a>
                 </li>
                 <li>
@@ -109,9 +110,11 @@ export default async function Page({
             <li>
               <a href="#dev-tools">6. Dev Tools</a>
             </li>
+            <li>
+              <a href="#showcases">7. Showcases</a>
+            </li>
           </ul>
         </TOC>
-
         <Heading title="A very basic example" level="h2"></Heading>
         <CodeBlock
           code={`const Hello = "World!"
@@ -320,7 +323,6 @@ marked.use(
           lang="css"
         />
         <Heading title="Underlines" level="h3" justify="flex-start"></Heading>
-
         <CodeBlock
           code={`// This is normal comments from source code.
 const blog = "https://jser.dev"
@@ -410,7 +412,6 @@ const blog = "jser.dev"
           level="h3"
           justify="flex-start"
         ></Heading>
-
         <CodeBlock
           code={`// @highlight
 function useSomeEffect({blog}) {
@@ -681,7 +682,6 @@ pre.shaku .line.diff-delete::before {
           it.
         </$.p>
         <Heading title="Fold lines" level="h3" justify="flex-start"></Heading>
-
         <CodeBlock
           code={`function useSomeEffect({blog}) {
   useEffect(() => {
@@ -741,12 +741,46 @@ pre.shaku .line.diff-delete::before {
 }`}
           lang="css"
         />
+        <Heading title="Cut lines" level="h3" justify="flex-start"></Heading>
+        <$.p>
+          In case you want to remove some lines from the rendered output but
+          keep them in the source code, you can use <code>@cut</code> to cut one
+          line, or append <code>start</code> / <code>end</code> (or{" "}
+          <code>v</code> / <code>^</code>) to cut multiple lines
+        </$.p>
+        <CodeBlock
+          code={`// @cut v 
+import Button from './Button'
+import { useEffect } from 'react'
+// @cut ^ 
+function component() {
+  return <Button
+          class="button"
+          disabled
+        />
+}`}
+          lang="js"
+        />
+        Above annotation will be rendered as:
+        <CodeBlock
+          code={`// @cut v 
+import Button from './Button'
+import { useEffect } from 'react'
+// @cut ^ 
+function component() {
+  return <Button
+          class="button"
+          disabled
+        />
+}`}
+          lang="js"
+          shakuEnabled
+        />
         <Heading
           title="Position Shift"
           level="h3"
           justify="flex-start"
         ></Heading>
-
         <CodeBlock
           code={`function component() {
 //^<<
@@ -841,6 +875,25 @@ const Hello = "World!"
           <a href="/shiki-token-inspector">Shiki Token Inspector</a> and{" "}
           <a href="/sugar-high-token-inspector">Sugar High Token Inspector</a>
         </p>
+        <Heading title="Showcases" level="h2"></Heading>
+        <p>Check out some examples built with Shaku.</p>
+        <ul>
+          <li>
+            <a
+              href="https://jser.dev/2024-03-20-how-does-useoptimisticwork-internally-in-react/"
+              target="_blank"
+            >
+              jser.dev blog
+            </a>{" "}
+            is using Shaku heavily to annotate code snippets.
+          </li>
+          <li>
+            <a href="https://jser.pro/ddir/quiz" target="_blank">
+              jser.pro
+            </a>{" "}
+            has interactive React quizzes on top of Shaku.
+          </li>
+        </ul>
         <$.hr $margin="2rem auto" $width={"50%"} />
         <$.p $textAlign="center">
           Got a bug or have better ideas? Raise an issue on{" "}
