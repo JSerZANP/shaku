@@ -1,5 +1,16 @@
 # shaku-code-annotate-sugar-high
 
+## 0.6.0
+
+### Minor Changes
+
+- support new directive - cut
+
+### Patch Changes
+
+- Updated dependencies
+  - shaku-code-annotate-core@0.9.0
+
 ## 0.5.0
 
 ### Minor Changes

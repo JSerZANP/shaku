@@ -1,5 +1,16 @@
 # shaku-code-annotate
 
+## 0.8.0
+
+### Minor Changes
+
+- support new directive - cut
+
+### Patch Changes
+
+- Updated dependencies
+  - shaku-code-annotate-core@0.9.0
+
 ## 0.7.0
 
 ### Minor Changes
