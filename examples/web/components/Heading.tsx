@@ -17,6 +17,7 @@ export function Heading({
       $display="flex"
       $justifyContent={justify}
       $alignItems="center"
+      $scrollMarginTop={20}
       $gap={10}
       id={id}
       className={styles.heading}

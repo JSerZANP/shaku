@@ -4,6 +4,7 @@ import { FaDiscord } from "react-icons/fa";
 import { CodeBlock } from "../components/CodeBlock";
 import styles from "../components/CodePreview/CodePreview.module.css";
 import { Heading } from "../components/Heading";
+import { TOC } from "../components/TOC";
 export default async function Page({
   searchParams,
 }: {
@@ -36,10 +37,81 @@ export default async function Page({
           </$.a>
         </$.nav>
         <$.h1 $textAlign="center">Shaku - code annotation made easy</$.h1>
+
         <p>
           <a href="https://github.com/JSerZANP/shaku">Shaku</a> makes it super
           easy to annotate code with special directives in comments.
         </p>
+
+        <TOC>
+          <ul>
+            <li>
+              <a href="#a-very-basic-example">1. A very basic example</a>
+            </li>
+
+            <li>
+              <a href="#usage">2. Usage</a>
+            </li>
+            <li>
+              <a href="#supported-languages">3. Supported Languages</a>
+            </li>
+            <li>
+              <a href="#styling">4. Styling</a>
+              <ul>
+                <li>
+                  <a href="#dark-mode-support">Dark mode support</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#syntax">5. Syntax</a>
+              <ul>
+                <li>
+                  <a href="#callout">Callout</a>
+                </li>
+                <li>
+                  <a href="#underlines">Underlines</a>
+                </li>
+                <li>
+                  <a href="#highlight-lines">Highlight Lines</a>
+                </li>
+                <li>
+                  <a href="#highlight-words(inline)">Highlight words(inline)</a>
+                </li>
+                <li>
+                  <a href="#diff-lines">Diff lines</a>
+                </li>
+                <li>
+                  <a href="#dim-lines">Dim lines</a>
+                </li>
+                <li>
+                  <a href="#focus-lines">Focus lines</a>
+                </li>
+                <li>
+                  <a href="#fold-lines">Fold lines</a>
+                </li>
+                <li>
+                  <a href="#position-shift">Position Shift</a>
+                </li>
+                <li>
+                  <a href="#escape">Escape</a>
+                </li>
+                <li>
+                  <a href="#custom-class-names-for-lines">
+                    Custom class names for lines
+                  </a>
+                </li>
+                <li>
+                  <a href="#custom-data-attributes">Custom data attributes</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#dev-tools">6. Dev Tools</a>
+            </li>
+          </ul>
+        </TOC>
+
         <Heading title="A very basic example" level="h2"></Heading>
         <CodeBlock
           code={`const Hello = "World!"
