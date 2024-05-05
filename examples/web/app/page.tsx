@@ -76,7 +76,7 @@ export default async function Page({
                   <a href="#highlight-lines">Highlight Lines</a>
                 </li>
                 <li>
-                  <a href="#highlight-words(inline)">Highlight words(inline)</a>
+                  <a href="#highlight-words(inline)">Highlight Words(inline)</a>
                 </li>
                 <li>
                   <a href="#diff-lines">Diff lines</a>
@@ -461,7 +461,7 @@ function useSomeEffect({blog}) {
           lang="css"
         />
         <Heading
-          title="Highlight words(inline)"
+          title="Highlight Words(inline)"
           level="h3"
           justify="flex-start"
         ></Heading>
