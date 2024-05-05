@@ -74,25 +74,25 @@ button:hover {
 }
 
 @media screen and (max-width: 1700px) {
-  body {
+  .article {
     margin: 0 500px 0 auto;
   }
 }
 
 @media screen and (max-width: 1500px) {
-  body {
+  .article {
     margin: 0 400px 0 auto;
   }
 }
 
 @media screen and (max-width: 1300px) {
-  body {
+  .article {
     margin: 0 300px 0 auto;
   }
 }
 
 @media screen and (max-width: 1000px) {
-  body {
+  .article {
     margin: 0 auto;
   }
 }

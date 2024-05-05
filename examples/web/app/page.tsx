@@ -11,7 +11,7 @@ export default async function Page({
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   return (
-    <div className={styles.preview}>
+    <div className={`article ${styles.preview}`}>
       <Head>
         <title>Shaku</title>
       </Head>
