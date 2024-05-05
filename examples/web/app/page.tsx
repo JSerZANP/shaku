@@ -825,8 +825,8 @@ const Hello = "World!"
           Shaku.
         </p>
         <CodeBlock
-          code={`// @data hello=world jser=dev !
-// @data hello=world jser=dev
+          code={`// @data hello=world jser="dev" !
+// @data hello=world jser="dev"
 // @highlight
 const Hello = "World!"
 //     ^

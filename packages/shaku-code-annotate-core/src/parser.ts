@@ -1,3 +1,5 @@
+import { parseDataEntries } from "./parseDataEntries";
+
 export type ShakuDirectiveUnderline = {
   type: "DirectiveUnderline";
   config: {
@@ -150,7 +152,7 @@ export type ShakuDirectiveData = {
 };
 
 const RegShakuDirectiveData =
-  /^(?<leadingSpaces>\s*)@data\s+(?<entries>([a-zA-Z0-9 \-=_]+))\s*(?<escape>!?)\s*$/;
+  /^(?<leadingSpaces>\s*)@data\s+(?<entries>([a-zA-Z0-9 \\"\-=_]+))\s*(?<escape>!?)\s*$/;
 
 export type ShakuLine =
   | ShakuDirectiveUnderline
@@ -362,20 +364,8 @@ export const parseLine = (line: string): ShakuLine | null => {
   const matchShakuDirectiveData = line.match(RegShakuDirectiveData);
   if (matchShakuDirectiveData) {
     const entriesStr = matchShakuDirectiveData.groups?.entries ?? "";
-    const entries = filterNonNull(
-      entriesStr
-        .trim()
-        .split(/\s+/)
-        .map((entry) => {
-          const segs = entry.split("=");
-          if (segs.length !== 2) return null;
-          return {
-            key: segs[0],
-            value: segs[1],
-          };
-        })
-    );
 
+    const entries = parseDataEntries(entriesStr);
     return {
       type: "DirectiveData",
       config: {
@@ -482,8 +472,4 @@ function getCanonicalMark(mark: string) {
   if (mark === "v") return "start";
   if (mark === "^") return "end";
   return mark;
-}
-
-function filterNonNull<T>(arr: (T | null)[]): T[] {
-  return arr.filter((item): item is T => item !== null);
 }

@@ -234,8 +234,8 @@ You can also use \`@data\` to add custom data attributes to a
   Shaku.
 
 \`\`\`tsx annotate
-// @data hello=world jser=dev !
-// @data hello=world jser=dev
+// @data hello=world jser="dev" !
+// @data hello=world jser="dev"
 // @highlight
 const Hello = "World!"
 //     ^

@@ -1339,6 +1339,25 @@ exports[`parseLine() can parse comment lines > @data abc=123 1`] = `
 }
 `;
 
+exports[`parseLine() can parse comment lines > @data abc=123 ed1="abc def"  ! 1`] = `
+{
+  "config": {
+    "entries": [
+      {
+        "key": "abc",
+        "value": "123",
+      },
+      {
+        "key": "ed1",
+        "value": "abc def",
+      },
+    ],
+    "isEscaped": true,
+  },
+  "type": "DirectiveData",
+}
+`;
+
 exports[`parseLine() can parse comment lines > @data abc=123 ed1=abc    1`] = `
 {
   "config": {

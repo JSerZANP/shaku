@@ -1,0 +1,79 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`parseDataEntries() >   key1="value1" key2="value 2 2 " key3=value3    1`] = `
+[
+  {
+    "key": "key1",
+    "value": "value1",
+  },
+  {
+    "key": "key2",
+    "value": "value 2 2 ",
+  },
+  {
+    "key": "key3",
+    "value": "value3",
+  },
+]
+`;
+
+exports[`parseDataEntries() >   key1=value1 key2=value2 key3=value3    1`] = `
+[
+  {
+    "key": "key1",
+    "value": "value1",
+  },
+  {
+    "key": "key2",
+    "value": "value2",
+  },
+  {
+    "key": "key3",
+    "value": "value3",
+  },
+]
+`;
+
+exports[`parseDataEntries() >  key1=value1    key2=value2    1`] = `
+[
+  {
+    "key": "key1",
+    "value": "value1",
+  },
+  {
+    "key": "key2",
+    "value": "value2",
+  },
+]
+`;
+
+exports[`parseDataEntries() >  key1=value1  1`] = `
+[
+  {
+    "key": "key1",
+    "value": "value1",
+  },
+]
+`;
+
+exports[`parseDataEntries() >  key1=value1 key2=value2 1`] = `
+[
+  {
+    "key": "key1",
+    "value": "value1",
+  },
+  {
+    "key": "key2",
+    "value": "value2",
+  },
+]
+`;
+
+exports[`parseDataEntries() > key1=value1 1`] = `
+[
+  {
+    "key": "key1",
+    "value": "value1",
+  },
+]
+`;
