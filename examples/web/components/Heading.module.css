@@ -1,0 +1,7 @@
+.heading a {
+  opacity: 0;
+}
+
+.heading:hover a {
+  opacity: 1;
+}

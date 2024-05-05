@@ -3,6 +3,7 @@ import Head from "next/head";
 import { FaDiscord } from "react-icons/fa";
 import { CodeBlock } from "../components/CodeBlock";
 import styles from "../components/CodePreview/CodePreview.module.css";
+import { Heading } from "../components/Heading";
 export default async function Page({
   searchParams,
 }: {
@@ -39,7 +40,7 @@ export default async function Page({
           <a href="https://github.com/JSerZANP/shaku">Shaku</a> makes it super
           easy to annotate code with special directives in comments.
         </p>
-        <$.h2 $textAlign="center">A very basic example</$.h2>
+        <Heading title="A very basic example" level="h2"></Heading>
         <CodeBlock
           code={`const Hello = "World!"
 //     ^
@@ -61,7 +62,7 @@ export default async function Page({
           Now code and annotation are visually separated, super cool to explain
           code, right?
         </$.p>
-        <$.h2 $textAlign="center">Usage</$.h2>
+        <Heading title="Usage" level="h2"></Heading>
         <$.p $lineHeight="1.5">Choose the right tool for your use case.</$.p>
         <$.ol $listStyle="disc" $lineHeight="1.5">
           <$.li $margin="8px 0">
@@ -128,13 +129,13 @@ export default async function Page({
             <code>CodePreviewMarked.tsx</code>
           </a>
         </$.p>
-        <$.h2 $textAlign="center">Supported Languages</$.h2>
+        <Heading title="Supported Languages" level="h2"></Heading>
         <$.p>
           Shaku on Shiki supports most languages that are supported by Shiki.
           You can find the +150 languages from{" "}
           <a href="/snippet">Shaku Snippet</a>.
         </$.p>
-        <$.h2 $textAlign="center">Styling</$.h2>
+        <Heading title="Styling" level="h2"></Heading>
         <p>
           Shaku renders code into a <code>&lt;pre /&gt;</code> with class
           <code>.shaku</code>, and shaku elements have class names prefixed with{" "}
@@ -149,7 +150,11 @@ export default async function Page({
           The class names for each Shaku element will be explained in Syntax
           section.
         </p>
-        <$.h3>Dark mode support</$.h3>
+        <Heading
+          title="Dark mode support"
+          level="h3"
+          justify="flex-start"
+        ></Heading>
         <p>
           You can render multiple themes by setting <code>themes</code> in the
           Shaku plugins, the theme lang is put on the <code>&lt;pre&gt;</code>{" "}
@@ -186,13 +191,13 @@ marked.use(
           lang="css"
           shakuEnabled
         />
-        <$.h2 $textAlign="center">Syntax</$.h2>
+        <Heading title="Syntax" level="h2"></Heading>
         <blockquote>
           You can also try out the syntax on{" "}
           <a href="/playground">Shaku Playground</a> or{" "}
           <a href="/snippet">Shaku Snippet</a>.
         </blockquote>
-        <$.h3>Callout</$.h3>
+        <Heading title="Callout" level="h3" justify="flex-start"></Heading>
         <CodeBlock
           code={`const blog = "https://jser.dev"
 //                    ^
@@ -242,7 +247,8 @@ marked.use(
 }`}
           lang="css"
         />
-        <$.h3>Underlines</$.h3>
+        <Heading title="Underlines" level="h3" justify="flex-start"></Heading>
+
         <CodeBlock
           code={`// This is normal comments from source code.
 const blog = "https://jser.dev"
@@ -327,7 +333,12 @@ const blog = "jser.dev"
 }`}
           lang="css"
         />
-        <$.h3>Highlight Lines</$.h3>
+        <Heading
+          title="Highlight Lines"
+          level="h3"
+          justify="flex-start"
+        ></Heading>
+
         <CodeBlock
           code={`// @highlight
 function useSomeEffect({blog}) {
@@ -377,7 +388,11 @@ function useSomeEffect({blog}) {
 }`}
           lang="css"
         />
-        <$.h3>Highlight words(inline)</$.h3>
+        <Heading
+          title="Highlight words(inline)"
+          level="h3"
+          justify="flex-start"
+        ></Heading>
         <CodeBlock
           code={`//       (           )
 function useSomeEffect({blog}) {
@@ -442,7 +457,7 @@ function useSomeEffect({blog}) {
 `}
           lang="css"
         />
-        <$.h3>Diff lines</$.h3>
+        <Heading title="Diff lines" level="h3" justify="flex-start"></Heading>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
   useEffect(() => {
@@ -506,7 +521,7 @@ pre.shaku .line.diff-delete::before {
 }`}
           lang="css"
         />
-        <$.h3>Dim lines</$.h3>
+        <Heading title="Dim lines" level="h3" justify="flex-start"></Heading>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
   // @dim
@@ -553,7 +568,7 @@ pre.shaku .line.diff-delete::before {
 }`}
           lang="css"
         />
-        <$.h3>Focus lines</$.h3>
+        <Heading title="Focus lines" level="h3" justify="flex-start"></Heading>
         <CodeBlock
           code={`function useSomeEffect({blog}) {
   // @focus
@@ -593,7 +608,8 @@ pre.shaku .line.diff-delete::before {
           Since it is actually <code>@dim</code>, there is no special class for
           it.
         </$.p>
-        <$.h3>Fold lines</$.h3>
+        <Heading title="Fold lines" level="h3" justify="flex-start"></Heading>
+
         <CodeBlock
           code={`function useSomeEffect({blog}) {
   useEffect(() => {
@@ -653,7 +669,12 @@ pre.shaku .line.diff-delete::before {
 }`}
           lang="css"
         />
-        <$.h3>Position Shift</$.h3>
+        <Heading
+          title="Position Shift"
+          level="h3"
+          justify="flex-start"
+        ></Heading>
+
         <CodeBlock
           code={`function component() {
 //^<<
@@ -685,9 +706,7 @@ pre.shaku .line.diff-delete::before {
 }`}
           lang="js"
         />
-        <h3>
-          Escape with <code>!</code>
-        </h3>
+        <Heading title="Escape" level="h3" justify="flex-start"></Heading>
         <p>
           For cases where rendering raw comments are desirable, we can put{" "}
           <code>!</code>
@@ -703,7 +722,11 @@ pre.shaku .line.diff-delete::before {
           lang="js"
           shakuEnabled
         />
-        <h3>Custom class names for lines</h3>
+        <Heading
+          title="Custom class names for lines"
+          level="h3"
+          justify="flex-start"
+        ></Heading>
         <p>
           Sometimes you might want to add custom class names for a line, this
           could be easily done by <code>@class</code> directive.
@@ -719,7 +742,11 @@ const Hello = "World!"
           lang="js"
           shakuEnabled
         />
-        <h3>Custom data attributes</h3>
+        <Heading
+          title="Custom data attributes"
+          level="h3"
+          justify="flex-start"
+        ></Heading>
         <p>
           You can also use <code>@data</code> to add custom data attributes to a
           line, which could be useful if you are building something on top of
@@ -736,7 +763,7 @@ const Hello = "World!"
           lang="js"
           shakuEnabled
         />
-        <$.h2 $textAlign="center">Dev Tools</$.h2>
+        <Heading title="Dev Tools" level="h2"></Heading>
         <p>
           We got some tools to understand how Shaku works, such as{" "}
           <a href="/shiki-token-inspector">Shiki Token Inspector</a> and{" "}
