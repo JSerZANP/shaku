@@ -155,7 +155,7 @@ export let codeToShakuHtml = function (
         case "AnnotationLine":
           // annotation lines cannot exist alone
           break;
-        case "DirectiveFold":
+        case "DirectiveFold": {
           const mark = shakuLine.config.mark;
           switch (mark) {
             case "start": {
@@ -186,6 +186,7 @@ export let codeToShakuHtml = function (
               assertsNever(mark);
           }
           break;
+        }
         case "DirectiveHighlight": {
           const mark = shakuLine.config.mark;
           switch (mark) {

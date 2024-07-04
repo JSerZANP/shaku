@@ -9,6 +9,7 @@ pre.shaku .line {
   min-height: 1em;
   padding: 0 var(--padding-horizontal);
   line-height: 1.5;
+  display: block;
 }
 
 pre.shaku.github-light .line.highlight {

@@ -15,12 +15,21 @@ const CodeSnippetPreview = dynamic(() => import("./CodeSnippetPreview"), {
   ssr: false,
 });
 
+const CodeSnippetPreviewTransformer = dynamic(
+  () => import("./CodeSnippetPreviewTransformer"),
+  {
+    ssr: false,
+  }
+);
+
 export function CodeSnippet({
   code: _code,
   lang: _lang,
+  useTransformer,
 }: {
   code?: string;
   lang?: string;
+  useTransformer?: boolean;
 }) {
   const [lang, setLang] = useState<string>(_lang ?? "javascript");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
@@ -104,7 +113,11 @@ export function CodeSnippet({
             }}
           />
         </Column>
-        <CodeSnippetPreview code={code} lang={lang} />
+        {useTransformer ? (
+          <CodeSnippetPreviewTransformer code={code} lang={lang} />
+        ) : (
+          <CodeSnippetPreview code={code} lang={lang} />
+        )}
       </Row>
     </Column>
   );

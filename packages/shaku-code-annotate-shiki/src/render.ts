@@ -11,7 +11,7 @@ const MarkEnd = `</mark>`;
 type Insertion = {
   position: number;
   type: "opening" | "closing";
-  id?: number;
+  id?: string;
 };
 
 export function renderInsertion(insertion: Insertion) {
@@ -88,7 +88,6 @@ export function renderSourceLineWithInlineHighlight(
         } else {
           // insertion point is inside the token
           // need to break the token down
-
           const lengthToSlice = insertion.position - currentPosition;
           const head = token.content.slice(0, lengthToSlice);
           const tail = token.content.slice(lengthToSlice);

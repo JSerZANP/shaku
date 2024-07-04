@@ -1,4 +1,5 @@
 import { parseDataEntries } from "./parseDataEntries";
+import { fromHtml } from "hast-util-from-html";
 
 export type ShakuDirectiveUnderline = {
   type: "DirectiveUnderline";
@@ -447,7 +448,7 @@ type ShakuComponentUnderline = {
   };
 };
 
-type ShakuComponent = ShakuComponentCallout | ShakuComponentUnderline;
+export type ShakuComponent = ShakuComponentCallout | ShakuComponentUnderline;
 
 export function renderComponent(
   component: ShakuComponent,
@@ -479,6 +480,75 @@ export function renderComponent(
           ? component.config.contents
           : escapeHtml(component.config.contents)
       }</div>`;
+    default:
+      assertsNever(component);
+  }
+}
+
+export function renderComponentHast(
+  component: ShakuComponent,
+  options?: {
+    useDangerousRawHtml?: boolean;
+  }
+) {
+  const useDangerousRawHtml = options?.useDangerousRawHtml;
+  switch (component.type) {
+    case "ShakuComponentCallout":
+      return {
+        type: "element",
+        tagName: "div",
+        properties: {
+          className: "shaku-callout",
+          style: `left:${component.config.offset}ch`,
+        },
+        children: [
+          {
+            type: "element",
+            tagName: "span",
+            properties: {
+              className: "shaku-callout-arrow",
+              style: `left:${component.config.arrowOffset}ch`,
+            },
+          },
+          useDangerousRawHtml
+            ? fromHtml(component.config.contents, { fragment: true })
+            : {
+                type: "text",
+                value: escapeHtml(component.config.contents),
+              },
+        ],
+      };
+    case "ShakuComponentUnderline":
+      return {
+        type: "element",
+        tagName: "div",
+        properties: {
+          className: `shaku-underline shaku-underline-${component.config.underlineStyle}`,
+          style: `left:${component.config.offset}ch`,
+        },
+        children: [
+          {
+            type: "element",
+            tagName: "span",
+            properties: {
+              className: "shaku-underline-line",
+              style: `left:${component.config.underlineOffset}ch`,
+            },
+            children: [
+              {
+                type: "text",
+                value: component.config.underlineContent,
+              },
+            ],
+          },
+          useDangerousRawHtml
+            ? fromHtml(component.config.contents, { fragment: true })
+            : {
+                type: "text",
+                value: escapeHtml(component.config.contents),
+              },
+        ],
+      };
     default:
       assertsNever(component);
   }
