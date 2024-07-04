@@ -1,5 +1,12 @@
 # shaku-code-annotate-sugar-high
 
+## 0.6.1
+
+### Patch Changes
+
+- Updated dependencies [263bd8f]
+  - shaku-code-annotate-core@0.10.0
+
 ## 0.6.0
 
 ### Minor Changes
