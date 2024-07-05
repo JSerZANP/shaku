@@ -532,13 +532,13 @@ export default function Counter() {
   // ^
 // [Hello!]
 `,
-  json: `
-{
-  "name": "John",
-  "age": 30,
-  "isStudent": false
-}
-`,
+  //   json: `
+  // {
+  //   "name": "John",
+  //   "age": 30,
+  //   "isStudent": false
+  // }
+  // `,
   json5: `
 {
   // This is a JSON5 object with comments
@@ -658,14 +658,14 @@ variable = 10;
   }
 }
 `,
-  liquid: `
-This is a multi-line comment 
-{% comment %}
-          ----------
-     ^
-  [Hello World!]
-{% endcomment %}
-`,
+  //   liquid: `
+  // This is a multi-line comment
+  // {% comment %}
+  //           ----------
+  //      ^
+  //   [Hello World!]
+  // {% endcomment %}
+  // `,
   php: `
 // @highlight
 <?php
@@ -894,14 +894,14 @@ print "Hello, World!";
 #       ^
 # [Hello Shaku!]
 `,
-  razor: `
-<h1>Welcome to our website!</h1>
-  @{
-    // ----
-    // ^
-    //[Hello World!]
-  }
-`,
+  //   razor: `
+  // <h1>Welcome to our website!</h1>
+  //   @{
+  //     // ----
+  //     // ^
+  //     //[Hello World!]
+  //   }
+  // `,
   reg: `
 ; @highlight
 "CompletionChar"=dword:00000040 
@@ -1053,29 +1053,29 @@ name="John"
 #      ^
 # [Hello Shaku!]
 `,
-  smalltalk: `
-Object subclass: MyClass [
-  "This is a simple class named MyClass."
-  
-  | instanceVariable |
-  
-  "@highlight"
-  MyClass class >> classMethod [
-      "This is a class method of MyClass."
-      
-      ^ 'Hello from class method!'
-      "  -----"
-      "  ^ "
-  " [Hello Shaku!]"
-  ]
-  
-  MyClass >> instanceMethod [
-      "This is an instance method of MyClass."
-      
-      ^ 'Hello from instance method!'
-  ]
-]
-`,
+  //   smalltalk: `
+  // Object subclass: MyClass [
+  //   "This is a simple class named MyClass."
+
+  //   | instanceVariable |
+
+  //   "@highlight"
+  //   MyClass class >> classMethod [
+  //       "This is a class method of MyClass."
+
+  //       ^ 'Hello from class method!'
+  //       "  -----"
+  //       "  ^ "
+  //   " [Hello Shaku!]"
+  //   ]
+
+  //   MyClass >> instanceMethod [
+  //       "This is an instance method of MyClass."
+
+  //       ^ 'Hello from instance method!'
+  //   ]
+  // ]
+  // `,
   solidity: `
 // Function to add two numbers
 // @highlight

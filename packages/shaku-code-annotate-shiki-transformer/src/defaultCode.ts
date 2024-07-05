@@ -532,13 +532,13 @@ export default function Counter() {
   // ^
 // [Hello!]
 `,
-  json: `
-{
-  "name": "John",
-  "age": 30,
-  "isStudent": false
-}
-`,
+  //   json: `
+  // {
+  //   "name": "John",
+  //   "age": 30,
+  //   "isStudent": false
+  // }
+  // `,
   json5: `
 {
   // This is a JSON5 object with comments
@@ -894,14 +894,14 @@ print "Hello, World!";
 #       ^
 # [Hello Shaku!]
 `,
-  razor: `
-<h1>Welcome to our website!</h1>
-  @{
-    // ----
-    // ^
-    //[Hello World!]
-  }
-`,
+  //   razor: `
+  // <h1>Welcome to our website!</h1>
+  //   @{
+  //     // ----
+  //     // ^
+  //     //[Hello World!]
+  //   }
+  // `,
   reg: `
 ; @highlight
 "CompletionChar"=dword:00000040 
