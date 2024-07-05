@@ -26,7 +26,6 @@ export function TOC({ children }: { children: React.ReactNode }) {
       })
     );
     const highlight = () => {
-      console.log("highlight");
       const scrollTop = window.scrollY;
       const active = list.findLast(({ el }, i) => {
         if (el == null) return i === 0;
