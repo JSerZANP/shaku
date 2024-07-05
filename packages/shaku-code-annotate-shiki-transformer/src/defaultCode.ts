@@ -658,14 +658,14 @@ variable = 10;
   }
 }
 `,
-  liquid: `
-This is a multi-line comment 
-{% comment %}
-          ----------
-     ^
-  [Hello World!]
-{% endcomment %}
-`,
+//   liquid: `
+// This is a multi-line comment 
+// {% comment %}
+//           ----------
+//      ^
+//   [Hello World!]
+// {% endcomment %}
+// `,
   php: `
 // @highlight
 <?php
@@ -1053,29 +1053,29 @@ name="John"
 #      ^
 # [Hello Shaku!]
 `,
-  smalltalk: `
-Object subclass: MyClass [
-  "This is a simple class named MyClass."
+//   smalltalk: `
+// Object subclass: MyClass [
+//   "This is a simple class named MyClass."
   
-  | instanceVariable |
+//   | instanceVariable |
   
-  "@highlight"
-  MyClass class >> classMethod [
-      "This is a class method of MyClass."
+//   "@highlight"
+//   MyClass class >> classMethod [
+//       "This is a class method of MyClass."
       
-      ^ 'Hello from class method!'
-      "  -----"
-      "  ^ "
-  " [Hello Shaku!]"
-  ]
+//       ^ 'Hello from class method!'
+//       "  -----"
+//       "  ^ "
+//   " [Hello Shaku!]"
+//   ]
   
-  MyClass >> instanceMethod [
-      "This is an instance method of MyClass."
+//   MyClass >> instanceMethod [
+//       "This is an instance method of MyClass."
       
-      ^ 'Hello from instance method!'
-  ]
-]
-`,
+//       ^ 'Hello from instance method!'
+//   ]
+// ]
+// `,
   solidity: `
 // Function to add two numbers
 // @highlight
