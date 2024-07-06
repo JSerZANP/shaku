@@ -11,13 +11,13 @@ out of my frustration while writing articles for my personal blog - [jser.dev](h
 
 1. [shaku-code-annotate-core](./packages/shaku-code-annotate-core/) - core parser of Shaku. Tokenizer not included.
 
-### Shiki@1.x.x
+### Latest Shiki(1.x.x)
 
 Recommended implementation based on [Shiki Transformer](https://shiki.matsu.io/guide/transformers)
 
 1. [shaku-code-annotate-shiki-transformer](./packages/shaku-code-annotate-shiki-transformer/) - Shaku syntax transformer for Shiki@1.x.x
 
-### Shiki@0.x.x
+### Legacy Shiki(0.x.x)
 
 Legacy implementation by wrapping shiki.
 
