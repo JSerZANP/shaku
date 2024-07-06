@@ -1,12 +1,4 @@
 import { expect, test } from "vitest";
-import { getShakuHighlighters } from "../getHighlighters";
-import rehypeShiki from "@shikijs/rehype";
-import rehypeStringify from "rehype-stringify";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
-import shakuCodeAnnotateShikiTransformer from "..";
-import * as shiki from "shiki";
 import { fetchProcessor } from "./util";
 
 const snippets = [

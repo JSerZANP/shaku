@@ -58,6 +58,7 @@ type ShakuUpdatesForLine = Map<number, Array<ShakuUpdate>>;
 type Options = {
   /**
    * whether or not to escape the annotation
+   * use it if you want to support markdown in annotation
    * @default false
    */
   useDangerousRawHtml?: boolean;

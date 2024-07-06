@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.2.1
+
+### Patch Changes
+
+- hotfix for the language alias
+
 ## 0.2.0
 
 ### Minor Changes

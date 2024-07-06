@@ -8,7 +8,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "strict": true,
-    "target": "ES2015"
+    "target": "ES2018"
   },
   "exclude": ["node_modules"]
 }
