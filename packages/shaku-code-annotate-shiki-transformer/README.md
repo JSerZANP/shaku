@@ -4,6 +4,10 @@ This is a [Shiki Transformer](https://shiki.matsu.io/guide/transformers) to supp
 
 You can use this transformer anywhere shiki is supported with simple integration.
 
+## Live demos
+
+1. Astro + Shaku demo : [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/github-yunziv-kcb1ow?file=astro.config.mjs)
+
 ## Usage
 
 ```ts
@@ -18,18 +22,19 @@ const unifiedProcessor = unified()
 const code = await codeToHtml("foo\bar", {
   lang: "js",
   theme: "vitesse-light",
-  includeExplanation: true,
   transformers: [
-    shakuCodeAnnotateShikiTransformer({
-      useDangerousRawHtml: true,
-      markdownToHtmlAndSanitize: (code) =>
-        unifiedProcessor.processSync(code).toString(),
-    }),
+    shakuCodeAnnotateShikiTransformer(),
+    // if you want markdown support in the annotation
+    // shakuCodeAnnotateShikiTransformer({
+    //   useDangerousRawHtml: true,
+    //   markdownToHtmlAndSanitize: (code) =>
+    //     unifiedProcessor.processSync(code).toString(),
+    // }),
   ],
 });
 ```
 
-Or in a rehype plugin
+Or in a rehype plugin.
 
 ```ts
 import { unified } from "unified";
@@ -42,23 +47,17 @@ const file = await unified()
   .use(remarkParse)
   .use(remarkRehype)
   .use(rehypeShiki, {
-    includeExplanation: true,
     transformers: [
-      shakuCodeAnnotateShikiTransformer({
-        useDangerousRawHtml: true,
-        markdownToHtmlAndSanitize: (code) =>
-          unifiedProcessor.processSync(code).toString(),
-      }),
+      shakuCodeAnnotateShikiTransformer(),
+      // if you want markdown support in the annotation
+      // shakuCodeAnnotateShikiTransformer({
+      //   useDangerousRawHtml: true,
+      //   markdownToHtmlAndSanitize: (code) =>
+      //     unifiedProcessor.processSync(code).toString(),
+      // }),
     ],
     theme: "vitesse-light",
   })
   .use(rehypeStringify)
   .process(await fs.readFile("./input.md"));
 ```
-
-## Demos
-
-## Caveat
-
-1. `includeExplanation` is required in transformer setup.
-2. `includeExplanation` doesn't work well if `themes` is set, I'm looking to patch Shiki for this.
