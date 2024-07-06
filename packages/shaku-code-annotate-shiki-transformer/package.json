@@ -1,6 +1,6 @@
 {
   "name": "shaku-code-annotate-shiki-transformer",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "dependencies": {
     "@types/hast": "^3.0.4",
     "shaku-code-annotate-core": "^0.10.0",

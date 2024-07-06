@@ -1,5 +1,12 @@
 # marked-shaku-code-annotate
 
+## 0.7.2
+
+### Patch Changes
+
+- Updated dependencies
+  - shaku-code-annotate-shiki@0.10.0
+
 ## 0.7.1
 
 ### Patch Changes

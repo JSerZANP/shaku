@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.2.0
+
+### Minor Changes
+
+- remove the need of explanations for tokens
+
 ## 0.1.1
 
 ### Patch Changes
