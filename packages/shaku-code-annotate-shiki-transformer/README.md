@@ -6,7 +6,10 @@ You can use this transformer anywhere shiki is supported with simple integration
 
 ## Live demos
 
-1. Astro + Shaku demo : [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/github-yunziv-kcb1ow?file=astro.config.mjs)
+|     |               |                                                                                                                                                              |
+| --- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | Astro + Shaku | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/github-yunziv-kcb1ow?file=astro.config.mjs) |
+| 2   | Next + Shaku  | [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/edit/github-hrpoqm-sbmxb9?file=next.config.mjs)  |
 
 ## Usage
 
