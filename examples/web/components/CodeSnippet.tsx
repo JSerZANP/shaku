@@ -26,7 +26,9 @@ export function CodeSnippet({
   code?: string;
   lang?: string;
 }) {
-  const [lang, setLang] = useState<string>(_lang ?? "javascript");
+  const [lang, setLang] = useState<string>(
+    _lang in defaultCode ? _lang : "javascript"
+  );
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
 
   const share = () => {

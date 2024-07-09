@@ -503,47 +503,7 @@ export default function Counter() {
     </button>
   );
 }`,
-  js: `// @highlight
-import { useState } from 'react';
 
-//     (     ) (2     ) (   3 )
-export default function Counter() {
-  // @highlight
-  const [count, setCount] = useState(0);
-              //~~~~~~~~
-  
-  // @diff + start
-  // This
-  // is
-  // Comment
-  // @diff + end
-  function handleClick() {
-    setCount(count + 1);
-  //-------------------
-  //     ^
-  //[Underline and callout!]
-  }
-
-  // @class clickable
-  // @data jser=dev
-  const blog = "https://jser.dev"
-
-  // @diff - 
-  console.log('jser.dev')
-
-  // @cut v
-  // comment to cut
-  // @cut  ^
-  
-  return (
-    <button onClick={handleClick}>
-    {/*       ^           */}
-    {/* [Supports JSX] */}
-    {/* [Awesome,right?] */}
-      You pressed me {count} times
-    </button>
-  );
-}`,
   imba: `
 # @highlight
 # coffee
