@@ -796,8 +796,9 @@ function component() {
           shakuEnabled
         />
         <$.p>
-          Sometimes it is hard to position it right, you can use position shift{" "}
-          <code>&lt;</code> to move shaku elements toward left
+          Sometimes it is hard to position it right(with formatter .etc), you
+          can use position shift <code>&lt;</code> to move shaku elements toward
+          left
         </$.p>
         <CodeBlock
           code={`function component() {
