@@ -10,10 +10,6 @@ import { RiShareBoxLine } from "react-icons/ri";
 import { defaultCode } from "remark-shaku-code-annotate";
 import { Button, Column, Row, Text, View } from "./bare";
 
-const CodeSnippetPreview = dynamic(() => import("./CodeSnippetPreview"), {
-  ssr: false,
-});
-
 const CodeSnippetPreviewTransformer = dynamic(
   () => import("./CodeSnippetPreviewTransformer"),
   {
@@ -26,11 +22,9 @@ const supportedLangs = Object.keys(defaultCode);
 export function CodeSnippet({
   code: _code,
   lang: _lang,
-  useTransformer,
 }: {
   code?: string;
   lang?: string;
-  useTransformer?: boolean;
 }) {
   const [lang, setLang] = useState<string>(_lang ?? "javascript");
   const [code, setCode] = useState(_code ?? defaultCode[lang] ?? "");
@@ -114,11 +108,7 @@ export function CodeSnippet({
             }}
           />
         </Column>
-        {useTransformer ? (
-          <CodeSnippetPreviewTransformer code={code} lang={lang} />
-        ) : (
-          <CodeSnippetPreview code={code} lang={lang} />
-        )}
+        <CodeSnippetPreviewTransformer code={code} lang={lang} />
       </Row>
     </Column>
   );
