@@ -129,3 +129,18 @@ test("codeToHtml() + raw HTML + explicit trigger", async () => {
     expect(html).toMatchSnapshot();
   }
 });
+
+test("unknown lang should fallback to text", async () => {
+  const processor = await fetchProcessor(
+    "javascript",
+    true /* useDangerousRawHtml */
+  );
+
+  for (const snippet of snippets) {
+    const html = await processor
+      .process(`\`\`\`unknown \n${snippet}\n\`\`\``)
+      .then((result) => result.toString());
+
+    expect(html).toMatchSnapshot();
+  }
+});
