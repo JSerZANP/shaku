@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.2.2
+
+### Patch Changes
+
+- enable custom trigger
+
 ## 0.2.1
 
 ### Patch Changes
