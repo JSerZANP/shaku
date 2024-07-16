@@ -606,6 +606,10 @@ const shakuCodeAnnotateShikiTransformer: (
 
 export default shakuCodeAnnotateShikiTransformer;
 
+export function isLangSupported(lang: unknown) {
+  return typeof lang === "string" && lang in commentPatterns;
+}
+
 /**
  * using token explanation is not performant and flaky
  * now here just use boring regexp
