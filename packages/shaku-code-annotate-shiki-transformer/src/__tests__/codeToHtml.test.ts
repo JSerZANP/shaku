@@ -113,3 +113,19 @@ test("codeToHtml() + raw HTML", async () => {
     expect(html).toMatchSnapshot();
   }
 });
+
+test("codeToHtml() + raw HTML + explicit trigger", async () => {
+  const processor = await fetchProcessor(
+    "javascript",
+    true /* useDangerousRawHtml */,
+    /shaku/
+  );
+
+  for (const snippet of snippets) {
+    const html = await processor
+      .process(`\`\`\`js \n${snippet}\n\`\`\``)
+      .then((result) => result.toString());
+
+    expect(html).toMatchSnapshot();
+  }
+});

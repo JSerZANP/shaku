@@ -1,5 +1,108 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`codeToHtml() + raw HTML + explicit trigger 1`] = `
+"<pre class=\\"shiki github-light\\" style=\\"background-color:#fff;color:#24292e\\" tabindex=\\"0\\"><code><span class=\\"line\\"></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">function</span><span style=\\"color:#6F42C1\\"> ChatRoom</span><span style=\\"color:#24292E\\">({ </span><span style=\\"color:#E36209\\">roomId</span><span style=\\"color:#24292E\\"> }) {</span></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">  const</span><span style=\\"color:#24292E\\"> [</span><span style=\\"color:#005CC5\\">serverUrl</span><span style=\\"color:#24292E\\">, </span><span style=\\"color:#005CC5\\">setServerUrl</span><span style=\\"color:#24292E\\">] </span><span style=\\"color:#D73A49\\">=</span><span style=\\"color:#6F42C1\\"> useState</span><span style=\\"color:#24292E\\">(</span><span style=\\"color:#032F62\\">'https://localhost:1234'</span><span style=\\"color:#24292E\\">);</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">  //       ^</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">  // [&#x3C;a href=\\"https:jser.dev\\">jser.dev&#x3C;/a>]</span></span>
+<span class=\\"line\\"></span>
+<span class=\\"line\\"><span style=\\"color:#6F42C1\\">  useEffect</span><span style=\\"color:#24292E\\">(() </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">     // (                                                     )</span></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">        const</span><span style=\\"color:#005CC5\\"> connection</span><span style=\\"color:#D73A49\\"> =</span><span style=\\"color:#6F42C1\\"> createConnection</span><span style=\\"color:#24292E\\">(serverUrl, roomId);</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">     // (1                )</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">        connection.</span><span style=\\"color:#6F42C1\\">connect</span><span style=\\"color:#24292E\\">();</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">    </span></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">  	return</span><span style=\\"color:#24292E\\"> () </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">           //(2                    )</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">             connection.</span><span style=\\"color:#6F42C1\\">disconnect</span><span style=\\"color:#24292E\\">();</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">  	};</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">   //(3                 )</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">  }, [serverUrl, roomId]);</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">}</span></span>
+<span class=\\"line\\"></span>
+<span class=\\"line\\"></span></code></pre>"
+`;
+
+exports[`codeToHtml() + raw HTML + explicit trigger 2`] = `
+"<pre class=\\"shiki github-light\\" style=\\"background-color:#fff;color:#24292e\\" tabindex=\\"0\\"><code><span class=\\"line\\"></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">function</span><span style=\\"color:#6F42C1\\"> hello</span><span style=\\"color:#24292E\\">() {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">  //        ^!</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">  //    [Hello world!]!</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">  //        ^</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">  //    [Shaku &#x3C;b>Shaku&#x3C;/b>]</span></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">  const</span><span style=\\"color:#005CC5\\"> blog</span><span style=\\"color:#D73A49\\"> =</span><span style=\\"color:#032F62\\"> \\"https://jser.dev\\"</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">}</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">  </span></span>
+<span class=\\"line\\"></span></code></pre>"
+`;
+
+exports[`codeToHtml() + raw HTML + explicit trigger 3`] = `
+"<pre class=\\"shiki github-light\\" style=\\"background-color:#fff;color:#24292e\\" tabindex=\\"0\\"><code><span class=\\"line\\"></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">function</span><span style=\\"color:#6F42C1\\"> useSomeEffect</span><span style=\\"color:#24292E\\">({</span><span style=\\"color:#E36209\\">blog</span><span style=\\"color:#24292E\\">}) {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6F42C1\\">  useEffect</span><span style=\\"color:#24292E\\">(() </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">    //  do some stuff</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">      // @fold start</span></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">      return</span><span style=\\"color:#24292E\\"> () </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">        // @highlight</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">        location.href </span><span style=\\"color:#D73A49\\">=</span><span style=\\"color:#032F62\\"> 'https://jser.dev'</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">      }</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">      // @fold ^</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">    }, [blog])</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">}</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">  </span></span>
+<span class=\\"line\\"></span></code></pre>"
+`;
+
+exports[`codeToHtml() + raw HTML + explicit trigger 4`] = `
+"<pre class=\\"shiki github-light\\" style=\\"background-color:#fff;color:#24292e\\" tabindex=\\"0\\"><code><span class=\\"line\\"></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">// @class abc h123</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">// @highlight</span></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">function</span><span style=\\"color:#6F42C1\\"> useSomeEffect</span><span style=\\"color:#24292E\\">({</span><span style=\\"color:#E36209\\">blog</span><span style=\\"color:#24292E\\">}) {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6F42C1\\">  useEffect</span><span style=\\"color:#24292E\\">(() </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">      return</span><span style=\\"color:#24292E\\"> () </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">        location.href </span><span style=\\"color:#D73A49\\">=</span><span style=\\"color:#032F62\\"> 'https://jser.dev'</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">      }</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">    }, [blog])</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">}</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">  </span></span>
+<span class=\\"line\\"></span></code></pre>"
+`;
+
+exports[`codeToHtml() + raw HTML + explicit trigger 5`] = `
+"<pre class=\\"shiki github-light\\" style=\\"background-color:#fff;color:#24292e\\" tabindex=\\"0\\"><code><span class=\\"line\\"></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">function</span><span style=\\"color:#6F42C1\\"> useSomeEffect</span><span style=\\"color:#24292E\\">({</span><span style=\\"color:#E36209\\">blog</span><span style=\\"color:#24292E\\">}) {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6F42C1\\">  useEffect</span><span style=\\"color:#24292E\\">(() </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">    // @data a=1</span></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">      return</span><span style=\\"color:#24292E\\"> () </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">        // @data a-b-c=1-2-3 beg-1=hello-2</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">        location.href </span><span style=\\"color:#D73A49\\">=</span><span style=\\"color:#032F62\\"> 'https://jser.dev'</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">      }</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">    }, [blog])</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">}</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">  </span></span>
+<span class=\\"line\\"></span></code></pre>"
+`;
+
+exports[`codeToHtml() + raw HTML + explicit trigger 6`] = `
+"<pre class=\\"shiki github-light\\" style=\\"background-color:#fff;color:#24292e\\" tabindex=\\"0\\"><code><span class=\\"line\\"></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">  function</span><span style=\\"color:#6F42C1\\"> useSomeEffect</span><span style=\\"color:#24292E\\">({</span><span style=\\"color:#E36209\\">blog</span><span style=\\"color:#24292E\\">}) {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">    // @cut v</span></span>
+<span class=\\"line\\"><span style=\\"color:#6F42C1\\">    useEffect</span><span style=\\"color:#24292E\\">(() </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span>
+<span class=\\"line\\"><span style=\\"color:#D73A49\\">        return</span><span style=\\"color:#24292E\\"> () </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">          // @cut ^</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">          location.href </span><span style=\\"color:#D73A49\\">=</span><span style=\\"color:#032F62\\"> 'https://jser.dev'</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">          // @cut start</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">        }</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">      }, [blog])</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">      // @cut end</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">    // @cut</span></span>
+<span class=\\"line\\"><span style=\\"color:#6A737D\\">    // a comment to cut</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">  }</span></span>
+<span class=\\"line\\"><span style=\\"color:#24292E\\">    </span></span>
+<span class=\\"line\\"></span></code></pre>"
+`;
+
 exports[`codeToHtml() + raw HTML 1`] = `"<pre class=\\"shiki github-light shaku\\" style=\\"background-color:#fff;color:#24292e\\" tabindex=\\"0\\"><code><span class=\\"line\\"></span><span class=\\"line\\"><span style=\\"color:#D73A49\\">function</span><span style=\\"color:#6F42C1\\"> ChatRoom</span><span style=\\"color:#24292E\\">({ </span><span style=\\"color:#E36209\\">roomId</span><span style=\\"color:#24292E\\"> }) {</span></span><span class=\\"line\\"><span style=\\"color:#D73A49\\">  const</span><span style=\\"color:#24292E\\"> [</span><span style=\\"color:#005CC5\\">serverUrl</span><span style=\\"color:#24292E\\">, </span><span style=\\"color:#005CC5\\">setServerUrl</span><span style=\\"color:#24292E\\">] </span><span style=\\"color:#D73A49\\">=</span><span style=\\"color:#6F42C1\\"> useState</span><span style=\\"color:#24292E\\">(</span><span style=\\"color:#032F62\\">'https://localhost:1234'</span><span style=\\"color:#24292E\\">);</span></span><div class=\\"shaku-callout\\" style=\\"left:5ch\\"><span class=\\"shaku-callout-arrow\\" style=\\"left:6ch\\"></span><p>jser.dev</p></div><span class=\\"line\\"></span><span class=\\"line\\"><span style=\\"color:#6F42C1\\">  useEffect</span><span style=\\"color:#24292E\\">(() </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span><span class=\\"line\\"><span style=\\"color:#D73A49\\">        </span><mark class=\\"shaku-inline-highlight\\"><span style=\\"color:#D73A49\\">const</span><span style=\\"color:#005CC5\\"> connection</span><span style=\\"color:#D73A49\\"> =</span><span style=\\"color:#6F42C1\\"> createConnection</span><span style=\\"color:#24292E\\">(serverUrl, roomId);</span></mark></span><span class=\\"line\\"><span style=\\"color:#24292E\\">        </span><mark class=\\"shaku-inline-highlight\\" data-id=\\"1\\"><span style=\\"color:#24292E\\">connection.</span><span style=\\"color:#6F42C1\\">connect</span><span style=\\"color:#24292E\\">(</span></mark><span style=\\"color:#24292E\\">);</span></span><span class=\\"line\\"><span style=\\"color:#24292E\\">    </span></span><span class=\\"line\\"><span style=\\"color:#D73A49\\">  	return</span><span style=\\"color:#24292E\\"> () </span><span style=\\"color:#D73A49\\">=></span><span style=\\"color:#24292E\\"> {</span></span><span class=\\"line\\"><span style=\\"color:#24292E\\">             </span><mark class=\\"shaku-inline-highlight\\" data-id=\\"2\\"><span style=\\"color:#24292E\\">connection.</span><span style=\\"color:#6F42C1\\">disconnect</span><span style=\\"color:#24292E\\">()</span></mark><span style=\\"color:#24292E\\">;</span></span><span class=\\"line\\"><span style=\\"color:#24292E\\">  	};</span></span><span class=\\"line\\"><span style=\\"color:#24292E\\">  }, </span><mark class=\\"shaku-inline-highlight\\" data-id=\\"3\\"><span style=\\"color:#24292E\\">[serverUrl, roomId])</span></mark><span style=\\"color:#24292E\\">;</span></span><span class=\\"line\\"><span style=\\"color:#24292E\\">}</span></span><span class=\\"line\\"></span><span class=\\"line\\"></span></code></pre>"`;
 
 exports[`codeToHtml() + raw HTML 2`] = `"<pre class=\\"shiki github-light shaku\\" style=\\"background-color:#fff;color:#24292e\\" tabindex=\\"0\\"><code><span class=\\"line\\"></span><span class=\\"line\\"><span style=\\"color:#D73A49\\">function</span><span style=\\"color:#6F42C1\\"> hello</span><span style=\\"color:#24292E\\">() {</span></span><span class=\\"line\\"><span style=\\"color:#6A737D\\">  //        ^</span></span><span class=\\"line\\"><span style=\\"color:#6A737D\\">  //    [Hello world!]</span></span><div class=\\"shaku-callout\\" style=\\"left:8ch\\"><span class=\\"shaku-callout-arrow\\" style=\\"left:4ch\\"></span><p>Shaku Shaku</p></div><span class=\\"line\\"><span style=\\"color:#D73A49\\">  const</span><span style=\\"color:#005CC5\\"> blog</span><span style=\\"color:#D73A49\\"> =</span><span style=\\"color:#032F62\\"> \\"https://jser.dev\\"</span></span><span class=\\"line\\"><span style=\\"color:#24292E\\">}</span></span><span class=\\"line\\"><span style=\\"color:#24292E\\">  </span></span><span class=\\"line\\"></span></code></pre>"`;

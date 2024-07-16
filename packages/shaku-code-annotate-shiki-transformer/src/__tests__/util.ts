@@ -11,7 +11,11 @@ export const unifiedProcessor = unified()
   .use(remarkRehype) // this sanitize html by default
   .use(rehypeStringify);
 
-export function fetchProcessor(lang, useDangerousRawHtml: boolean) {
+export function fetchProcessor(
+  lang: string,
+  useDangerousRawHtml: boolean,
+  shakuTrigger?: RegExp
+) {
   return shiki
     .createHighlighter({
       themes: ["github-light"],
@@ -22,16 +26,14 @@ export function fetchProcessor(lang, useDangerousRawHtml: boolean) {
         .use(remarkParse)
         .use(remarkRehype)
         .use(rehypeShiki, {
-          includeExplanation: true,
           transformers: [
             shakuCodeAnnotateShikiTransformer({
               useDangerousRawHtml,
+              shakuTrigger,
               markdownToHtmlAndSanitize: (code) =>
                 unifiedProcessor.processSync(code).toString(),
             }),
           ],
-          // TODO: patch shiki to support multiple themes
-          // currently shiki doesn't return explanations if `themes` is used
           theme: "github-light",
         })
         .use(rehypeStringify)

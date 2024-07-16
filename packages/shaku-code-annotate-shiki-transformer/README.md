@@ -64,3 +64,19 @@ const file = await unified()
   .use(rehypeStringify)
   .process(await fs.readFile("./input.md"));
 ```
+
+By default, Shaku will be applied on all code blocks. You can set explicit trigger by pasetting `shakuTrigger` to be checked against code meta.
+
+```ts
+shakuCodeAnnotateShikiTransformer({
+  shakuTrigger: /annotate/,
+});
+```
+
+With above setting, we need to explicitly add `annotate` like below to trigger Shaku.
+
+````md
+```js annotate
+
+```
+````

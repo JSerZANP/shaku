@@ -10,6 +10,7 @@ import { commentPatterns } from "./commentPatterns";
 declare module "shiki" {
   export interface ShikiTransformerContextMeta {
     shaku: ShakuUpdatesForLine;
+    isEnabled: boolean;
     linesToHide: Set<number>;
   }
 }
@@ -57,6 +58,12 @@ type ShakuUpdatesForLine = Map<number, Array<ShakuUpdate>>;
 
 type Options = {
   /**
+   * the regexp to trigger Shaku syntax
+   * it is matched against the code block meta string
+   * by default Shaku syntax is enabled
+   */
+  shakuTrigger?: RegExp;
+  /**
    * whether or not to escape the annotation
    * use it if you want to support markdown in annotation
    * @default false
@@ -76,13 +83,20 @@ const shakuCodeAnnotateShikiTransformer: (
   const useDangerousRawHtml = options?.useDangerousRawHtml;
   const markdownToHtmlAndSanitize =
     options?.markdownToHtmlAndSanitize ?? ((md: string) => md);
-
+  const shakuTrigger = options?.shakuTrigger;
   return {
-    preprocess() {
+    preprocess(_code, options) {
       this.meta.shaku = new Map();
       this.meta.linesToHide = new Set<number>();
+      this.meta.isEnabled =
+        shakuTrigger == null
+          ? true
+          : shakuTrigger.test(options.meta?.__raw ?? "");
     },
     tokens(lines) {
+      if (!this.meta.isEnabled) {
+        return;
+      }
       const shaku = this.meta.shaku;
       const parsedLines = parseLines(lines, this.options.lang, true);
       const hasFocus = hasShakuDirectiveFocus(parsedLines);
@@ -441,9 +455,15 @@ const shakuCodeAnnotateShikiTransformer: (
       }
     },
     pre(node) {
+      if (!this.meta.isEnabled) {
+        return;
+      }
       this.addClassToHast(node, "shaku");
     },
     code(node) {
+      if (!this.meta.isEnabled) {
+        return;
+      }
       const shaku = this.meta.shaku;
 
       const linesToHide = this.meta.linesToHide;
@@ -536,6 +556,9 @@ const shakuCodeAnnotateShikiTransformer: (
     },
     // line is 1-based
     line(line, i) {
+      if (!this.meta.isEnabled) {
+        return;
+      }
       // if shaku line, we need to strip it.
       // return {
       //   type: "text",
