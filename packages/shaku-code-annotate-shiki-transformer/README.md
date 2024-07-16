@@ -80,3 +80,5 @@ With above setting, we need to explicitly add `annotate` like below to trigger S
 
 ```
 ````
+
+There is also a util function `isLangSupported(lang: unknown)` to check if certain language is supported in Shaku transformer.
