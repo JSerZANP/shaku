@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.2.3
+
+### Patch Changes
+
+- fallback to text if lang is unknown
+
 ## 0.2.2
 
 ### Patch Changes
