@@ -47,6 +47,7 @@ Check out some cool stuff built with Shaku.
 
 - [jser.dev blog](https://jser.dev/2024-03-20-how-does-useoptimisticwork-internally-in-react/) is using Shaku heavily to annotate code snippets.
 - [jser.pro](https://jser.pro/ddir/quiz) has interactive React quizzes on top of Shaku.
+- [bfe.dev](https://bigfrontend.dev/problem/39/discuss/2363?focus=26638) supports Shaku in its posts.
 
 ## Community
 
