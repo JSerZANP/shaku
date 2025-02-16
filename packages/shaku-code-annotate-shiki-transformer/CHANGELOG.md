@@ -1,5 +1,11 @@
 # shaku-code-annotate
 
+## 0.3.0
+
+### Minor Changes
+
+- trim ending empty lines
+
 ## 0.2.4
 
 ### Patch Changes
