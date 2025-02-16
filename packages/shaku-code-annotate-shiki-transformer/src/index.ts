@@ -92,6 +92,7 @@ const shakuCodeAnnotateShikiTransformer: (
         shakuTrigger == null
           ? true
           : shakuTrigger.test(options.meta?.__raw ?? "");
+      return _code.trimEnd();
     },
     tokens(lines) {
       if (!this.meta.isEnabled) {
